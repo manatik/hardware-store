@@ -30,24 +30,31 @@ services:
       - ../server/assets:/var/lib/images
     working_dir: /api
     command: bash -c "
-        yarn install
-        && yarn typeorm migration:run
-        && yarn start:dev"
+      yarn install
+      && yarn typeorm migration:run
+      && yarn start:dev"
 
-  client:
-    image: node:16.15.0
+  nginx:
+    build: ./nginx
     ports:
-      - "3000:3000"
+      - "80:80"
+      - "443:443"
     networks:
       - web
     depends_on:
       - server
     volumes:
-      - ../client:/client
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     working_dir: /client
-    command: bash -c "
-      yarn install
-      && yarn start"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
   pgdata:
@@ -55,4 +62,3 @@ volumes:
 
 networks:
   web:
-
