@@ -1,23 +1,25 @@
 version: "3.10"
 
+x-node-version: &node-version node:16.15.0
+
 services:
   db:
     image: postgres
     restart: always
     ports:
-      - "25432:5432"
+      - "25432:25432"
     environment:
       - POSTGRES_DB=test
       - POSTGRES_USER=test
-      - POSTGRES_PASSWORD=testik
+      - POSTGRES_PASSWORD=test
     volumes:
       - pgdata:/var/lib/postgresql/data
       - pgsql-sock:/var/run/postgresql
     networks:
       - web
 
-  server:
-    image: node:16.15.0
+  backend:
+    image: *node-version
     ports:
       - "9000:9000"
     networks:
@@ -29,32 +31,27 @@ services:
       - pgsql-sock:/var/run/postgresql
       - ../backend/assets:/var/lib/images
     working_dir: /api
+    # && yarn typeorm migration:run
     command: bash -c "
       yarn install
-      && yarn typeorm migration:run
+      && chmod -R 777 node_modules
       && yarn start:dev"
 
-  nginx:
-    build: ./deploy/nginx
+  frontend:
+    image: *node-version
     ports:
-      - "80:80"
-      - "443:443"
+      - "3000:3000"
     networks:
       - web
     depends_on:
-      - server
+      - backend
     volumes:
-      - ./deploy/certbot/conf:/etc/letsencrypt
-      - ./deploy/certbot/www:/var/www/certbot
+      - ../frontend:/frontend
     working_dir: /frontend
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./deploy/certbot/conf:/etc/letsencrypt
-      - ./deploy/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    command: bash -c "
+      yarn install
+      && chmod -R 777 node_modules
+      && yarn dev"
 
 volumes:
   pgdata:
