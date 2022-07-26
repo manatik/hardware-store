@@ -16,7 +16,7 @@ services:
     networks:
       - web
 
-  server:
+  backend:
     image: node:16.15.0
     ports:
       - "9000:9000"
@@ -25,16 +25,17 @@ services:
     depends_on:
       - db
     volumes:
-      - ../server:/api
+      - ../backend:/api
       - pgsql-sock:/var/run/postgresql
-      - ../server/assets:/var/lib/images
+      - ../backend/assets:/var/lib/images
     working_dir: /api
+    # && yarn typeorm migration:run
     command: bash -c "
       yarn install
-      && yarn typeorm migration:run
+      && chmod -R 777 node_modules
       && yarn start:dev"
 
-  client:
+  frontend:
     image: node:16.15.0
     ports:
       - "3000:3000"
@@ -43,11 +44,12 @@ services:
     depends_on:
       - server
     volumes:
-      - ../client:/client
-    working_dir: /client
+      - ../frontend:/frontend
+    working_dir: /frontend
     command: bash -c "
       yarn install
-      && yarn start"
+      && chmod -R 777 node_modules
+      && yarn dev"
 
 volumes:
   pgdata:

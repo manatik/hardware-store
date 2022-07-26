@@ -79,5 +79,4 @@ echo
 
 echo "### Reloading nginx ..."
 
-# first service_name
-docker-compose exec first nginx -s reload
+docker-compose exec nginx nginx -s reload

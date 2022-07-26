@@ -25,9 +25,9 @@ services:
     depends_on:
       - db
     volumes:
-      - ../server:/api
+      - ../backend:/api
       - pgsql-sock:/var/run/postgresql
-      - ../server/assets:/var/lib/images
+      - ../backend/assets:/var/lib/images
     working_dir: /api
     command: bash -c "
       yarn install
@@ -35,7 +35,7 @@ services:
       && yarn start:dev"
 
   nginx:
-    build: ./nginx
+    build: ./deploy/nginx
     ports:
       - "80:80"
       - "443:443"
@@ -44,16 +44,16 @@ services:
     depends_on:
       - server
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    working_dir: /client
+      - ./deploy/certbot/conf:/etc/letsencrypt
+      - ./deploy/certbot/www:/var/www/certbot
+    working_dir: /frontend
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
   certbot:
     image: certbot/certbot
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - ./deploy/certbot/conf:/etc/letsencrypt
+      - ./deploy/certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
