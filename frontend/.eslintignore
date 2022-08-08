@@ -1,0 +1,9 @@
+README.md
+CHANGELOG.md
+
+.idea
+.yarn
+node_modules
+build
+*.scss
+.eslintrc.js
