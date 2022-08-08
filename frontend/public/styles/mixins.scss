@@ -1,0 +1,13 @@
+@mixin container {
+  &_container {
+    max-width: 1200px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 20px 35px;
+  }
+}
+
+@mixin m-inline-block {
+  display: inline-block;
+  vertical-align: top;
+}
