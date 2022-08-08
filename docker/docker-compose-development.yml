@@ -38,7 +38,8 @@ services:
     working_dir: /api
     command: bash -c "
       yarn install
-      && yarn migrate:up
+      && yarn prisma migrate dev
+      && yarn prisma generate
       && yarn start:dev"
 
   frontend:

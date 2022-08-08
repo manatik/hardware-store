@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from 'app.controller';
 import { AppService } from 'app.service';
 import { AuthorizationModule } from 'authorization/authorization.module';
+import { PrismaService } from 'database/prisma/prisma.service';
+import { PrismaModule } from 'database/prisma/prisma.module';
 
 @Module({
   imports: [
@@ -18,10 +20,11 @@ import { AuthorizationModule } from 'authorization/authorization.module';
       password: process.env.POSTGRES_PASSWORD,
       port: Number(process.env.POSTGRES_PORT),
       database: process.env.POSTGRES_DB,
-      synchronize: false
+      synchronize: false,
     }),
     UserModule,
     AuthorizationModule,
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
