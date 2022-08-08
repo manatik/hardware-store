@@ -13,11 +13,12 @@ import { AuthorizationModule } from 'authorization/authorization.module';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      port: 25432,
-      username: 'test',
-      password: 'test',
-      database: 'test',
-      synchronize: false,
+      host: process.env.POSTGRES_HOST,
+      username: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      port: Number(process.env.POSTGRES_PORT),
+      database: process.env.POSTGRES_DB,
+      synchronize: false
     }),
     UserModule,
     AuthorizationModule,

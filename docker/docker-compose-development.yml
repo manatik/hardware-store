@@ -7,16 +7,21 @@ services:
     image: postgres
     restart: always
     ports:
-      - "25432:25432"
+      - "25432:5432"
     environment:
       - POSTGRES_DB=test
       - POSTGRES_USER=test
-      - POSTGRES_PASSWORD=test
+      - POSTGRES_PASSWORD=testik
     volumes:
       - pgdata:/var/lib/postgresql/data
       - pgsql-sock:/var/run/postgresql
     networks:
       - web
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     image: *node-version
@@ -31,10 +36,9 @@ services:
       - pgsql-sock:/var/run/postgresql
       - ../backend/assets:/var/lib/images
     working_dir: /api
-    # && yarn typeorm migration:run
     command: bash -c "
       yarn install
-      && chmod -R 777 node_modules
+      && yarn migrate:up
       && yarn start:dev"
 
   frontend:
@@ -50,10 +54,11 @@ services:
     working_dir: /frontend
     command: bash -c "
       yarn install
-      && chmod -R 777 node_modules
       && yarn dev"
 
 volumes:
+  db:
+    driver: local
   pgdata:
   pgsql-sock:
 
