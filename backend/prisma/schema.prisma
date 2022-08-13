@@ -11,13 +11,17 @@ datasource db {
 }
 
 model User {
-	id            Int       @id @default(autoincrement())
-	email         String    @unique
+	id            Int         @id @default(autoincrement())
+	email         String      @unique
+	password      String
 	firstname     String
 	lastname      String
 	dob           DateTime?
 	tokens        UserToken[]
 	roles         UserRole[]
+	createdAt     DateTime    @default(now()) @map("created_at")
+	updatedAt     DateTime    @map("updated_at")
+	deletedAt     DateTime    @map("deleted_at")
 
   @@map("user")
 }
