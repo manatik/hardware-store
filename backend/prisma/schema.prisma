@@ -20,8 +20,8 @@ model User {
 	tokens        UserToken[]
 	roles         UserRole[]
 	createdAt     DateTime    @default(now()) @map("created_at")
-	updatedAt     DateTime    @map("updated_at")
-	deletedAt     DateTime    @map("deleted_at")
+	updatedAt     DateTime?    @map("updated_at")
+	deletedAt     DateTime?    @map("deleted_at")
 
   @@map("user")
 }
@@ -41,7 +41,7 @@ model Role {
 	id          Int         @id @default(autoincrement())
 	name        String      @unique
 	createdAt   DateTime    @default(now()) @map("created_at")
-	updatedAt   DateTime    @map("updated_at")
+	updatedAt   DateTime?    @map("updated_at")
 	users       UserRole[]
 
 	@@map("role")
@@ -54,7 +54,7 @@ model UserRole {
 	role        Role        @relation(fields: [roleId], references: [id])
 	roleId      Int         @map("role_id")
 	createdAt   DateTime    @map("created_at") @default(now())
-	updatedAt   DateTime    @map("updated_at")
+	updatedAt   DateTime?    @map("updated_at")
 
 	@@map("user_role")
 }

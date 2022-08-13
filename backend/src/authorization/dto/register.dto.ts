@@ -8,4 +8,12 @@ export class RegisterDto {
   @IsNotEmpty()
   @IsString()
   password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  lastname: string;
+
+  @IsNotEmpty()
+  @IsString()
+  firstname: string;
 }

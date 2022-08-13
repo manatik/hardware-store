@@ -14,7 +14,12 @@ export class UserService {
     try {
       const users = await this.prismaService.user.findMany();
 
-      return this.errorService.success('Пользователи успешно получены', users);
+      return {
+        message: 'Пользователи успешно получены',
+        error: false,
+        success: true,
+        users
+      }
     } catch (e) {
       throw this.errorService.internal('Ошибка получения пользователей', JSON.stringify(e));
     }
@@ -27,7 +32,12 @@ export class UserService {
         include: { roles: true, tokens: true },
       });
 
-      return this.errorService.success('Пользователь успешно получен', user);
+      return {
+        message: 'Пользователь успешно получен',
+        error: false,
+        success: true,
+        user
+      };
     } catch (e) {
       throw this.errorService.internal('Ошибка получения пользователя', JSON.stringify(e));
     }
@@ -40,7 +50,12 @@ export class UserService {
         include: { roles: true, tokens: true }
       });
 
-      return this.errorService.success('Пользователь успешно получен', user);
+      return {
+        message: 'Пользователь успешно получен',
+        error: false,
+        success: true,
+        user
+      }
     } catch (e) {
       throw this.errorService.internal('Ошибка получения пользователя', JSON.stringify(e));
     }
@@ -50,8 +65,14 @@ export class UserService {
     try {
       const user = await this.prismaService.user.create({ data: dto, include: { roles: true, tokens: true } });
 
-      return this.errorService.success('Пользователь успешно создан', user);
+      return {
+        message: 'Пользователь успешно создан',
+        error: false,
+        success: true,
+        user
+      }
     } catch (e) {
+      console.error("CREATE_USER_ERROR ", e);
       throw this.errorService.internal('Ошибка создания пользователя', JSON.stringify(e));
     }
   }
@@ -64,7 +85,12 @@ export class UserService {
         include: { roles: true, tokens: true }
       });
 
-      return this.errorService.success('Пользователь успешно обновлён', user);
+      return {
+        message: 'Пользователь успешно обновлён',
+        error: false,
+        success: true,
+        user
+      }
     } catch (e) {
       throw this.errorService.internal('Ошибка обновления пользователя', JSON.stringify(e));
     }
@@ -74,7 +100,12 @@ export class UserService {
     try {
       const user = await this.prismaService.user.update({ where: { id }, data: { deletedAt: Date.now().toString() } });
 
-      return this.errorService.success('Пользователь успешно удалён', user);
+      return {
+        message: 'Пользователь успешно удалён',
+        error: false,
+        success: true,
+        user
+      }
     } catch (e) {
       throw this.errorService.internal('Ошибка удаления пользователя', JSON.stringify(e));
     }

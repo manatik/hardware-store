@@ -6,7 +6,7 @@ import { LoginDto } from "./dto/login.dto";
 import { RegisterDto } from "./dto/register.dto";
 import * as bcrypt from "bcrypt";
 import { ErrorService } from "../common/error/error.service";
-import dayjs from "dayjs";
+import * as dayjs from "dayjs";
 import { FastifyRequest } from "fastify";
 
 @Injectable()
@@ -20,7 +20,7 @@ export class AuthorizationService {
   }
 
   async login(dto: LoginDto) {
-    const user = await this.userService.getByEmail(dto.email);
+    const { user } = await this.userService.getByEmail(dto.email);
 
     if (!user) {
       throw this.errorService.badRequest('Пользователя с таким E-mail не существует');
@@ -48,7 +48,11 @@ export class AuthorizationService {
   }
 
   async register(dto: RegisterDto) {
-    const user = await this.userService.create(dto);
+
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
+    dto.password = hashedPassword;
+
+    const { user } = await this.userService.create(dto);
 
     const payload = { email: user.email, roles: user.roles, id: user.id };
 
@@ -68,7 +72,7 @@ export class AuthorizationService {
 
       const expireIn = dayjs.unix(refreshTokenInfo.exp).toISOString();
 
-      const user = await this.userService.getByEmail(refreshTokenInfo.email);
+      const { user } = await this.userService.getByEmail(refreshTokenInfo.email);
 
       if (!user || user.deletedAt) {
         await this.prismaService.userToken.delete({ where: { token: refreshToken } });
