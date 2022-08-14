@@ -8,7 +8,7 @@ import {
 import helmet from '@fastify/helmet';
 import fastifyCookie from '@fastify/cookie';
 
-const PORT = Number.isNaN(process.env.PORT) ? 9000 : Number(process.env.PORT);
+const PORT = Number.isNaN(Number(process.env.PORT)) ? 9000 : Number(process.env.PORT);
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -26,7 +26,7 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(Number(PORT), '0.0.0.0');
+  await app.listen(PORT, '0.0.0.0');
 }
 
 bootstrap().then(() => {
