@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+	id            Int         @id @default(autoincrement())
+	email         String      @unique
+	password      String
+	firstname     String
+	lastname      String
+	dob           DateTime?
+	tokens        UserToken[]
+	roles         UserRole[]
+	createdAt     DateTime    @default(now()) @map("created_at")
+	updatedAt     DateTime?    @map("updated_at")
+	deletedAt     DateTime?    @map("deleted_at")
+
+  @@map("user")
+}
+
+model UserToken {
+	id            Int         @id @default(autoincrement())
+	user          User        @relation(fields: [userId], references: [id])
+	userId        Int         @map("user_id")
+	token         String      @unique
+	expireIn      DateTime    @map("expire_in")
+	createdAt     DateTime    @default(now()) @map("created_at")
+
+  @@map("user_token")
+}
+
+model Role {
+	id          Int         @id @default(autoincrement())
+	name        String      @unique
+	createdAt   DateTime    @default(now()) @map("created_at")
+	updatedAt   DateTime?    @map("updated_at")
+	users       UserRole[]
+
+	@@map("role")
+}
+
+model UserRole {
+	id          Int         @id @default(autoincrement())
+	user        User        @relation(fields: [userId], references: [id])
+	userId      Int         @map("user_id")
+	role        Role        @relation(fields: [roleId], references: [id])
+	roleId      Int         @map("role_id")
+	createdAt   DateTime    @map("created_at") @default(now())
+	updatedAt   DateTime?    @map("updated_at")
+
+	@@map("user_role")
+}
