@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Html, Head, Main, NextScript,
 } from 'next/document'
-import HeadDocument from '@features/HeadDocument'
+import HeadDocument from '@features/Basic/common/HeadDocument'
 
 const Document = () => {
   return (
@@ -13,6 +13,7 @@ const Document = () => {
       <body>
         <Main />
         <NextScript />
+        <div id="modal"></div>
       </body>
     </Html>
   )

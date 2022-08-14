@@ -1,6 +1,6 @@
 import React from 'react'
 import { NextPage } from 'next'
-import AdminLayout from '@features/Admin-Layout'
+import AdminLayout from '@features/Admin/common/Admin-Layout'
 
 const Orders: NextPage = () => {
   return (

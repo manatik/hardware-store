@@ -22,6 +22,7 @@
       "@pages/*": ["pages/*"],
       "@redux": ["redux"],
       "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
       "@types": ["types"],
       "@constants": ["constants"],
       "@models": ["models"],
@@ -30,7 +31,9 @@
       "@hooks": ["hooks"],
       "@api": ["api"],
       "@api/*": ["api/*"],
-      "@context": ["context"]
+      "@context": ["context"],
+      "@public": ["public"],
+      "@public/*": ["public/*"],
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

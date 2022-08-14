@@ -1,0 +1,90 @@
+@import "@public/styles/variables.scss";
+@import "@public/styles/mixins.scss";
+
+.containerProduct {
+    margin-bottom: 64px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 32px;
+    }
+
+    &__title {
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    &__button {
+        padding: 12px 16px;
+        border-radius: 8px;
+        background-color: $colorPrimary;
+        cursor: pointer;
+    }
+
+    &__cards {}
+}
+
+.form {
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15%);
+    background: #fff;
+    max-width: 850px;
+    width: 100%;
+
+    &__title {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+        margin-bottom: 16px;
+    }
+
+    &__button {
+        @include m-button;
+    }
+
+    &__close {
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        transition: opacity ease 0.5s;
+
+        &:after,
+        &:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            display: block;
+            width: 24px;
+            height: 3px;
+            background: #000;
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+        &:before {
+            transform: rotate(45deg);
+        }
+    }
+}
+// only for hovers
+@media (hover: hover) and (pointer: fine){
+    .containerProduct {
+        &__button:hover,
+        &__card__button:hover {
+            opacity: $opacityHover;
+        }
+    }
+
+    .form {
+        &__button:hover {
+            opacity: $opacityHover;
+        }
+    }
+}
