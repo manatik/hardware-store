@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { JwtService } from "@nestjs/jwt";
-import { UserService } from "../entities/user/user.service";
-import { PrismaService } from "../database/prisma/prisma.service";
-import { LoginDto } from "./dto/login.dto";
-import { RegisterDto } from "./dto/register.dto";
-import * as bcrypt from "bcrypt";
-import { ErrorService } from "../common/error/error.service";
-import * as dayjs from "dayjs";
-import { FastifyRequest } from "fastify";
+import { JwtService } from '@nestjs/jwt';
+import { UserService } from 'entities/user/user.service';
+import { PrismaService } from 'database/prisma/prisma.service';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
+import * as bcrypt from 'bcrypt';
+import { ErrorService } from 'common/error/error.service';
+import * as dayjs from 'dayjs';
+import { FastifyRequest } from 'fastify';
 
 @Injectable()
 export class AuthorizationService {
@@ -15,15 +15,16 @@ export class AuthorizationService {
     private readonly jwtService: JwtService,
     private readonly userService: UserService,
     private readonly prismaService: PrismaService,
-    private readonly errorService: ErrorService
-  ) {
-  }
+    private readonly errorService: ErrorService,
+  ) {}
 
   async login(dto: LoginDto) {
     const { user } = await this.userService.getByEmail(dto.email);
 
     if (!user) {
-      throw this.errorService.badRequest('Пользователя с таким E-mail не существует');
+      throw this.errorService.badRequest(
+        'Пользователя с таким E-mail не существует',
+      );
     }
 
     const isValidPassword = await bcrypt.compare(dto.password, user.password);
@@ -43,14 +44,12 @@ export class AuthorizationService {
 
     return {
       accessToken,
-      refreshToken
-    }
+      refreshToken,
+    };
   }
 
   async register(dto: RegisterDto) {
-
-    const hashedPassword = await bcrypt.hash(dto.password, 10);
-    dto.password = hashedPassword;
+    dto.password = await bcrypt.hash(dto.password, 10);
 
     const { user } = await this.userService.create(dto);
 
@@ -61,40 +60,54 @@ export class AuthorizationService {
 
     return {
       accessToken,
-      refreshToken
-    }
+      refreshToken,
+    };
   }
 
   async refresh(req: FastifyRequest) {
     try {
-      const refreshToken = req.cookies["r_t"];
-      const refreshTokenInfo = this.jwtService.verify(refreshToken, { secret: process.env.JWT_SECRET });
+      const refreshToken = req.cookies['r_t'];
+      const refreshTokenInfo = this.jwtService.verify(refreshToken, {
+        secret: process.env.JWT_SECRET,
+      });
 
       const expireIn = dayjs.unix(refreshTokenInfo.exp).toISOString();
 
-      const { user } = await this.userService.getByEmail(refreshTokenInfo.email);
+      const { user } = await this.userService.getByEmail(
+        refreshTokenInfo.email,
+      );
 
       if (!user || user.deletedAt) {
-        await this.prismaService.userToken.delete({ where: { token: refreshToken } });
-        throw this.errorService.badRequest('Пользователь удалён или заблокирован');
+        await this.prismaService.userToken.delete({
+          where: { token: refreshToken },
+        });
+        throw this.errorService.badRequest(
+          'Пользователь удалён или заблокирован',
+        );
       }
-
     } catch (e) {
-      throw this.errorService.internal('Ошибка обновления токена', JSON.stringify(e));
+      throw this.errorService.internal(
+        'Ошибка обновления токена',
+        JSON.stringify(e),
+      );
     }
   }
 
-
   private async generateRefreshToken(payload: any, idUser: number) {
-    const refreshToken = this.jwtService.sign(payload, { expiresIn: '30d', secret: process.env.JWT_SECRET });
+    const refreshToken = this.jwtService.sign(payload, {
+      expiresIn: '30d',
+      secret: process.env.JWT_SECRET,
+    });
     const expireInDate = dayjs().add(30, 'days').toISOString();
 
-    const findToken = await this.prismaService.userToken.findFirst({ where: { userId: idUser } });
+    const findToken = await this.prismaService.userToken.findFirst({
+      where: { userId: idUser },
+    });
 
     if (findToken) {
       await this.prismaService.userToken.update({
         where: { id: findToken.id },
-        data: { token: refreshToken, expireIn: expireInDate, userId: idUser }
+        data: { token: refreshToken, expireIn: expireInDate, userId: idUser },
       });
 
       return refreshToken;
@@ -104,15 +117,17 @@ export class AuthorizationService {
       data: {
         token: refreshToken,
         expireIn: expireInDate,
-        userId: idUser
-      }
+        userId: idUser,
+      },
     });
 
     return refreshToken;
   }
 
   private generateAccessToken(payload: any) {
-    return this.jwtService.sign(payload, { expiresIn: '24h', secret: process.env.JWT_SECRET });
+    return this.jwtService.sign(payload, {
+      expiresIn: '24h',
+      secret: process.env.JWT_SECRET,
+    });
   }
-
 }

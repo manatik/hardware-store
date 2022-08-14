@@ -1,27 +1,129 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRoleDto } from 'entities/role/dto/create-role.dto';
 import { PrismaService } from 'database/prisma/prisma.service';
+import { ErrorService } from 'common/error/error.service';
 
 @Injectable()
 export class RoleService {
-  constructor(private readonly prismaService: PrismaService) {
-  }
-  async getAll() {
-    const roles = await this.prismaService.role.findMany();
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly errorService: ErrorService,
+  ) {}
 
-    return {
-      message: 'Роли успешно получены',
-      error: false,
-      success: true,
-      roles
+  async getAll() {
+    try {
+      const roles = await this.prismaService.role.findMany();
+
+      return {
+        message: 'Роли успешно получены',
+        error: false,
+        success: true,
+        roles,
+      };
+    } catch (e) {
+      throw this.errorService.internal(
+        'Ошибка получения ролей',
+        JSON.stringify(e),
+      );
     }
   }
 
-  async getById(id: number) {}
+  async getById(id: number) {
+    try {
+      const role = await this.prismaService.role.findUnique({
+        where: { id },
+        include: { users: true },
+      });
 
-  async create(dto: CreateRoleDto) {}
+      return {
+        message: 'Роль успешно получена',
+        error: false,
+        success: true,
+        role,
+      };
+    } catch (e) {
+      throw this.errorService.internal(
+        'Ошибка получения роли',
+        JSON.stringify(e),
+      );
+    }
+  }
 
-  async update(id: number, dto) {}
+  async getByName(name: string) {
+    try {
+      const role = await this.prismaService.role.findUnique({
+        where: { name },
+        include: { users: true },
+      });
 
-  async delete(id: number) {}
+      return {
+        message: 'Роль успешно получена',
+        error: false,
+        success: true,
+        role,
+      };
+    } catch (e) {
+      throw this.errorService.internal(
+        'Ошибка получения роли',
+        JSON.stringify(e),
+      );
+    }
+  }
+
+  async create(dto: CreateRoleDto) {
+    try {
+      const role = await this.prismaService.role.create({ data: dto });
+
+      return {
+        message: 'Роль успешно создана',
+        error: false,
+        success: true,
+        role,
+      };
+    } catch (e) {
+      throw this.errorService.internal(
+        'Ошибка создания роли',
+        JSON.stringify(e),
+      );
+    }
+  }
+
+  async update(id: number, dto) {
+    try {
+      const role = await this.prismaService.role.update({
+        where: { id },
+        data: dto,
+      });
+
+      return {
+        message: 'Роль успешно обновлена',
+        error: false,
+        success: true,
+        role,
+      };
+    } catch (e) {
+      throw this.errorService.internal(
+        'Ошибка обновления роли',
+        JSON.stringify(e),
+      );
+    }
+  }
+
+  async delete(id: number) {
+    try {
+      const role = await this.prismaService.role.delete({ where: { id } });
+
+      return {
+        message: 'Роль успешно удалена',
+        error: false,
+        success: true,
+        role,
+      };
+    } catch (e) {
+      throw this.errorService.internal(
+        'Ошибка удаления роли',
+        JSON.stringify(e),
+      );
+    }
+  }
 }

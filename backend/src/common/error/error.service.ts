@@ -2,12 +2,11 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ErrorService {
-
   badRequest(message: string) {
     return new HttpException(
       { message, error: true, success: false },
-      HttpStatus.BAD_REQUEST
-    )
+      HttpStatus.BAD_REQUEST,
+    );
   }
 
   success<T>(message: string, args?: T) {
