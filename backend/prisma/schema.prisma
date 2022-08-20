@@ -23,7 +23,7 @@ model User {
 	updatedAt     DateTime?   @map("updated_at")
 	deletedAt     DateTime?   @map("deleted_at")
 
-  @@map("user")
+    @@map("user")
 }
 
 model UserToken {
@@ -34,7 +34,7 @@ model UserToken {
 	expireIn      DateTime    @map("expire_in")
 	createdAt     DateTime    @default(now()) @map("created_at")
 
-  @@map("user_token")
+    @@map("user_token")
 }
 
 model Role {
@@ -60,45 +60,129 @@ model UserRole {
 }
 
 model Category {
-	id          Int         @id @default(autoincrement())
-	name        String      @unique
-	article     String      @unique
-	products    Product[]
-	createdAt   DateTime    @map("created_at") @default(now())
-  updatedAt   DateTime?   @map("updated_at")
-  deletedAt   DateTime?   @map("deleted_at")
+	id                  Int                 @id @default(autoincrement())
+	name                String              @unique
+	article             String              @unique
+	plywoodProducts     Plywood[]
+	furnitureProducts   Furniture[]
+	houseProducts       House[]
+	createdAt           DateTime            @map("created_at") @default(now())
+    updatedAt           DateTime?           @map("updated_at")
+    deletedAt           DateTime?           @map("deleted_at")
+
+    @@map("category")
 }
 
-model Product {
-	id          Int             @id @default(autoincrement())
-	name        String
-	article     String          @unique
-	width       Int?
-	heigth      Int?
-	depth       Int?
-	photos      ProductPhoto[]
-	category    Category        @relation(fields: [categoryId], references: [id])
-	categoryId  Int             @map("category_id")
-	createdAt   DateTime        @map("created_at") @default(now())
-  updatedAt   DateTime?       @map("updated_at")
-  deletedAt   DateTime?       @map("deleted_at")
+/////////////////////////////////////////////////////////////
+//////////////////  PLYWOOD  ///////////////////////////////
+///////////////////////////////////////////////////////////
+
+model Plywood {
+	id                  Int                         @id @default(autoincrement())
+	name                String
+	article             String                      @unique
+	photos              Json?
+	category            Category                    @relation(fields: [categoryId], references: [id])
+	categoryId          Int                         @map("category_id")
+	formats             PlywoodFormatPlywood[]
+	surfaceTypes        PlywoodSurfaceTypePlywood[]
+	width               Int
+	class               String
+	densityPlywood      String                      @map("density_plywood")
+	glue                String
+	membraneType        String                      @map("membrane_type")
+	densityMembrane     String                      @map("density_membrane")
+	guaranteePeriod     String                      @map("guarantee_period")
+	humidity            String
+	wearResistance      String                      @map("wear_resistance")
+	price               Int
+	createdAt           DateTime                    @map("created_at") @default(now())
+    updatedAt           DateTime?                   @map("updated_at")
+    deletedAt           DateTime?                   @map("deleted_at")
+
+    @@map("plywood")
 }
 
-model Photo {
-	id          Int             @id @default(autoincrement())
-	name        String          @unique
-	path        String
-	products    ProductPhoto[]
-	createdAt   DateTime        @map("created_at") @default(now())
-  updatedAt   DateTime?       @map("updated_at")
+model FormatPlywood {
+    id          Int                     @id @default(autoincrement())
+    plywoods    PlywoodFormatPlywood[]
+    format      String                  @unique
+    price       Int
+    createdAt   DateTime                @map("created_at") @default(now())
+    updatedAt   DateTime?               @map("updated_at")
+    deletedAt   DateTime?               @map("deleted_at")
+
+    @@map("format_plywood")
 }
 
-model ProductPhoto {
-	id          Int         @id @default(autoincrement())
-	product     Product     @relation(fields: [productId], references: [id])
-	productId   Int         @map("product_id")
-	photo       Photo       @relation(fields: [photoId], references: [id])
-	photoId     Int         @map("photo_id")
+model SurfaceTypePlywood {
+    id          Int                             @id @default(autoincrement())
+    plywood     PlywoodSurfaceTypePlywood[]
+    type        String                          @unique
+    price       Int
+    createdAt   DateTime                        @map("created_at") @default(now())
+    updatedAt   DateTime?                       @map("updated_at")
+    deletedAt   DateTime?                       @map("deleted_at")
 
-	@@map("product_photo")
+    @@map("surface_type_plywood")
+}
+
+model PlywoodFormatPlywood {
+    id                  Int             @id @default(autoincrement())
+    plywood             Plywood         @relation(fields: [plywoodId], references: [id], onDelete: Cascade)
+    plywoodId           Int             @map("plywood_id")
+    formatPlywood       FormatPlywood   @relation(fields: [formatPlywoodId], references: [id], onDelete: Cascade)
+    formatPlywoodId     Int             @map("format_plywood_id")
+    createdAt           DateTime        @map("created_at") @default(now())
+    updatedAt           DateTime?       @map("updated_at")
+
+    @@map("plywood__format_plywood")
+}
+
+model PlywoodSurfaceTypePlywood {
+    id                      Int                 @id @default(autoincrement())
+    plywood                 Plywood             @relation(fields: [plywoodId], references: [id], onDelete: Cascade)
+    plywoodId               Int                 @map("plywood_id")
+    surfaceTypePlywood      SurfaceTypePlywood  @relation(fields: [surfaceTypePlywoodId], references: [id], onDelete: Cascade)
+    surfaceTypePlywoodId    Int                 @map("surface_type_plywood_id")
+    createdAt               DateTime            @map("created_at") @default(now())
+    updatedAt               DateTime?           @map("updated_at")
+
+    @@map("plywood__surface_type_plywood")
+}
+
+/////////////////////////////////////////////////////////////
+//////////////////  FURNITURE  /////////////////////////////
+///////////////////////////////////////////////////////////
+
+model Furniture {
+    id          Int             @id @default(autoincrement())
+    name        String
+    article     String          @unique
+    photos      Json?
+    category    Category        @relation(fields: [categoryId], references: [id])
+    categoryId  Int             @map("category_id")
+    createdAt   DateTime        @map("created_at") @default(now())
+    updatedAt   DateTime?       @map("updated_at")
+    deletedAt   DateTime?       @map("deleted_at")
+
+    @@map("furniture")
+}
+
+/////////////////////////////////////////////////////////////
+//////////////////  HOUSE  /////////////////////////////////
+///////////////////////////////////////////////////////////
+
+model House {
+    id          Int             @id @default(autoincrement())
+    name        String
+    article     String          @unique
+    photos      Json?
+    category    Category        @relation(fields: [categoryId], references: [id])
+    categoryId  Int             @map("category_id")
+    createdAt   DateTime        @map("created_at") @default(now())
+    updatedAt   DateTime?       @map("updated_at")
+    deletedAt   DateTime?       @map("deleted_at")
+
+    @@map("house")
 }

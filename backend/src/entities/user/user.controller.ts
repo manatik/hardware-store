@@ -13,12 +13,12 @@ import { UserService } from 'entities/user/user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
   @Get('all')
-  async getAll() {
+  async all() {
     return await this.userService.getAll();
   }
 
   @Get(':id')
-  async getById(@Param('id') id: number) {
+  async byId(@Param('id') id: number) {
     return await this.userService.getById(id);
   }
 
@@ -33,7 +33,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: number) {
-    return await this.userService.delete(id);
+  async remove(@Param('id') id: number) {
+    return await this.userService.remove(id);
   }
 }

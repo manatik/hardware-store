@@ -157,7 +157,7 @@ export class UserService {
     }
   }
 
-  async delete(id: number) {
+  async remove(id: number) {
     try {
       const user = await this.prismaService.user.update({
         where: { id },
