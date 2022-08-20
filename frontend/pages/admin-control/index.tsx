@@ -1,6 +1,6 @@
 import React from 'react'
 import { NextPage } from 'next'
-import AdminLayout from '@features/Admin-Layout/index'
+import AdminLayout from '@features/Admin/common/Admin-Layout/index'
 
 const AdminControl: NextPage = () => {
   return (

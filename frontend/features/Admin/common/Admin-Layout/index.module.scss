@@ -1,0 +1,103 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables.scss";
+
+.adminLayout {
+    &__header {
+        @include container;
+        background-color: $colorPrimary;
+        height: 64px;
+        transition: background .45s;
+
+        &_content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+
+    &__link {
+        font-size: 22px;
+        padding-right: 16px;
+    }
+
+    &__main {
+        @include container;
+    }
+
+    &__mobile {
+        display: none;
+
+        &__open {
+            text-align: center;
+            cursor: pointer;
+            z-index: 100;
+            height: 100%;
+
+            & span {
+                display: block;
+                border-bottom: 3px solid #fff;
+                margin: 3px 0 0 0;
+                width: 18px;
+                height: 2px;
+            }
+        }
+
+        &__menu {
+            position: absolute;
+            min-width: 240px;
+            top: 35px;
+            z-index: 1;
+
+            &__inner {
+                display: flex;
+                flex-direction: column;
+                margin-top: 5px;
+                padding: 12px 16px;
+                color: #1c1c1c;
+                background: #fff;
+                border: 1px solid rgba(0,0,0,.1125);
+                border-radius: 8px;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15%);
+                overflow: hidden;
+            }
+
+            &__item {
+                padding: 7px 0;
+                position: relative;
+            }
+        }
+    }
+}
+
+// < 980
+@media (max-width: 980px){
+    .adminLayout {
+        &__header {
+            height: 45px;
+
+            &_container {
+                padding: 12px 16px;
+            }
+
+            &_content {
+                display: none;
+            }
+        }
+
+        &__mobile {
+            display: flex;
+        }
+    }
+}
+
+// < 980
+@media (max-width: 640px){
+    .adminLayout {
+        &__main {
+            &_container {
+                padding: 12px 16px;
+            }
+        }
+    }
+}

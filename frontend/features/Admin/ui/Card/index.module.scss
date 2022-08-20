@@ -1,0 +1,120 @@
+@import "@public/styles/variables.scss";
+@import "@public/styles/mixins.scss";
+
+.card {
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15%);
+    background: #fff;
+
+    &:not(:last-child) {
+        margin-bottom: 24px;
+    }
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &__left {
+        display: flex;
+
+        &__info {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &__right {
+        display: flex;
+    }
+
+    &__image {
+        height: 120px;
+        width: 120px;
+        margin-right: 16px;
+    }
+
+    &__title {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+    }
+
+    &__description {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+
+    &__button {
+        @include m-button;
+
+        &Edit {
+            background-color: #ff7010;
+        }
+
+        &Remove {
+            background-color: #e23535;
+        }
+
+        &:not(:last-child) {
+            margin-right: 16px;
+        }
+    }
+
+    &__hidden {
+        display: none;
+    }
+
+    &__edit {
+
+    }
+}
+
+// only for hovers
+@media (hover: hover) and (pointer: fine){
+    .card {
+        &__button:hover {
+            opacity: $opacityHover;
+        }
+    }
+}
+
+// < 980
+@media (max-width: 640px){
+    .card {
+        &__inner {
+            flex-direction: column;
+        }
+
+        &__left {
+            flex-direction: column;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        &__right {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        &__hidden {
+            margin-top: 16px;
+        }
+
+        &__button {
+            &:not(:last-child) {
+                margin: 0 0 12px 0;
+            }
+        }
+    }
+}

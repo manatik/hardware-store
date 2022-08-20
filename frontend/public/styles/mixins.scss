@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 @mixin container {
   &_container {
     max-width: 1200px;
@@ -10,4 +12,18 @@
 @mixin m-inline-block {
   display: inline-block;
   vertical-align: top;
+}
+
+@mixin m-button {
+  color: $colorOnPrimary;
+  background-color: $colorPrimary;
+  box-sizing: border-box;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
 }
