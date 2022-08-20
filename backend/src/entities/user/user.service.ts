@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
+import { Role } from 'authorization/enum/role.enum';
+import { RoleService } from 'entities/role/role.service';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly errorService: ErrorService,
+    private readonly roleService: RoleService,
   ) {}
 
   async getAll() {
@@ -22,7 +25,7 @@ export class UserService {
     } catch (e) {
       throw this.errorService.internal(
         'Ошибка получения пользователей',
-        JSON.stringify(e),
+        e.message,
       );
     }
   }
@@ -43,7 +46,7 @@ export class UserService {
     } catch (e) {
       throw this.errorService.internal(
         'Ошибка получения пользователя',
-        JSON.stringify(e),
+        e.message,
       );
     }
   }
@@ -64,7 +67,7 @@ export class UserService {
     } catch (e) {
       throw this.errorService.internal(
         'Ошибка получения пользователя',
-        JSON.stringify(e),
+        e.message,
       );
     }
   }
@@ -73,8 +76,12 @@ export class UserService {
     try {
       const user = await this.prismaService.user.create({
         data: dto,
-        include: { roles: true, tokens: true },
+        include: { roles: { select: { role: true } } },
       });
+
+      const { role } = await this.roleService.getByName(Role.User);
+      await this.addRole(user.id, role.id);
+      user.roles.push({ role });
 
       return {
         message: 'Пользователь успешно создан',
@@ -86,7 +93,44 @@ export class UserService {
       console.error('CREATE_USER_ERROR ', e);
       throw this.errorService.internal(
         'Ошибка создания пользователя',
-        JSON.stringify(e),
+        e.message,
+      );
+    }
+  }
+
+  async addRole(userId: number, roleId: number) {
+    try {
+      const user = await this.prismaService.user.findUnique({
+        where: { id: userId },
+      });
+
+      const role = await this.prismaService.role.findUnique({
+        where: { id: roleId },
+      });
+
+      if (!user || !role) {
+        throw this.errorService.internal(
+          'Нет такого пользователя или роли',
+          'Ошибка. Нет пользователя или роли',
+        );
+      }
+
+      await this.prismaService.userRole.create({
+        data: { roleId: role.id, userId: user.id },
+      });
+
+      return {
+        message: 'Роль успешно добавлена',
+        error: false,
+        success: true,
+        role,
+        user,
+      };
+    } catch (e) {
+      console.error('ADD_ROLE_ERROR ', e);
+      throw this.errorService.internal(
+        'Ошибка добавления роли пользователю',
+        e.message,
       );
     }
   }
@@ -108,7 +152,7 @@ export class UserService {
     } catch (e) {
       throw this.errorService.internal(
         'Ошибка обновления пользователя',
-        JSON.stringify(e),
+        e.message,
       );
     }
   }
@@ -129,7 +173,7 @@ export class UserService {
     } catch (e) {
       throw this.errorService.internal(
         'Ошибка удаления пользователя',
-        JSON.stringify(e),
+        e.message,
       );
     }
   }

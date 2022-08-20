@@ -20,15 +20,15 @@ model User {
 	tokens        UserToken[]
 	roles         UserRole[]
 	createdAt     DateTime    @default(now()) @map("created_at")
-	updatedAt     DateTime?    @map("updated_at")
-	deletedAt     DateTime?    @map("deleted_at")
+	updatedAt     DateTime?   @map("updated_at")
+	deletedAt     DateTime?   @map("deleted_at")
 
   @@map("user")
 }
 
 model UserToken {
 	id            Int         @id @default(autoincrement())
-	user          User        @relation(fields: [userId], references: [id])
+	user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 	userId        Int         @map("user_id")
 	token         String      @unique
 	expireIn      DateTime    @map("expire_in")
@@ -40,21 +40,65 @@ model UserToken {
 model Role {
 	id          Int         @id @default(autoincrement())
 	name        String      @unique
-	createdAt   DateTime    @default(now()) @map("created_at")
-	updatedAt   DateTime?    @map("updated_at")
 	users       UserRole[]
+	createdAt   DateTime    @default(now()) @map("created_at")
+	updatedAt   DateTime?   @map("updated_at")
 
 	@@map("role")
 }
 
 model UserRole {
 	id          Int         @id @default(autoincrement())
-	user        User        @relation(fields: [userId], references: [id])
+	user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 	userId      Int         @map("user_id")
 	role        Role        @relation(fields: [roleId], references: [id])
 	roleId      Int         @map("role_id")
 	createdAt   DateTime    @map("created_at") @default(now())
-	updatedAt   DateTime?    @map("updated_at")
+	updatedAt   DateTime?   @map("updated_at")
 
 	@@map("user_role")
+}
+
+model Category {
+	id          Int         @id @default(autoincrement())
+	name        String      @unique
+	article     String      @unique
+	products    Product[]
+	createdAt   DateTime    @map("created_at") @default(now())
+  updatedAt   DateTime?   @map("updated_at")
+  deletedAt   DateTime?   @map("deleted_at")
+}
+
+model Product {
+	id          Int             @id @default(autoincrement())
+	name        String
+	article     String          @unique
+	width       Int?
+	heigth      Int?
+	depth       Int?
+	photos      ProductPhoto[]
+	category    Category        @relation(fields: [categoryId], references: [id])
+	categoryId  Int             @map("category_id")
+	createdAt   DateTime        @map("created_at") @default(now())
+  updatedAt   DateTime?       @map("updated_at")
+  deletedAt   DateTime?       @map("deleted_at")
+}
+
+model Photo {
+	id          Int             @id @default(autoincrement())
+	name        String          @unique
+	path        String
+	products    ProductPhoto[]
+	createdAt   DateTime        @map("created_at") @default(now())
+  updatedAt   DateTime?       @map("updated_at")
+}
+
+model ProductPhoto {
+	id          Int         @id @default(autoincrement())
+	product     Product     @relation(fields: [productId], references: [id])
+	productId   Int         @map("product_id")
+	photo       Photo       @relation(fields: [photoId], references: [id])
+	photoId     Int         @map("photo_id")
+
+	@@map("product_photo")
 }

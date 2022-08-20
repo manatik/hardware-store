@@ -3,9 +3,10 @@ import { UserController } from 'entities/user/user.controller';
 import { UserService } from 'entities/user/user.service';
 import { PrismaModule } from 'database/prisma/prisma.module';
 import { ErrorModule } from 'common/error/error.module';
+import { RoleModule } from 'entities/role/role.module';
 
 @Module({
-  imports: [PrismaModule, ErrorModule],
+  imports: [PrismaModule, ErrorModule, RoleModule],
   controllers: [UserController],
   providers: [UserService],
   exports: [UserService],
