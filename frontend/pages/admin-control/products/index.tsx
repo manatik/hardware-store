@@ -15,6 +15,7 @@ const Products: NextPage = () => {
       <ContainerProduct
         title="Продукция"
         buttonName="Добавить товар"
+        cards={[]}
         form={
           <form>
             <InputField

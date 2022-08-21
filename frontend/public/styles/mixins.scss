@@ -27,3 +27,67 @@
   text-align: center;
   cursor: pointer;
 }
+
+@mixin m-button-close {
+  &__close {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: opacity ease 0.5s;
+
+    &:after,
+    &:before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      display: block;
+      width: 24px;
+      height: 3px;
+      background: #000;
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+@mixin m-form-modal {
+  .form {
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15%);
+    background: #fff;
+    max-width: 850px;
+    width: 100%;
+
+    &__title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 28px;
+      margin-bottom: 16px;
+    }
+
+    &__button {
+      @include m-button;
+    }
+
+    @include m-button-close;
+  }
+
+  // only for hovers
+  @media (hover: hover) and (pointer: fine){
+    .form {
+      &__button:hover {
+        opacity: $opacityHover;
+      }
+    }
+  }
+}

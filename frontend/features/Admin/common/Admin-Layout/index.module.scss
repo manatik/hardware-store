@@ -48,6 +48,7 @@
             min-width: 240px;
             top: 35px;
             z-index: 1;
+            animation: menu .3s forwards;
 
             &__inner {
                 display: flex;
@@ -68,6 +69,11 @@
             }
         }
     }
+}
+
+@keyframes menu {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
 
 // < 980
@@ -91,7 +97,7 @@
     }
 }
 
-// < 980
+// < 640
 @media (max-width: 640px){
     .adminLayout {
         &__main {

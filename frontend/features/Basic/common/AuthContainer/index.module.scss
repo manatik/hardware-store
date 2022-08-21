@@ -1,0 +1,28 @@
+@import "@public/styles/mixins";
+
+.auth {
+    height: 100%;
+    @include m-button-close;
+
+    &__container {
+        height: 100%;
+        max-width: 480px;
+        padding: 92px 20px 20px 20px;
+        margin: 0 auto;
+    }
+}
+
+// < 640
+//@media (max-width: 640px){
+//    .auth {
+//        &__container {
+//            padding-top: 52px;
+//
+//            & > *:first-of-type {
+//                display: flex;
+//                flex-direction: column;
+//                height: 100%;
+//            }
+//        }
+//    }
+//}

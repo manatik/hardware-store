@@ -1,7 +1,7 @@
 export interface PropsInputField {
   type: InputType,
   name: string;
-  value: string;
+  value: string | number;
   placeholder?: string;
   size: 'lg' | 'md' | 'sm';
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

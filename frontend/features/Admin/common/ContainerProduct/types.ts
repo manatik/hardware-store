@@ -1,5 +1,6 @@
 export interface PropsContainerProduct {
   title: string;
-  buttonName: string;
-  form: any;
+  buttonName?: string;
+  form?: any;
+  cards?: [];
 }

@@ -11,6 +11,7 @@ const ContainerProduct: FC<PropsContainerProduct> = ({
   title,
   buttonName,
   form,
+  cards,
 }): ReactElement<Children> => {
   const [toggle, setToggle] = useState<boolean>(false)
   const onToggle = () => {
@@ -21,17 +22,17 @@ const ContainerProduct: FC<PropsContainerProduct> = ({
       <div className={styles.containerProduct__header}>
         <div className={styles.containerProduct__title}>{title}</div>
         <div>
-          <div
+          {buttonName && <div
             className={styles.containerProduct__button}
             onClick={onToggle}
-          >
+                         >
             {buttonName}
-          </div>
+          </div>}
         </div>
       </div>
-      <div className={styles.containerProduct__cards}>
+      {cards && <div className={styles.containerProduct__cards}>
         <Card />
-      </div>
+      </div>}
       {toggle && <Portal>
         <Modal>
           <>
