@@ -9,8 +9,13 @@ import { storageService } from '@utils/storageService'
 
 import styles from '@pages/login/index.module.scss'
 import { AuthForm } from 'types/auth'
+import { wrapper } from '@store/store'
+import { ProjectPage, useServerSideProps } from '@hooks'
+import { useAppDispatch } from '@store/hooks'
+import { fetchRegisterAsync } from '@store/register/registerSlice'
 
 const Register = () => {
+  const dispatch = useAppDispatch()
   const router = useRouter()
   const formRef = useRef<FormikProps<AuthForm>>(null)
 
@@ -41,8 +46,7 @@ const Register = () => {
           validateOnChange={false}
           validateOnBlur={false}
           onSubmit={async (values) => {
-            // eslint-disable-next-line no-console
-            console.log(values)
+            await dispatch(fetchRegisterAsync(values))
           }}
         >
           {({
@@ -97,5 +101,9 @@ const Register = () => {
     </AuthContainer>
   )
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  ({ dispatch }) => async (context) => useServerSideProps(ProjectPage.Register, context, dispatch),
+)
 
 export default Register

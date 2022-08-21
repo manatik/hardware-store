@@ -11,13 +11,12 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
     new ExpressAdapter(),
+    { cors: true }
   );
 
   app.use(cookieParser(process.env.COOKIE_SECRET));
 
   app.setGlobalPrefix('api');
-
-  app.enableCors({ credentials: true, origin: false });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, }));
 
