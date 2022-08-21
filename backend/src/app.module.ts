@@ -11,14 +11,9 @@ import { JwtAuthGuard } from "authorization/guards/jwt.guard";
 import { RolesGuard } from "authorization/guards/roles.guard";
 import { ProductsModule } from "entities/products/products.module";
 import { CategoryModule } from "entities/category/category.module";
-import { ServeStaticModule } from '@nestjs/serve-static';
-import * as path from 'path';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: path.join(__dirname, '..', 'assets'),
-    }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
