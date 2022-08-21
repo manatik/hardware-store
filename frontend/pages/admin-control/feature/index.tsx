@@ -1,20 +1,19 @@
 import React from 'react'
+import { NextPage } from 'next'
 import AdminLayout from '@features/Admin/common/Admin-Layout'
 import ContainerProduct from '@features/Admin/common/ContainerProduct'
 import CardGrid from '@features/Admin/ui/CardGrid'
+import { wrapper } from '@store/store'
+import { ProjectPage, useServerSideProps } from '@hooks'
 
 import styles from './index.module.scss'
 
-const feature = () => {
-  const onChange = (e: any) => {
-    // eslint-disable-next-line no-console
-    console.log(123, e)
-  }
-
+const feature: NextPage = () => {
   return (
     <AdminLayout>
       <ContainerProduct
         title="Техничесткие характеристики"
+        buttonName="Добавить характеристику"
       />
       <div className={styles.feature}>
         <div className={styles.feature__container}>
@@ -68,5 +67,9 @@ const feature = () => {
     </AdminLayout>
   )
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  ({ dispatch }) => async (context) => useServerSideProps(ProjectPage.Feature, context, dispatch),
+)
 
 export default feature

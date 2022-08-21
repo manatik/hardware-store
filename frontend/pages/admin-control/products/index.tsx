@@ -4,6 +4,8 @@ import AdminLayout from '@features/Admin/common/Admin-Layout'
 import ContainerProduct from '@features/Admin/common/ContainerProduct'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
+import { wrapper } from '@store/store'
+import { ProjectPage, useServerSideProps } from '@hooks'
 
 const Products: NextPage = () => {
   const onChange = (e: any) => {
@@ -50,5 +52,9 @@ const Products: NextPage = () => {
     </AdminLayout>
   )
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  ({ dispatch }) => async (context) => useServerSideProps(ProjectPage.Products, context, dispatch),
+)
 
 export default Products
