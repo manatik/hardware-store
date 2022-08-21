@@ -31,7 +31,13 @@ export class AuthorizationController {
 
   @Public()
   @Get('/refresh')
-  async refresh(@Req() req: FastifyRequest) {
-    return this.authService.refresh(req);
+  async refresh(@Req() req: FastifyRequest, @Res() res: FastifyReply) {
+    const tokens = await this.authService.refresh(req);
+
+    if (tokens.refreshToken) {
+      res.setCookie('r_t', tokens.refreshToken, { httpOnly: true });
+    }
+
+    res.send(this.errorService.success('Токены успешно обновлены', { ...tokens }));
   }
 }

@@ -14,14 +14,11 @@ model User {
 	id            Int         @id @default(autoincrement())
 	email         String      @unique
 	password      String
-	firstname     String
-	lastname      String
-	dob           DateTime?
 	tokens        UserToken[]
 	roles         UserRole[]
 	createdAt     DateTime    @default(now()) @map("created_at")
 	updatedAt     DateTime?   @map("updated_at")
-	deletedAt     DateTime?   @map("deleted_at")
+	deleted       DateTime?
 
     @@map("user")
 }
@@ -68,7 +65,7 @@ model Category {
 	houseProducts       House[]
 	createdAt           DateTime            @map("created_at") @default(now())
     updatedAt           DateTime?           @map("updated_at")
-    deletedAt           DateTime?           @map("deleted_at")
+    deleted             DateTime?
 
     @@map("category")
 }
@@ -98,19 +95,20 @@ model Plywood {
 	price               Int
 	createdAt           DateTime                    @map("created_at") @default(now())
     updatedAt           DateTime?                   @map("updated_at")
-    deletedAt           DateTime?                   @map("deleted_at")
+    deleted             DateTime?
 
     @@map("plywood")
 }
 
 model FormatPlywood {
-    id          Int                     @id @default(autoincrement())
-    plywoods    PlywoodFormatPlywood[]
-    format      String                  @unique
-    price       Int
-    createdAt   DateTime                @map("created_at") @default(now())
-    updatedAt   DateTime?               @map("updated_at")
-    deletedAt   DateTime?               @map("deleted_at")
+    id              Int                     @id @default(autoincrement())
+    plywoods        PlywoodFormatPlywood[]
+    format          String
+    size            String                  @unique
+    price           Int
+    createdAt       DateTime                @map("created_at") @default(now())
+    updatedAt       DateTime?               @map("updated_at")
+    deleted         DateTime?
 
     @@map("format_plywood")
 }
@@ -122,7 +120,7 @@ model SurfaceTypePlywood {
     price       Int
     createdAt   DateTime                        @map("created_at") @default(now())
     updatedAt   DateTime?                       @map("updated_at")
-    deletedAt   DateTime?                       @map("deleted_at")
+    deleted     DateTime?
 
     @@map("surface_type_plywood")
 }
@@ -164,7 +162,7 @@ model Furniture {
     categoryId  Int             @map("category_id")
     createdAt   DateTime        @map("created_at") @default(now())
     updatedAt   DateTime?       @map("updated_at")
-    deletedAt   DateTime?       @map("deleted_at")
+    deleted     DateTime?
 
     @@map("furniture")
 }
@@ -182,7 +180,7 @@ model House {
     categoryId  Int             @map("category_id")
     createdAt   DateTime        @map("created_at") @default(now())
     updatedAt   DateTime?       @map("updated_at")
-    deletedAt   DateTime?       @map("deleted_at")
+    deleted     DateTime?
 
     @@map("house")
 }

@@ -33,7 +33,7 @@ export class AuthorizationService {
       throw this.errorService.badRequest('Неверный пароль');
     }
 
-    if (user.deletedAt) {
+    if (user.deleted) {
       throw this.errorService.badRequest('Пользователь заблокирован');
     }
 
@@ -67,6 +67,7 @@ export class AuthorizationService {
   async refresh(req: FastifyRequest) {
     try {
       const refreshToken = req.cookies['r_t'];
+
       const refreshTokenInfo = this.jwtService.verify(refreshToken, {
         secret: process.env.JWT_SECRET,
       });
@@ -77,7 +78,7 @@ export class AuthorizationService {
         refreshTokenInfo.email,
       );
 
-      if (!user || user.deletedAt) {
+      if (!user || user.deleted) {
         await this.prismaService.userToken.delete({
           where: { token: refreshToken },
         });
@@ -85,6 +86,19 @@ export class AuthorizationService {
           'Пользователь удалён или заблокирован',
         );
       }
+
+      const payload = { email: user.email, roles: user.roles, id: user.id };
+
+      if (dayjs().diff(expireIn, 'millisecond') > 0) {
+        const refreshToken = await this.generateRefreshToken(payload, user.id);
+        const accessToken = this.generateAccessToken(payload);
+
+        return { accessToken, refreshToken };
+      }
+
+      const accessToken = this.generateAccessToken(payload);
+
+      return { accessToken, refreshToken: null };
     } catch (e) {
       throw this.errorService.internal(
         'Ошибка обновления токена',

@@ -1,15 +1,18 @@
-import { Controller, Delete, Get, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { CategoryService } from "./category.service";
 
 @Controller("category")
 export class CategoryController {
+  constructor(private readonly categoryService: CategoryService) {}
+
   @Get()
   async all() {
-    return Promise.resolve("all products");
+    return await this.categoryService.getAll();
   }
 
   @Get(":id")
-  async byId() {
-    return Promise.resolve("by id");
+  async byId(@Param('id') id: number) {
+    return await this.categoryService.getById(id);
   }
 
   @Post()
@@ -18,8 +21,8 @@ export class CategoryController {
   }
 
   @Patch(":id")
-  async update() {
-    return Promise.resolve("update product");
+  async update(@Param('id') id: number, @Body() dto) {
+    return await this.categoryService.update(id, dto);
   }
 
   @Delete(":id")

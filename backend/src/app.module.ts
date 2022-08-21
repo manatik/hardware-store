@@ -20,7 +20,7 @@ import { ProductsModule } from "./entities/products/products.module";
     UserModule,
     AuthorizationModule,
     PrismaModule,
-    ProductsModule
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [
