@@ -6,9 +6,10 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { UserModule } from 'entities/user/user.module';
 import { ErrorModule } from 'common/error/error.module';
 import { JwtModule } from '@nestjs/jwt';
+import { RoleModule } from 'entities/role/role.module';
 
 @Module({
-  imports: [PrismaModule, UserModule, ErrorModule, JwtModule],
+  imports: [PrismaModule, UserModule, ErrorModule, JwtModule, RoleModule],
   controllers: [AuthorizationController],
   providers: [AuthorizationService, JwtStrategy],
   exports: [],

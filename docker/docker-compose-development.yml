@@ -34,6 +34,7 @@ services:
     command: bash -c "
       yarn install
       && yarn prisma migrate dev
+      && yarn prisma db seed
       && yarn prisma generate
       && yarn start:dev"
 

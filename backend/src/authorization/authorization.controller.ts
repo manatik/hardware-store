@@ -17,20 +17,19 @@ export class AuthorizationController {
   @Post('/login')
   async login(@Body() dto: LoginDto, @Res() res: FastifyReply) {
     const { refreshToken, accessToken } = await this.authService.login(dto);
-    res.setCookie('a_t', accessToken, { httpOnly: true });
     res.setCookie('r_t', refreshToken, { httpOnly: true });
-    res.send(this.errorService.success('Успешный вход'));
+    res.send(this.errorService.success('Успешный вход', { accessToken }));
   }
 
   @Public()
   @Post('/register')
   async register(@Body() dto: RegisterDto, @Res() res: FastifyReply) {
     const { refreshToken, accessToken } = await this.authService.register(dto);
-    res.setCookie('a_t', accessToken);
-    res.setCookie('r_t', refreshToken);
-    res.send(this.errorService.success('Успешная регистрация'));
+    res.setCookie('r_t', refreshToken, { httpOnly: true });
+    res.send(this.errorService.success('Успешная регистрация', { accessToken }));
   }
 
+  @Public()
   @Get('/refresh')
   async refresh(@Req() req: FastifyRequest) {
     return this.authService.refresh(req);

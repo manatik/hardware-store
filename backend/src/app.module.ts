@@ -9,6 +9,7 @@ import { APP_GUARD } from "@nestjs/core";
 import { JwtAuthGuard } from "./authorization/guards/jwt.guard";
 import { RolesGuard } from "./authorization/guards/roles.guard";
 import { JwtModule } from "@nestjs/jwt";
+import { ProductsModule } from "./entities/products/products.module";
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { JwtModule } from "@nestjs/jwt";
     UserModule,
     AuthorizationModule,
     PrismaModule,
+    ProductsModule
   ],
   controllers: [AppController],
   providers: [
