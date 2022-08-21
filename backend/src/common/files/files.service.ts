@@ -4,7 +4,7 @@ import * as path from "path";
 
 @Injectable()
 export class FilesService {
-  private readonly SOURCE_DIR = path.join(process.cwd(), 'assets')
+  private readonly SOURCE_DIR = path.join(process.cwd(), 'assets');
 
   async writeFile() {
     const data = new Uint8Array(Buffer.from('Hello Node.js'));
