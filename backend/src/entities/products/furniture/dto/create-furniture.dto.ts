@@ -1,4 +1,5 @@
-import { IsJSON, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { Transform } from "class-transformer";
 
 export class CreateFurnitureDto {
   @IsNotEmpty()
@@ -9,11 +10,8 @@ export class CreateFurnitureDto {
   @IsString()
   article: string;
 
-  @IsOptional()
-  @IsJSON({ each: true })
-  photos: {
-    filename: string;
-    path: string;
-    size: string;
-  }
+  @IsNotEmpty()
+  @IsNumber()
+  @Transform(({ value }) => Number(value))
+  categoryId: number;
 }

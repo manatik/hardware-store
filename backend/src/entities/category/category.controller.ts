@@ -1,32 +1,29 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseIntPipe, Patch } from "@nestjs/common";
 import { CategoryService } from "./category.service";
+import { Public } from "../../authorization/decorators/public.decorator";
+import { Role } from "../../authorization/enum/role.enum";
+import { Roles } from "../../authorization/decorators/roles.decorator";
+import { UpdateCategoryDto } from "./dto/update-category.dto";
 
 @Controller("category")
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  @Public()
   @Get()
   async all() {
     return await this.categoryService.getAll();
   }
 
-  @Get(":id")
-  async byId(@Param('id') id: number) {
+  @Public()
+  @Get(':id')
+  async byId(@Param('id', ParseIntPipe) id: number) {
     return await this.categoryService.getById(id);
   }
 
-  @Post()
-  async add() {
-    return Promise.resolve("add product");
-  }
-
-  @Patch(":id")
-  async update(@Param('id') id: number, @Body() dto) {
+  @Roles(Role.Admin)
+  @Patch(':id')
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateCategoryDto) {
     return await this.categoryService.update(id, dto);
-  }
-
-  @Delete(":id")
-  async remove() {
-    return Promise.resolve("remove product");
   }
 }

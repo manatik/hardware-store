@@ -1,18 +1,24 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from "@nestjs/core";
+import { JwtModule } from "@nestjs/jwt";
 import { UserModule } from 'entities/user/user.module';
 import { AppController } from 'app.controller';
 import { AppService } from 'app.service';
 import { AuthorizationModule } from 'authorization/authorization.module';
 import { PrismaModule } from 'database/prisma/prisma.module';
-import { APP_GUARD } from "@nestjs/core";
-import { JwtAuthGuard } from "./authorization/guards/jwt.guard";
-import { RolesGuard } from "./authorization/guards/roles.guard";
-import { JwtModule } from "@nestjs/jwt";
-import { ProductsModule } from "./entities/products/products.module";
+import { JwtAuthGuard } from "authorization/guards/jwt.guard";
+import { RolesGuard } from "authorization/guards/roles.guard";
+import { ProductsModule } from "entities/products/products.module";
+import { CategoryModule } from "entities/category/category.module";
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'assets'),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -21,6 +27,7 @@ import { ProductsModule } from "./entities/products/products.module";
     AuthorizationModule,
     PrismaModule,
     ProductsModule,
+    CategoryModule
   ],
   controllers: [AppController],
   providers: [

@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "database/prisma/prisma.service";
 import { ErrorService } from "common/error/error.service";
-import { FilesService } from "common/files/files.service";
+import { CreateFurnitureDto } from "./dto/create-furniture.dto";
+import { FilesService } from "../../../common/files/files.service";
 
 @Injectable()
 export class FurnitureService {
@@ -14,7 +15,6 @@ export class FurnitureService {
 
   async getAll() {
     try {
-      console.log(this.filesService)
       const products = await this.prismaService.furniture.findMany({ where: { deleted: { in: null } } });
 
       return this.errorService.success('Продукты успешно получены', { products });
@@ -33,8 +33,9 @@ export class FurnitureService {
     }
   }
 
-  async add(dto) {
+  async add(dto: CreateFurnitureDto, photos: Array<Express.Multer.File>) {
     try {
+
       const product = await this.prismaService.furniture.create({ data: dto });
 
       return this.errorService.success('Продукт успешно добавлен', { product });

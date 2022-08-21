@@ -7,7 +7,7 @@ import { RegisterDto } from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
 import { ErrorService } from 'common/error/error.service';
 import * as dayjs from 'dayjs';
-import { FastifyRequest } from 'fastify';
+import { Request } from "express";
 
 @Injectable()
 export class AuthorizationService {
@@ -64,7 +64,7 @@ export class AuthorizationService {
     };
   }
 
-  async refresh(req: FastifyRequest) {
+  async refresh(req: Request) {
     try {
       const refreshToken = req.cookies['r_t'];
 

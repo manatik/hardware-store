@@ -17,7 +17,7 @@ export class UserController {
     return await this.userService.getAll();
   }
 
-  @Get(':id')
+  @Get('info')
   async byId(@Param('id') id: number) {
     return await this.userService.getById(id);
   }

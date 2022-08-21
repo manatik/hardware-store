@@ -1,6 +1,18 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  UploadedFiles,
+  UseInterceptors
+} from "@nestjs/common";
 import { FurnitureService } from "./furniture.service";
-import { Public } from "../../../authorization/decorators/public.decorator";
+import { CreateFurnitureDto } from "./dto/create-furniture.dto";
+import { FilesInterceptor } from "@nestjs/platform-express";
 
 @Controller("products/furniture")
 export class FurnitureController {
@@ -17,8 +29,9 @@ export class FurnitureController {
   }
 
   @Post()
-  async add(@Body() dto) {
-    return await this.furnitureService.add(dto);
+  @UseInterceptors(FilesInterceptor('photos'))
+  async add(@UploadedFiles() photos: Array<Express.Multer.File>, @Body() dto: CreateFurnitureDto) {
+    return await this.furnitureService.add(dto, photos);
   }
 
   @Patch(":id")

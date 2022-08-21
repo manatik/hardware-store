@@ -1,31 +1,22 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import * as cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
-import helmet from '@fastify/helmet';
-import fastifyCookie from '@fastify/cookie';
+import {NestExpressApplication, ExpressAdapter} from "@nestjs/platform-express"
+import { AppModule } from 'app.module';
 
 const PORT = Number.isNaN(Number(process.env.PORT)) ? 9000 : Number(process.env.PORT);
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
+  const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
-    new FastifyAdapter({ logger: true }),
+    new ExpressAdapter(),
   );
 
+  app.use(cookieParser());
+
   app.setGlobalPrefix('api')
-  await app.register(helmet);
-  await app.register(fastifyCookie, {
-    secret: process.env.COOKIE_SECRET, // for cookies signature
-  });
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-    }),
-  );
+
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, }));
 
   await app.listen(PORT, '0.0.0.0');
 }
