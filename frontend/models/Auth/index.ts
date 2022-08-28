@@ -7,4 +7,5 @@ export interface AuthResp {
   accessToken: string;
   error: boolean | string;
   success: boolean;
+  message: string;
 }

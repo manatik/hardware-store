@@ -12,4 +12,5 @@ export enum ApiEndpoints {
   Login = '/api/auth/login',
   RegisterNext = '/api/v1/register',
   LoginNext = '/api/v1/login',
+  Categories = '/api/category',
 }

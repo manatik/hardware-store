@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { setGlobalError } from '@store/app/appSlice'
 import authService from '@services/auth/auth.service'
 import { AuthModal, AuthResp } from '@models/Auth'
 import { AuthState } from './types'
@@ -8,20 +7,16 @@ import { AuthState } from './types'
 export const initialState: AuthState = {
   isLoading: false,
   auth: null,
-  authError: false,
   isError: false,
 }
 
 export const fetchAuthAsync = createAsyncThunk<AuthResp, AuthModal>(
   'auth/fetchAuth',
-  // @ts-ignore
-  async (userData, { rejectWithValue, dispatch }) => {
+  async (userData, { rejectWithValue }) => {
     try {
-      return await authService.internal.login(userData)
+      const { data } = await authService.internal.login(userData)
+      return data
     } catch (err: any) {
-      if (err.code === 403 || err.code >= 500) {
-        dispatch(setGlobalError(err.data || { reason: 'Произошла ошибка сервера' }))
-      }
       return rejectWithValue(err)
     }
   },
@@ -30,11 +25,7 @@ export const fetchAuthAsync = createAsyncThunk<AuthResp, AuthModal>(
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    clearAuthError(state) {
-      state.authError = null
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAuthAsync.pending, (state) => {
@@ -47,11 +38,10 @@ export const authSlice = createSlice({
       .addCase(fetchAuthAsync.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        state.authError = action.payload
+        // @ts-ignore
+        state.auth = action.payload
       })
   },
 })
-
-export const { clearAuthError } = authSlice.actions
 
 export default authSlice.reducer
