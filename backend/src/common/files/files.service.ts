@@ -1,7 +1,7 @@
-import { Injectable } from "@nestjs/common";
-import * as fsPromises from "fs/promises";
+import { Injectable } from '@nestjs/common';
+import * as fsPromises from 'fs/promises';
 import * as fs from 'fs';
-import * as path from "path";
+import * as path from 'path';
 import * as sharp from 'sharp';
 import * as uuid from 'uuid';
 
@@ -9,7 +9,7 @@ import * as uuid from 'uuid';
 export class FilesService {
   private readonly SOURCE_DIR = path.join(process.cwd(), 'assets');
 
-  async writeFileWithCompress({ filename, buffer }: { filename: string, buffer: Buffer }) {
+  async writeFileWithCompress({ filename, buffer }: { filename: string; buffer: Buffer }) {
     try {
       const compressedBuffer = await this.compressFile(buffer);
       const name = uuid.v4() + '.webp';
@@ -21,10 +21,7 @@ export class FilesService {
 
   async compressFile(buffer: Buffer) {
     try {
-      return await sharp(buffer)
-        .toFormat('webp')
-        .webp({ quality: 80 })
-        .toBuffer()
+      return await sharp(buffer).toFormat('webp').webp({ quality: 80 }).toBuffer();
     } catch (e) {
       throw e;
     }
@@ -33,7 +30,7 @@ export class FilesService {
   async writeFile({ filename, buffer }) {
     try {
       if (!fs.existsSync(this.SOURCE_DIR)) {
-        fs.mkdirSync(this.SOURCE_DIR, { recursive: true })
+        fs.mkdirSync(this.SOURCE_DIR, { recursive: true });
       }
 
       await fsPromises.writeFile(`${this.SOURCE_DIR}/${filename}`, buffer);

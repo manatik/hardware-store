@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { CategoryController } from './category.controller';
-import { CategoryService } from './category.service';
+import { HouseController } from 'entities/house/house.controller';
+import { HouseService } from 'entities/house/house.service';
 import { PrismaModule } from 'database/prisma/prisma.module';
 import { ErrorModule } from 'common/error/error.module';
 
 @Module({
   imports: [PrismaModule, ErrorModule],
-  controllers: [CategoryController],
-  providers: [CategoryService],
+  controllers: [HouseController],
+  providers: [HouseService],
   exports: [],
 })
-export class CategoryModule {}
+export class HouseModule {}

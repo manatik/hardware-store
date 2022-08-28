@@ -7,7 +7,7 @@ import { RegisterDto } from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
 import { ErrorService } from 'common/error/error.service';
 import * as dayjs from 'dayjs';
-import { Request } from "express";
+import { Request } from 'express';
 
 @Injectable()
 export class AuthorizationService {
@@ -22,9 +22,7 @@ export class AuthorizationService {
     const { user } = await this.userService.getByEmail(dto.email);
 
     if (!user) {
-      throw this.errorService.badRequest(
-        'Пользователя с таким E-mail не существует',
-      );
+      throw this.errorService.badRequest('Пользователя с таким E-mail не существует');
     }
 
     const isValidPassword = await bcrypt.compare(dto.password, user.password);
@@ -74,17 +72,13 @@ export class AuthorizationService {
 
       const expireIn = dayjs.unix(refreshTokenInfo.exp).toISOString();
 
-      const { user } = await this.userService.getByEmail(
-        refreshTokenInfo.email,
-      );
+      const { user } = await this.userService.getByEmail(refreshTokenInfo.email);
 
       if (!user || user.deleted) {
         await this.prismaService.userToken.delete({
           where: { token: refreshToken },
         });
-        throw this.errorService.badRequest(
-          'Пользователь удалён или заблокирован',
-        );
+        throw this.errorService.badRequest('Пользователь удалён или заблокирован');
       }
 
       const payload = { email: user.email, roles: user.roles, id: user.id };
@@ -100,10 +94,7 @@ export class AuthorizationService {
 
       return { accessToken, refreshToken: null };
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка обновления токена',
-        JSON.stringify(e),
-      );
+      throw this.errorService.internal('Ошибка обновления токена', JSON.stringify(e));
     }
   }
 

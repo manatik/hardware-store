@@ -8,13 +8,13 @@ import {
   Patch,
   Post,
   UploadedFiles,
-  UseInterceptors
-} from "@nestjs/common";
-import { FurnitureService } from "./furniture.service";
-import { CreateFurnitureDto } from "./dto/create-furniture.dto";
-import { FilesInterceptor } from "@nestjs/platform-express";
+  UseInterceptors,
+} from '@nestjs/common';
+import { FurnitureService } from 'entities/furniture/furniture.service';
+import { CreateFurnitureDto } from 'entities/furniture/dto/create-furniture.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
-@Controller("products/furniture")
+@Controller('products/furniture')
 export class FurnitureController {
   constructor(private readonly furnitureService: FurnitureService) {}
 
@@ -23,7 +23,7 @@ export class FurnitureController {
     return await this.furnitureService.getAll();
   }
 
-  @Get(":id")
+  @Get(':id')
   async byId(@Param('id', ParseIntPipe) id: number) {
     return await this.furnitureService.getById(id);
   }
@@ -34,12 +34,12 @@ export class FurnitureController {
     return await this.furnitureService.add(dto, photos);
   }
 
-  @Patch(":id")
+  @Patch(':id')
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
     return await this.furnitureService.update(id, dto);
   }
 
-  @Delete(":id")
+  @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.furnitureService.remove(id);
   }
