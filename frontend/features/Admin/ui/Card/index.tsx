@@ -1,20 +1,20 @@
 import React, { FC, ReactElement, useRef } from 'react'
 import Image from 'next/image'
 import cn from 'classnames'
-
 import popa from 'assets/popa.jpeg'
-import InputField from '@features/Admin/ui/InputField'
-import { InputType } from '@features/Admin/ui/InputField/types'
 import { slideToggle } from '@utils/slideToogle'
+import { CardProps } from '@features/Admin/ui/Card/types'
 
 import styles from './index.module.scss'
 
-const Card: FC = (): ReactElement => {
+const Card: FC<CardProps> = ({
+  image,
+  title,
+  description,
+  form,
+  remove = true,
+}): ReactElement => {
   const hiddenElem = useRef<HTMLDivElement | null>(null)
-  const onChange = (e: any) => {
-    // eslint-disable-next-line no-console
-    console.log(123, e)
-  }
 
   const toggle = () => {
     slideToggle(hiddenElem.current)
@@ -23,16 +23,16 @@ const Card: FC = (): ReactElement => {
     <div className={styles.card}>
       <div className={styles.card__inner}>
         <div className={styles.card__left}>
-          <div className={styles.card__image}>
+          {image && <div className={styles.card__image}>
             <Image
               src={popa}
               height={120}
               width={120}
             />
-          </div>
+          </div>}
           <div className={styles.card__left__info}>
-            <div className={styles.card__title}>Вишневый пирог</div>
-            <div className={styles.card__description}>described</div>
+            {title && <div className={styles.card__title}>{title}</div>}
+            {description && <div className={styles.card__description}>{description}</div>}
           </div>
         </div>
         <div className={styles.card__right}>
@@ -45,59 +45,26 @@ const Card: FC = (): ReactElement => {
           >
             Редактировать
           </div>
-          <div
-            className={cn(
-              styles.card__button,
-              styles.card__buttonRemove,
-            )}
-          >
+          {remove
+            && <div
+              className={cn(
+                styles.card__button,
+                styles.card__buttonRemove,
+              )}
+               >
             Удалить
-          </div>
+          </div>}
         </div>
       </div>
 
-      <div
+      {form && <div
         className={styles.card__hidden}
         ref={hiddenElem}
-      >
+               >
         <div className={styles.card__edit}>
-          <InputField
-            type={InputType.Text}
-            name="title"
-            value=''
-            label="Название"
-            size="md"
-            onChange={onChange}
-          />
-
-          <InputField
-            type={InputType.Text}
-            name="title"
-            value=''
-            label="Описание"
-            size="md"
-            onChange={onChange}
-          />
-
-          <InputField
-            type={InputType.Text}
-            name="title"
-            value=''
-            label="Что-то еще"
-            size="md"
-            onChange={onChange}
-          />
-
-          <div
-            className={cn(
-              styles.card__button,
-              styles.card__buttonEdit,
-            )}
-          >
-            Сохранить изменения
-          </div>
+          {form}
         </div>
-      </div>
+      </div>}
     </div>
   )
 }

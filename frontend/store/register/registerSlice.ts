@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { setGlobalError } from '@store/app/appSlice'
 import authService from '@services/auth/auth.service'
 import { AuthModal, AuthResp } from '@models/Auth'
 import { RegisterState } from './types'
@@ -8,20 +7,16 @@ import { RegisterState } from './types'
 export const initialState: RegisterState = {
   isLoading: false,
   register: null,
-  registerError: null,
   isError: false,
 }
 
 export const fetchRegisterAsync = createAsyncThunk<AuthResp, AuthModal>(
   'register/fetchRegister',
-  // @ts-ignore
-  async (userData, { rejectWithValue, dispatch }) => {
+  async (userData, { rejectWithValue }) => {
     try {
-      return await authService.internal.register(userData)
-    } catch (err: any) {
-      if (err.code === 403 || err.code >= 500) {
-        dispatch(setGlobalError(err.data || { reason: 'Произошла ошибка сервера' }))
-      }
+      const { data } = await authService.internal.register(userData)
+      return data
+    } catch (err) {
       return rejectWithValue(err)
     }
   },
@@ -30,11 +25,7 @@ export const fetchRegisterAsync = createAsyncThunk<AuthResp, AuthModal>(
 export const registerSlice = createSlice({
   name: 'register',
   initialState,
-  reducers: {
-    clearAuthError(state) {
-      state.registerError = null
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchRegisterAsync.pending, (state) => {
@@ -47,11 +38,10 @@ export const registerSlice = createSlice({
       .addCase(fetchRegisterAsync.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        state.registerError = action.payload
+        // @ts-ignore
+        state.register = action.payload
       })
   },
 })
-
-export const { clearAuthError } = registerSlice.actions
 
 export default registerSlice.reducer

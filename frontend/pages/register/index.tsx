@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import AuthContainer from '@features/Basic/common/AuthContainer'
 import { Formik, FormikProps } from 'formik'
@@ -11,18 +11,29 @@ import styles from '@pages/login/index.module.scss'
 import { AuthForm } from 'types/auth'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
-import { useAppDispatch } from '@store/hooks'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { fetchRegisterAsync } from '@store/register/registerSlice'
+import { getRegisterLoading, getRegisterError, getRegisterInfo } from '@store/register/selector'
+import cn from 'classnames'
 
 const Register = () => {
   const dispatch = useAppDispatch()
+  const register = useAppSelector(getRegisterInfo)
+  const isError = useAppSelector(getRegisterError)
+  const isLoading = useAppSelector(getRegisterLoading)
+  const [error, setError] = useState<string>('')
   const router = useRouter()
   const formRef = useRef<FormikProps<AuthForm>>(null)
 
-  const onLoginLinkClick = () => {
+  const onLoginLinkClick = async () => {
     storageService.setItem('email', formRef?.current?.values?.email || '')
-    router.push('/login')
+    await router.push('/login')
   }
+
+  useEffect(() => {
+    if (register?.success) router.push('/')
+    if (isError && register?.error) setError(register.message)
+  }, [register, isError])
 
   useEffect(() => {
     return () => {
@@ -61,6 +72,7 @@ const Register = () => {
               onSubmit={handleSubmit}
               onChange={() => {
                 setErrors({})
+                setError('')
               }}
               noValidate
             >
@@ -68,8 +80,9 @@ const Register = () => {
                 type={InputType.Text}
                 name="email"
                 value={values.email}
-                error={errors.email}
+                error={errors.email || error}
                 placeholder="Электронная почта"
+                isDisabled={isLoading}
                 size="md"
                 onChange={handleChange}
               />
@@ -79,18 +92,25 @@ const Register = () => {
                 value={values.password}
                 error={errors.password}
                 placeholder="Пароль"
+                isDisabled={isLoading}
                 size="md"
                 onChange={handleChange}
               />
               <button
                 type="submit"
-                className={styles.login__submit}
+                className={cn(styles.login__submit, {
+                  disable: isLoading,
+                })}
+                disabled={isLoading}
               >
                 Создать аккаунт
               </button>
               <button
-                className={styles.login__submit}
+                className={cn(styles.login__submit, {
+                  disable: isLoading,
+                })}
                 onClick={onLoginLinkClick}
+                disabled={isLoading}
               >
                 Уже есть аккаунт
               </button>
