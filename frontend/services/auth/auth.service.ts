@@ -7,6 +7,7 @@ import { ApiEndpoints, baseApiEndpoints } from '@api'
  */
 const loginEndpointNext = `${baseApiEndpoints.baseLocalEndpoint}${ApiEndpoints.LoginNext}`
 const registerEndpointNext = `${baseApiEndpoints.baseLocalEndpoint}${ApiEndpoints.RegisterNext}`
+const refreshEndpointNext = `${baseApiEndpoints.baseLocalEndpoint}${ApiEndpoints.RefreshNext}`
 
 const internal = {
   login: async (userData: AuthModal) => {
@@ -17,6 +18,10 @@ const internal = {
     const resp = await httpService.post<AuthResp>(registerEndpointNext, userData)
     return resp
   },
+  refresh: async (cookie: any) => {
+    const resp = await httpService.post<AuthResp>(refreshEndpointNext, cookie)
+    return resp
+  },
 }
 
 /**
@@ -24,6 +29,7 @@ const internal = {
  */
 const loginEndpoint = `${baseApiEndpoints.baseEndpoint}${ApiEndpoints.Login}`
 const registerEndpoint = `${baseApiEndpoints.baseEndpoint}${ApiEndpoints.Register}`
+const refreshEndpoint = `${baseApiEndpoints.baseEndpoint}${ApiEndpoints.Refresh}`
 
 const external = {
   login: async (userData: AuthModal) => {
@@ -32,6 +38,10 @@ const external = {
   },
   register: async (userData: AuthModal) => {
     const resp = await httpService.post<AuthResp>(registerEndpoint, userData)
+    return resp
+  },
+  refresh: async (cookie: any) => {
+    const resp = await httpService.post<AuthResp>(refreshEndpoint, cookie)
     return resp
   },
 }

@@ -13,6 +13,7 @@ const Card: FC<CardProps> = ({
   description,
   form,
   remove = true,
+  edit = true,
 }): ReactElement => {
   const hiddenElem = useRef<HTMLDivElement | null>(null)
 
@@ -35,16 +36,17 @@ const Card: FC<CardProps> = ({
             {description && <div className={styles.card__description}>{description}</div>}
           </div>
         </div>
-        <div className={styles.card__right}>
-          <div
-            className={cn(
-              styles.card__button,
-              styles.card__buttonEdit,
-            )}
-            onClick={toggle}
-          >
-            Редактировать
-          </div>
+        {(edit || remove) && <div className={styles.card__right}>
+          {edit
+            && <div
+              className={cn(
+                styles.card__button,
+                styles.card__buttonEdit,
+              )}
+              onClick={toggle}
+               >
+              Редактировать
+            </div>}
           {remove
             && <div
               className={cn(
@@ -52,9 +54,9 @@ const Card: FC<CardProps> = ({
                 styles.card__buttonRemove,
               )}
                >
-            Удалить
-          </div>}
-        </div>
+              Удалить
+            </div>}
+        </div>}
       </div>
 
       {form && <div

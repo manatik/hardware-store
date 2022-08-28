@@ -1,11 +1,12 @@
 import React, { FC, ReactElement, useState } from 'react'
-import Card from '@features/Admin/ui/Card'
+// import Card from '@features/Admin/ui/Card'
 import Portal from '@features/Basic/common/Portal'
 import Modal from '@features/Basic/common/Modal'
 
 import { PropsContainerProduct } from '@features/Admin/common/ContainerProduct/types'
-import styles from '@features/Admin/common/ContainerProduct/index.module.scss'
 import { Children } from '@models/Props/props'
+
+import styles from '@features/Admin/common/ContainerProduct/index.module.scss'
 
 const ContainerProduct: FC<PropsContainerProduct> = ({
   title,
@@ -31,7 +32,7 @@ const ContainerProduct: FC<PropsContainerProduct> = ({
         </div>
       </div>
       {cards && <div className={styles.containerProduct__cards}>
-        <Card />
+        {/* <Card /> */}
       </div>}
       {toggle && <Portal>
         <Modal>

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import localStorageService from '@services/localStorage/localStorage.service'
 
 import authService from '@services/auth/auth.service'
 import { AuthModal, AuthResp } from '@models/Auth'
@@ -15,6 +16,7 @@ export const fetchRegisterAsync = createAsyncThunk<AuthResp, AuthModal>(
   async (userData, { rejectWithValue }) => {
     try {
       const { data } = await authService.internal.register(userData)
+      localStorageService.setTokens(data.accessToken)
       return data
     } catch (err) {
       return rejectWithValue(err)

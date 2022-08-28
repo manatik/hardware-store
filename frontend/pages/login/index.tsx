@@ -31,7 +31,7 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (auth?.success) router.push('/')
+    // if (auth?.success) router.push('/')
     if (isError && auth?.error) setError(auth.message)
   }, [auth, isError])
 
