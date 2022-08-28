@@ -8,7 +8,10 @@ import { AppModule } from 'app.module';
 const PORT = Number.isNaN(Number(process.env.PORT)) ? 9000 : Number(process.env.PORT);
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, new ExpressAdapter(), { cors: true });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, new ExpressAdapter(), {
+    cors: true,
+    logger: ['error', 'log', 'warn'],
+  });
 
   app.use(cookieParser(process.env.COOKIE_SECRET));
 

@@ -1,6 +1,14 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreatePlywoodDto {
+  @IsOptional()
+  @IsString({ each: true })
+  formatIds: string[];
+
+  @IsOptional()
+  @IsString({ each: true })
+  surfaceIds: string[];
+
   @IsNotEmpty()
   @IsString()
   name: string;

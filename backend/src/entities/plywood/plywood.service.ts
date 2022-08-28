@@ -36,7 +36,36 @@ export class PlywoodService {
 
   async add(dto: CreatePlywoodDto) {
     try {
+      const duplicate = await this.prismaService.plywood.findFirst({ where: { article: dto.article } });
+
+      if (duplicate) {
+        throw this.errorService.badRequest(`Продукт с артикулом - ${dto.article} уже существует`);
+      }
+
+      let formatIds: string[] | undefined = undefined;
+      let surfaceIds: string[] | undefined = undefined;
+
+      if (dto.formatIds?.length) {
+        formatIds = JSON.parse(JSON.stringify(dto.formatIds));
+        delete dto.formatIds;
+      }
+
+      if (dto.surfaceIds?.length) {
+        surfaceIds = JSON.parse(JSON.stringify(dto.surfaceIds));
+        delete dto.surfaceIds;
+      }
+
       const product = (await this.prismaService.plywood.create({ data: dto })) as any as IPlywood;
+
+      if (formatIds?.length) {
+        console.log('formats', formatIds);
+        await this.addFormatsToPlywood(product, formatIds);
+      }
+
+      if (surfaceIds?.length) {
+        console.log('surface', surfaceIds);
+        await this.addSurfacesToPlywood(product, surfaceIds);
+      }
 
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {
@@ -67,6 +96,46 @@ export class PlywoodService {
       return this.errorService.success('Продукт успешно удален', { product });
     } catch (e) {
       throw this.errorService.internal('Ошибка удаления продута', e.message);
+    }
+  }
+
+  async addFormatsToPlywood(product: IPlywood, formatIds: string[] | number[]) {
+    try {
+      const formats = formatIds.map((id) => ({ formatPlywoodId: parseInt(id) }));
+
+      await this.prismaService.plywood.update({
+        where: { id: product.id },
+        data: {
+          formats: {
+            createMany: {
+              data: formats,
+              skipDuplicates: true,
+            },
+          },
+        },
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async addSurfacesToPlywood(product: IPlywood, surfaceIds: string[] | number[]) {
+    try {
+      const surfaces = surfaceIds.map((id) => ({ surfaceTypePlywoodId: parseInt(id) }));
+
+      await this.prismaService.plywood.update({
+        where: { id: product.id },
+        data: {
+          surfaceTypes: {
+            createMany: {
+              data: surfaces,
+              skipDuplicates: true,
+            },
+          },
+        },
+      });
+    } catch (e) {
+      throw e;
     }
   }
 }

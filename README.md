@@ -37,6 +37,7 @@
 ### Furniture
 * PREFIX=/furniture
 
+
 * getAll
   * method=GET
   * path=/
@@ -53,6 +54,7 @@
 ### House
 * PREFIX=/house
 
+
 * getAll
     * method=GET
     * path=/
@@ -68,6 +70,43 @@
 
 ### Plywood
 * PREFIX=/plywood
+
+
+* getAll
+    * method=GET
+    * path=/
+* getById
+    * method=GET
+    * path=/:id
+* update
+    * method=PATCH
+    * path=/:id
+* remove
+    * method=DELETE
+    * path=/:id
+
+
+### Plywood formats
+* PREFIX=/plywood-format
+
+
+* getAll
+    * method=GET
+    * path=/
+* getById
+    * method=GET
+    * path=/:id
+* update
+    * method=PATCH
+    * path=/:id
+* remove
+    * method=DELETE
+    * path=/:id
+
+
+### Plywood surfaces
+* PREFIX=/plywood-surface
+
 
 * getAll
     * method=GET

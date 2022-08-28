@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { UserService } from 'entities/user/user.service';
 
 @Controller('user')
@@ -10,7 +10,7 @@ export class UserController {
   }
 
   @Get('info')
-  async byId(@Param('id') id: number) {
+  async byId(@Param('id', ParseIntPipe) id: number) {
     return await this.userService.getById(id);
   }
 
@@ -20,12 +20,12 @@ export class UserController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
     return await this.userService.update(id, dto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
+  async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.userService.remove(id);
   }
 }
