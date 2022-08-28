@@ -35,15 +35,18 @@ export class UserService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: number, { tokens: withTokens, roles: withRoles }) {
     try {
       const user = await this.prismaService.user.findFirst({
         where: { id, deleted: { in: null } },
-        include: { roles: { select: { role: true } }, tokens: { select: { token: true } } },
+        include: {
+          roles: withRoles ? { select: { role: true } } : false,
+          tokens: withTokens ? { select: { token: true } } : false,
+        },
       });
 
       // @ts-ignore
-      user.isAdmin = user.roles.some(({ role }) => role.name === Role.Admin);
+      user.isAdmin = user.roles?.some(({ role }) => role?.name === Role.Admin);
 
       return this.errorService.success('Пользователь успешно получен', { user });
     } catch (e) {
