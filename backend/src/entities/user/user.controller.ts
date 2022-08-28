@@ -16,6 +16,7 @@ import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
 import { Request } from 'express';
 import { UserInfoQuery } from 'entities/user/dto/user-info.query';
+import { UserAllQuery } from 'entities/user/dto/user-all.query';
 
 @Roles(Role.Admin)
 @Controller('user')
@@ -23,8 +24,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('all')
-  async all() {
-    return await this.userService.getAll();
+  async all(@Query() query: UserAllQuery) {
+    return await this.userService.getAll(query);
   }
 
   @Roles(Role.User)

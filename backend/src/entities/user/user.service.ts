@@ -3,6 +3,8 @@ import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 import { Role } from 'authorization/enum/role.enum';
 import { RoleService } from 'entities/role/role.service';
+import { UserInfoQuery } from 'entities/user/dto/user-info.query';
+import { UserAllQuery } from 'entities/user/dto/user-all.query';
 
 @Injectable()
 export class UserService {
@@ -12,9 +14,15 @@ export class UserService {
     private readonly roleService: RoleService,
   ) {}
 
-  async getAll() {
+  async getAll({ deleted }: UserAllQuery) {
     try {
-      const users = await this.prismaService.user.findMany({ where: { deleted: { in: null } } });
+      let users;
+
+      if (deleted) {
+        users = await this.prismaService.user.findMany();
+      } else {
+        users = await this.prismaService.user.findMany({ where: { deleted: { in: null } } });
+      }
 
       return this.errorService.success('Пользователи успешно получены', { users });
     } catch (e) {
@@ -35,8 +43,10 @@ export class UserService {
     }
   }
 
-  async getById(id: number, { tokens: withTokens, roles: withRoles }) {
+  async getById(id: number, query: UserInfoQuery) {
     try {
+      const { tokens: withTokens, roles: withRoles } = query;
+
       const user = await this.prismaService.user.findFirst({
         where: { id, deleted: { in: null } },
         include: {
@@ -45,6 +55,7 @@ export class UserService {
         },
       });
 
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       user.isAdmin = user.roles?.some(({ role }) => role?.name === Role.Admin);
 
