@@ -26,7 +26,7 @@ export class UserService {
     try {
       const user = await this.prismaService.user.findFirst({
         where: { email, deleted: { in: null } },
-        include: { roles: true, tokens: true },
+        include: { roles: { select: { role: true } }, tokens: { select: { token: true } } },
       });
 
       return this.errorService.success('Пользователь успешно получен', { user });
