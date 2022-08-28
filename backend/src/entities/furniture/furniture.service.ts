@@ -1,23 +1,26 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "database/prisma/prisma.service";
-import { ErrorService } from "common/error/error.service";
-import { CreateFurnitureDto } from "./dto/create-furniture.dto";
-import { FilesService } from "../../../common/files/files.service";
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'database/prisma/prisma.service';
+import { ErrorService } from 'common/error/error.service';
+import { CreateFurnitureDto } from 'entities/furniture/dto/create-furniture.dto';
+import { FilesService } from 'common/files/files.service';
 
 @Injectable()
 export class FurnitureService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly errorService: ErrorService,
-    private readonly filesService: FilesService
-  ) {
-  }
+    private readonly filesService: FilesService,
+  ) {}
 
   async getAll() {
     try {
-      const products = await this.prismaService.furniture.findMany({ where: { deleted: { in: null } } });
+      const products = await this.prismaService.furniture.findMany({
+        where: { deleted: { in: null } },
+      });
 
-      return this.errorService.success('Продукты успешно получены', { products });
+      return this.errorService.success('Продукты успешно получены', {
+        products,
+      });
     } catch (e) {
       throw this.errorService.internal('Ошибка получения продуктов', e.message);
     }
@@ -25,7 +28,9 @@ export class FurnitureService {
 
   async getById(id: number) {
     try {
-      const product = await this.prismaService.furniture.findFirst({ where: { id, deleted: { in: null } } });
+      const product = await this.prismaService.furniture.findFirst({
+        where: { id, deleted: { in: null } },
+      });
 
       return this.errorService.success('Продукт успешно получен', { product });
     } catch (e) {
@@ -37,7 +42,10 @@ export class FurnitureService {
     try {
       for (const photo of photos) {
         console.log(photo);
-        await this.filesService.writeFileWithCompress({ filename: photo.originalname, buffer: photo.buffer })
+        await this.filesService.writeFileWithCompress({
+          filename: photo.originalname,
+          buffer: photo.buffer,
+        });
       }
 
       const product = await this.prismaService.furniture.create({ data: dto });
@@ -50,7 +58,10 @@ export class FurnitureService {
 
   async update(id: number, dto) {
     try {
-      const product = await this.prismaService.furniture.update({ where: { id }, data: dto });
+      const product = await this.prismaService.furniture.update({
+        where: { id },
+        data: dto,
+      });
 
       return this.errorService.success('Продукт успешно обновлен', { product });
     } catch (e) {
@@ -60,7 +71,10 @@ export class FurnitureService {
 
   async remove(id: number) {
     try {
-      const product = await this.prismaService.furniture.update({ where: { id }, data: { deleted: new Date() } })
+      const product = await this.prismaService.furniture.update({
+        where: { id },
+        data: { deleted: new Date() },
+      });
 
       return this.errorService.success('Продукт успешно удален', { product });
     } catch (e) {

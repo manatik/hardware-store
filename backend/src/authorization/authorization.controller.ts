@@ -4,14 +4,11 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { Public } from './decorators/public.decorator';
 import { ErrorService } from 'common/error/error.service';
-import { Request, Response } from "express"
+import { Request, Response } from 'express';
 
 @Controller('auth')
 export class AuthorizationController {
-  constructor(
-    private readonly authService: AuthorizationService,
-    private readonly errorService: ErrorService,
-  ) {}
+  constructor(private readonly authService: AuthorizationService, private readonly errorService: ErrorService) {}
 
   @Public()
   @Post('/login')

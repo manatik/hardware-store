@@ -1,18 +1,14 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "database/prisma/prisma.service";
-import { ErrorService } from "common/error/error.service";
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'database/prisma/prisma.service';
+import { ErrorService } from 'common/error/error.service';
 
 @Injectable()
-export class PlywoodService {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly errorService: ErrorService
-  ) {
-  }
+export class HouseService {
+  constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
   async getAll() {
     try {
-      const products = await this.prismaService.plywood.findMany({ where: { deleted: { in: null } } });
+      const products = await this.prismaService.house.findMany({ where: { deleted: { in: null } } });
 
       return this.errorService.success('Продукты успешно получены', { products });
     } catch (e) {
@@ -22,7 +18,7 @@ export class PlywoodService {
 
   async getById(id: number) {
     try {
-      const product = await this.prismaService.plywood.findFirst({ where: { id, deleted: { in: null } } });
+      const product = await this.prismaService.house.findFirst({ where: { id, deleted: { in: null } } });
 
       return this.errorService.success('Продукт успешно получен', { product });
     } catch (e) {
@@ -32,7 +28,7 @@ export class PlywoodService {
 
   async add(dto) {
     try {
-      const product = await this.prismaService.plywood.create({ data: dto });
+      const product = await this.prismaService.house.create({ data: dto });
 
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {
@@ -42,7 +38,7 @@ export class PlywoodService {
 
   async update(id: number, dto) {
     try {
-      const product = await this.prismaService.plywood.update({ where: { id }, data: dto });
+      const product = await this.prismaService.house.update({ where: { id }, data: dto });
 
       return this.errorService.success('Продукт успешно обновлен', { product });
     } catch (e) {
@@ -52,7 +48,7 @@ export class PlywoodService {
 
   async remove(id: number) {
     try {
-      const product = await this.prismaService.plywood.update({ where: { id }, data: { deleted: new Date() } })
+      const product = await this.prismaService.house.update({ where: { id }, data: { deleted: new Date() } });
 
       return this.errorService.success('Продукт успешно удален', { product });
     } catch (e) {

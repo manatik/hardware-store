@@ -5,10 +5,7 @@ import { ErrorService } from 'common/error/error.service';
 
 @Injectable()
 export class RoleService {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly errorService: ErrorService,
-  ) {}
+  constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
   async getAll() {
     try {
@@ -21,10 +18,7 @@ export class RoleService {
         roles,
       };
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка получения ролей',
-        JSON.stringify(e),
-      );
+      throw this.errorService.internal('Ошибка получения ролей', JSON.stringify(e));
     }
   }
 
@@ -42,10 +36,7 @@ export class RoleService {
         role,
       };
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка получения роли',
-        JSON.stringify(e),
-      );
+      throw this.errorService.internal('Ошибка получения роли', JSON.stringify(e));
     }
   }
 
@@ -63,10 +54,7 @@ export class RoleService {
         role,
       };
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка получения роли',
-        JSON.stringify(e),
-      );
+      throw this.errorService.internal('Ошибка получения роли', JSON.stringify(e));
     }
   }
 
@@ -81,10 +69,7 @@ export class RoleService {
         role,
       };
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка создания роли',
-        JSON.stringify(e),
-      );
+      throw this.errorService.internal('Ошибка создания роли', JSON.stringify(e));
     }
   }
 
@@ -102,10 +87,7 @@ export class RoleService {
         role,
       };
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка обновления роли',
-        JSON.stringify(e),
-      );
+      throw this.errorService.internal('Ошибка обновления роли', JSON.stringify(e));
     }
   }
 
@@ -120,10 +102,7 @@ export class RoleService {
         role,
       };
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка удаления роли',
-        JSON.stringify(e),
-      );
+      throw this.errorService.internal('Ошибка удаления роли', JSON.stringify(e));
     }
   }
 }

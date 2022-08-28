@@ -10,8 +10,7 @@ export class UserService {
     private readonly prismaService: PrismaService,
     private readonly errorService: ErrorService,
     private readonly roleService: RoleService,
-  ) {
-  }
+  ) {}
 
   async getAll() {
     try {
@@ -19,10 +18,7 @@ export class UserService {
 
       return this.errorService.success('Пользователи успешно получены', { users });
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка получения пользователей',
-        e.message,
-      );
+      throw this.errorService.internal('Ошибка получения пользователей', e.message);
     }
   }
 
@@ -35,10 +31,7 @@ export class UserService {
 
       return this.errorService.success('Пользователь успешно получен', { user });
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка получения пользователя',
-        e.message,
-      );
+      throw this.errorService.internal('Ошибка получения пользователя', e.message);
     }
   }
 
@@ -51,10 +44,7 @@ export class UserService {
 
       return this.errorService.success('Пользователь успешно получен', { user });
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка получения пользователя',
-        e.message,
-      );
+      throw this.errorService.internal('Ошибка получения пользователя', e.message);
     }
   }
 
@@ -72,10 +62,7 @@ export class UserService {
       return this.errorService.success('Пользователь успешно создан', { user });
     } catch (e) {
       console.error('CREATE_USER_ERROR ', e);
-      throw this.errorService.internal(
-        'Ошибка создания пользователя',
-        e.message,
-      );
+      throw this.errorService.internal('Ошибка создания пользователя', e.message);
     }
   }
 
@@ -90,10 +77,7 @@ export class UserService {
       });
 
       if (!user || !role) {
-        throw this.errorService.internal(
-          'Нет такого пользователя или роли',
-          'Ошибка. Нет пользователя или роли',
-        );
+        throw this.errorService.internal('Нет такого пользователя или роли', 'Ошибка. Нет пользователя или роли');
       }
 
       await this.prismaService.userRole.create({
@@ -103,10 +87,7 @@ export class UserService {
       return this.errorService.success('Роль успешно добавлена');
     } catch (e) {
       console.error('ADD_ROLE_ERROR ', e);
-      throw this.errorService.internal(
-        'Ошибка добавления роли пользователю',
-        e.message,
-      );
+      throw this.errorService.internal('Ошибка добавления роли пользователю', e.message);
     }
   }
 
@@ -120,10 +101,7 @@ export class UserService {
 
       return this.errorService.success('Пользователь успешно обновлён', { user });
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка обновления пользователя',
-        e.message,
-      );
+      throw this.errorService.internal('Ошибка обновления пользователя', e.message);
     }
   }
 
@@ -133,10 +111,7 @@ export class UserService {
 
       return this.errorService.success('Пользователь успешно удалён', { user });
     } catch (e) {
-      throw this.errorService.internal(
-        'Ошибка удаления пользователя',
-        e.message,
-      );
+      throw this.errorService.internal('Ошибка удаления пользователя', e.message);
     }
   }
 }

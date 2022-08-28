@@ -9,8 +9,11 @@ import { AuthorizationModule } from 'authorization/authorization.module';
 import { PrismaModule } from 'database/prisma/prisma.module';
 import { JwtAuthGuard } from 'authorization/guards/jwt.guard';
 import { RolesGuard } from 'authorization/guards/roles.guard';
-import { ProductsModule } from 'entities/products/products.module';
 import { CategoryModule } from 'entities/category/category.module';
+import { FurnitureModule } from 'entities/furniture/furniture.module';
+import { HouseModule } from 'entities/house/house.module';
+import { PlywoodModule } from 'entities/plywood/plywood.module';
+import { PlywoodFormatsModule } from 'entities/plywood-formats/plywood-formats.module';
 
 @Module({
   imports: [
@@ -21,14 +24,13 @@ import { CategoryModule } from 'entities/category/category.module';
     UserModule,
     AuthorizationModule,
     PrismaModule,
-    ProductsModule,
     CategoryModule,
+    FurnitureModule,
+    HouseModule,
+    PlywoodModule,
+    PlywoodFormatsModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    { provide: APP_GUARD, useClass: JwtAuthGuard },
-    { provide: APP_GUARD, useClass: RolesGuard },
-  ],
+  providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard }, { provide: APP_GUARD, useClass: RolesGuard }],
 })
 export class AppModule {}
