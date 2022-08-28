@@ -27,9 +27,9 @@ export class AuthorizationController {
   }
 
   @Public()
-  @Get('/refresh')
-  async refresh(@Req() req: Request, @Res() res: Response) {
-    const tokens = await this.authService.refresh(req);
+  @Post('/refresh')
+  async refresh(@Body() cookies, @Res() res: Response) {
+    const tokens = await this.authService.refresh(cookies);
 
     if (tokens.refreshToken) {
       res.cookie('r_t', tokens.refreshToken, { httpOnly: true });

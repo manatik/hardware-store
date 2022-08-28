@@ -62,9 +62,9 @@ export class AuthorizationService {
     };
   }
 
-  async refresh(req: Request) {
+  async refresh(cookies) {
     try {
-      const refreshToken = req.cookies['r_t'];
+      const refreshToken = cookies['r_t'];
 
       const refreshTokenInfo = this.jwtService.verify(refreshToken, {
         secret: process.env.JWT_SECRET,
