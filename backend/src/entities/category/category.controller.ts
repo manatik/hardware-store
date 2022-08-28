@@ -17,6 +17,7 @@ export class CategoryController {
     return await this.categoryService.getAll();
   }
 
+  @Roles(Role.User)
   @Public()
   @Get(':id')
   async byId(@Param('id', ParseIntPipe) id: number): Promise<ISuccessResponseType & { category: ICategory }> {
