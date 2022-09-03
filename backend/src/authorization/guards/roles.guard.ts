@@ -11,29 +11,29 @@ export class RolesGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     try {
-      const requireRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
-        context.getHandler(),
-        context.getClass(),
-      ]);
+      const requireRoles = this.reflector.getAllAndMerge<Role[]>(ROLES_KEY, [context.getHandler(), context.getClass()]);
 
-      if (!requireRoles) {
+      if (!requireRoles?.length) {
         return true;
       }
-
+      console.log(requireRoles);
       const request = context.switchToHttp().getRequest();
       const authHeader = request.headers?.authorization;
       const token = authHeader?.split(' ')[1];
+
       const tokenInfo = this.jwtService.verify(token, {
-        secret: process.env.ACCESS_TOKEN_SECRET,
+        secret: process.env.JWT_SECRET,
       });
 
       return tokenInfo.roles.some(({ role }) => requireRoles.includes(role?.name));
     } catch (e) {
       throw new HttpException(
         {
-          message: 'Ошибка роли',
+          message: 'Ошибка роли или токен не действителен',
+          error: e.message,
+          success: false,
         },
-        HttpStatus.UNAUTHORIZED,
+        HttpStatus.FORBIDDEN,
       );
     }
   }

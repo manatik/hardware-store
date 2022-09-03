@@ -17,6 +17,36 @@
 # API
 * PREFIX=/api
 
+## Users
+* PREFIX=/user
+
+
+* getAll
+  * method=GET
+  * path=/all
+  * query=?deleted=bool
+
+
+* getInfo
+  * method=GET
+  * path=/info
+  * query=?tokens=bool&roles=bool
+
+
+* create
+  * method=POST
+  * path=/
+
+
+* update
+  * method=PATCH
+  * path=/:id
+
+    
+* remove
+  * method=DELETE
+  * path=/:id
+
 ## Category
 * PREFIX=/category
 
@@ -24,9 +54,12 @@
 * getAll
   * method=GET
   * path=/
+
+
 * getById
   * method=GET
   * path=/:id
+
 * update
   * method=PATCH
   * path=/:id
@@ -41,12 +74,18 @@
 * getAll
   * method=GET
   * path=/
+
+
 * getById
   * method=GET
   * path=/:id
+
+
 * update
   * method=PATCH
   * path=/:id
+
+
 * remove
   * method=DELETE
   * path=/:id
@@ -58,12 +97,18 @@
 * getAll
     * method=GET
     * path=/
+
+
 * getById
     * method=GET
     * path=/:id
+
+
 * update
     * method=PATCH
     * path=/:id
+
+
 * remove
     * method=DELETE
     * path=/:id
@@ -75,12 +120,18 @@
 * getAll
     * method=GET
     * path=/
+
+
 * getById
     * method=GET
     * path=/:id
+
+
 * update
     * method=PATCH
     * path=/:id
+
+
 * remove
     * method=DELETE
     * path=/:id
@@ -93,12 +144,18 @@
 * getAll
     * method=GET
     * path=/
+
+
 * getById
     * method=GET
     * path=/:id
+
+
 * update
     * method=PATCH
     * path=/:id
+  
+
 * remove
     * method=DELETE
     * path=/:id
@@ -111,12 +168,18 @@
 * getAll
     * method=GET
     * path=/
+
+
 * getById
     * method=GET
     * path=/:id
+
+
 * update
     * method=PATCH
     * path=/:id
+
+
 * remove
     * method=DELETE
     * path=/:id
