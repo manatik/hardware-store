@@ -5,6 +5,7 @@ import { usersService } from '@services/users/users.service'
 import { refreshToken } from '@utils/refreshToken'
 import { Store } from '@store/store'
 import { fetchUserInfoAsync } from '@store/app/appSlice'
+import { redirectController } from '@utils/redirectController'
 
 /**
  * Список шаблонов страниц
@@ -26,11 +27,13 @@ export const useServerSideProps = async (
   context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>,
   store: Store,
 ): Promise<GetServerSidePropsResult<any>> => {
-  const { dispatch } = store
+  const { dispatch, getState } = store
   const { headers } = context.req
   const cookie = headers.cookie ? headers.cookie : ''
 
   await dispatch(fetchUserInfoAsync(cookie))
+
+  if (!getState().app.userInfo.isAdmin) return redirectController(pageName)
 
   switch (pageName) {
     case ProjectPage.Categories: {
