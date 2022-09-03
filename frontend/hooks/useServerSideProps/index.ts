@@ -31,9 +31,9 @@ export const useServerSideProps = async (
   const { headers } = context.req
   const cookie = headers.cookie ? headers.cookie : ''
 
-  await dispatch(fetchUserInfoAsync(cookie))
+  // await dispatch(fetchUserInfoAsync(cookie))
 
-  if (!getState().app.userInfo.isAdmin) return redirectController(pageName)
+  // if (!getState().app.userInfo?.isAdmin) return redirectController(pageName)
 
   switch (pageName) {
     case ProjectPage.Categories: {
