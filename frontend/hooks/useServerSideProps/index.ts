@@ -33,7 +33,7 @@ export const useServerSideProps = async (
 
   await dispatch(fetchUserInfoAsync(cookie))
 
-  if (!getState().app.userInfo.isAdmin) return redirectController(pageName)
+  if (!getState()?.app?.userInfo?.isAdmin) return redirectController(pageName)
 
   switch (pageName) {
     case ProjectPage.Categories: {
