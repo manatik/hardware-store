@@ -15,12 +15,15 @@ export interface UserInfo {
   error: boolean;
   message: string;
   success: boolean;
-  user: {
-    id: number;
-    email: string;
-    password: string;
-    createdAt: string | null;
-    deleted: string | null;
-    updatedAt: string | null;
-  };
+  user: UserData;
+}
+
+export interface UserData {
+  id: number;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+  createdAt: string | null;
+  deleted: string | null;
+  updatedAt: string | null;
 }
