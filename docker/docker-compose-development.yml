@@ -41,7 +41,7 @@ services:
 
   frontend:
     image: *node-version
-    container_name: nextjs-ui
+    container_name: nextjs
     ports:
       - "3000:3000"
     networks:
@@ -54,6 +54,22 @@ services:
     command: bash -c "
       yarn install
       && yarn dev"
+
+  nginx:
+    build: ../deploy/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - web
+    depends_on:
+      - backend
+      - frontend
+    volumes:
+      - ../deploy/certbot/conf:/etc/letsencrypt
+      - ../deploy/certbot/www:/var/www/certbot
+    working_dir: /nginx
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
 volumes:
   db:
