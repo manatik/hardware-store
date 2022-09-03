@@ -7,7 +7,6 @@ import { RegisterDto } from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
 import { ErrorService } from 'common/error/error.service';
 import * as dayjs from 'dayjs';
-import { Request } from 'express';
 
 @Injectable()
 export class AuthorizationService {

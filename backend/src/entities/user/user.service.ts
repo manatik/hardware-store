@@ -94,6 +94,8 @@ export class UserService {
         return this.errorService.success('Пользователь успешно получен', { user: { ...user, isAdmin: true } });
       }
 
+      delete user.roles;
+
       return this.errorService.success('Пользователь успешно получен', { user });
     } catch (e) {
       throw this.errorService.internal('Ошибка получения пользователя', e.message);
