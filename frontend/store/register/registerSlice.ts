@@ -16,6 +16,7 @@ export const fetchRegisterAsync = createAsyncThunk<AuthResp, AuthModal>(
   async (userData, { rejectWithValue }) => {
     try {
       const { data } = await authService.internal.register(userData)
+      localStorageService.removeAuthData()
       localStorageService.setTokens(data.accessToken)
       return data
     } catch (err) {
