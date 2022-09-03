@@ -19,9 +19,25 @@ export class UserService {
       let users;
 
       if (deleted) {
-        users = await this.prismaService.user.findMany();
+        users = await this.prismaService.user.findMany({
+          select: {
+            id: true,
+            email: true,
+            createdAt: true,
+            updatedAt: true,
+            deleted: true,
+          },
+        });
       } else {
-        users = await this.prismaService.user.findMany({ where: { deleted: { in: null } } });
+        users = await this.prismaService.user.findMany({
+          where: { deleted: { in: null } },
+          select: {
+            id: true,
+            email: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        });
       }
 
       return this.errorService.success('Пользователи успешно получены', { users });
@@ -30,11 +46,24 @@ export class UserService {
     }
   }
 
-  async getByEmail(email: string) {
+  async getByEmail(
+    email: string,
+    params: { withPassword?: boolean; withRoles?: boolean } = { withPassword: false, withRoles: false },
+  ) {
     try {
+      const { withRoles, withPassword } = params;
+
       const user = await this.prismaService.user.findFirst({
         where: { email, deleted: { in: null } },
-        include: { roles: { select: { role: true } }, tokens: { select: { token: true } } },
+        select: {
+          roles: withRoles ? { select: { role: true } } : false,
+          id: true,
+          email: true,
+          updatedAt: true,
+          createdAt: true,
+          deleted: true,
+          password: withPassword,
+        },
       });
 
       return this.errorService.success('Пользователь успешно получен', { user });
@@ -45,19 +74,25 @@ export class UserService {
 
   async getById(id: number, query: UserInfoQuery) {
     try {
-      const { tokens: withTokens, roles: withRoles } = query;
+      const { roles: withRoles } = query;
 
       const user = await this.prismaService.user.findFirst({
         where: { id, deleted: { in: null } },
-        include: {
+        select: {
           roles: withRoles ? { select: { role: true } } : false,
-          tokens: withTokens ? { select: { token: true } } : false,
+          id: true,
+          email: true,
+          deleted: true,
+          createdAt: true,
+          updatedAt: true,
         },
       });
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      user.isAdmin = user.roles?.some(({ role }) => role?.name === Role.Admin);
+      if (user.roles?.some(({ role }) => role?.name === Role.Admin)) {
+        delete user.roles;
+        return this.errorService.success('Пользователь успешно получен', { user: { ...user, isAdmin: true } });
+      }
 
       return this.errorService.success('Пользователь успешно получен', { user });
     } catch (e) {

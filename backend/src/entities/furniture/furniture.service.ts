@@ -41,7 +41,6 @@ export class FurnitureService {
   async add(dto: CreateFurnitureDto, photos: Array<Express.Multer.File>) {
     try {
       for (const photo of photos) {
-        console.log(photo);
         await this.filesService.writeFileWithCompress({
           filename: photo.originalname,
           buffer: photo.buffer,

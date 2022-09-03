@@ -22,7 +22,7 @@ services:
     image: *node-version
     container_name: node-api
     ports:
-      - "9000:9000"
+      - "4200:4200"
     networks:
       - web
     depends_on:

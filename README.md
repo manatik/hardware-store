@@ -30,7 +30,7 @@
 * getInfo
   * method=GET
   * path=/info
-  * query=?tokens=bool&roles=bool
+  * query=?roles=bool
 
 
 * create

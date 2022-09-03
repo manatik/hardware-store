@@ -19,7 +19,7 @@ export class AuthorizationService {
   ) {}
 
   async login(dto: LoginDto) {
-    const { user } = await this.userService.getByEmail(dto.email);
+    const { user } = await this.userService.getByEmail(dto.email, { withPassword: true, withRoles: true });
 
     if (!user) {
       throw this.errorService.badRequest('Пользователя с таким E-mail не существует');
@@ -72,7 +72,7 @@ export class AuthorizationService {
 
       const expireIn = dayjs.unix(refreshTokenInfo.exp).toISOString();
 
-      const { user } = await this.userService.getByEmail(refreshTokenInfo.email);
+      const { user } = await this.userService.getByEmail(refreshTokenInfo.email, { withRoles: true });
 
       if (!user || user.deleted) {
         await this.prismaService.userToken.delete({

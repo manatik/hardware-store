@@ -6,10 +6,5 @@ export class UserInfoQuery {
   @IsOptional()
   @IsBoolean()
   @Transform(({ value }) => isTrue(value))
-  tokens: boolean | string;
-
-  @IsOptional()
-  @IsBoolean()
-  @Transform(({ value }) => isTrue(value))
-  roles: boolean | string;
+  roles: boolean;
 }
