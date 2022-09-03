@@ -1,3 +1,6 @@
 export interface AppState {
-  globalError: any
+  globalError: any;
+  userInfo: any;
+  isLoading: boolean;
+  isError: boolean;
 }

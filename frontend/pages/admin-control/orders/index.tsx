@@ -15,7 +15,7 @@ const Orders: NextPage = () => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ dispatch }) => async (context) => useServerSideProps(ProjectPage.Orders, context, dispatch),
+  (store) => async (context) => useServerSideProps(ProjectPage.Orders, context, store),
 )
 
 export default Orders

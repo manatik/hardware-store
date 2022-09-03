@@ -30,7 +30,7 @@ export const makeStore = () => configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat(...customMiddleware),
 })
 
-type Store = ReturnType<typeof makeStore>
+export type Store = ReturnType<typeof makeStore>
 
 export type AppDispatch = Store['dispatch']
 export type RootState = ReturnType<Store['getState']>
@@ -41,4 +41,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
   >
 
-export const wrapper = createWrapper(makeStore, { debug: true })
+export const wrapper = createWrapper(makeStore)

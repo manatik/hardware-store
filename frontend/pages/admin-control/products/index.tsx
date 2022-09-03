@@ -54,7 +54,7 @@ const Products: NextPage = () => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ dispatch }) => async (context) => useServerSideProps(ProjectPage.Products, context, dispatch),
+  (store) => async (context) => useServerSideProps(ProjectPage.Products, context, store),
 )
 
 export default Products

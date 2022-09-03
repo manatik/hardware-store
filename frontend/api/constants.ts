@@ -16,4 +16,5 @@ export enum ApiEndpoints {
   RefreshNext = '/api/v1/refresh',
   Categories = '/api/category',
   Users = '/api/user/all',
+  UserInfo = '/api/user/info'
 }

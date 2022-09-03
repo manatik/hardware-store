@@ -69,7 +69,7 @@ const feature: NextPage = () => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ dispatch }) => async (context) => useServerSideProps(ProjectPage.Feature, context, dispatch),
+  (store) => async (context) => useServerSideProps(ProjectPage.Feature, context, store),
 )
 
 export default feature

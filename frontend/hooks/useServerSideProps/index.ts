@@ -3,6 +3,8 @@ import { GetServerSidePropsContext, GetServerSidePropsResult, PreviewData } from
 import { categoryService } from '@services/category/category.service'
 import { usersService } from '@services/users/users.service'
 import { refreshToken } from '@utils/refreshToken'
+import { Store } from '@store/store'
+import { fetchUserInfoAsync } from '@store/app/appSlice'
 
 /**
  * Список шаблонов страниц
@@ -22,11 +24,13 @@ export enum ProjectPage {
 export const useServerSideProps = async (
   pageName: ProjectPage,
   context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>,
-  dispatch: any,
+  store: Store,
 ): Promise<GetServerSidePropsResult<any>> => {
+  const { dispatch } = store
   const { headers } = context.req
   const cookie = headers.cookie ? headers.cookie : ''
-  // console.log(cookie, dispatch)
+
+  await dispatch(fetchUserInfoAsync(cookie))
 
   switch (pageName) {
     case ProjectPage.Categories: {
@@ -44,7 +48,7 @@ export const useServerSideProps = async (
 
     case ProjectPage.Users: {
       try {
-        const { users } = await usersService.users()
+        const { users } = await usersService.users(cookie)
         return { props: { users } }
       } catch (e: any) {
         if (e.statusCode === 401) {

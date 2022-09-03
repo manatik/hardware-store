@@ -15,6 +15,7 @@ export class AuthorizationController {
   async login(@Body() dto: LoginDto, @Res() res: Response) {
     const { refreshToken, accessToken } = await this.authService.login(dto);
     res.cookie('r_t', refreshToken, { httpOnly: true });
+    res.cookie('a_t', accessToken, { httpOnly: true });
     res.json(this.errorService.success('Успешный вход', { accessToken }));
   }
 
@@ -23,6 +24,7 @@ export class AuthorizationController {
   async register(@Body() dto: RegisterDto, @Res() res: Response) {
     const { refreshToken, accessToken } = await this.authService.register(dto);
     res.cookie('r_t', refreshToken, { httpOnly: true });
+    res.cookie('a_t', accessToken, { httpOnly: true });
     res.json(this.errorService.success('Успешная регистрация', { accessToken }));
   }
 

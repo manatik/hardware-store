@@ -10,3 +10,17 @@ export interface Users {
   message: string;
   success: boolean;
 }
+
+export interface UserInfo {
+  error: boolean;
+  message: string;
+  success: boolean;
+  user: {
+    id: number;
+    email: string;
+    password: string;
+    createdAt: string | null;
+    deleted: string | null;
+    updatedAt: string | null;
+  };
+}

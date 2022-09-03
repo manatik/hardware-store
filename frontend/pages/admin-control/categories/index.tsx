@@ -108,8 +108,8 @@ const Categories: NextPage = ({ categories }: any) => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ dispatch }) => async (context) => {
-    return useServerSideProps(ProjectPage.Categories, context, dispatch)
+  (store) => async (context) => {
+    return useServerSideProps(ProjectPage.Categories, context, store)
   },
 )
 

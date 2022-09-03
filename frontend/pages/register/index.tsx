@@ -123,7 +123,7 @@ const Register = () => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ dispatch }) => async (context) => useServerSideProps(ProjectPage.Register, context, dispatch),
+  (store) => async (context) => useServerSideProps(ProjectPage.Register, context, store),
 )
 
 export default Register

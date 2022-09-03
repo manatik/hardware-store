@@ -28,7 +28,7 @@ const Users: NextPage = ({ users }: any) => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  ({ dispatch }) => async (context) => useServerSideProps(ProjectPage.Users, context, dispatch),
+  (store) => async (context) => useServerSideProps(ProjectPage.Users, context, store),
 )
 
 export default Users
