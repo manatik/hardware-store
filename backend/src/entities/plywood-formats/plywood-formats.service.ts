@@ -12,7 +12,17 @@ export class PlywoodFormatsService {
     try {
       const formats = (await this.prismaService.formatPlywood.findMany()) as any as IPlywoodFormat[];
 
-      return this.errorService.success('Форматы успешно получены', { formats });
+      const groupedByFormat = {};
+
+      formats.forEach(format => {
+        if (groupedByFormat[format.format]) {
+          groupedByFormat[format.format].push(format);
+        } else {
+          groupedByFormat[format.format] = [format];
+        }
+      })
+
+      return this.errorService.success('Форматы успешно получены', { formats: groupedByFormat });
     } catch (e) {
       throw this.errorService.internal('Ошибка получения форматов', e.message);
     }

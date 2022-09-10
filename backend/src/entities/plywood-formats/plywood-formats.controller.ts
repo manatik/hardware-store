@@ -13,7 +13,7 @@ export class PlywoodFormatsController {
 
   @Public()
   @Get()
-  async all(): Promise<ISuccessResponseType & { formats: IPlywoodFormat[] }> {
+  async all(): Promise<ISuccessResponseType & { formats: {[key: string]: IPlywoodFormat[]} }> {
     return await this.plywoodFormatsService.getAll();
   }
 
