@@ -1,12 +1,12 @@
+import { Store } from '@store/store'
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSidePropsContext, GetServerSidePropsResult, PreviewData } from 'next'
-import { categoryService } from '@services/category/category.service'
 import { usersService } from '@services/users/users.service'
 import { refreshToken } from '@utils/refreshToken'
-import { Store } from '@store/store'
 import { fetchUserInfoAsync } from '@store/app/appSlice'
 import { redirectController } from '@utils/redirectController'
-import { fetchCategoryAsync } from '@store/category/categorySlice'
+import { fetchCategoriesAsync } from '@store/category/categorySlice'
+import { fetchFormatsAsync } from '@store/format/formatSlice'
 
 /**
  * Список шаблонов страниц
@@ -33,9 +33,13 @@ export const useServerSideProps = async (
   const cookie = headers.cookie ? headers.cookie : ''
 
   await dispatch(fetchUserInfoAsync(cookie))
-  await dispatch(fetchCategoryAsync())
 
-  if (!getState().app.userInfo?.isAdmin) return redirectController(pageName)
+  if (!getState().app.userInfo?.isAdmin) {
+    return redirectController(pageName)
+  }
+
+  await dispatch(fetchCategoriesAsync())
+  await dispatch(fetchFormatsAsync())
 
   switch (pageName) {
     case ProjectPage.Categories: {

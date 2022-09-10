@@ -16,6 +16,7 @@ export interface UserInfo {
   message: string;
   success: boolean;
   user: UserData;
+  statusCode: number
 }
 
 export interface UserData {

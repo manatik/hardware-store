@@ -10,19 +10,21 @@ import AdminLayout from '@features/Admin/common/Admin-Layout'
 import ContainerProduct from '@features/Admin/common/ContainerProduct'
 import Card from '@features/Admin/ui/Card'
 import InputField from '@features/Admin/ui/InputField'
+import { useAppDispatch } from '@store/hooks'
+import { fetchUpdateCategoryAsync } from '@store/category/categorySlice'
 
 import { Category } from '@models/Category'
 import { CategorySchema } from '@schema/category'
 import { InputType } from '@features/Admin/ui/InputField/types'
 
-import { categoryService } from '@services/category/category.service'
-
 import styles from '@features/Admin/ui/Card/index.module.scss'
 
-const Categories: NextPage = ({ categories }: any) => {
-  const updateCategory = async (values: { id: string, name: string, article: string }) => {
+const Categories: NextPage<{categories: Category[]}> = ({ categories }) => {
+  const dispatch = useAppDispatch()
+
+  const updateCategory = async (values: Category) => {
     try {
-      await categoryService.categoryUpdate(values)
+      await dispatch(fetchUpdateCategoryAsync(values))
       toast.success('Категория успешно обновлена')
     } catch (e) {
       toast.error('Ошибка запроса')
@@ -75,6 +77,7 @@ const Categories: NextPage = ({ categories }: any) => {
                       value={values.name}
                       error={errors.name}
                       placeholder="Название категории"
+                      label="Название"
                       size="md"
                       onChange={handleChange}
                     />
@@ -84,6 +87,7 @@ const Categories: NextPage = ({ categories }: any) => {
                       value={values.article}
                       error={errors.article}
                       placeholder="Артикул категории"
+                      label="Артикул"
                       size="md"
                       onChange={handleChange}
                     />

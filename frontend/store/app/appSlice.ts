@@ -15,8 +15,7 @@ export const fetchUserInfoAsync = createAsyncThunk<UserInfo, string>(
   'app/fetchUserInfo',
   async (cookie, { rejectWithValue }) => {
     try {
-      const data = await usersService.userinfo(cookie)
-      return data
+      return await usersService.userinfo(cookie)
     } catch (err: any) {
       return rejectWithValue(err)
     }
@@ -40,11 +39,9 @@ export const appSlice = createSlice({
         state.isLoading = false
         state.userInfo = action.payload.user
       })
-      .addCase(fetchUserInfoAsync.rejected, (state, action) => {
+      .addCase(fetchUserInfoAsync.rejected, (state) => {
         state.isLoading = false
         state.isError = true
-        // @ts-ignore
-        state.userInfo = action.payload
       })
   },
 })
