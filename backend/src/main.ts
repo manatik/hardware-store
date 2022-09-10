@@ -9,7 +9,6 @@ const PORT = Number.isNaN(Number(process.env.PORT)) ? 9000 : Number(process.env.
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, new ExpressAdapter(), {
-    cors: { origin: '*' },
     logger: ['error', 'log', 'warn'],
   });
 
