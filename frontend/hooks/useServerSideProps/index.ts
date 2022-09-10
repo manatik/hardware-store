@@ -6,6 +6,7 @@ import { refreshToken } from '@utils/refreshToken'
 import { Store } from '@store/store'
 import { fetchUserInfoAsync } from '@store/app/appSlice'
 import { redirectController } from '@utils/redirectController'
+import { fetchCategoryAsync } from '@store/category/categorySlice'
 
 /**
  * Список шаблонов страниц
@@ -31,15 +32,16 @@ export const useServerSideProps = async (
   const { headers } = context.req
   const cookie = headers.cookie ? headers.cookie : ''
 
-  // await dispatch(fetchUserInfoAsync(cookie))
+  await dispatch(fetchUserInfoAsync(cookie))
+  await dispatch(fetchCategoryAsync())
 
-  // if (!getState().app.userInfo?.isAdmin) return redirectController(pageName)
+  if (!getState().app.userInfo?.isAdmin) return redirectController(pageName)
 
   switch (pageName) {
     case ProjectPage.Categories: {
       try {
-        const { categories } = await categoryService.categories()
-        return { props: { categories } }
+        const { category } = getState()
+        return { props: { categories: category.items } }
       } catch (e: any) {
         if (e.statusCode === 401) {
           await refreshToken(e.statusCode, cookie)
