@@ -14,7 +14,7 @@ export const refreshToken = async (code: number, cookie: string) => {
       result[cur[0]] = cur[1]
     }
 
-    const { data } = await authService.internal.refresh(result)
+    const { data } = await authService.refresh(result)
     localStorageService.removeAuthData()
     localStorageService.setTokens(data.accessToken)
   }

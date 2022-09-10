@@ -15,7 +15,7 @@ export const fetchAuthAsync = createAsyncThunk<AuthResp, AuthModal>(
   'auth/fetchAuth',
   async (userData, { rejectWithValue }) => {
     try {
-      const { data } = await authService.internal.login(userData)
+      const { data } = await authService.login(userData)
       localStorageService.removeAuthData()
       localStorageService.setTokens(data.accessToken)
       return data

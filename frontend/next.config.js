@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   swcMinify: false,
   productionBrowserSourceMaps: process.env.ENVIRONMENT === 'review',
   /**
@@ -10,6 +10,14 @@ const nextConfig = {
     REACT_APP_ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
     API_SSR_BASE_URL: process.env.API_SSR_BASE_URL,
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.REACT_APP_API_URL}/api/:path*`,
+      },
+    ]
   },
 }
 
