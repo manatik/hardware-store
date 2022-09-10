@@ -54,6 +54,7 @@ services:
     command: bash -c "
       yarn install
       && yarn dev"
+
 volumes:
   db:
     driver: local

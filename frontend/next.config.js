@@ -15,7 +15,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.REACT_APP_API_URL}/api/:path*`,
+        destination: 'http://nestjs:4200/api/:path*',
       },
     ]
   },
