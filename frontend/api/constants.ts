@@ -11,7 +11,8 @@ export enum ApiEndpoints {
   Register = '/api/auth/register',
   Login = '/api/auth/login',
   Refresh = '/api/auth/refresh',
-  Categories = '/api/category',
   Users = '/api/user/all',
-  UserInfo = '/api/user/info'
+  UserInfo = '/api/user/info',
+  Categories = '/api/category',
+  Format = '/api/products/plywood-format',
 }

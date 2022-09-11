@@ -24,9 +24,7 @@ if (isDev) {
 }
 
 export const makeStore = () => configureStore({
-  // @ts-ignore
   reducer,
-  // @ts-ignore
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat(...customMiddleware),
 })
 

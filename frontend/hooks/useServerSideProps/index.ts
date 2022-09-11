@@ -1,11 +1,12 @@
+import { Store } from '@store/store'
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSidePropsContext, GetServerSidePropsResult, PreviewData } from 'next'
-import { categoryService } from '@services/category/category.service'
 import { usersService } from '@services/users/users.service'
 import { refreshToken } from '@utils/refreshToken'
-import { Store } from '@store/store'
 import { fetchUserInfoAsync } from '@store/app/appSlice'
 import { redirectController } from '@utils/redirectController'
+import { fetchCategoriesAsync } from '@store/category/categorySlice'
+import { fetchFormatsAsync } from '@store/format/formatSlice'
 
 /**
  * Список шаблонов страниц
@@ -31,15 +32,20 @@ export const useServerSideProps = async (
   const { headers } = context.req
   const cookie = headers.cookie ? headers.cookie : ''
 
-  // await dispatch(fetchUserInfoAsync(cookie))
+  await dispatch(fetchUserInfoAsync(cookie))
 
-  // if (!getState().app.userInfo?.isAdmin) return redirectController(pageName)
+  if (!getState().app.userInfo?.isAdmin) {
+    return redirectController(pageName)
+  }
+
+  await dispatch(fetchCategoriesAsync())
+  await dispatch(fetchFormatsAsync())
 
   switch (pageName) {
     case ProjectPage.Categories: {
       try {
-        const { categories } = await categoryService.categories()
-        return { props: { categories } }
+        const { category } = getState()
+        return { props: { categories: category.items } }
       } catch (e: any) {
         if (e.statusCode === 401) {
           await refreshToken(e.statusCode, cookie)

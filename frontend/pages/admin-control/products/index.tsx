@@ -1,17 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NextPage } from 'next'
 import AdminLayout from '@features/Admin/common/Admin-Layout'
 import ContainerProduct from '@features/Admin/common/ContainerProduct'
-import { InputType } from '@features/Admin/ui/InputField/types'
-import InputField from '@features/Admin/ui/InputField'
+
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
+import SelectField from '@features/Admin/ui/SelectField'
+import { useAppSelector } from '@store/hooks'
+import { getCategories } from '@store/category/selector'
+import Furniture from '@features/Admin/ui/Products/Furniture'
+import Plywood from '@features/Admin/ui/Products/Plywood'
+import House from '@features/Admin/ui/Products/House'
 
 const Products: NextPage = () => {
-  const onChange = (e: any) => {
-    // eslint-disable-next-line no-console
-    console.log(123, e)
+  const categories = useAppSelector(getCategories)
+  const [data, setData] = useState({
+    name: '',
+    value: categories[0].id,
+  })
+
+  const handleChange = (target: any) => {
+    setData(target)
   }
+
   return (
     <AdminLayout>
       <ContainerProduct
@@ -19,34 +30,20 @@ const Products: NextPage = () => {
         buttonName="Добавить товар"
         cards={[]}
         form={
-          <form>
-            <InputField
-              type={InputType.Text}
-              name="title"
-              value=''
-              label="Название"
-              size="md"
-              onChange={onChange}
+          <>
+            <SelectField
+              name="Категории"
+              onChange={handleChange}
+              value={data.value}
+              label="Категории товаров"
+              options={categories}
+              defaultOption="Выберите категорию..."
             />
 
-            <InputField
-              type={InputType.Text}
-              name="title"
-              value=''
-              label="Описание"
-              size="md"
-              onChange={onChange}
-            />
-
-            <InputField
-              type={InputType.Text}
-              name="title"
-              value=''
-              label="Что-то еще"
-              size="md"
-              onChange={onChange}
-            />
-          </form>
+             {Number(data.value) === 1 && <Plywood />}
+             {Number(data.value) === 2 && <House />}
+             {Number(data.value) === 3 && <Furniture />}
+          </>
         }
       />
     </AdminLayout>

@@ -17,4 +17,5 @@ export enum InputType {
   Password = 'password',
   Text = 'text',
   Search = 'search',
+  Number = 'number',
 }

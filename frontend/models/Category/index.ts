@@ -10,3 +10,10 @@ export interface Categories {
   message: string;
   success: boolean;
 }
+
+export interface CategoryData {
+  category: Category;
+  error: boolean;
+  message: string;
+  success: boolean;
+}
