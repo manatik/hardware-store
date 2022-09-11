@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class CreatePlywoodDto {
   @IsOptional()
@@ -19,10 +20,12 @@ export class CreatePlywoodDto {
 
   @IsNotEmpty()
   @IsNumber()
+  @Transform(({ value }) => Number(value))
   categoryId: number;
 
   @IsNotEmpty()
   @IsNumber()
+  @Transform(({ value }) => Number(value))
   width: number;
 
   @IsNotEmpty()
@@ -59,5 +62,6 @@ export class CreatePlywoodDto {
 
   @IsNotEmpty()
   @IsNumber()
+  @Transform(({ value }) => Number(value))
   price: number;
 }

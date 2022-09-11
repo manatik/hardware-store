@@ -135,6 +135,7 @@
 * remove
     * method=DELETE
     * path=/:id
+    * query=?hard=bool
 
 
 ### Plywood formats

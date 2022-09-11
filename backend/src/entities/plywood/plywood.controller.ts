@@ -4,9 +4,11 @@ import {
   Delete,
   Get,
   Param,
+  ParseBoolPipe,
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -19,6 +21,7 @@ import { IPlywood } from 'entities/plywood/types/IPlywood.interface';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
 
+@Public()
 @Controller('products/plywood')
 export class PlywoodController {
   constructor(private readonly plywoodService: PlywoodService) {}
@@ -35,14 +38,14 @@ export class PlywoodController {
     return await this.plywoodService.getById(id);
   }
 
-  @Roles(Role.Admin)
+  // @Roles(Role.Admin)
   @Post()
   @UseInterceptors(FilesInterceptor('photos'))
   async add(
     @UploadedFiles() photos: Array<Express.Multer.File>,
     @Body() dto: CreatePlywoodDto,
   ): Promise<ISuccessResponseType & { product: IPlywood }> {
-    return await this.plywoodService.add(dto);
+    return await this.plywoodService.add(dto, photos);
   }
 
   @Roles(Role.Admin)
@@ -54,9 +57,12 @@ export class PlywoodController {
     return await this.plywoodService.update(id, dto);
   }
 
-  @Roles(Role.Admin)
+  // @Roles(Role.Admin)
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number): Promise<ISuccessResponseType & { product: IPlywood }> {
-    return await this.plywoodService.remove(id);
+  async remove(
+    @Param('id', ParseIntPipe) id: number,
+    @Query('hard', ParseBoolPipe) hard: boolean,
+  ): Promise<ISuccessResponseType & { product: IPlywood }> {
+    return await this.plywoodService.remove(id, hard);
   }
 }
