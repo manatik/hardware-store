@@ -55,6 +55,19 @@ export const useServerSideProps = async (
       }
     }
 
+    case ProjectPage.Feature: {
+      try {
+        const { format } = getState()
+        return { props: { formatPlywood: format.items } }
+      } catch (e: any) {
+        if (e.statusCode === 401) {
+          await refreshToken(e.statusCode, cookie)
+        }
+
+        return { props: { formatPlywood: null } }
+      }
+    }
+
     case ProjectPage.Users: {
       try {
         const { users } = await usersService.users(cookie)

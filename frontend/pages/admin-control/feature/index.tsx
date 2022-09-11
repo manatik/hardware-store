@@ -9,7 +9,7 @@ import { ProjectPage, useServerSideProps } from '@hooks'
 import FeatureForm from '@features/Admin/ui/Feature'
 import styles from './index.module.scss'
 
-const Feature: NextPage = () => {
+const Feature: NextPage = ({ formatPlywood }: any) => {
   return (
     <AdminLayout>
       <ContainerProduct
@@ -21,12 +21,20 @@ const Feature: NextPage = () => {
         <div className={styles.feature__container}>
           <div className={styles.feature__title}>Характеристики Фанеры</div>
           <div className={styles.feature__card__container}>
-            {/* <CardGrid */}
-            {/*  title="Формат листа" */}
-            {/*  description="5x10" */}
-            {/*  type="1525x3050" */}
-            {/*  price={1300} */}
-            {/* /> */}
+            {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
+            {formatPlywood && Object.entries(formatPlywood).map(([_, value]) => {
+              // @ts-ignore
+              return value.map((item: any) => (
+                <CardGrid
+                  key={item.id}
+                  title="Формат листа"
+                  description={item.format}
+                  type={item.size}
+                  price={item.price}
+                />
+              ))
+            })}
+
           </div>
         </div>
         <div className={styles.feature__container}>

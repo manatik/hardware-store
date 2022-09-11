@@ -5,6 +5,7 @@ import cn from 'classnames'
 import styles from '@features/Admin/ui/Card/index.module.scss'
 import { Formik } from 'formik'
 import { FurnitureSchema } from '@schema/furniture'
+import TextAriaField from '@features/Admin/ui/TextAriaField'
 
 const FurnitureFormProduct = () => {
   return (
@@ -14,6 +15,7 @@ const FurnitureFormProduct = () => {
         image: '',
         price: '',
         format: '',
+        description: '',
       }}
       validationSchema={FurnitureSchema}
       validateOnChange={false}
@@ -76,6 +78,13 @@ const FurnitureFormProduct = () => {
             onChange={handleChange}
           />
 
+          <TextAriaField
+            name="description"
+            value={values.description}
+            label="Описание"
+            onChange={handleChange}
+          />
+
           <button
             type="submit"
             className={cn(
@@ -83,7 +92,7 @@ const FurnitureFormProduct = () => {
               styles.card__buttonEdit,
             )}
           >
-            Создать товар
+            Создать
           </button>
         </form>)}
     </Formik>

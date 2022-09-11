@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
 import styles from '@features/Admin/ui/Card/index.module.scss'
 import { Formik } from 'formik'
-import { useAppDispatch } from '@store/hooks'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { fetchAddFormatAsync } from '@store/format/formatSlice'
+import { toast } from 'react-toastify'
+import { getFormatIsError } from '@store/format/selector'
 
 const FeatureForm = () => {
   const dispatch = useAppDispatch()
+  const isError = useAppSelector(getFormatIsError)
+
+  useEffect(() => {
+    if (isError) toast.error('Ошибка запроса')
+  }, [isError])
 
   return (
     <Formik
@@ -21,7 +28,7 @@ const FeatureForm = () => {
       validateOnBlur={false}
       onSubmit={async (values) => {
         // @ts-ignore
-        dispatch(fetchAddFormatAsync(values))
+        await dispatch(fetchAddFormatAsync(values))
       }}
     >
       {({
