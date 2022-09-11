@@ -3,26 +3,25 @@ import { CreatePlywoodFormatsDto } from 'entities/plywood-formats/dto/create-ply
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 import { IPlywoodFormat } from 'entities/plywood-formats/types/IPlywoodFormat.interface';
+import * as _ from 'radash';
+import { isTrue } from 'common/utils/utils';
+import { PlywoodFormatsAllQuery } from 'entities/plywood-formats/dto/plywood-formats-all.query';
 
 @Injectable()
 export class PlywoodFormatsService {
   constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
-  async getAll() {
+  async getAll(query: PlywoodFormatsAllQuery) {
     try {
       const formats = (await this.prismaService.formatPlywood.findMany()) as any as IPlywoodFormat[];
 
-      const groupedByFormat = {};
+      if (isTrue(query.group)) {
+        const groupedByFormat = _.group(formats, (format) => format.format);
 
-      formats.forEach(format => {
-        if (groupedByFormat[format.format]) {
-          groupedByFormat[format.format].push(format);
-        } else {
-          groupedByFormat[format.format] = [format];
-        }
-      })
+        return this.errorService.success('Форматы успешно получены', { formats: groupedByFormat });
+      }
 
-      return this.errorService.success('Форматы успешно получены', { formats: groupedByFormat });
+      return this.errorService.success('Форматы успешно получены', { formats });
     } catch (e) {
       throw this.errorService.internal('Ошибка получения форматов', e.message);
     }
@@ -63,6 +62,12 @@ export class PlywoodFormatsService {
 
   async remove(id: number) {
     try {
+      const isFormatExist = await this.getById(id);
+
+      if (!isFormatExist) {
+        throw this.errorService.badRequest(`Формата фанеры с id=${id} не существует`);
+      }
+
       const format = (await this.prismaService.formatPlywood.delete({ where: { id } })) as any as IPlywoodFormat;
 
       return this.errorService.success('Формат успешно удален', { format });

@@ -14,55 +14,50 @@ import {
 } from '@nestjs/common';
 import { PlywoodService } from 'entities/plywood/plywood.service';
 import { CreatePlywoodDto } from 'entities/plywood/dto/create-plywood.dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
 import { Public } from 'authorization/decorators/public.decorator';
-import { ISuccessResponseType } from 'types/ISuccessResponse.type';
-import { IPlywood } from 'entities/plywood/types/IPlywood.interface';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { DeletePlywoodQuery } from 'entities/plywood/dto/delete-plywood.query';
 
-@Public()
 @Controller('products/plywood')
 export class PlywoodController {
   constructor(private readonly plywoodService: PlywoodService) {}
 
   @Public()
   @Get()
-  async all(): Promise<ISuccessResponseType & { products: IPlywood[] }> {
+  async all() {
     return await this.plywoodService.getAll();
   }
 
   @Public()
   @Get(':id')
-  async byId(@Param('id', ParseIntPipe) id: number): Promise<ISuccessResponseType & { product: IPlywood }> {
+  async byId(@Param('id', ParseIntPipe) id: number) {
     return await this.plywoodService.getById(id);
   }
 
-  // @Roles(Role.Admin)
+  @Roles(Role.Admin)
   @Post()
+  async add(@Body() dto: CreatePlywoodDto) {
+    return await this.plywoodService.add(dto);
+  }
+
+  @Roles(Role.Admin)
   @UseInterceptors(FilesInterceptor('photos'))
-  async add(
-    @UploadedFiles() photos: Array<Express.Multer.File>,
-    @Body() dto: CreatePlywoodDto,
-  ): Promise<ISuccessResponseType & { product: IPlywood }> {
-    return await this.plywoodService.add(dto, photos);
+  @Post('photos/:id')
+  async addPhotos(@UploadedFiles() photos: Array<Express.Multer.File>, @Param('id', ParseIntPipe) id: number) {
+    return await this.plywoodService.addPhotos(id, photos);
   }
 
   @Roles(Role.Admin)
   @Patch(':id')
-  async update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto,
-  ): Promise<ISuccessResponseType & { product: IPlywood }> {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
     return await this.plywoodService.update(id, dto);
   }
 
-  // @Roles(Role.Admin)
+  @Roles(Role.Admin)
   @Delete(':id')
-  async remove(
-    @Param('id', ParseIntPipe) id: number,
-    @Query('hard', ParseBoolPipe) hard: boolean,
-  ): Promise<ISuccessResponseType & { product: IPlywood }> {
-    return await this.plywoodService.remove(id, hard);
+  async remove(@Param('id', ParseIntPipe) id: number, @Query() query: DeletePlywoodQuery) {
+    return await this.plywoodService.remove(id, query);
   }
 }

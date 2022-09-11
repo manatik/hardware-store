@@ -55,6 +55,12 @@ export class PlywoodSurfaceService {
 
   async remove(id: number) {
     try {
+      const isSurfaceExist = await this.getById(id);
+
+      if (!isSurfaceExist) {
+        throw this.errorService.badRequest(`Типа поверхности с id=${id} не существует`);
+      }
+
       const surface = (await this.prismaService.surfaceTypePlywood.delete({ where: { id } })) as any as IPlywoodSurface;
 
       return this.errorService.success('Тип покрытия успешно удален', { surface });
