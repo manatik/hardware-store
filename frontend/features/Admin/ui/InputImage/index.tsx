@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import ImageUploading, { ImageListType } from 'react-images-uploading'
+import React from 'react'
+import ImageUploading from 'react-images-uploading'
 import cn from 'classnames'
 import styles from './index.module.scss'
 

@@ -3,8 +3,6 @@ import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
 import { Formik } from 'formik'
-import InputImage from '@features/Admin/ui/InputImage'
-import { ImageListType } from 'react-images-uploading'
 
 import styles from '@features/Admin/ui/Card/index.module.scss'
 import { plywoodService } from '@services/products/plywood.service'
@@ -16,7 +14,6 @@ import { flat } from 'radash'
 import { toast } from 'react-toastify'
 
 const PlywoodFormProduct = () => {
-  const [images, setImages] = useState([])
   const [option, setOption] = useState()
   const [formatsData, setFormatsData] = useState<any>()
   const formRef = useRef<HTMLFormElement | null>(null)
@@ -24,12 +21,10 @@ const PlywoodFormProduct = () => {
 
   const addProduct = async (values: any) => {
     try {
-      const formData = new FormData()
-      images.forEach((item) => {
-        // @ts-ignore
-        formData.append('photos[]', item.file)
+      await plywoodService.plywoodAdd({
+        ...values,
+        formatIds: formatsData,
       })
-      await plywoodService.plywoodAdd({ ...values, formatIds: formatsData })
     } catch (e: any) {
       toast.error('Ошибка запроса')
     }
@@ -48,10 +43,6 @@ const PlywoodFormProduct = () => {
 
     // @ts-ignore
     setOption(flat(options))
-  }
-
-  const onChange = (imageList: ImageListType) => {
-    setImages(imageList as never[])
   }
 
   const handleChangeFormatsData = (target: any) => {
@@ -243,12 +234,6 @@ const PlywoodFormProduct = () => {
             label="Износостойкость"
             size="md"
             onChange={handleChange}
-          />
-
-          <InputImage
-            name="photos"
-            value={images}
-            onChange={onChange}
           />
 
           <button
