@@ -3,10 +3,16 @@ import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 import { CreatePlywoodDto } from 'entities/plywood/dto/create-plywood.dto';
 import { IPlywood } from 'entities/plywood/types/IPlywood.interface';
+import { plainToClass } from 'class-transformer';
+import { FilesService } from 'common/files/files.service';
 
 @Injectable()
 export class PlywoodService {
-  constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly errorService: ErrorService,
+    private readonly filesService: FilesService,
+  ) {}
 
   async getAll() {
     try {
@@ -34,7 +40,7 @@ export class PlywoodService {
     }
   }
 
-  async add(dto: CreatePlywoodDto) {
+  async add(dto: CreatePlywoodDto, photos: Array<Express.Multer.File>) {
     try {
       const duplicate = await this.prismaService.plywood.findFirst({ where: { article: dto.article } });
 
@@ -67,6 +73,13 @@ export class PlywoodService {
         await this.addSurfacesToPlywood(product, surfaceIds);
       }
 
+      for (const photo of photos) {
+        await this.filesService.writeFileWithCompress({
+          filename: photo.originalname,
+          buffer: photo.buffer,
+        });
+      }
+
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {
       throw this.errorService.internal('Ошибка добавления продукта', e.message);
@@ -86,12 +99,18 @@ export class PlywoodService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: number, hard: boolean) {
     try {
-      const product = (await this.prismaService.plywood.update({
-        where: { id },
-        data: { deleted: new Date() },
-      })) as any as IPlywood;
+      let product;
+
+      if (hard) {
+        product = await this.prismaService.plywood.delete({ where: { id } });
+      } else {
+        product = (await this.prismaService.plywood.update({
+          where: { id },
+          data: { deleted: new Date() },
+        })) as any as IPlywood;
+      }
 
       return this.errorService.success('Продукт успешно удален', { product });
     } catch (e) {
