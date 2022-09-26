@@ -145,6 +145,7 @@
 * getAll
     * method=GET
     * path=/
+    * query=?group=bool
 
 
 * getById

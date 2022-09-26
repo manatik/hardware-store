@@ -13,7 +13,13 @@ export class FilesService {
     try {
       const compressedBuffer = await this.compressFile(buffer);
       const name = uuid.v4() + '.webp';
+
       await this.writeFile({ filename: name, buffer: compressedBuffer });
+
+      return {
+        filename: name,
+        path: `public/${name}`,
+      };
     } catch (e) {
       throw e;
     }

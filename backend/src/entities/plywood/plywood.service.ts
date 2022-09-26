@@ -5,6 +5,7 @@ import { CreatePlywoodDto } from 'entities/plywood/dto/create-plywood.dto';
 import { IPlywood } from 'entities/plywood/types/IPlywood.interface';
 import { plainToClass } from 'class-transformer';
 import { FilesService } from 'common/files/files.service';
+import { DeletePlywoodQuery } from 'entities/plywood/dto/delete-plywood.query';
 
 @Injectable()
 export class PlywoodService {
@@ -40,7 +41,7 @@ export class PlywoodService {
     }
   }
 
-  async add(dto: CreatePlywoodDto, photos: Array<Express.Multer.File>) {
+  async add(dto: CreatePlywoodDto) {
     try {
       const duplicate = await this.prismaService.plywood.findFirst({ where: { article: dto.article } });
 
@@ -73,16 +74,28 @@ export class PlywoodService {
         await this.addSurfacesToPlywood(product, surfaceIds);
       }
 
-      for (const photo of photos) {
-        await this.filesService.writeFileWithCompress({
-          filename: photo.originalname,
-          buffer: photo.buffer,
-        });
-      }
-
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {
       throw this.errorService.internal('Ошибка добавления продукта', e.message);
+    }
+  }
+
+  async addPhotos(id: number, photos: Array<Express.Multer.File>) {
+    try {
+      const photoPaths: string[] = [];
+
+      for (const photo of photos) {
+        const { path } = await this.filesService.writeFileWithCompress({
+          filename: photo.originalname,
+          buffer: photo.buffer,
+        });
+
+        photoPaths.push(path);
+      }
+
+      this.prismaService.plywood.update({ where: { id }, data: { photos: photoPaths } });
+    } catch (e) {
+      throw this.errorService.internal('Ошибка добавления фото продукта', e.message);
     }
   }
 
@@ -99,11 +112,17 @@ export class PlywoodService {
     }
   }
 
-  async remove(id: number, hard: boolean) {
+  async remove(id: number, query: DeletePlywoodQuery) {
     try {
+      const plywoodIsExist = await this.getById(id);
+
+      if (!plywoodIsExist) {
+        throw this.errorService.badRequest(`Продукта с id=${id} не существует`);
+      }
+
       let product;
 
-      if (hard) {
+      if (query.hard) {
         product = await this.prismaService.plywood.delete({ where: { id } });
       } else {
         product = (await this.prismaService.plywood.update({
