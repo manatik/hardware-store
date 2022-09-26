@@ -21,6 +21,8 @@ export enum ProjectPage {
   Users,
   AdminControl,
   Index,
+
+  Contacts,
 }
 
 export const useServerSideProps = async (
@@ -31,6 +33,7 @@ export const useServerSideProps = async (
   const { dispatch, getState } = store
   const { headers } = context.req
   const cookie = headers.cookie ? headers.cookie : ''
+  const link = context.resolvedUrl
 
   await dispatch(fetchUserInfoAsync(cookie))
 
@@ -79,6 +82,10 @@ export const useServerSideProps = async (
 
         return { props: { users: null } }
       }
+    }
+
+    case ProjectPage.Contacts: {
+      return { props: { link } }
     }
 
     // eslint-disable-next-line no-fallthrough

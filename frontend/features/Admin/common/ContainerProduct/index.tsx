@@ -4,7 +4,7 @@ import Portal from '@features/Basic/common/Portal'
 import Modal from '@features/Basic/common/Modal'
 
 import { PropsContainerProduct } from '@features/Admin/common/ContainerProduct/types'
-import { Children } from '@models/Props/props'
+import { IChildren } from '@models/Props/props'
 
 import styles from '@features/Admin/common/ContainerProduct/index.module.scss'
 
@@ -13,7 +13,7 @@ const ContainerProduct: FC<PropsContainerProduct> = ({
   buttonName,
   form,
   cards,
-}): ReactElement<Children> => {
+}): ReactElement<IChildren> => {
   const [toggle, setToggle] = useState<boolean>(false)
   const onToggle = () => {
     setToggle(!toggle)

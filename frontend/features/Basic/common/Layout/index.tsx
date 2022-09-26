@@ -1,12 +1,25 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC } from 'react'
 import Topline from '@features/Basic/common/Topline'
 import Footer from '@features/Basic/common/Footer'
 import { Children } from '@models/Props/props'
 
-const Layout: FC<Children> = ({ children }): ReactElement => {
+interface LayoutProps {
+  children: Children;
+  dark?: boolean;
+  link?: string;
+}
+
+const Layout: FC<LayoutProps> = ({
+  children,
+  dark = false,
+  link,
+}) => {
   return (
     <>
-      <Topline />
+      <Topline
+        dark={dark}
+        link={link}
+      />
       {children}
       <Footer />
     </>

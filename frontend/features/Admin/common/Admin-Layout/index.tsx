@@ -1,10 +1,10 @@
 import React, { FC, ReactElement, useState } from 'react'
 import Link from 'next/link'
-import { Children } from '@models/Props/props'
+import { IChildren } from '@models/Props/props'
 import { adminLinks } from '@features/Admin/common/Admin-Layout/links'
 import styles from './index.module.scss'
 
-const AdminLayout: FC<Children> = ({ children }): ReactElement => {
+const AdminLayout: FC<IChildren> = ({ children }): ReactElement => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
   const toggleMenu = () => {
     setOpenMenu(!openMenu)

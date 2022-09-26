@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { useRouter } from 'next/router'
-import { Children } from '@models/Props/props'
+import { IChildren } from '@models/Props/props'
 
 import styles from './index.module.scss'
 
-const AuthContainer: FC<Children> = ({ children }) => {
+const AuthContainer: FC<IChildren> = ({ children }) => {
   const router = useRouter()
   return (
     <div className={styles.auth}>

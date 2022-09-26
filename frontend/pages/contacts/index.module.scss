@@ -1,0 +1,144 @@
+@import "@public/styles/mixins.scss";
+@import "@public/styles/variables.scss";
+
+.contacts {
+    background-color: $colorSecondary;
+    padding: 185px 0 100px 0;
+
+    &__inner {
+        @include w-layout;
+    }
+
+    &__title {
+        font-family: MuseoSansCyrl700;
+        font-size: 75px;
+        line-height: 77px;
+        margin-bottom: 70px;
+        color: $colorPrimary;
+    }
+
+    &__map {
+        position: relative;
+
+        &__contacts {
+            position: absolute;
+            top: 115px;
+            left: 115px;
+            padding: 30px 35px;
+            background-color: $colorOnPrimary;
+
+            &__title {
+                font-family: MuseoSansCyrl700;
+                font-size: 20px;
+                line-height: 28px;
+                margin-bottom: 16px;
+                color: $colorPrimary;
+            }
+
+            &__links {
+                display: flex;
+                flex-direction: column;
+            }
+
+            @media (max-width: 1020px) {
+                top: 30px;
+                left: 30px;
+            }
+        }
+    }
+
+    &__link {
+        font-family: MuseoSansCyrl500;
+        font-size: 14px;
+        line-height: 18px;
+        display: flex;
+
+        &:not(:last-child) {
+            margin-bottom: 18px;
+        }
+
+        &Phone {
+            &:before {
+                content: '';
+                display: block;
+                width: 21px;
+                height: 21px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 21px 21px;
+                background-image: url('../../assets/layout/phone-dark.svg');
+                margin-right: 17px;
+            }
+        }
+
+        &Email {
+            &:before {
+                content: '';
+                display: block;
+                width: 21px;
+                height: 21px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 21px 21px;
+                background-image: url('../../assets/layout/email-dark.svg');
+                margin-right: 17px;
+            }
+        }
+
+        &VK {
+            &:before {
+                content: '';
+                display: block;
+                width: 21px;
+                height: 21px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 21px 21px;
+                background-image: url('../../assets/layout/vk-dark.svg');
+                margin-right: 17px;
+            }
+        }
+
+        &TG {
+            &:before {
+                content: '';
+                display: block;
+                width: 21px;
+                height: 21px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 21px 21px;
+                background-image: url('../../assets/layout/tg-dark.svg');
+                margin-right: 17px;
+            }
+        }
+
+        &WU {
+            &:before {
+                content: '';
+                display: block;
+                width: 21px;
+                height: 21px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 21px 21px;
+                background-image: url('../../assets/layout/wu-dark.svg');
+                margin-right: 17px;
+            }
+        }
+
+        &Pin {
+            &:before {
+                content: '';
+                display: block;
+                width: 21px;
+                height: 21px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 21px 21px;
+                background-image: url('../../assets/layout/pin-dark.svg');
+                margin-right: 17px;
+            }
+        }
+    }
+}
