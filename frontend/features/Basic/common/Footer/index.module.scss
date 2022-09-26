@@ -1,0 +1,90 @@
+@import "@public/styles/mixins.scss";
+@import "@public/styles/variables.scss";
+
+.footer {
+    padding: 30px 0;
+    background-color: $colorPrimary;
+
+    &__inner {
+        @include w-layout;
+    }
+
+    &__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__bottom {
+        font-family: 'MuseoSansCyrl500';
+        font-size: 16px;
+        line-height: 16px;
+        text-align: center;
+        color: $colorOnPrimary;
+        padding-top: 30px;
+    }
+
+    &__links, &__contact,
+    &__social {
+        @include g-flex-container;
+    }
+
+    &__links {
+        margin-right: 50px;
+        &:before {
+            content: '';
+            display: block;
+            width: 126px;
+            height: 43px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 126px 43px;
+            background-image: url('../../../../assets/layout/logo.svg');
+        }
+    }
+
+    &__link {
+        @include m-margin-link-bottom;
+        font-family: 'MuseoSansCyrl500';
+        font-size: 16px;
+        line-height: 16px;
+        color: $colorOnPrimary;
+    }
+
+    &__contact {
+        margin-right: 30px;
+
+        &__link {
+            font-family: 'MuseoSansCyrl500';
+            font-size: 16px;
+            line-height: 16px;
+            color: $colorOnPrimary;
+
+            &:not(:last-child) {
+                margin-right: 30px;
+            }
+        }
+    }
+
+    &__social {
+        &__link {
+            cursor: pointer;
+
+            &:not(:last-child) {
+                margin-right: 17px;
+            }
+        }
+    }
+}
+
+// only for hovers
+@media (hover: hover) and (pointer: fine){
+    .footer {
+        &__call, &__basket,
+        &__social__link {
+            &:hover {
+                opacity: $opacityHover;
+            }
+        }
+    }
+}

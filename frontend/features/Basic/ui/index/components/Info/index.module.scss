@@ -1,0 +1,199 @@
+@import "@public/styles/mixins.scss";
+@import "@public/styles/variables.scss";
+
+.info {
+    background-color: $colorSecondary;
+    padding: 100px 0;
+
+    &__inner {
+        @include w-layout;
+    }
+
+    &__title {
+        font-family: MuseoSansCyrl700;
+        font-size: 64px;
+        line-height: 64px;
+        margin-bottom: 72px;
+        color: $colorPrimary;
+    }
+
+    &__products, &__about {
+        margin-bottom: 72px;
+    }
+
+    &__about {
+        &__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @media (max-width: 980px) {
+                flex-direction: column;
+            }
+        }
+
+        &__description {
+            font-family: MuseoSansCyrl500;
+            font-size: 20px;
+            line-height: 28px;
+            max-width: 500px;
+            color: #343434;
+            margin-right: 25px;
+
+            @media (max-width: 980px) {
+                margin-bottom: 38px;
+            }
+        }
+
+        &__image {
+            max-width: 612px;
+
+            img {
+                border-radius: 15px;
+            }
+        }
+    }
+
+    &__edge {
+        &__inner {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        &__image {
+            position: absolute;
+            left: 0;
+
+            img {
+                border-radius: 15px;
+            }
+        }
+
+        &__description {
+            padding: 38px 60px;
+            border-radius: 15px;
+            max-width: 630px;
+            background-color: $colorPrimary;
+
+            &__title {
+                font-family: MuseoSansCyrl700;
+                font-size: 28px;
+                line-height: 140%;
+                color: $colorOnPrimary;
+                margin-bottom: 20px;
+            }
+
+            &__subTitle {
+                font-family: MuseoSansCyrl300;
+                font-size: 16px;
+                line-height: 22px;
+                color: $colorOnPrimary;
+
+                &:not(:last-child) {
+                    margin-bottom: 25px;
+                }
+            }
+        }
+    }
+
+    &__cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-column-gap: 20px;
+        margin-bottom: 72px;
+
+        @media (max-width: 1025px) {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-row-gap: 20px;
+        }
+
+        @media (max-width: 780px) {
+            grid-template-columns: 1fr 1fr;
+            grid-row-gap: 20px;
+        }
+
+        @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-row-gap: 20px;
+        }
+    }
+
+    &__card {
+        position: relative;
+        padding: 25px 30px;
+        border-radius: 24px;
+
+        &__title {
+            font-family: MuseoSansCyrl700;
+            font-size: 24px;
+            line-height: 28px;
+            color: $colorOnPrimary;
+            margin-bottom: 9px;
+            position: relative;
+            z-index: 10;
+        }
+
+        &__subTitle {
+            font-family: MuseoSansCyrl500;
+            font-size: 16px;
+            line-height: 140%;
+            color: $colorOnPrimary;
+            position: relative;
+            z-index: 10;
+
+            &:not(:last-child) {
+                margin-bottom: 7px;
+            }
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 24px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 3;
+            background-color: rgba($colorPrimary, .7);
+            transition: 250ms background-color;
+        }
+
+        &Home {
+            width: auto;
+            height: auto;
+            background-size: 100% 270px;
+            background-repeat: no-repeat;
+            background-image: url("../../../../../../assets/slider/slide-1.png");
+        }
+
+        &Furniture {
+            width: auto;
+            height: auto;
+            background-size: 100% 270px;
+            background-repeat: no-repeat;
+            background-image: url("../../../../../../assets/slider/slide-5.png");
+        }
+
+        &PlyWood {
+            width: auto;
+            height: auto;
+            background-size: 100% 270px;
+            background-repeat: no-repeat;
+            background-image: url("../../../../../../assets/slider/slide-3.png");
+        }
+
+        &Service {
+            width: auto;
+            height: auto;
+            background-size: 100% 270px;
+            background-repeat: no-repeat;
+            background-image: url("../../../../../../assets/slider/slide-6.png");
+        }
+    }
+}
