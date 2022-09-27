@@ -3,8 +3,8 @@ import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { Public } from 'authorization/decorators/public.decorator';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
-import { CreatePlywoodFormatsDto } from 'entities/plywood-enitity/plywood-formats/dto/create-plywood-formats.dto';
-import { TypeService } from 'entities/plywood-enitity/plywood-type/type.service';
+import { CreatePlywoodFormatsDto } from 'entities/plywood-enitities/plywood-formats/dto/create-plywood-formats.dto';
+import { TypeService } from 'entities/plywood-enitities/plywood-type/type.service';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_TYPE)
 export class TypeController {

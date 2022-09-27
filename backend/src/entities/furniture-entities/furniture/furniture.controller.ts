@@ -10,8 +10,8 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FurnitureService } from 'entities/furniture-entity/furniture/furniture.service';
-import { CreateFurnitureDto } from 'entities/furniture-entity/furniture/dto/create-furniture.dto';
+import { FurnitureService } from 'entities/furniture-entities/furniture/furniture.service';
+import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 

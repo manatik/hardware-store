@@ -3,32 +3,33 @@ import { RoleService } from 'entities/role/role.service';
 import { CreateRoleDto } from 'entities/role/dto/create-role.dto';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
+import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 
 @Roles(Role.Admin)
-@Controller('role')
+@Controller(GLOBAL_PREFIXES.ROLE)
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
-  @Get()
+  @Get(ENDPOINTS.ROLE.ALL)
   async getAll() {
     return await this.roleService.getAll();
   }
 
-  @Get(':id')
+  @Get(ENDPOINTS.ROLE.GET_BY_ID)
   async getById(@Param('id') id: number) {
     return await this.roleService.getById(id);
   }
 
-  @Post()
+  @Post(ENDPOINTS.ROLE.CREATE)
   async create(@Body() dto: CreateRoleDto) {
     return await this.roleService.create(dto);
   }
 
-  @Patch()
+  @Patch(ENDPOINTS.ROLE.UPDATE)
   async update(@Param('id') id: number, @Body() dto) {
     return await this.roleService.update(id, dto);
   }
 
-  @Delete()
+  @Delete(ENDPOINTS.ROLE.DELETE)
   async delete(@Param('id') id: number) {
     return await this.roleService.delete(id);
   }

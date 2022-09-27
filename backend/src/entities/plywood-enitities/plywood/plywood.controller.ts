@@ -11,14 +11,14 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { PlywoodService } from 'entities/plywood-enitity/plywood/plywood.service';
-import { CreatePlywoodDto } from 'entities/plywood-enitity/plywood/dto/create-plywood.dto';
+import { PlywoodService } from 'entities/plywood-enitities/plywood/plywood.service';
+import { CreatePlywoodDto } from 'entities/plywood-enitities/plywood/dto/create-plywood.dto';
 import { Public } from 'authorization/decorators/public.decorator';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { DeletePlywoodQuery } from 'entities/plywood-enitity/plywood/dto/delete-plywood.query';
-import { AddPhotoDto } from 'entities/plywood-enitity/plywood/dto/add-photo.dto';
+import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delete-plywood.query';
+import { AddPhotoDto } from 'entities/plywood-enitities/plywood/dto/add-photo.dto';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD)

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePlywoodFormatsDto } from 'entities/plywood-enitity/plywood-formats/dto/create-plywood-formats.dto';
+import { CreatePlywoodFormatsDto } from 'entities/plywood-enitities/plywood-formats/dto/create-plywood-formats.dto';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
-import { IPlywoodFormat } from 'entities/plywood-enitity/plywood-formats/types/IPlywoodFormat.interface';
+import { IPlywoodFormat } from 'entities/plywood-enitities/plywood-formats/types/IPlywoodFormat.interface';
 import * as _ from 'radash';
 import { isTrue } from 'common/utils/utils';
-import { PlywoodFormatsAllQuery } from 'entities/plywood-enitity/plywood-formats/dto/plywood-formats-all.query';
+import { PlywoodFormatsAllQuery } from 'entities/plywood-enitities/plywood-formats/dto/plywood-formats-all.query';
 
 @Injectable()
 export class FormatsService {

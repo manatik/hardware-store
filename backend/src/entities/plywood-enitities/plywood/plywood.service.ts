@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
-import { CreatePlywoodDto } from 'entities/plywood-enitity/plywood/dto/create-plywood.dto';
-import { IPlywood } from 'entities/plywood-enitity/plywood/types/IPlywood.interface';
+import { CreatePlywoodDto } from 'entities/plywood-enitities/plywood/dto/create-plywood.dto';
+import { IPlywood } from 'entities/plywood-enitities/plywood/types/IPlywood.interface';
 import { FilesService } from 'common/files/files.service';
-import { DeletePlywoodQuery } from 'entities/plywood-enitity/plywood/dto/delete-plywood.query';
+import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delete-plywood.query';
 import { Prisma } from '@prisma/client';
 import { IPhoto } from 'types/IPhoto.type';
-import { AddPhotoDto } from 'entities/plywood-enitity/plywood/dto/add-photo.dto';
+import { AddPhotoDto } from 'entities/plywood-enitities/plywood/dto/add-photo.dto';
 
 @Injectable()
 export class PlywoodService {

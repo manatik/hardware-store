@@ -9,12 +9,11 @@ import { AuthorizationModule } from 'authorization/authorization.module';
 import { JwtAuthGuard } from 'authorization/guards/jwt.guard';
 import { RolesGuard } from 'authorization/guards/roles.guard';
 import { CategoryModule } from 'entities/category/category.module';
-import { FurnitureModule } from 'entities/furniture/furniture.module';
-import { HouseModule } from 'entities/house/house.module';
-import { PlywoodModule } from 'entities/plywood/plywood.module';
-import { PlywoodFormatsModule } from 'entities/plywood-formats/plywood-formats.module';
 import { PrismaModule } from 'database/prisma/prisma.module';
 import { getJwtConfig } from 'common/config/jwt.config';
+import { PlywoodEntityModule } from 'entities/plywood-enitities/plywood-entity.module';
+import { HouseEntityModule } from 'entities/house-entities/house-entity.module';
+import { FurnitureEntityModule } from 'entities/furniture-entities/furniture-entity.module';
 
 @Module({
   imports: [
@@ -28,10 +27,9 @@ import { getJwtConfig } from 'common/config/jwt.config';
     PrismaModule,
     AuthorizationModule,
     CategoryModule,
-    FurnitureModule,
-    HouseModule,
-    PlywoodModule,
-    PlywoodFormatsModule,
+    FurnitureEntityModule,
+    HouseEntityModule,
+    PlywoodEntityModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard }, { provide: APP_GUARD, useClass: RolesGuard }],

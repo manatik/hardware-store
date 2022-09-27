@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePlywoodSurfaceDto } from 'entities/plywood-enitity/plywood-surface/dto/create-plywood-surface.dto';
+import { CreatePlywoodSurfaceDto } from 'entities/plywood-enitities/plywood-surface/dto/create-plywood-surface.dto';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
-import { IPlywoodSurface } from 'entities/plywood-enitity/plywood-surface/types/IPlywoodSurface.interface';
+import { IPlywoodSurface } from 'entities/plywood-enitities/plywood-surface/types/IPlywoodSurface.interface';
 
 @Injectable()
 export class SurfaceService {

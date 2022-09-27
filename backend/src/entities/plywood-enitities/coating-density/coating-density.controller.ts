@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query 
 import { Public } from 'authorization/decorators/public.decorator';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
-import { CreatePlywoodFormatsDto } from 'entities/plywood-enitity/plywood-formats/dto/create-plywood-formats.dto';
-import { CoatingDensityService } from 'entities/plywood-enitity/coating-density/coating-density.service';
+import { CreatePlywoodFormatsDto } from 'entities/plywood-enitities/plywood-formats/dto/create-plywood-formats.dto';
+import { CoatingDensityService } from 'entities/plywood-enitities/coating-density/coating-density.service';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_COATING_DENSITY)

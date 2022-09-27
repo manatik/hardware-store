@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from 'database/prisma/prisma.module';
 import { ErrorModule } from 'common/error/error.module';
-import { TypeController } from 'entities/plywood-enitity/plywood-type/type.controller';
-import { TypeService } from 'entities/plywood-enitity/plywood-type/type.service';
+import { TypeController } from 'entities/plywood-enitities/plywood-type/type.controller';
+import { TypeService } from 'entities/plywood-enitities/plywood-type/type.service';
 
 @Module({
   imports: [PrismaModule, ErrorModule],

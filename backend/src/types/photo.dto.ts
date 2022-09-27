@@ -8,5 +8,5 @@ export class PhotoDto {
   path: string;
 
   @IsString()
-  size: string;
+  color: string;
 }

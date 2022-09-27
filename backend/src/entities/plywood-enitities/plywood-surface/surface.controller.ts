@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { ISuccessResponseType } from 'types/ISuccessResponse.type';
-import { SurfaceService } from 'entities/plywood-enitity/plywood-surface/surface.service';
-import { IPlywoodSurface } from 'entities/plywood-enitity/plywood-surface/types/IPlywoodSurface.interface';
-import { CreatePlywoodSurfaceDto } from 'entities/plywood-enitity/plywood-surface/dto/create-plywood-surface.dto';
+import { SurfaceService } from 'entities/plywood-enitities/plywood-surface/surface.service';
+import { IPlywoodSurface } from 'entities/plywood-enitities/plywood-surface/types/IPlywoodSurface.interface';
+import { CreatePlywoodSurfaceDto } from 'entities/plywood-enitities/plywood-surface/dto/create-plywood-surface.dto';
 import { Public } from 'authorization/decorators/public.decorator';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';

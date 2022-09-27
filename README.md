@@ -14,6 +14,8 @@
     3. COOKIE_SECRET="for cookie secret"
     4. PORT=port server
 
+#### Все маршруты API описаны в файле - src/common/consts/endpoints.consts.ts;
+
 # API
 * PREFIX=/api
 
@@ -165,6 +167,78 @@
 
 ### Plywood surfaces
 * PREFIX=/plywood-surface
+
+
+* getAll
+    * method=GET
+    * path=/
+
+
+* getById
+    * method=GET
+    * path=/:id
+
+
+* update
+    * method=PATCH 
+    * path=/:id
+
+
+* remove
+    * method=DELETE
+    * path=/:id
+
+
+### Plywood sort
+* PREFIX=/plywood-sort
+
+
+* getAll
+    * method=GET
+    * path=/
+
+
+* getById
+    * method=GET
+    * path=/:id
+
+
+* update
+    * method=PATCH
+    * path=/:id
+
+
+* remove
+    * method=DELETE
+    * path=/:id
+
+
+### Plywood type
+* PREFIX=/plywood-type
+
+
+* getAll
+    * method=GET
+    * path=/
+
+
+* getById
+    * method=GET
+    * path=/:id
+
+
+* update
+    * method=PATCH
+    * path=/:id
+
+
+* remove
+    * method=DELETE
+    * path=/:id
+
+
+### Plywood coating density
+* PREFIX=/plywood-coating-density
 
 
 * getAll
