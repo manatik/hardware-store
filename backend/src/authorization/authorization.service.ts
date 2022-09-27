@@ -7,6 +7,7 @@ import { RegisterDto } from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
 import { ErrorService } from 'common/error/error.service';
 import * as dayjs from 'dayjs';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthorizationService {
@@ -15,6 +16,7 @@ export class AuthorizationService {
     private readonly userService: UserService,
     private readonly prismaService: PrismaService,
     private readonly errorService: ErrorService,
+    private readonly configService: ConfigService,
   ) {}
 
   async login(dto: LoginDto) {
@@ -37,7 +39,7 @@ export class AuthorizationService {
     const payload = { email: user.email, roles: user.roles, id: user.id };
 
     const refreshToken = await this.generateRefreshToken(payload, user.id);
-    const accessToken = this.generateAccessToken(payload);
+    const accessToken = await this.generateAccessToken(payload);
 
     return {
       accessToken,
@@ -53,7 +55,7 @@ export class AuthorizationService {
     const payload = { email: user.email, roles: user.roles, id: user.id };
 
     const refreshToken = await this.generateRefreshToken(payload, user.id);
-    const accessToken = this.generateAccessToken(payload);
+    const accessToken = await this.generateAccessToken(payload);
 
     return {
       accessToken,
@@ -65,9 +67,7 @@ export class AuthorizationService {
     try {
       const refreshToken = cookies['r_t'];
 
-      const refreshTokenInfo = this.jwtService.verify(refreshToken, {
-        secret: process.env.JWT_SECRET,
-      });
+      const refreshTokenInfo = this.jwtService.verify(refreshToken);
 
       const expireIn = dayjs.unix(refreshTokenInfo.exp).toISOString();
 
@@ -84,12 +84,12 @@ export class AuthorizationService {
 
       if (dayjs().diff(expireIn, 'millisecond') > 0) {
         const refreshToken = await this.generateRefreshToken(payload, user.id);
-        const accessToken = this.generateAccessToken(payload);
+        const accessToken = await this.generateAccessToken(payload);
 
         return { accessToken, refreshToken };
       }
 
-      const accessToken = this.generateAccessToken(payload);
+      const accessToken = await this.generateAccessToken(payload);
 
       return { accessToken, refreshToken: null };
     } catch (e) {
@@ -98,9 +98,9 @@ export class AuthorizationService {
   }
 
   private async generateRefreshToken(payload: any, idUser: number) {
-    const refreshToken = this.jwtService.sign(payload, {
+    const refreshToken = await this.jwtService.signAsync(payload, {
       expiresIn: '30d',
-      secret: process.env.JWT_SECRET,
+      secret: this.configService.get('JWT_SECRET'),
     });
     const expireInDate = dayjs().add(30, 'days').toISOString();
 
@@ -128,10 +128,10 @@ export class AuthorizationService {
     return refreshToken;
   }
 
-  private generateAccessToken(payload: any) {
-    return this.jwtService.sign(payload, {
+  private async generateAccessToken(payload: any) {
+    return this.jwtService.signAsync(payload, {
       expiresIn: '24h',
-      secret: process.env.JWT_SECRET,
+      secret: this.configService.get('JWT_SECRET'),
     });
   }
 }

@@ -25,7 +25,7 @@ export class RolesGuard implements CanActivate {
         secret: process.env.JWT_SECRET,
       });
 
-      return tokenInfo.roles.some(({ role }) => requireRoles.includes(role?.name));
+      return tokenInfo.roles.some((role) => requireRoles.includes(role?.name));
     } catch (e) {
       throw new HttpException(
         {

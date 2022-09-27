@@ -56,7 +56,7 @@ export class UserService {
       const user = await this.prismaService.user.findFirst({
         where: { email, deleted: { in: null } },
         select: {
-          roles: withRoles ? { select: { role: true } } : false,
+          roles: withRoles,
           id: true,
           email: true,
           updatedAt: true,
@@ -79,7 +79,7 @@ export class UserService {
       const user = await this.prismaService.user.findFirst({
         where: { id, deleted: { in: null } },
         select: {
-          roles: withRoles ? { select: { role: true } } : false,
+          roles: withRoles,
           id: true,
           email: true,
           deleted: true,
@@ -88,8 +88,7 @@ export class UserService {
         },
       });
 
-      // @ts-ignore
-      if (user.roles?.some(({ role }) => role?.name === Role.Admin)) {
+      if (user.roles?.some((role) => role?.name === Role.Admin)) {
         delete user.roles;
         return this.errorService.success('Пользователь успешно получен', { user: { ...user, isAdmin: true } });
       }
@@ -104,14 +103,11 @@ export class UserService {
 
   async create(dto) {
     try {
-      const user = await this.prismaService.user.create({
-        data: dto,
-        include: { roles: { select: { role: true } } },
-      });
+      const user = await this.prismaService.user.create({ data: dto, include: { roles: true } });
 
       const { role } = await this.roleService.getByName(Role.User);
       await this.addRole(user.id, role.id);
-      user.roles.push({ role });
+      user.roles.push(role);
 
       return this.errorService.success('Пользователь успешно создан', { user });
     } catch (e) {
@@ -134,9 +130,7 @@ export class UserService {
         throw this.errorService.internal('Нет такого пользователя или роли', 'Ошибка. Нет пользователя или роли');
       }
 
-      await this.prismaService.userRole.create({
-        data: { roleId: role.id, userId: user.id },
-      });
+      await this.prismaService.user.update({ where: { id: user.id }, data: { roles: { connect: { id: roleId } } } });
 
       return this.errorService.success('Роль успешно добавлена');
     } catch (e) {

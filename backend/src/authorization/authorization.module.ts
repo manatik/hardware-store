@@ -7,9 +7,10 @@ import { UserModule } from 'entities/user/user.module';
 import { ErrorModule } from 'common/error/error.module';
 import { JwtModule } from '@nestjs/jwt';
 import { RoleModule } from 'entities/role/role.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [PrismaModule, UserModule, ErrorModule, JwtModule, RoleModule],
+  imports: [PrismaModule, UserModule, ErrorModule, JwtModule, RoleModule, ConfigModule],
   controllers: [AuthorizationController],
   providers: [AuthorizationService, JwtStrategy],
   exports: [],

@@ -15,7 +15,7 @@ model User {
 	email         String      @unique
 	password      String
 	tokens        UserToken[]
-	roles         UserRole[]
+	roles         Role[]
 	createdAt     DateTime    @default(now()) @map("created_at")
 	updatedAt     DateTime?   @map("updated_at")
 	deleted       DateTime?
@@ -37,24 +37,24 @@ model UserToken {
 model Role {
 	id          Int         @id @default(autoincrement())
 	name        String      @unique
-	users       UserRole[]
+	users       User[]
 	createdAt   DateTime    @default(now()) @map("created_at")
 	updatedAt   DateTime?   @map("updated_at")
 
 	@@map("role")
 }
 
-model UserRole {
-	id          Int         @id @default(autoincrement())
-	user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-	userId      Int         @map("user_id")
-	role        Role        @relation(fields: [roleId], references: [id])
-	roleId      Int         @map("role_id")
-	createdAt   DateTime    @map("created_at") @default(now())
-	updatedAt   DateTime?   @map("updated_at")
-
-	@@map("user_role")
-}
+//model UserRole {
+//	id          Int         @id @default(autoincrement())
+//	user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+//	userId      Int         @map("user_id")
+//	role        Role        @relation(fields: [roleId], references: [id])
+//	roleId      Int         @map("role_id")
+//	createdAt   DateTime    @map("created_at") @default(now())
+//	updatedAt   DateTime?   @map("updated_at")
+//
+//	@@map("user_role")
+//}
 
 model Category {
 	id                  Int                 @id @default(autoincrement())
@@ -81,8 +81,8 @@ model Plywood {
 	photos              Json?
 	category            Category                    @relation(fields: [categoryId], references: [id])
 	categoryId          Int                         @map("category_id")
-	formats             PlywoodFormatPlywood[]
-	surfaceTypes        PlywoodSurfaceTypePlywood[]
+	formats             PlywoodFormat[]
+	surfaceTypes        PlywoodSurfaceType[]
 	width               Int
 	class               String
 	densityPlywood      String                      @map("density_plywood")
@@ -100,9 +100,9 @@ model Plywood {
   @@map("plywood")
 }
 
-model FormatPlywood {
+model PlywoodFormat {
   id              Int                     @id @default(autoincrement())
-  plywoods        PlywoodFormatPlywood[]
+  plywoods        Plywood[]
   format          String
   size            String                  @unique
   price           Int
@@ -110,44 +110,44 @@ model FormatPlywood {
   updatedAt       DateTime?               @map("updated_at")
   deleted         DateTime?
 
-  @@map("format_plywood")
+  @@map("plywood_format")
 }
 
-model SurfaceTypePlywood {
+model PlywoodSurfaceType {
   id          Int                             @id @default(autoincrement())
-  plywood     PlywoodSurfaceTypePlywood[]
+  plywood     Plywood[]
   type        String                          @unique
   price       Int
   createdAt   DateTime                        @map("created_at") @default(now())
   updatedAt   DateTime?                       @map("updated_at")
   deleted     DateTime?
 
-  @@map("surface_type_plywood")
+  @@map("plywood_surface_type")
 }
 
-model PlywoodFormatPlywood {
-  id                  Int             @id @default(autoincrement())
-  plywood             Plywood         @relation(fields: [plywoodId], references: [id], onDelete: Cascade)
-  plywoodId           Int             @map("plywood_id")
-  formatPlywood       FormatPlywood   @relation(fields: [formatPlywoodId], references: [id], onDelete: Cascade)
-  formatPlywoodId     Int             @map("format_plywood_id")
-  createdAt           DateTime        @map("created_at") @default(now())
-  updatedAt           DateTime?       @map("updated_at")
-
-  @@map("plywood__format_plywood")
-}
-
-model PlywoodSurfaceTypePlywood {
-  id                      Int                 @id @default(autoincrement())
-  plywood                 Plywood             @relation(fields: [plywoodId], references: [id], onDelete: Cascade)
-  plywoodId               Int                 @map("plywood_id")
-  surfaceTypePlywood      SurfaceTypePlywood  @relation(fields: [surfaceTypePlywoodId], references: [id], onDelete: Cascade)
-  surfaceTypePlywoodId    Int                 @map("surface_type_plywood_id")
-  createdAt               DateTime            @map("created_at") @default(now())
-  updatedAt               DateTime?           @map("updated_at")
-
-  @@map("plywood__surface_type_plywood")
-}
+//model PlywoodFormatPlywood {
+//  id                  Int             @id @default(autoincrement())
+//  plywood             Plywood         @relation(fields: [plywoodId], references: [id], onDelete: Cascade)
+//  plywoodId           Int             @map("plywood_id")
+//  formatPlywood       FormatPlywood   @relation(fields: [formatPlywoodId], references: [id], onDelete: Cascade)
+//  formatPlywoodId     Int             @map("format_plywood_id")
+//  createdAt           DateTime        @map("created_at") @default(now())
+//  updatedAt           DateTime?       @map("updated_at")
+//
+//  @@map("plywood__format_plywood")
+//}
+//
+//model PlywoodSurfaceTypePlywood {
+//  id                      Int                 @id @default(autoincrement())
+//  plywood                 Plywood             @relation(fields: [plywoodId], references: [id], onDelete: Cascade)
+//  plywoodId               Int                 @map("plywood_id")
+//  surfaceTypePlywood      SurfaceTypePlywood  @relation(fields: [surfaceTypePlywoodId], references: [id], onDelete: Cascade)
+//  surfaceTypePlywoodId    Int                 @map("surface_type_plywood_id")
+//  createdAt               DateTime            @map("created_at") @default(now())
+//  updatedAt               DateTime?           @map("updated_at")
+//
+//  @@map("plywood__surface_type_plywood")
+//}
 
 /////////////////////////////////////////////////////////////
 //////////////////  FURNITURE  /////////////////////////////
