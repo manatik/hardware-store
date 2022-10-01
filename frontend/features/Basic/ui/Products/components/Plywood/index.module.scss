@@ -1,0 +1,8 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.plywood {
+    &__title {
+        @include w-container-title;
+    }
+}

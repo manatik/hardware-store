@@ -1,0 +1,53 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.service {
+    &__wrap {
+        @include w-layout;
+        padding: 100px 0;
+    }
+
+    &__title {
+        @include w-layout-title;
+    }
+
+    &__inner {
+        @include w-layout;
+    }
+
+    &__cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 64px 20px;
+
+        @media (max-width: 920px) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 469px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        max-width: 400px;
+
+        &__image {
+           border-radius: 24px;
+            margin-bottom: 20px;
+        }
+
+        &__description {
+            font-family: MuseoSansCyrl500;
+            font-size: 18px;
+            line-height: 21px;
+        }
+
+        &__step {
+            font-family: MuseoSansCyrl500;
+            font-size: 18px;
+            line-height: 21px;
+            color: $colorPrimary;
+        }
+    }
+}

@@ -1,0 +1,38 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.cabinet {
+    &__title {
+        @include w-container-title();
+        margin-bottom: 82px;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 70px;
+    }
+
+    &__left {
+        @include m-typography (20px, 28px);
+        margin-right: 20px;
+        width: 50%;
+
+        & b {
+            @include m-typography (20px, 28px);
+            color: $colorPrimary;
+        }
+    }
+
+    &__right {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+
+        &__item {
+            & img {
+                border-radius: 12px;
+            }
+        }
+    }
+}

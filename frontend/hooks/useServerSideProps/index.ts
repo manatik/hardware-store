@@ -20,9 +20,11 @@ export enum ProjectPage {
   Products,
   Users,
   AdminControl,
-  Index,
 
+  Index,
   Contacts,
+  Service,
+  ProductsPage,
 }
 
 export const useServerSideProps = async (
@@ -34,11 +36,14 @@ export const useServerSideProps = async (
   const { headers } = context.req
   const cookie = headers.cookie ? headers.cookie : ''
   const link = context.resolvedUrl
+  const dark = true
 
   await dispatch(fetchUserInfoAsync(cookie))
 
   if (!getState().app.userInfo?.isAdmin) {
-    return redirectController(pageName)
+    const redirect = redirectController(pageName)
+
+    if (redirect) return redirect
   }
 
   await dispatch(fetchCategoriesAsync())
@@ -84,8 +89,20 @@ export const useServerSideProps = async (
       }
     }
 
+    case ProjectPage.Index: {
+      return { props: { dark: !dark } }
+    }
+
+    case ProjectPage.Service: {
+      return { props: { link, dark } }
+    }
+
+    case ProjectPage.ProductsPage: {
+      return { props: { link, dark } }
+    }
+
     case ProjectPage.Contacts: {
-      return { props: { link } }
+      return { props: { link, dark } }
     }
 
     // eslint-disable-next-line no-fallthrough

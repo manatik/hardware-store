@@ -1,0 +1,24 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.info {
+    display: flex;
+    align-items: center;
+    padding: 80px 0 100px;
+
+    &__left {
+        @include m-typography (20px, 28px);
+        width: 50%;
+
+        & b {
+            @include m-typography (20px, 28px);
+            color: $colorPrimary;
+        }
+    }
+
+    &__right {
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
+    }
+}

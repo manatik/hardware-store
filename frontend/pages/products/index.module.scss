@@ -1,0 +1,14 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.products {
+    padding: 100px 0;
+
+    &__inner {
+        @include w-layout;
+    }
+
+    &__title {
+        @include w-layout-title;
+    }
+}

@@ -3,22 +3,26 @@
 
 .topline {
     @include w-layout;
-    position: relative;
+
+    &__wrap {
+        position: relative;
+    }
 
     &Dark {
         background-color: $colorSecondary;
     }
 
     &__inner {
-        position: absolute;
-        z-index: 3;
         width: 100%;
         height: 85px;
         display: flex;
         justify-content: space-between;
     }
 
-    &__absolute {
+    &Absolute {
+        @include w-layout;
+        position: absolute;
+        z-index: 3;
     }
 
     &__left {

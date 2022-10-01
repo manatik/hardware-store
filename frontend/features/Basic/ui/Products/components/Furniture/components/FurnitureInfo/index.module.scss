@@ -1,0 +1,37 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    padding: 80px 0 100px;
+
+    &__title {
+        @include w-container-title();
+        margin-bottom: 40px;
+    }
+
+    &__left {
+        margin-right: 20px;
+    }
+
+    &__right {
+        width: 30%;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
+
+        &__title {
+            @include m-typography(28px, 40px, 700);
+            color: $colorPrimary;
+            margin-bottom: 20px;
+        }
+
+        &__text {
+            @include m-typography(16px, 22px, 300);
+        }
+    }
+}

@@ -19,6 +19,28 @@
   }
 }
 
+@mixin w-layout-title {
+  font-family: MuseoSansCyrl700;
+  font-size: 75px;
+  line-height: 77px;
+  margin-bottom: 70px;
+  color: $colorPrimary;
+}
+
+@mixin w-container-title {
+  font-family: MuseoSansCyrl700;
+  font-size: 64px;
+  line-height: 100%;
+  margin-bottom: 70px;
+  color: $colorPrimary;
+}
+
+@mixin m-typography($size: 16px, $lineHeight: 20px, $font: 300) {
+  font-family: MuseoSansCyrl + $font;
+  font-size: $size;
+  line-height: $lineHeight;
+}
+
 @mixin w-container {
   margin: 0 auto;
   max-width: 1240px;

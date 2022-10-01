@@ -1,27 +1,36 @@
 import React, { FC } from 'react'
+import { Children } from '@models/Props/props'
 import Topline from '@features/Basic/common/Topline'
 import Footer from '@features/Basic/common/Footer'
-import { Children } from '@models/Props/props'
+
+import styles from './index.module.scss'
 
 interface LayoutProps {
   children: Children;
+  absolute?: boolean;
   dark?: boolean;
   link?: string;
 }
 
 const Layout: FC<LayoutProps> = ({
   children,
+  absolute = true,
   dark = false,
   link,
 }) => {
   return (
     <>
-      <Topline
-        dark={dark}
-        link={link}
-      />
-      {children}
-      <Footer />
+      <div className={!absolute ? styles.layout : ''}>
+        <Topline
+          absolute={absolute}
+          dark={dark}
+          link={link}
+        />
+        <main className={styles.layout__content}>
+          {children}
+        </main>
+        <Footer />
+      </div>
     </>
   )
 }

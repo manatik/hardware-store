@@ -1,0 +1,42 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.calculator {
+    margin-bottom: 100px;
+
+    &__title {
+        @include w-container-title;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__left {
+        width: calc(50% - 60px);
+    }
+
+    &__right {
+        width: calc(50% - 60px);
+    }
+
+    &__select {
+        &__item {
+            margin-bottom: 35px;
+
+            &:not(:last-child) {
+                margin-bottom: 35px;
+            }
+        }
+
+        &__title {
+            @include m-typography(20px, 28px, 700);
+
+            & b {
+                @include m-typography(15px, 21px, 500);
+                color: #C33B3B;
+            }
+        }
+    }
+}

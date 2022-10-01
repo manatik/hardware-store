@@ -1,0 +1,40 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.slider {
+    margin-bottom: 100px;
+
+    &__slide {
+        max-height: 430px;
+
+        img {
+            object-fit: cover;
+            border-radius: 30px;
+        }
+    }
+
+    &__pagination {
+        position: unset;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        transition: 300ms opacity;
+        margin-top: 10px;
+
+        &__bullet {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba($colorPrimary, .4);
+
+            &:not(:last-child) {
+                margin-right: 4px;
+            }
+
+            &Active {
+                background-color: rgba($colorPrimary, 1);
+            }
+        }
+    }
+}

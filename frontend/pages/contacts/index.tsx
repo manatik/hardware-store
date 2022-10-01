@@ -9,10 +9,13 @@ import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
 import styles from './index.module.scss'
 
-const Contacts: NextPage<{ link: string}> = ({ link }) => {
+const Contacts: NextPage<{ link: string, dark: boolean }> = ({
+  link, dark,
+}) => {
   return (
     <Layout
-      dark={true}
+      dark={dark}
+      absolute={false}
       link={link}
     >
       <div className={styles.contacts}>

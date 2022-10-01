@@ -3,13 +3,13 @@ import type { NextPage } from 'next'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
 import Layout from '@features/Basic/common/Layout'
-import HomeSlider from '@features/Basic/ui/index/components/Slider'
-import HomeInfo from '@features/Basic/ui/index/components/Info'
+import HomeSlider from '@features/Basic/ui/Home/components/Slider'
+import HomeInfo from '@features/Basic/ui/Home/components/Info'
 
-const Home: NextPage = (): ReactElement => {
+const Home: NextPage<{ dark: boolean }> = ({ dark }): ReactElement => {
   return (
     <>
-      <Layout>
+      <Layout dark={dark}>
         <HomeSlider />
         <HomeInfo />
       </Layout>

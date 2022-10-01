@@ -2,19 +2,14 @@
 @import "@public/styles/variables.scss";
 
 .contacts {
-    background-color: $colorSecondary;
-    padding: 185px 0 100px 0;
+    padding: 100px 0;
 
     &__inner {
         @include w-layout;
     }
 
     &__title {
-        font-family: MuseoSansCyrl700;
-        font-size: 75px;
-        line-height: 77px;
-        margin-bottom: 70px;
-        color: $colorPrimary;
+        @include w-layout-title;
     }
 
     &__map {

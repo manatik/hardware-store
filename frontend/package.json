@@ -14,6 +14,7 @@
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "formik": "^2.2.9",
+    "locomotive-scroll": "^4.1.4",
     "next": "12.2.3",
     "next-redux-wrapper": "^7.0.5",
     "node-sass": "^7.0.1",
@@ -28,6 +29,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
+    "sharp": "^0.31.1",
     "swiper": "^8.4.2",
     "yup": "^0.32.11"
   },

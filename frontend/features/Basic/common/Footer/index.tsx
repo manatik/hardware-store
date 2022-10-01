@@ -10,7 +10,7 @@ import styles from './index.module.scss'
 
 const Footer = () => {
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles.footer__inner}>
         <div className={styles.footer__top}>
           <div className={styles.footer__links}>
@@ -43,7 +43,7 @@ const Footer = () => {
           Plywood Market. Copyright ©️ 2022
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 

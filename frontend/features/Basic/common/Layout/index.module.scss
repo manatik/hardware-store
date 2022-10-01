@@ -1,0 +1,13 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__content {
+        background-color: $colorSecondary;
+        flex: 1 0 auto;
+    }
+}

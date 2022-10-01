@@ -1,0 +1,32 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.designer {
+    margin-top: 100px;
+
+    &__title {
+        @include w-container-title;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 70px 0;
+    }
+
+    &__left {
+        margin-right: 20px;
+    }
+
+    &__right {
+        @include m-typography (20px, 28px);
+        margin-right: 20px;
+        width: 50%;
+
+        & b {
+            @include m-typography (20px, 28px);
+            color: $colorPrimary;
+        }
+    }
+}

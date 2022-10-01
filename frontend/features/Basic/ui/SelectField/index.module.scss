@@ -1,0 +1,61 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.selectField {
+    @include m-typography(16px, 22px, 300);
+    display: block;
+    color: $colorBlack;
+    padding: 13px 25px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid $colorPrimary;
+    border-radius: 24px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: $colorSecondary;
+    background-image: url('../../../../assets/arrow.svg');
+    background-repeat: no-repeat, repeat;
+    background-position: right 25px top 50%, 0 0;
+    background-size: 16px auto, 100%;
+    margin-top: 8px;
+    cursor: pointer;
+
+    &:focus {
+        border: 1px solid $colorPrimary;
+        outline: none;
+    }
+    &::-ms-expand {
+        display: none;
+    }
+    & option {
+        font-weight:normal;
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 22px;
+        text-transform: inherit;
+        color: #1c1c1c;
+        margin-bottom: 8px;
+    }
+
+    &Error {
+        margin-top: 4px;
+        color: #ff3f3f;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 16px;
+        text-transform: inherit;
+    }
+
+    &.error {
+        border-color: #ff3f3f;
+        background-color: rgba(255, 63, 63, .09);
+    }
+}

@@ -1,0 +1,27 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.production {
+    margin-top: 100px;
+
+    &__title {
+        @include w-container-title;
+    }
+
+    &__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 30px 20px;
+    }
+
+    &__text {
+        @include m-typography (20px, 28px);
+        margin: auto;
+
+        & b {
+            @include m-typography (20px, 28px);
+            color: $colorPrimary;
+        }
+    }
+}

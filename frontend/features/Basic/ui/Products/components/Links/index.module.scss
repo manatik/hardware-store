@@ -1,0 +1,25 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.links {
+    &__item {
+        font-family: MuseoSansCyrl500;
+        font-size: 16px;
+        line-height: 140%;
+        padding: 9px 16px 10px;
+        color: #636161;
+        background-color: $colorSecondary;
+        border: 2px solid $colorPrimary;
+        border-radius: 25px;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 15px;
+        }
+
+        &Active {
+            color: $colorOnPrimary;
+            background-color: $colorPrimary;
+        }
+    }
+}
