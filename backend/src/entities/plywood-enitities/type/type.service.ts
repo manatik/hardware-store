@@ -3,12 +3,12 @@ import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 
 @Injectable()
-export class CoatingDensityService {
+export class TypeService {
   constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
   async getAll() {
     try {
-      const allItems = await this.prismaService.plywoodCoatingDensity.findMany();
+      const allItems = await this.prismaService.plywoodType.findMany();
       return this.errorService.success('Успешно', { data: allItems });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -17,7 +17,7 @@ export class CoatingDensityService {
 
   async getById(id: number) {
     try {
-      const item = await this.prismaService.plywoodCoatingDensity.findFirst({ where: { id } });
+      const item = await this.prismaService.plywoodType.findFirst({ where: { id } });
       return this.errorService.success('Успешно', { data: item });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -26,7 +26,7 @@ export class CoatingDensityService {
 
   async add(dto) {
     try {
-      const created = await this.prismaService.plywoodCoatingDensity.create({ data: dto });
+      const created = await this.prismaService.plywoodType.create({ data: dto });
       return this.errorService.success('Успешно', { data: created });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -35,7 +35,7 @@ export class CoatingDensityService {
 
   async update(id: number, dto) {
     try {
-      const updated = await this.prismaService.plywoodCoatingDensity.update({ where: { id }, data: dto });
+      const updated = await this.prismaService.plywoodType.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -44,7 +44,7 @@ export class CoatingDensityService {
 
   async remove(id: number) {
     try {
-      const removed = await this.prismaService.plywoodCoatingDensity.delete({ where: { id } });
+      const removed = await this.prismaService.plywoodType.delete({ where: { id } });
       return this.errorService.success('Успешно', { data: removed });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);

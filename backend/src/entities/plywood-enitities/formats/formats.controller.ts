@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
-import { FormatsService } from 'entities/plywood-enitities/plywood-formats/formats.service';
-import { CreatePlywoodFormatsDto } from 'entities/plywood-enitities/plywood-formats/dto/create-plywood-formats.dto';
+import { FormatsService } from 'entities/plywood-enitities/formats/formats.service';
+import { CreatePlywoodFormatsDto } from 'entities/plywood-enitities/formats/dto/create-plywood-formats.dto';
 import { Public } from 'authorization/decorators/public.decorator';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
-import { PlywoodFormatsAllQuery } from 'entities/plywood-enitities/plywood-formats/dto/plywood-formats-all.query';
+import { PlywoodFormatsAllQuery } from 'entities/plywood-enitities/formats/dto/plywood-formats-all.query';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_FORMATS)

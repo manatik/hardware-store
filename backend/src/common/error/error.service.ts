@@ -3,8 +3,8 @@ import { ISuccessResponseType } from 'types/ISuccessResponse.type';
 
 @Injectable()
 export class ErrorService {
-  badRequest(message: string) {
-    return new HttpException({ message, error: true, success: false }, HttpStatus.BAD_REQUEST);
+  badRequest(message: string, error?: string) {
+    return new HttpException({ message, error: error || true, success: false }, HttpStatus.BAD_REQUEST);
   }
 
   success<T>(message: string, data?: T): ISuccessResponseType & T {

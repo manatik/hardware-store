@@ -3,8 +3,8 @@ import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { Public } from 'authorization/decorators/public.decorator';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
-import { CreatePlywoodFormatsDto } from 'entities/plywood-enitities/plywood-formats/dto/create-plywood-formats.dto';
-import { TypeService } from 'entities/plywood-enitities/plywood-type/type.service';
+import { TypeService } from 'entities/plywood-enitities/type/type.service';
+import { CreateTypeDto } from './dto/create-type.dto';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_TYPE)
 export class TypeController {
@@ -24,7 +24,7 @@ export class TypeController {
 
   @Roles(Role.Admin)
   @Post(ENDPOINTS.PLYWOOD_TYPE.CREATE)
-  async add(@Body() dto: CreatePlywoodFormatsDto) {
+  async add(@Body() dto: CreateTypeDto) {
     return await this.typeService.add(dto);
   }
 

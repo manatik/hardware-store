@@ -1,7 +1,10 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateFurnitureDto {
+  @IsOptional()
+  @IsNumber()
+  features: number[];
+
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -12,6 +15,17 @@ export class CreateFurnitureDto {
 
   @IsNotEmpty()
   @IsNumber()
-  @Transform(({ value }) => Number(value))
   categoryId: number;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  available: boolean;
+
+  @IsNotEmpty()
+  @IsNumber()
+  price: number;
+
+  @IsNotEmpty()
+  @IsString()
+  description: string;
 }

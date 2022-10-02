@@ -5,36 +5,42 @@ import { RegisterDto } from './dto/register.dto';
 import { Public } from './decorators/public.decorator';
 import { ErrorService } from 'common/error/error.service';
 import { Response } from 'express';
+import { ENDPOINTS, GLOBAL_PREFIXES } from '../common/consts/endpoints.consts';
 
-@Controller('auth')
+enum TOKENS {
+  REFRESH = 'r_t',
+  ACCESS = 'a_t',
+}
+
+@Controller(GLOBAL_PREFIXES.AUTH)
 export class AuthorizationController {
   constructor(private readonly authService: AuthorizationService, private readonly errorService: ErrorService) {}
 
   @Public()
-  @Post('/login')
+  @Post(ENDPOINTS.AUTH.LOGIN)
   async login(@Body() dto: LoginDto, @Res() res: Response) {
     const { refreshToken, accessToken } = await this.authService.login(dto);
-    res.cookie('r_t', refreshToken, { httpOnly: true });
-    res.cookie('a_t', accessToken, { httpOnly: true });
+    res.cookie(TOKENS.REFRESH, refreshToken, { httpOnly: true });
+    res.cookie(TOKENS.ACCESS, accessToken, { httpOnly: true });
     res.json(this.errorService.success('Успешный вход', { accessToken }));
   }
 
   @Public()
-  @Post('/register')
+  @Post(ENDPOINTS.AUTH.REGISTER)
   async register(@Body() dto: RegisterDto, @Res() res: Response) {
     const { refreshToken, accessToken } = await this.authService.register(dto);
-    res.cookie('r_t', refreshToken, { httpOnly: true });
-    res.cookie('a_t', accessToken, { httpOnly: true });
+    res.cookie(TOKENS.REFRESH, refreshToken, { httpOnly: true });
+    res.cookie(TOKENS.ACCESS, accessToken, { httpOnly: true });
     res.json(this.errorService.success('Успешная регистрация', { accessToken }));
   }
 
   @Public()
-  @Post('/refresh')
+  @Post(ENDPOINTS.AUTH.REFRESH)
   async refresh(@Body() cookies, @Res() res: Response) {
     const tokens = await this.authService.refresh(cookies);
 
     if (tokens.refreshToken) {
-      res.cookie('r_t', tokens.refreshToken, { httpOnly: true });
+      res.cookie(TOKENS.REFRESH, tokens.refreshToken, { httpOnly: true });
     }
 
     res.json(this.errorService.success('Токены успешно обновлены', { ...tokens }));

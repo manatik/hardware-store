@@ -78,14 +78,7 @@ export class UserService {
 
       const user = await this.prismaService.user.findFirst({
         where: { id, deleted: { in: null } },
-        select: {
-          roles: withRoles,
-          id: true,
-          email: true,
-          deleted: true,
-          createdAt: true,
-          updatedAt: true,
-        },
+        include: { roles: withRoles },
       });
 
       if (user.roles?.some((role) => role?.name === Role.Admin)) {
@@ -94,8 +87,9 @@ export class UserService {
       }
 
       delete user.roles;
+      delete user.password;
 
-      return this.errorService.success('Пользователь успешно получен', { user });
+      return this.errorService.success('Пользователь успешно получен', { ...user, isAdmin: false });
     } catch (e) {
       throw this.errorService.internal('Ошибка получения пользователя', e.message);
     }
@@ -118,24 +112,27 @@ export class UserService {
 
   async addRole(userId: number, roleId: number) {
     try {
-      const user = await this.prismaService.user.findUnique({
-        where: { id: userId },
-      });
+      await this.checkUserAndRole(userId, roleId);
 
-      const role = await this.prismaService.role.findUnique({
-        where: { id: roleId },
-      });
-
-      if (!user || !role) {
-        throw this.errorService.internal('Нет такого пользователя или роли', 'Ошибка. Нет пользователя или роли');
-      }
-
-      await this.prismaService.user.update({ where: { id: user.id }, data: { roles: { connect: { id: roleId } } } });
+      await this.prismaService.user.update({ where: { id: userId }, data: { roles: { connect: { id: roleId } } } });
 
       return this.errorService.success('Роль успешно добавлена');
     } catch (e) {
       console.error('ADD_ROLE_ERROR ', e);
-      throw this.errorService.internal('Ошибка добавления роли пользователю', e.message);
+      throw this.errorService.badRequest('Ошибка добавления роли пользователю', e.message);
+    }
+  }
+
+  async removeRole(userId: number, roleId: number) {
+    try {
+      await this.checkUserAndRole(userId, roleId);
+
+      await this.prismaService.user.update({ where: { id: userId }, data: { roles: { disconnect: { id: roleId } } } });
+
+      return this.errorService.success('Роль успешно удалена');
+    } catch (e) {
+      console.error('REMOVE_ROLE_ERROR ', e);
+      throw this.errorService.badRequest('Ошибка добавления роли пользователю', e.message);
     }
   }
 
@@ -160,6 +157,20 @@ export class UserService {
       return this.errorService.success('Пользователь успешно удалён', { user });
     } catch (e) {
       throw this.errorService.internal('Ошибка удаления пользователя', e.message);
+    }
+  }
+
+  private async checkUserAndRole(userId: number, roleId: number) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+
+    const role = await this.prismaService.role.findUnique({
+      where: { id: roleId },
+    });
+
+    if (!user || !role) {
+      throw this.errorService.internal('Нет такого пользователя или роли', 'Ошибка. Нет пользователя или роли');
     }
   }
 }

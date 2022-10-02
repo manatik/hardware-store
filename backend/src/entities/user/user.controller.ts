@@ -6,8 +6,9 @@ import { Request } from 'express';
 import { UserInfoQuery } from 'entities/user/dto/user-info.query';
 import { UserAllQuery } from 'entities/user/dto/user-all.query';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { UserRoleDto } from './dto/user-role.dto';
 
-@Roles(Role.Admin)
+// @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.USER)
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -28,9 +29,20 @@ export class UserController {
     return await this.userService.create(dto);
   }
 
+  @Patch(ENDPOINTS.USER.ADD_ROLE)
+  async addRoleToUser(@Req() req: Request & { user: any }, @Body() dto: UserRoleDto) {
+    console.log(req.user, dto);
+    return await this.userService.addRole(req.user.id, dto.roleId);
+  }
+
+  @Patch(ENDPOINTS.USER.REMOVE_ROLE)
+  async removeRoleToUser(@Req() req: Request & { user: any }, @Body() dto: UserRoleDto) {
+    return await this.userService.removeRole(req.user.id, dto.roleId);
+  }
+
   @Patch(ENDPOINTS.USER.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
-    return await this.userService.update(id, dto);
+  async update(@Req() req: Request & { user: any }, @Body() dto) {
+    return await this.userService.update(req.user.id, dto);
   }
 
   @Delete(ENDPOINTS.USER.DELETE)

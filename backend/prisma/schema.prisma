@@ -18,10 +18,10 @@ model Category {
 	furnitureProducts   Furniture[]
 	houseProducts       House[]
 	createdAt           DateTime    @map("created_at") @default(now())
-  updatedAt           DateTime?   @map("updated_at")
-  deleted             DateTime?
+    updatedAt           DateTime?   @map("updated_at")
+    deleted             DateTime?
 
-  @@map("category")
+    @@map("category")
 }
 
 /////////////////////////////////////////////////////////////
@@ -81,6 +81,7 @@ model Plywood {
 	width               Int
 	available           Boolean
 	price               Int
+	description         String
 	createdAt           DateTime                  @map("created_at") @default(now())
   updatedAt           DateTime?                 @map("updated_at")
   deleted             DateTime?
@@ -152,11 +153,26 @@ model Furniture {
   photos      Json?
   category    Category        @relation(fields: [categoryId], references: [id])
   categoryId  Int             @map("category_id")
+  available   Boolean
+  price       Int
+  features    FurnitureFeature[]
+  description String
   createdAt   DateTime        @map("created_at") @default(now())
   updatedAt   DateTime?       @map("updated_at")
   deleted     DateTime?
 
   @@map("furniture")
+}
+
+model FurnitureFeature {
+  id          Int             @id @default(autoincrement())
+  furniture   Furniture[]
+  name        String          @unique
+  price       Int
+  createdAt   DateTime        @map("created_at") @default(now())
+  updatedAt   DateTime?       @map("updated_at")
+
+  @@map("furniture_feauture")
 }
 
 /////////////////////////////////////////////////////////////

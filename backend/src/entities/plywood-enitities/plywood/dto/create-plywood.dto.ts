@@ -3,11 +3,11 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-val
 export class CreatePlywoodDto {
   @IsOptional()
   @IsNumber()
-  formatIds: number[];
+  formats: number[];
 
   @IsOptional()
   @IsNumber()
-  surfaceIds: number[];
+  surfaceTypes: number[];
 
   @IsOptional()
   @IsNumber()
@@ -40,6 +40,10 @@ export class CreatePlywoodDto {
   @IsNotEmpty()
   @IsBoolean()
   available: boolean;
+
+  @IsNotEmpty()
+  @IsString()
+  description: string;
 
   @IsNotEmpty()
   @IsNumber()
