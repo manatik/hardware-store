@@ -7,6 +7,7 @@ import { fetchUserInfoAsync } from '@store/app/appSlice'
 import { redirectController } from '@utils/redirectController'
 import { fetchCategoriesAsync } from '@store/category/categorySlice'
 import { fetchFormatsAsync } from '@store/format/formatSlice'
+import { setCookieHeader } from '@services/http.service'
 
 /**
  * Список шаблонов страниц
@@ -35,8 +36,8 @@ export const useServerSideProps = async (
   const { dispatch, getState } = store
   const { headers } = context.req
   const cookie = headers.cookie ? headers.cookie : ''
-  const link = context.resolvedUrl
-  const dark = true
+
+  setCookieHeader(cookie)
 
   await dispatch(fetchUserInfoAsync(cookie))
 
@@ -87,22 +88,6 @@ export const useServerSideProps = async (
 
         return { props: { users: null } }
       }
-    }
-
-    case ProjectPage.Index: {
-      return { props: { dark: !dark } }
-    }
-
-    case ProjectPage.Service: {
-      return { props: { link, dark } }
-    }
-
-    case ProjectPage.ProductsPage: {
-      return { props: { link, dark } }
-    }
-
-    case ProjectPage.Contacts: {
-      return { props: { link, dark } }
     }
 
     // eslint-disable-next-line no-fallthrough
