@@ -4,6 +4,8 @@ import React, {
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Opposite from '@features/Basic/ui/Opposite'
 
 import vkLight from 'assets/layout/vk.svg'
 import tgLight from 'assets/layout/tg.svg'
@@ -12,13 +14,12 @@ import vkDark from 'assets/layout/vk-dark.svg'
 import tgDark from 'assets/layout/tg-dark.svg'
 import wuDark from 'assets/layout/wu-dark.svg'
 import basket from 'assets/layout/fa-shopping-bag.svg'
-import Opposite from '@features/Basic/ui/Opposite'
+
 import styles from './index.module.scss'
 
 interface ToplineProps {
   dark: boolean;
   absolute: boolean;
-  link?: string;
 }
 
 enum ToplineLinks {
@@ -31,10 +32,10 @@ enum ToplineLinks {
 
 const Topline: FC<ToplineProps> = ({
   dark,
-  link,
   absolute,
 }): ReactElement => {
   const [toggle, setToggle] = useState<boolean>(false)
+  const { pathname } = useRouter()
 
   const toggleModal = (): void => {
     setToggle(!toggle)
@@ -70,7 +71,7 @@ const Topline: FC<ToplineProps> = ({
              <Link href={ToplineLinks.Products}>
               <a
                 className={cn(styles.topline__link, {
-                  [styles.topline__leftActive]: link === ToplineLinks.Products,
+                  [styles.topline__leftActive]: pathname === ToplineLinks.Products,
                   [styles.topline__linkDark]: dark,
                 })}
               >Продукты</a>
@@ -78,7 +79,7 @@ const Topline: FC<ToplineProps> = ({
              <Link href={ToplineLinks.Service}>
               <a
                 className={cn(styles.topline__link, {
-                  [styles.topline__leftActive]: link === ToplineLinks.Service,
+                  [styles.topline__leftActive]: pathname === ToplineLinks.Service,
                   [styles.topline__linkDark]: dark,
                 })}
               >Сервис</a>
@@ -86,7 +87,7 @@ const Topline: FC<ToplineProps> = ({
              <Link href={ToplineLinks.Contacts}>
               <a
                 className={cn(styles.topline__link, {
-                  [styles.topline__leftActive]: link === ToplineLinks.Contacts,
+                  [styles.topline__leftActive]: pathname === ToplineLinks.Contacts,
                   [styles.topline__linkDark]: dark,
                 })}
               >Контакты</a>
@@ -146,7 +147,7 @@ const Topline: FC<ToplineProps> = ({
                 className={styles.topline__call}
                 onClick={toggleModal}
               >Заказать звонок</button>
-              <Link href={`${ToplineLinks.Basket}?redirectUrl=${link || ''}`}>
+              <Link href={`${ToplineLinks.Basket}?redirectUrl=${pathname || ''}`}>
                 <a className={styles.topline__basket}>
                   <Image src={basket} />
                   <span className={styles.topline__basket__point}>3</span>

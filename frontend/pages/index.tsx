@@ -6,10 +6,10 @@ import Layout from '@features/Basic/common/Layout'
 import HomeSlider from '@features/Basic/ui/Home/components/Slider'
 import HomeInfo from '@features/Basic/ui/Home/components/Info'
 
-const Home: NextPage<{ dark: boolean }> = ({ dark }): ReactElement => {
+const Home: NextPage = (): ReactElement => {
   return (
     <>
-      <Layout dark={dark}>
+      <Layout dark={false}>
         <HomeSlider />
         <HomeInfo />
       </Layout>

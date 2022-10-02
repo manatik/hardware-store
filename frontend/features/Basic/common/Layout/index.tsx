@@ -9,14 +9,12 @@ interface LayoutProps {
   children: Children;
   absolute?: boolean;
   dark?: boolean;
-  link?: string;
 }
 
 const Layout: FC<LayoutProps> = ({
   children,
   absolute = true,
   dark = false,
-  link,
 }) => {
   return (
     <>
@@ -24,7 +22,6 @@ const Layout: FC<LayoutProps> = ({
         <Topline
           absolute={absolute}
           dark={dark}
-          link={link}
         />
         <main className={styles.layout__content}>
           {children}

@@ -7,14 +7,11 @@ import ServiceFeature from '@features/Basic/ui/Service'
 
 import styles from '@features/Basic/ui/Service/index.module.scss'
 
-const Service: NextPage<{ link: string, dark: boolean }> = ({
-  link, dark,
-}) => {
+const Service: NextPage = () => {
   return (
     <Layout
-      dark={dark}
+      dark={true}
       absolute={false}
-      link={link}
     >
       <div className={styles.service__wrap}>
         <div className={styles.service__title}>Сервис</div>

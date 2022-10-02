@@ -7,14 +7,11 @@ import ProductsFeature from '@features/Basic/ui/Products'
 
 import styles from './index.module.scss'
 
-const Products: NextPage<{ link: string, dark: boolean }> = ({
-  link, dark,
-}) => {
+const Products: NextPage = () => {
   return (
     <Layout
-      dark={dark}
+      dark={true}
       absolute={false}
-      link={link}
     >
       <div className={styles.products}>
         <div className={styles.products__inner}>
