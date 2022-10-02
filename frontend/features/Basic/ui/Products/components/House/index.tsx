@@ -3,6 +3,9 @@ import { houseLinks, plywood, ProductLinks } from '@features/Basic/ui/Products/m
 import Slider from '@features/Basic/ui/Products/components/Slider'
 import Links from '@features/Basic/ui/Products/components/Links'
 import HouseInfo from '@features/Basic/ui/Products/components/House/components/HouseInfo'
+import HouseOfferCard from '@features/Basic/ui/Products/components/House/components/HouseOfferCard'
+import HouseCabinet from '@features/Basic/ui/Products/components/House/components/HouseCabinet'
+import HouseEquipment from '@features/Basic/ui/Products/components/House/components/HouseEquipment'
 
 const House = () => {
   return (
@@ -14,6 +17,9 @@ const House = () => {
       />
 
       <HouseInfo />
+      <HouseOfferCard />
+      <HouseCabinet />
+      <HouseEquipment />
     </>
   )
 }

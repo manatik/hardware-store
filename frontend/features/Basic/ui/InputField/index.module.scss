@@ -1,0 +1,102 @@
+@import "@public/styles/variables.scss";
+
+.input__field {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    height: 48px;
+    padding: 14px 27px;
+    border: 1px solid $colorPrimary;
+    border-radius: 19px;
+
+    &__wrapper {
+        &:not(:last-child) {
+            margin-bottom: 16px;
+        }
+    }
+
+    &Label {
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 22px;
+        text-transform: inherit;
+        color: #1c1c1c;
+    }
+
+    &Control {
+        flex-grow: 1;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: none;
+        background-color: transparent;
+        color: #1c1c1c;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 18px;
+        text-transform: inherit;
+
+        &::-webkit-input-placeholder {
+            color: #1c1c1c;
+        }
+
+        &::-moz-placeholder {
+            color: #1c1c1c;
+        }
+
+        &:-moz-placeholder {
+            color: #1c1c1c;
+        }
+        &:-ms-input-placeholder {
+            color: #1c1c1c;
+        }
+
+        &[type="password"] {
+            letter-spacing: 1px;
+        }
+
+        &[type="search"] {
+            &::-webkit-search-decoration,
+            &::-webkit-search-cancel-button,
+            &::-webkit-search-results-button,
+            &::-webkit-search-results-decoration {
+                -webkit-appearance:none;
+            }
+        }
+    }
+
+    &Error {
+        margin-top: 4px;
+        color: #ff3f3f;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 16px;
+        text-transform: inherit;
+    }
+
+    &.lg {
+        height: 48px;
+    }
+
+    &.md {
+        height: 40px;
+    }
+
+    &.sm {
+        height: 32px;
+    }
+
+    &.error {
+        border-color: #ff3f3f;
+        background-color: rgba(255, 63, 63, .09);
+    }
+
+    &.disable {
+        opacity: $opacityHover;
+    }
+}

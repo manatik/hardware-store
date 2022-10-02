@@ -1,0 +1,120 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.equipment {
+    &__title {
+        @include w-container-title;
+        margin-bottom: 70px;
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 20px;
+
+        @media (max-width: 1100px){
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @media (max-width: 860px){
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 640px){
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 30px;
+        background-color: $colorOnPrimary;
+        border-radius: 10px;
+
+        &__top {
+
+        }
+
+        &__title {
+            @include m-typography(28px, 40px, 700);
+            color: $colorPrimary;
+            margin-bottom: 20px;
+        }
+
+        &__body {
+            margin: 0;
+            padding: 0;
+
+            & li {
+                @include m-typography(16px, 22px, 300);
+                list-style-type: none;
+                margin-bottom: 9px;
+            }
+        }
+
+        &__button {
+            padding: 17px 32px;
+            border: 1px solid $colorPrimary;
+            border-radius: 10px;
+            color: $colorPrimary;
+            text-align: center;
+            cursor: pointer;
+
+            @media (hover: hover) and (pointer: fine){
+                &:hover {
+                    opacity: $opacityHover;
+                }
+            }
+        }
+    }
+
+    &__modal {
+        position: relative;
+        max-width: 410px;
+        padding: 72px 42px;
+        border-radius: 16px;
+        background-color: $colorOnPrimary;
+
+        &__close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            cursor: pointer;
+        }
+
+        &__title {
+            @include m-typography(28px, 40px, 700);
+            color: $colorPrimary;
+            margin-bottom: 15px;
+        }
+
+        &__info {
+            @include m-typography(16px, 22px, 300);
+            margin-bottom: 15px;
+
+            & b {
+                @include m-typography(16px, 22px, 300);
+                color: $colorPrimary;
+            }
+        }
+
+        &__button {
+            @include m-typography(16px, 22px, 500);
+            border-radius: 10px;
+            background-color: $colorPrimary;
+            color: $colorOnPrimary;
+            text-align: center;
+            padding: 17px;
+            width: 100%;
+            cursor: pointer;
+
+            @media (hover: hover) and (pointer: fine){
+                &:hover {
+                    opacity: $opacityHover;
+                }
+            }
+        }
+    }
+}

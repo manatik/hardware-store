@@ -224,3 +224,74 @@
     }
   }
 }
+
+@mixin m-offer-card {
+  display: flex;
+
+  &__left {
+    @include m-typography(20px, 28px, 300);
+    color: $colorOnPrimary;
+    padding: 76px 48px 76px 60px;
+    border-radius: 26px 0 0 26px;
+    background-color: $colorPrimary;
+    width: 50%;
+
+    & a {
+      color: $colorOnPrimary;
+      border-bottom: 1px solid $colorOnPrimary;
+    }
+
+    & b {
+      @include m-typography(20px, 28px, 500);
+    }
+  }
+
+  &__right {
+    position: relative;
+    width: 50%;
+    border-radius: 0 26px 26px 0;
+    background-color: $colorPrimary;
+
+    & img {
+      border-radius: 0 26px 26px 0;
+      object-fit: cover;
+    }
+  }
+}
+
+@mixin m-card-cabinet {
+  &__title {
+    @include w-container-title();
+    margin-bottom: 82px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 70px;
+  }
+
+  &__left {
+    @include m-typography (20px, 28px);
+    margin-right: 20px;
+    width: 50%;
+
+    & b {
+      @include m-typography (20px, 28px);
+      color: $colorPrimary;
+    }
+  }
+
+  &__right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    &__item {
+      & img {
+        border-radius: 12px;
+      }
+    }
+  }
+}

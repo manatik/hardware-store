@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import cn from 'classnames'
 import Plywood from '@features/Basic/ui/Products/components/Plywood'
 import Furniture from '@features/Basic/ui/Products/components/Furniture'
 import House from '@features/Basic/ui/Products/components/House'
+import { getCookie, setCookie } from 'cookies-next'
+
 import styles from './index.module.scss'
 
 enum Blocks {
@@ -14,6 +16,7 @@ enum Blocks {
 
 const Products = () => {
   const [product, setProduct] = useState<Blocks>(Blocks.Plywood)
+  const blockActive = getCookie('ProductBlock')
 
   const blocks: Record<Blocks, () => JSX.Element> = {
     [Blocks.Plywood]: Plywood,
@@ -21,9 +24,16 @@ const Products = () => {
     [Blocks.House]: House,
   }
 
-  const toggleProduct = (type: Blocks): void => setProduct(type)
+  const toggleProduct = (type: Blocks): void => {
+    setProduct(type)
+    setCookie('ProductBlock', type)
+  }
 
   const CurrentComponent = blocks[product]
+
+  useEffect(() => {
+    if (blockActive) setProduct(blockActive as Blocks)
+  }, [blockActive])
 
   return (
     <div className={styles.products}>
