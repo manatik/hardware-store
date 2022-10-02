@@ -5,9 +5,10 @@ import { FormatsModule } from 'entities/plywood-enitities/formats/formats.module
 import { SortModule } from 'entities/plywood-enitities/sort/sort.module';
 import { SurfaceModule } from 'entities/plywood-enitities/surface/surface.module';
 import { TypeModule } from 'entities/plywood-enitities/type/type.module';
+import { FeatureModule } from './feature/feature.module';
 
 @Module({
-  imports: [PlywoodModule, CoatingDensityModule, FormatsModule, SortModule, SurfaceModule, TypeModule],
-  exports: [PlywoodModule, CoatingDensityModule, FormatsModule, SortModule, SurfaceModule, TypeModule],
+  imports: [PlywoodModule, CoatingDensityModule, FormatsModule, SortModule, SurfaceModule, TypeModule, FeatureModule],
+  exports: [PlywoodModule, CoatingDensityModule, FormatsModule, SortModule, SurfaceModule, TypeModule, FeatureModule],
 })
 export class PlywoodEntityModule {}

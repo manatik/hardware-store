@@ -1,4 +1,5 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { Available } from '../../../../types/enum/Available.enum';
 
 export class CreatePlywoodDto {
   @IsOptional()
@@ -38,8 +39,8 @@ export class CreatePlywoodDto {
   width: number;
 
   @IsNotEmpty()
-  @IsBoolean()
-  available: boolean;
+  @IsEnum(Available)
+  available: Available;
 
   @IsNotEmpty()
   @IsString()
