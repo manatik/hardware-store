@@ -146,7 +146,7 @@ const Topline: FC<ToplineProps> = ({
                 className={styles.topline__call}
                 onClick={toggleModal}
               >Заказать звонок</button>
-              <Link href={`${ToplineLinks.Basket}?redirectUrl=${link}`}>
+              <Link href={`${ToplineLinks.Basket}?redirectUrl=${link || ''}`}>
                 <a className={styles.topline__basket}>
                   <Image src={basket} />
                   <span className={styles.topline__basket__point}>3</span>
