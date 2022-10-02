@@ -1,24 +1,37 @@
 export const GLOBAL_PREFIXES = {
   USER: 'user',
   ROLE: 'role',
+  AUTH: 'auth',
+  CATEGORY: 'category',
+
   PLYWOOD: 'products/plywood',
   PLYWOOD_FORMATS: 'products/plywood-format',
-  PLYWOOD_SURFACE: 'products/plywood-surface',
-  PLYWOOD_SORT: 'products/plywood-sort',
+  PLYWOOD_SURFACE: 'products/surface',
+  PLYWOOD_SORT: 'products/sort',
   PLYWOOD_COATING_DENSITY: 'products/plywood-coating-density',
-  PLYWOOD_TYPE: 'products/plywood-type',
+  PLYWOOD_TYPE: 'products/type',
+
   FURNITURE: 'products/furniture',
+  FURNITURE_FEATURE: '',
+
   HOUSE: 'products/house',
-  CATEGORY: 'category',
+  HOUSE_FEATURE: '',
 };
 
 export const ENDPOINTS = {
+  AUTH: {
+    LOGIN: 'login',
+    REGISTER: 'register',
+    REFRESH: 'refresh',
+  },
   USER: {
     ALL: 'all',
     INFO: 'info',
     CREATE: '',
     UPDATE: ':id',
     DELETE: ':id',
+    ADD_ROLE: 'role-add',
+    REMOVE_ROLE: 'role-remove',
   },
   ROLE: {
     CREATE: '',
@@ -32,11 +45,23 @@ export const ENDPOINTS = {
     GET_BY_ID: ':id',
     UPDATE: ':id',
   },
+
   FURNITURE: {
+    GET_ALL: '',
     GET_BY_ID: ':id',
+    CREATE: '',
+    ADD_PHOTOS: 'photos/:id',
     UPDATE: ':id',
     DELETE: ':id',
   },
+  FURNITURE_FEATURE: {
+    GET_ALL: '',
+    GET_BY_ID: ':id',
+    CREATE: '',
+    UPDATE: ':id',
+    DELETE: ':id',
+  },
+
   PLYWOOD: {
     GET_ALL: '',
     GET_BY_ID: ':id',

@@ -21,6 +21,7 @@ import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delet
 import { AddPhotoDto } from 'entities/plywood-enitities/plywood/dto/add-photo.dto';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 
+@Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.PLYWOOD)
 export class PlywoodController {
   constructor(private readonly plywoodService: PlywoodService) {}
@@ -37,13 +38,11 @@ export class PlywoodController {
     return await this.plywoodService.getById(id);
   }
 
-  @Roles(Role.Admin)
   @Post(ENDPOINTS.PLYWOOD.CREATE)
   async add(@Body() dto: CreatePlywoodDto) {
     return await this.plywoodService.add(dto);
   }
 
-  @Roles(Role.Admin)
   @UseInterceptors(FilesInterceptor('photos'))
   @Post(ENDPOINTS.PLYWOOD.ADD_PHOTOS)
   async addPhotos(
@@ -54,13 +53,11 @@ export class PlywoodController {
     return await this.plywoodService.addPhotos(id, photos, dto);
   }
 
-  @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD.UPDATE)
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
     return await this.plywoodService.update(id, dto);
   }
 
-  @Roles(Role.Admin)
   @Delete(ENDPOINTS.PLYWOOD.DELETE)
   async remove(@Param('id', ParseIntPipe) id: number, @Query() query: DeletePlywoodQuery) {
     return await this.plywoodService.remove(id, query);

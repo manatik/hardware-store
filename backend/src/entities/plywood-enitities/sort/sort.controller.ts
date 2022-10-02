@@ -3,8 +3,8 @@ import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { Public } from 'authorization/decorators/public.decorator';
 import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
-import { CreatePlywoodFormatsDto } from 'entities/plywood-enitities/plywood-formats/dto/create-plywood-formats.dto';
-import { SortService } from 'entities/plywood-enitities/plywood-sort/sort.service';
+import { SortService } from 'entities/plywood-enitities/sort/sort.service';
+import { CreateSortDto } from './dto/create-sort.dto';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_SORT)
 export class SortController {
@@ -24,7 +24,7 @@ export class SortController {
 
   @Roles(Role.Admin)
   @Post(ENDPOINTS.PLYWOOD_SORT.CREATE)
-  async add(@Body() dto: CreatePlywoodFormatsDto) {
+  async add(@Body() dto: CreateSortDto) {
     return await this.sortService.add(dto);
   }
 

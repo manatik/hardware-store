@@ -21,6 +21,7 @@ export class PlywoodService {
     try {
       const products = (await this.prismaService.plywood.findMany({
         where: { deleted: { in: null } },
+        include: { formats: true, surfaceTypes: true, category: true, sorts: true, coatingDensity: true },
       })) as any as IPlywood[];
 
       return this.errorService.success('Продукты успешно получены', {
@@ -35,6 +36,7 @@ export class PlywoodService {
     try {
       const product = (await this.prismaService.plywood.findFirst({
         where: { id, deleted: { in: null } },
+        include: { formats: true, surfaceTypes: true, category: true, sorts: true, coatingDensity: true },
       })) as any as IPlywood;
 
       return this.errorService.success('Продукт успешно получен', { product });
@@ -51,30 +53,7 @@ export class PlywoodService {
         throw this.errorService.badRequest(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
-      let formatIds: string[] | undefined = undefined;
-      let surfaceIds: string[] | undefined = undefined;
-
-      if (dto.formatIds?.length) {
-        formatIds = JSON.parse(JSON.stringify(dto.formatIds));
-        delete dto.formatIds;
-      }
-
-      if (dto.surfaceIds?.length) {
-        surfaceIds = JSON.parse(JSON.stringify(dto.surfaceIds));
-        delete dto.surfaceIds;
-      }
-
       const product = (await this.prismaService.plywood.create({ data: dto })) as any as IPlywood;
-
-      if (formatIds?.length) {
-        console.log('formats', formatIds);
-        await this.addFormatsToPlywood(product, formatIds);
-      }
-
-      if (surfaceIds?.length) {
-        console.log('surface', surfaceIds);
-        await this.addSurfacesToPlywood(product, surfaceIds);
-      }
 
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {

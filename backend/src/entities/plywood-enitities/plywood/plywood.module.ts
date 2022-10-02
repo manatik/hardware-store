@@ -3,8 +3,8 @@ import { PlywoodController } from 'entities/plywood-enitities/plywood/plywood.co
 import { PlywoodService } from 'entities/plywood-enitities/plywood/plywood.service';
 import { PrismaModule } from 'database/prisma/prisma.module';
 import { ErrorModule } from 'common/error/error.module';
-import { SurfaceModule } from 'entities/plywood-enitities/plywood-surface/surface.module';
-import { FormatsModule } from 'entities/plywood-enitities/plywood-formats/formats.module';
+import { SurfaceModule } from 'entities/plywood-enitities/surface/surface.module';
+import { FormatsModule } from 'entities/plywood-enitities/formats/formats.module';
 import { FilesModule } from 'common/files/files.module';
 
 @Module({

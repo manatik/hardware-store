@@ -12,27 +12,43 @@ import {
 } from '@nestjs/common';
 import { FurnitureService } from 'entities/furniture-entities/furniture/furniture.service';
 import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { Roles } from '../../../authorization/decorators/roles.decorator';
+import { Role } from '../../../authorization/enum/role.enum';
+import { Public } from '../../../authorization/decorators/public.decorator';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { AddPhotoDto } from './dto/add-photo.dto';
 
+@Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.FURNITURE)
 export class FurnitureController {
   constructor(private readonly furnitureService: FurnitureService) {}
 
-  @Get()
+  @Public()
+  @Get(ENDPOINTS.FURNITURE.GET_ALL)
   async all() {
     return await this.furnitureService.getAll();
   }
 
+  @Public()
   @Get(ENDPOINTS.FURNITURE.GET_BY_ID)
   async byId(@Param('id', ParseIntPipe) id: number) {
     return await this.furnitureService.getById(id);
   }
 
-  @Post()
+  @Post(ENDPOINTS.FURNITURE.CREATE)
+  async add(@Body() dto: CreateFurnitureDto) {
+    return await this.furnitureService.add(dto);
+  }
+
   @UseInterceptors(FilesInterceptor('photos'))
-  async add(@UploadedFiles() photos: Array<Express.Multer.File>, @Body() dto: CreateFurnitureDto) {
-    return await this.furnitureService.add(dto, photos);
+  @Post(ENDPOINTS.PLYWOOD.ADD_PHOTOS)
+  async addPhotos(
+    @UploadedFiles() photos: Array<Express.Multer.File>,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: AddPhotoDto,
+  ) {
+    return await this.furnitureService.addPhotos(id, photos, dto);
   }
 
   @Patch(ENDPOINTS.FURNITURE.UPDATE)
