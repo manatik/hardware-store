@@ -1,4 +1,5 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { Available } from '../../../../types/enum/Available.enum';
 
 export class CreateFurnitureDto {
   @IsOptional()
@@ -18,8 +19,8 @@ export class CreateFurnitureDto {
   categoryId: number;
 
   @IsNotEmpty()
-  @IsBoolean()
-  available: boolean;
+  @IsEnum(Available)
+  available: Available;
 
   @IsNotEmpty()
   @IsNumber()
@@ -28,4 +29,16 @@ export class CreateFurnitureDto {
   @IsNotEmpty()
   @IsString()
   description: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  width: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  height: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  depth: number;
 }

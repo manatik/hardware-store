@@ -10,6 +10,7 @@ export const GLOBAL_PREFIXES = {
   PLYWOOD_SORT: 'products/sort',
   PLYWOOD_COATING_DENSITY: 'products/plywood-coating-density',
   PLYWOOD_TYPE: 'products/type',
+  PLYWOOD_FEATURE: 'products/plywood-feature',
 
   FURNITURE: 'products/furniture',
   FURNITURE_FEATURE: '',
@@ -99,6 +100,13 @@ export const ENDPOINTS = {
     DELETE: ':id',
   },
   PLYWOOD_TYPE: {
+    GET_ALL: '',
+    GET_BY_ID: ':id',
+    CREATE: '',
+    UPDATE: ':id',
+    DELETE: ':id',
+  },
+  PLYWOOD_FEATURE: {
     GET_ALL: '',
     GET_BY_ID: ':id',
     CREATE: '',

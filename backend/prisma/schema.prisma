@@ -10,6 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Available {
+  AVAILABLE
+  NOT_AVAILABLE
+  ORDER
+}
+
 model Category {
 	id                  Int         @id @default(autoincrement())
 	name                String      @unique
@@ -18,10 +24,10 @@ model Category {
 	furnitureProducts   Furniture[]
 	houseProducts       House[]
 	createdAt           DateTime    @map("created_at") @default(now())
-    updatedAt           DateTime?   @map("updated_at")
-    deleted             DateTime?
+  updatedAt           DateTime?   @map("updated_at")
+  deleted             DateTime?
 
-    @@map("category")
+  @@map("category")
 }
 
 /////////////////////////////////////////////////////////////
@@ -38,7 +44,7 @@ model User {
 	updatedAt     DateTime?   @map("updated_at")
 	deleted       DateTime?
 
-    @@map("user")
+  @@map("user")
 }
 
 model UserToken {
@@ -49,7 +55,7 @@ model UserToken {
 	expireIn      DateTime    @map("expire_in")
 	createdAt     DateTime    @default(now()) @map("created_at")
 
-    @@map("user_token")
+  @@map("user_token")
 }
 
 model Role {
@@ -78,8 +84,9 @@ model Plywood {
 	types               PlywoodType[]
 	sorts               PlywoodSort[]
 	coatingDensity      PlywoodCoatingDensity[]
+	features            PlywoodFeature[]
 	width               Int
-	available           Boolean
+	available           Available                 @default(AVAILABLE)
 	price               Int
 	description         String
 	createdAt           DateTime                  @map("created_at") @default(now())
@@ -87,6 +94,17 @@ model Plywood {
   deleted             DateTime?
 
   @@map("plywood")
+}
+
+model PlywoodFeature {
+  id          Int             @id @default(autoincrement())
+  plywoods    Plywood[]
+  name        String          @unique
+  price       Int
+  createdAt   DateTime        @map("created_at") @default(now())
+  updatedAt   DateTime?       @map("updated_at")
+
+  @@map("plywood_feauture")
 }
 
 model PlywoodFormat {
@@ -147,18 +165,21 @@ model PlywoodCoatingDensity {
 ///////////////////////////////////////////////////////////
 
 model Furniture {
-  id          Int             @id @default(autoincrement())
+  id          Int                 @id @default(autoincrement())
   name        String
-  article     String          @unique
+  article     String              @unique
   photos      Json?
-  category    Category        @relation(fields: [categoryId], references: [id])
-  categoryId  Int             @map("category_id")
-  available   Boolean
+  category    Category            @relation(fields: [categoryId], references: [id])
+  categoryId  Int                 @map("category_id")
+  available   Available           @default(AVAILABLE)
   price       Int
-  features    FurnitureFeature[]
   description String
-  createdAt   DateTime        @map("created_at") @default(now())
-  updatedAt   DateTime?       @map("updated_at")
+  height      Int?
+  width       Int?
+  depth       Int?
+  features    FurnitureFeature[]
+  createdAt   DateTime            @map("created_at") @default(now())
+  updatedAt   DateTime?           @map("updated_at")
   deleted     DateTime?
 
   @@map("furniture")

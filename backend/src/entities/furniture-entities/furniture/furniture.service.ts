@@ -19,6 +19,7 @@ export class FurnitureService {
     try {
       const products = await this.prismaService.furniture.findMany({
         where: { deleted: { in: null } },
+        include: { category: true, features: true },
       });
 
       return this.errorService.success('Продукты успешно получены', {
@@ -33,6 +34,7 @@ export class FurnitureService {
     try {
       const product = await this.prismaService.furniture.findFirst({
         where: { id, deleted: { in: null } },
+        include: { category: true, features: true },
       });
 
       return this.errorService.success('Продукт успешно получен', { product });
@@ -49,6 +51,7 @@ export class FurnitureService {
         throw this.errorService.badRequest(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
+      // @ts-ignore
       const product = await this.prismaService.furniture.create({ data: dto });
 
       return this.errorService.success('Продукт успешно добавлен', { product });

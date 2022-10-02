@@ -21,7 +21,14 @@ export class PlywoodService {
     try {
       const products = (await this.prismaService.plywood.findMany({
         where: { deleted: { in: null } },
-        include: { formats: true, surfaceTypes: true, category: true, sorts: true, coatingDensity: true },
+        include: {
+          formats: true,
+          surfaceTypes: true,
+          category: true,
+          sorts: true,
+          coatingDensity: true,
+          features: true,
+        },
       })) as any as IPlywood[];
 
       return this.errorService.success('Продукты успешно получены', {
@@ -36,7 +43,14 @@ export class PlywoodService {
     try {
       const product = (await this.prismaService.plywood.findFirst({
         where: { id, deleted: { in: null } },
-        include: { formats: true, surfaceTypes: true, category: true, sorts: true, coatingDensity: true },
+        include: {
+          formats: true,
+          surfaceTypes: true,
+          category: true,
+          sorts: true,
+          coatingDensity: true,
+          features: true,
+        },
       })) as any as IPlywood;
 
       return this.errorService.success('Продукт успешно получен', { product });
@@ -53,6 +67,7 @@ export class PlywoodService {
         throw this.errorService.badRequest(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
+      // @ts-ignore
       const product = (await this.prismaService.plywood.create({ data: dto })) as any as IPlywood;
 
       return this.errorService.success('Продукт успешно добавлен', { product });
@@ -78,7 +93,12 @@ export class PlywoodService {
         });
       }
 
-      this.prismaService.plywood.update({ where: { id }, data: { photos: photoPaths as unknown as Prisma.JsonArray } });
+      await this.prismaService.plywood.update({
+        where: { id },
+        data: { photos: photoPaths as unknown as Prisma.JsonArray },
+      });
+
+      return this.errorService.success('Фото успешно добавлено');
     } catch (e) {
       throw this.errorService.internal('Ошибка добавления фото продукта', e.message);
     }
