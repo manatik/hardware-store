@@ -20,6 +20,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delete-plywood.query';
 import { AddPhotoDto } from 'entities/plywood-enitities/plywood/dto/add-photo.dto';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { UpdatePlywoodDto } from './dto/update-plywood.dto';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.PLYWOOD)
@@ -54,7 +55,7 @@ export class PlywoodController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdatePlywoodDto) {
     return await this.plywoodService.update(id, dto);
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
+import { UpdateCoatingDensityDto } from './dto/update-coating-density.dto';
 
 @Injectable()
 export class CoatingDensityService {
@@ -33,7 +34,7 @@ export class CoatingDensityService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: number, dto: UpdateCoatingDensityDto) {
     try {
       const updated = await this.prismaService.plywoodCoatingDensity.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });

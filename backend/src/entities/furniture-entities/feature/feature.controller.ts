@@ -5,6 +5,7 @@ import { Roles } from '../../../authorization/decorators/roles.decorator';
 import { Role } from '../../../authorization/enum/role.enum';
 import { FeatureService } from './feature.service';
 import { CreateFeatureDto } from './dto/create-feature.dto';
+import { UpdateFeatureDto } from './dto/update-feature.dto';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.FURNITURE_FEATURE)
@@ -29,7 +30,7 @@ export class FeatureController {
   }
 
   @Patch(ENDPOINTS.FURNITURE_FEATURE.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFeatureDto) {
     return await this.featureService.update(id, dto);
   }
 

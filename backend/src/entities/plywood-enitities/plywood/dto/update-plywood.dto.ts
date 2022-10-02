@@ -1,7 +1,7 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Available } from '../../../../types/enum/Available.enum';
 
-export class CreatePlywoodDto {
+export class UpdatePlywoodDto {
   @IsOptional()
   @IsNumber()
   features: number[];
@@ -30,27 +30,27 @@ export class CreatePlywoodDto {
   @IsNumber()
   widths: number[];
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   article: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   categoryId: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Available)
   available: Available;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   description: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   price: number;
 }

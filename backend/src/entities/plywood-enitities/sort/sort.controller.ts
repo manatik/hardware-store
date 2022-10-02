@@ -5,6 +5,7 @@ import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
 import { SortService } from 'entities/plywood-enitities/sort/sort.service';
 import { CreateSortDto } from './dto/create-sort.dto';
+import { UpdateSortDto } from './dto/update-sort.dto';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_SORT)
 export class SortController {
@@ -30,7 +31,7 @@ export class SortController {
 
   @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD_SORT.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateSortDto) {
     return await this.sortService.update(id, dto);
   }
 

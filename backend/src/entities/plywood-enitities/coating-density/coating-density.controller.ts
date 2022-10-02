@@ -5,6 +5,7 @@ import { Role } from 'authorization/enum/role.enum';
 import { CoatingDensityService } from 'entities/plywood-enitities/coating-density/coating-density.service';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { CreateCoatingDensityDto } from './dto/create-coating-density.dto';
+import { UpdateCoatingDensityDto } from './dto/update-coating-density.dto';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_COATING_DENSITY)
 export class CoatingDensityController {
@@ -30,7 +31,7 @@ export class CoatingDensityController {
 
   @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD_COATING_DENSITY.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateCoatingDensityDto) {
     return await this.coatingService.update(id, dto);
   }
 

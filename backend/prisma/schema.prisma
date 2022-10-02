@@ -85,7 +85,7 @@ model Plywood {
 	sorts               PlywoodSort[]
 	coatingDensity      PlywoodCoatingDensity[]
 	features            PlywoodFeature[]
-	width               Int
+	widths              PlywoodWidth[]
 	available           Available                 @default(AVAILABLE)
 	price               Int
 	description         String
@@ -100,11 +100,13 @@ model PlywoodFeature {
   id          Int             @id @default(autoincrement())
   plywoods    Plywood[]
   name        String          @unique
+  description String?
+  value       String?
   price       Int
   createdAt   DateTime        @map("created_at") @default(now())
   updatedAt   DateTime?       @map("updated_at")
 
-  @@map("plywood_feauture")
+  @@map("plywood_feature")
 }
 
 model PlywoodFormat {
@@ -130,11 +132,23 @@ model PlywoodSurfaceType {
   @@map("plywood_surface_type")
 }
 
+model PlywoodWidth {
+  id          Int       @id @default(autoincrement())
+  plywood     Plywood[]
+  name        String
+  price       Int
+  createdAt   DateTime  @map("created_at") @default(now())
+  updatedAt   DateTime? @map("updated_at")
+
+  @@map("plywood_width")
+}
+
 model PlywoodType {
 	id          Int         @id @default(autoincrement())
 	plywood     Plywood[]
 	name        String      @unique
 	price       Int
+	createdAt   DateTime  @map("created_at") @default(now())
 	updatedAt   DateTime? @map("updated_at")
 
   @@map("plywood_type")
@@ -145,6 +159,7 @@ model PlywoodSort {
   plywood     Plywood[]
   name        String
   price       Int
+  createdAt   DateTime  @map("created_at") @default(now())
   updatedAt   DateTime?   @map("updated_at")
 
   @@map("plywood_sort")
@@ -155,6 +170,7 @@ model PlywoodCoatingDensity {
   plywood     Plywood[]
   name        String
   price       Int
+  createdAt   DateTime  @map("created_at") @default(now())
   updatedAt   DateTime?   @map("updated_at")
 
   @@map("plywood_coating_density")
@@ -189,11 +205,13 @@ model FurnitureFeature {
   id          Int             @id @default(autoincrement())
   furniture   Furniture[]
   name        String          @unique
+  description String?
+  value       String?
   price       Int
   createdAt   DateTime        @map("created_at") @default(now())
   updatedAt   DateTime?       @map("updated_at")
 
-  @@map("furniture_feauture")
+  @@map("furniture_feature")
 }
 
 /////////////////////////////////////////////////////////////

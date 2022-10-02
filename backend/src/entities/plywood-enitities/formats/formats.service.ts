@@ -6,6 +6,7 @@ import { IPlywoodFormat } from 'entities/plywood-enitities/formats/types/IPlywoo
 import * as _ from 'radash';
 import { isTrue } from 'common/utils/utils';
 import { PlywoodFormatsAllQuery } from 'entities/plywood-enitities/formats/dto/plywood-formats-all.query';
+import { UpdateFormatsDto } from './dto/update-formats.dto';
 
 @Injectable()
 export class FormatsService {
@@ -47,7 +48,7 @@ export class FormatsService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: number, dto: UpdateFormatsDto) {
     try {
       const format = (await this.prismaService.plywoodFormat.update({
         where: { id },

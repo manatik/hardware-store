@@ -5,6 +5,7 @@ import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
 import { TypeService } from 'entities/plywood-enitities/type/type.service';
 import { CreateTypeDto } from './dto/create-type.dto';
+import { UpdateTypeDto } from './dto/update-type.dto';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_TYPE)
 export class TypeController {
@@ -30,7 +31,7 @@ export class TypeController {
 
   @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD_TYPE.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateTypeDto) {
     return await this.typeService.update(id, dto);
   }
 

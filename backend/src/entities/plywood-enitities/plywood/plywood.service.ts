@@ -8,6 +8,8 @@ import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delet
 import { Prisma } from '@prisma/client';
 import { IPhoto } from 'types/IPhoto.type';
 import { AddPhotoDto } from 'entities/plywood-enitities/plywood/dto/add-photo.dto';
+import { UpdatePlywoodDto } from './dto/update-plywood.dto';
+import { idsArrayToArrayObjects } from '../../../common/utils/utils';
 
 @Injectable()
 export class PlywoodService {
@@ -67,7 +69,6 @@ export class PlywoodService {
         throw this.errorService.badRequest(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
-      // @ts-ignore
       const product = (await this.prismaService.plywood.create({ data: dto })) as any as IPlywood;
 
       return this.errorService.success('Продукт успешно добавлен', { product });
@@ -104,14 +105,26 @@ export class PlywoodService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: number, dto: UpdatePlywoodDto) {
     try {
-      const product = (await this.prismaService.plywood.update({
+      const updated = await this.prismaService.plywood.update({
         where: { id },
-        data: dto,
-      })) as any as IPlywood;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        data: {
+          ...dto,
+          formats: dto.formats?.length ? { connect: idsArrayToArrayObjects(dto.formats) } : { set: [] },
+          surfaceTypes: dto.surfaceTypes?.length ? { connect: idsArrayToArrayObjects(dto.surfaceTypes) } : { set: [] },
+          types: dto.types?.length ? { connect: idsArrayToArrayObjects(dto.types) } : { set: [] },
+          sorts: dto.sorts?.length ? { connect: idsArrayToArrayObjects(dto.sorts) } : { set: [] },
+          coatingDensity: dto.coatingDensity?.length
+            ? { connect: idsArrayToArrayObjects(dto.coatingDensity) }
+            : { set: [] },
+          widths: dto.widths?.length ? { connect: idsArrayToArrayObjects(dto.widths) } : { set: [] },
+        },
+      });
 
-      return this.errorService.success('Продукт успешно обновлен', { product });
+      return this.errorService.success('Продукт успешно обновлен', { data: updated });
     } catch (e) {
       throw this.errorService.internal('Ошибка обновления продукта', e.message);
     }

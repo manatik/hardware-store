@@ -6,6 +6,8 @@ import { FilesService } from 'common/files/files.service';
 import { AddPhotoDto } from './dto/add-photo.dto';
 import { IPhoto } from '../../../types/IPhoto.type';
 import { Prisma } from '@prisma/client';
+import { UpdateFurnitureDto } from './dto/update-furniture.dto';
+import { idsArrayToArrayObjects } from '../../../common/utils/utils';
 
 @Injectable()
 export class FurnitureService {
@@ -51,7 +53,6 @@ export class FurnitureService {
         throw this.errorService.badRequest(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
-      // @ts-ignore
       const product = await this.prismaService.furniture.create({ data: dto });
 
       return this.errorService.success('Продукт успешно добавлен', { product });
@@ -60,11 +61,16 @@ export class FurnitureService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: number, dto: UpdateFurnitureDto) {
     try {
       const product = await this.prismaService.furniture.update({
         where: { id },
-        data: dto,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        data: {
+          ...dto,
+          features: dto.features?.length ? { connect: idsArrayToArrayObjects(dto.features) } : { set: [] },
+        },
       });
 
       return this.errorService.success('Продукт успешно обновлен', { product });
