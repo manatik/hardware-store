@@ -1,0 +1,45 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.opposite {
+    position: relative;
+    max-width: 410px;
+    padding: 72px 42px;
+    border-radius: 16px;
+    background-color: $colorOnPrimary;
+
+    &__close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        cursor: pointer;
+    }
+
+    &__title {
+        @include m-typography(28px, 40px, 700);
+        color: $colorPrimary;
+        margin-bottom: 15px;
+    }
+
+    &__info {
+        @include m-typography(16px, 22px, 300);
+        margin-bottom: 15px;
+
+        & b {
+            @include m-typography(16px, 22px, 300);
+            color: $colorPrimary;
+        }
+    }
+
+    &__button {
+        @include m-typography(16px, 22px, 500);
+        @include m-hover;
+        border-radius: 10px;
+        background-color: $colorPrimary;
+        color: $colorOnPrimary;
+        text-align: center;
+        padding: 17px;
+        width: 100%;
+        cursor: pointer;
+    }
+}

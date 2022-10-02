@@ -1,0 +1,10 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.basket {
+    &__title {
+        @include m-typography(48px, 48px, 700);
+        color: $colorPrimary;
+        margin-bottom: 50px;
+    }
+}

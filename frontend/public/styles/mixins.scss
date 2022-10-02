@@ -295,3 +295,12 @@
     }
   }
 }
+
+@mixin m-hover {
+  @media (hover: hover) and (pointer: fine){
+    &:hover {
+      opacity: $opacityHover;
+      cursor: pointer;
+    }
+  }
+}

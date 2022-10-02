@@ -1,0 +1,28 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.basketForm {
+    &__title {
+        @include m-typography(28px, 40px, 700);
+        color: $colorPrimary;
+        margin-bottom: 38px;
+    }
+
+    &__form {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0 20px;
+    }
+
+    &__button {
+        @include m-typography(16px, 20px, 500);
+        @include m-hover;
+        max-height: 55px;
+        background-color: $colorPrimary;
+        border-radius: 10px;
+        color: $colorOnPrimary;
+        padding: 17px;
+        width: 100%;
+    }
+}

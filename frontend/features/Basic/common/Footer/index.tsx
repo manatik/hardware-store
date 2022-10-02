@@ -34,9 +34,24 @@ const Footer = () => {
             </div>
           </div>
           <div className={styles.footer__social}>
-            <div className={styles.footer__social__link}><Image src={vk} /></div>
-            <div className={styles.footer__social__link}><Image src={tg} /></div>
-            <div className={styles.footer__social__link}><Image src={wu} /></div>
+            <a
+              href="https://vk.com/plywood_market"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footer__social__link}
+            ><Image src={vk} /></a>
+            <a
+              href="https://t.me/plywood_market"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footer__social__link}
+            ><Image src={tg} /></a>
+            <a
+              href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footer__social__link}
+            ><Image src={wu} /></a>
           </div>
         </div>
         <div className={styles.footer__bottom}>

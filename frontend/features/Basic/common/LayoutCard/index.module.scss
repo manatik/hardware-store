@@ -1,0 +1,23 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.layoutCard {
+    height: 100%;
+    padding-top: 45px;
+    background-color: $colorSecondary;
+
+    &__inner {
+        @include w-layout;
+        flex: 1 0 auto;
+    }
+
+    &__close {
+        cursor: pointer;
+
+        &_block {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 70px;
+        }
+    }
+}

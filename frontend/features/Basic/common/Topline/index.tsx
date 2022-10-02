@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactElement,
+  FC, ReactElement, useState,
 } from 'react'
 import cn from 'classnames'
 import Image from 'next/image'
@@ -12,6 +12,7 @@ import vkDark from 'assets/layout/vk-dark.svg'
 import tgDark from 'assets/layout/tg-dark.svg'
 import wuDark from 'assets/layout/wu-dark.svg'
 import basket from 'assets/layout/fa-shopping-bag.svg'
+import Opposite from '@features/Basic/ui/Opposite'
 import styles from './index.module.scss'
 
 interface ToplineProps {
@@ -25,6 +26,7 @@ enum ToplineLinks {
   Products = '/products',
   Service = '/service',
   Contacts = '/contacts',
+  Basket = '/basket',
 }
 
 const Topline: FC<ToplineProps> = ({
@@ -32,6 +34,13 @@ const Topline: FC<ToplineProps> = ({
   link,
   absolute,
 }): ReactElement => {
+  const [toggle, setToggle] = useState<boolean>(false)
+
+  const toggleModal = (): void => {
+    setToggle(!toggle)
+    document.documentElement.classList.toggle('g_lockscroll')
+  }
+
   return (
     <header
       className={cn(styles.topline__wrap, {
@@ -87,27 +96,73 @@ const Topline: FC<ToplineProps> = ({
             <div className={styles.topline__social}>
               {dark
                 ? <>
-                  <div className={styles.topline__social__link}><Image src={vkDark} /></div>
-                  <div className={styles.topline__social__link}><Image src={tgDark} /></div>
-                  <div className={styles.topline__social__link}><Image src={wuDark} /></div>
+                  <a
+                    href="https://vk.com/plywood_market"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.topline__social__link}
+                  ><Image src={vkDark} /></a>
+
+                  <a
+                    href="https://t.me/plywood_market"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.topline__social__link}
+                  ><Image src={tgDark} /></a>
+
+                  <a
+                    href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.topline__social__link}
+                  ><Image src={wuDark} /></a>
                 </>
                 : <>
-                  <div className={styles.topline__social__link}><Image src={vkLight} /></div>
-                  <div className={styles.topline__social__link}><Image src={tgLight} /></div>
-                  <div className={styles.topline__social__link}><Image src={wuLight} /></div>
+                  <a
+                    href="https://vk.com/plywood_market"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.topline__social__link}
+                  ><Image src={vkLight} /></a>
+
+                  <a
+                    href="https://t.me/plywood_market"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.topline__social__link}
+                  ><Image src={tgLight} /></a>
+
+                  <a
+                    href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.topline__social__link}
+                  ><Image src={wuLight} /></a>
                 </>
               }
             </div>
             <div className={styles.topline__inter}>
-              <button className={styles.topline__call}>Заказать звонок</button>
-              <button className={styles.topline__basket}>
-                <Image src={basket} />
-                <span className={styles.topline__basket__point}>3</span>
-              </button>
+              <button
+                className={styles.topline__call}
+                onClick={toggleModal}
+              >Заказать звонок</button>
+              <Link href={`${ToplineLinks.Basket}?redirectUrl=${link}`}>
+                <a className={styles.topline__basket}>
+                  <Image src={basket} />
+                  <span className={styles.topline__basket__point}>3</span>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
+
+      {toggle && (
+        <Opposite
+          onClose={toggleModal}
+          title="Остались вопросы?"
+        />
+      )}
     </header>
   )
 }

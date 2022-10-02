@@ -1,0 +1,76 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.basketCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:not(:last-child) {
+        margin-bottom: 26px;
+    }
+
+    &__image {
+        width: 130px;
+
+        & img {
+            border-radius: 10px;
+        }
+    }
+
+    &__title {
+        @include m-typography(16px, 22px, 700);
+    }
+
+    &__color {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        margin-left: 16px;
+        border: 1px solid rgba($colorBlack, 0.37);
+
+        &_block {
+            @include m-typography(16px, 18px, 500);
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__price {
+        @include m-typography(16px, 18px, 500);
+        color: $colorPrimary;
+    }
+
+    &__counter {
+        display: flex;
+        align-items: center;
+
+        &__count {
+            @include m-typography(20px, 20px, 500);
+            color: $colorBlack;
+            padding: 0 10px;
+        }
+
+        &__button {
+            @include m-hover;
+            border: 1px solid $colorPrimary;
+            border-radius: 6px;
+            color: $colorPrimary;
+            padding: 6px 10px;
+            cursor: pointer;
+
+            &Active {
+                @include m-hover;
+                border: 1px solid $colorPrimary;
+                background-color: $colorPrimary;
+                border-radius: 6px;
+                color: $colorOnPrimary;
+                padding: 6px 10px;
+            }
+        }
+    }
+
+    &__remove {
+        @include m-hover;
+    }
+}
