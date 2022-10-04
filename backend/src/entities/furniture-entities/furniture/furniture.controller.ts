@@ -18,6 +18,7 @@ import { Role } from '../../../authorization/enum/role.enum';
 import { Public } from '../../../authorization/decorators/public.decorator';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { AddPhotoDto } from './dto/add-photo.dto';
+import { UpdateFurnitureDto } from './dto/update-furniture.dto';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.FURNITURE)
@@ -52,7 +53,7 @@ export class FurnitureController {
   }
 
   @Patch(ENDPOINTS.FURNITURE.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFurnitureDto) {
     return await this.furnitureService.update(id, dto);
   }
 

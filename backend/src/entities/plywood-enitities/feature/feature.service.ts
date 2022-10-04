@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../database/prisma/prisma.service';
 import { ErrorService } from '../../../common/error/error.service';
 import { CreateFeatureDto } from '../../furniture-entities/feature/dto/create-feature.dto';
+import { UpdateFeatureDto } from './dto/update-feature.dto';
 
 @Injectable()
 export class FeatureService {
@@ -34,7 +35,7 @@ export class FeatureService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: number, dto: UpdateFeatureDto) {
     try {
       const updated = await this.prismaService.furnitureFeature.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });

@@ -5,6 +5,7 @@ import { ENDPOINTS, GLOBAL_PREFIXES } from '../../../common/consts/endpoints.con
 import { Roles } from '../../../authorization/decorators/roles.decorator';
 import { Role } from '../../../authorization/enum/role.enum';
 import { CreateFeatureDto } from '../../furniture-entities/feature/dto/create-feature.dto';
+import { UpdateFeatureDto } from './dto/update-feature.dto';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.PLYWOOD_FEATURE)
@@ -29,7 +30,7 @@ export class FeatureController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD_FEATURE.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFeatureDto) {
     return await this.featureService.update(id, dto);
   }
 

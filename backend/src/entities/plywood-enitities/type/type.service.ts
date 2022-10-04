@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
+import { UpdateTypeDto } from './dto/update-type.dto';
 
 @Injectable()
 export class TypeService {
@@ -33,7 +34,7 @@ export class TypeService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: number, dto: UpdateTypeDto) {
     try {
       const updated = await this.prismaService.plywoodType.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });

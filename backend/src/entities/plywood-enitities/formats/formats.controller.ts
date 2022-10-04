@@ -6,6 +6,7 @@ import { Roles } from 'authorization/decorators/roles.decorator';
 import { Role } from 'authorization/enum/role.enum';
 import { PlywoodFormatsAllQuery } from 'entities/plywood-enitities/formats/dto/plywood-formats-all.query';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { UpdateFormatsDto } from './dto/update-formats.dto';
 
 @Controller(GLOBAL_PREFIXES.PLYWOOD_FORMATS)
 export class FormatsController {
@@ -31,7 +32,7 @@ export class FormatsController {
 
   @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD_FORMATS.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFormatsDto) {
     return await this.plywoodFormatsService.update(id, dto);
   }
 
