@@ -19,29 +19,35 @@
     }
 
     &__pagination {
-        font-family: MuseoSansCyrl500;
-        font-size: 16px;
-        line-height: 22px;
+        @include m-typography(20px, 28px, 500);
         color: $colorOnPrimary;
         text-align: center;
         transition: 300ms opacity;
         transform: translate3d(0, 0, 0);
         margin-right: 20px;
 
+        @include deviceWidth(mobile) {
+            @include m-typography(16px, 20px, 500);
+        }
+
         &__current {
-            font-family: MuseoSansCyrl500;
-            font-size: 32px;
-            line-height: 44px;
+            @include m-typography(32px, 44px, 500);
             color: $colorOnPrimary;
             margin-right: 3px;
+
+            @include deviceWidth(mobile) {
+                @include m-typography(20px, 28px, 500);
+            }
         }
 
         &__total {
-            font-family: MuseoSansCyrl500;
-            font-size: 16px;
-            line-height: 22px;
+            @include m-typography(20px, 28px, 500);
             color: $colorOnPrimary;
             margin-left: 3px;
+
+            @include deviceWidth(mobile) {
+                @include m-typography(16px, 20px, 500);
+            }
         }
     }
 
@@ -105,6 +111,19 @@
         left: 0;
         right: 0;
 
+        @include deviceWidth(tabletLandscape) {
+            left: 15px;
+            right: 15px;
+        }
+        @include deviceWidth(tabletPortrait) {
+            left: 15px;
+            right: 15px;
+        }
+        @include deviceWidth(mobile) {
+            left: 15px;
+            right: 15px;
+        }
+
         &__fill {
             background-color: #85BE65;
             position: absolute;
@@ -137,19 +156,29 @@
     }
 
     &__title {
-        font-family: MuseoSansCyrl700;
-        font-size: 75px;
-        line-height: 103%;
+        @include m-typography(75px, 103%, 700);
         color: $colorOnPrimary;
         margin-bottom: 30px;
         cursor: default;
+
+        @include deviceWidth(tabletLandscape) {
+            @include m-typography(48px, 49px, 700);
+        }
+        @include deviceWidth(tabletPortrait) {
+            @include m-typography(48px, 48px, 700);
+        }
+        @include deviceWidth(mobile) {
+            @include m-typography(32px, 32px, 700);
+        }
     }
 
     &__description {
-        font-family: MuseoSansCyrl300;
-        font-size: 20px;
-        line-height: 140%;
+        @include m-typography(20px, 140%, 300);
         color: $colorOnPrimary;
         cursor: default;
+
+        @include deviceWidth(mobile) {
+            @include m-typography(14px, 19px, 300);
+        }
     }
 }

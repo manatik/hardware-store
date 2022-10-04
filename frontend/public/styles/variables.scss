@@ -11,3 +11,15 @@ $colorBlack: #101010;
  * Hovers
  */
 $opacityHover: 0.7;
+
+/**
+ * Size
+ */
+$mobileMin: 0px;
+$mobileMax: 659px;
+$tabletPortraitMin: 660px;
+$tabletPortraitMax: 959px;
+$tabletLandScapeMin: 960px;
+$tabletLandScapeMax: 1259px;
+$desktopSmallMin: 1260px;
+$desktopSmallMax: 1440px;

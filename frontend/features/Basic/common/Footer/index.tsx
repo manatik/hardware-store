@@ -14,6 +14,42 @@ const Footer = () => {
       <div className={styles.footer__inner}>
         <div className={styles.footer__top}>
           <div className={styles.footer__links}>
+            <div className={styles.footer__links__content}>
+              <Link href="/">
+                <a className={styles.footer__link}>Главная</a>
+              </Link>
+              <Link href="/products">
+                <a className={styles.footer__link}>Продукты</a>
+              </Link>
+              <Link href="/service">
+                <a className={styles.footer__link}>Сервис</a>
+              </Link>
+              <Link href="/contacts">
+                <a className={styles.footer__link}>Контакты</a>
+              </Link>
+            </div>
+            <div className={styles.footer__links__social_mobile}>
+              <a
+                href="https://vk.com/plywood_market"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__social__link}
+              ><Image src={vk} /></a>
+              <a
+                href="https://t.me/plywood_market"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__social__link}
+              ><Image src={tg} /></a>
+              <a
+                href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__social__link}
+              ><Image src={wu} /></a>
+            </div>
+          </div>
+          <div className={styles.footer__links_mobile}>
             <Link href="/">
               <a className={styles.footer__link}>Главная</a>
             </Link>
@@ -27,31 +63,33 @@ const Footer = () => {
               <a className={styles.footer__link}>Контакты</a>
             </Link>
           </div>
-          <div className={styles.footer__contact}>
-            <div className={styles.footer__contact__link}>+79091349009</div>
-            <div className={styles.footer__contact__link}>
-              г. Киров, ул. Индустриальная&nbsp;20А
+          <div className={styles.footer__right}>
+            <div className={styles.footer__contact}>
+              <div className={styles.footer__contact__link}>+79091349009</div>
+              <div className={styles.footer__contact__link}>
+                г. Киров, ул. Индустриальная&nbsp;20А
+              </div>
             </div>
-          </div>
-          <div className={styles.footer__social}>
-            <a
-              href="https://vk.com/plywood_market"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.footer__social__link}
-            ><Image src={vk} /></a>
-            <a
-              href="https://t.me/plywood_market"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.footer__social__link}
-            ><Image src={tg} /></a>
-            <a
-              href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.footer__social__link}
-            ><Image src={wu} /></a>
+            <div className={styles.footer__social}>
+              <a
+                href="https://vk.com/plywood_market"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__social__link}
+              ><Image src={vk} /></a>
+              <a
+                href="https://t.me/plywood_market"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__social__link}
+              ><Image src={tg} /></a>
+              <a
+                href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__social__link}
+              ><Image src={wu} /></a>
+            </div>
           </div>
         </div>
         <div className={styles.footer__bottom}>

@@ -44,115 +44,124 @@ const Topline: FC<ToplineProps> = ({
 
   return (
     <header
-      className={cn(styles.topline__wrap, {
+      className={cn(styles.topline, {
         [styles.toplineDark]: dark,
       })}
     >
       <div
-        className={styles.topline}
+        className={cn(styles.topline__inner, {
+          [styles.toplineAbsolute]: absolute,
+        })}
       >
         <div
-          className={cn(styles.topline__inner, {
-            [styles.toplineAbsolute]: absolute,
+          className={cn(styles.topline__left, {
+            [styles.topline__leftDark]: dark,
           })}
         >
-          <div
-            className={cn(styles.topline__left, {
-              [styles.topline__leftDark]: dark,
-            })}
-          >
-             <Link href={ToplineLinks.Home}>
+          <div className={styles.topline__links}>
+            <Link href={ToplineLinks.Home}>
               <a
                 className={cn(styles.topline__link, {
                   [styles.topline__linkDark]: dark,
                 })}
               >Главная</a>
-             </Link>
-             <Link href={ToplineLinks.Products}>
+            </Link>
+            <Link href={ToplineLinks.Products}>
               <a
                 className={cn(styles.topline__link, {
                   [styles.topline__leftActive]: pathname === ToplineLinks.Products,
                   [styles.topline__linkDark]: dark,
                 })}
               >Продукты</a>
-             </Link>
-             <Link href={ToplineLinks.Service}>
+            </Link>
+            <Link href={ToplineLinks.Service}>
               <a
                 className={cn(styles.topline__link, {
                   [styles.topline__leftActive]: pathname === ToplineLinks.Service,
                   [styles.topline__linkDark]: dark,
                 })}
               >Сервис</a>
-             </Link>
-             <Link href={ToplineLinks.Contacts}>
+            </Link>
+            <Link href={ToplineLinks.Contacts}>
               <a
                 className={cn(styles.topline__link, {
                   [styles.topline__leftActive]: pathname === ToplineLinks.Contacts,
                   [styles.topline__linkDark]: dark,
                 })}
               >Контакты</a>
-             </Link>
+            </Link>
           </div>
-          <div className={styles.topline__right}>
-            <div className={styles.topline__social}>
-              {dark
-                ? <>
-                  <a
-                    href="https://vk.com/plywood_market"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.topline__social__link}
-                  ><Image src={vkDark} /></a>
 
-                  <a
-                    href="https://t.me/plywood_market"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.topline__social__link}
-                  ><Image src={tgDark} /></a>
+        </div>
+        <div className={styles.topline__right}>
+          <div className={styles.topline__social}>
+            {dark
+              ? <>
+                <a
+                  href="https://vk.com/plywood_market"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.topline__social__link}
+                ><Image src={vkDark} /></a>
 
-                  <a
-                    href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.topline__social__link}
-                  ><Image src={wuDark} /></a>
-                </>
-                : <>
-                  <a
-                    href="https://vk.com/plywood_market"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.topline__social__link}
-                  ><Image src={vkLight} /></a>
+                <a
+                  href="https://t.me/plywood_market"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.topline__social__link}
+                ><Image src={tgDark} /></a>
 
-                  <a
-                    href="https://t.me/plywood_market"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.topline__social__link}
-                  ><Image src={tgLight} /></a>
+                <a
+                  href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.topline__social__link}
+                ><Image src={wuDark} /></a>
+              </>
+              : <>
+                <a
+                  href="https://vk.com/plywood_market"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.topline__social__link}
+                ><Image src={vkLight} /></a>
 
-                  <a
-                    href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.topline__social__link}
-                  ><Image src={wuLight} /></a>
-                </>
-              }
-            </div>
-            <div className={styles.topline__inter}>
-              <button
-                className={styles.topline__call}
-                onClick={toggleModal}
-              >Заказать звонок</button>
-              <Link href={`${ToplineLinks.Basket}?redirectUrl=${pathname || ''}`}>
-                <a className={styles.topline__basket}>
-                  <Image src={basket} />
-                  <span className={styles.topline__basket__point}>3</span>
-                </a>
-              </Link>
+                <a
+                  href="https://t.me/plywood_market"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.topline__social__link}
+                ><Image src={tgLight} /></a>
+
+                <a
+                  href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.topline__social__link}
+                ><Image src={wuLight} /></a>
+              </>
+            }
+          </div>
+          <div className={styles.topline__inter}>
+            <button
+              className={styles.topline__call}
+              onClick={toggleModal}
+            >Заказать звонок
+            </button>
+            <Link href={`${ToplineLinks.Basket}?redirectUrl=${pathname || ''}`}>
+              <a className={styles.topline__basket}>
+                <Image src={basket} />
+                <span className={styles.topline__basket__point}>3</span>
+              </a>
+            </Link>
+            <div
+              className={cn(styles.topline__mobile, {
+                [styles.topline__mobileDark]: dark,
+              })}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
           </div>
         </div>

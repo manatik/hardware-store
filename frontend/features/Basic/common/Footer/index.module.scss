@@ -14,6 +14,16 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @include deviceWidth(tabletLandscape) {
+            display: block;
+        }
+        @include deviceWidth(tabletPortrait) {
+            display: block;
+        }
+        @include deviceWidth(mobile) {
+            display: block;
+        }
     }
 
     &__bottom {
@@ -32,6 +42,7 @@
 
     &__links {
         margin-right: 50px;
+
         &:before {
             content: '';
             display: block;
@@ -42,6 +53,45 @@
             background-size: 126px 43px;
             background-image: url('../../../../assets/layout/logo.svg');
         }
+
+        @include deviceWidth(tabletLandscape) {
+            justify-content: space-between;
+            margin: 0 0 35px;
+        }
+        @include deviceWidth(tabletPortrait) {
+            justify-content: space-between;
+            margin: 0 0 35px;
+        }
+        @include deviceWidth(mobile) {
+            justify-content: space-between;
+            margin: 0 0 20px;
+        }
+
+        &_mobile {
+            display: none;
+
+            @include deviceWidth(mobile) {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+            }
+        }
+
+        &__content {
+            @include deviceWidth(mobile) {
+                display: none;
+            }
+        }
+
+        &__social {
+            &_mobile {
+                display: none;
+
+                @include deviceWidth(mobile) {
+                    display: block;
+                }
+            }
+        }
     }
 
     &__link {
@@ -50,6 +100,19 @@
         font-size: 16px;
         line-height: 16px;
         color: $colorOnPrimary;
+    }
+
+    &__right {
+        display: flex;
+
+        @include deviceWidth(tabletLandscape) {
+            flex-direction: row-reverse;
+            justify-content: space-between;
+        }
+        @include deviceWidth(tabletPortrait) {
+            flex-direction: row-reverse;
+            justify-content: space-between;
+        }
     }
 
     &__contact {
@@ -63,7 +126,18 @@
 
             &:not(:last-child) {
                 margin-right: 30px;
+
+                @include deviceWidth(mobile) {
+                    margin-right: 0;
+                }
             }
+        }
+
+        @include deviceWidth(mobile) {
+            justify-content: space-between;
+            flex-direction: row-reverse;
+            margin-right: 0;
+            width: 100%;
         }
     }
 
@@ -74,6 +148,10 @@
             &:not(:last-child) {
                 margin-right: 17px;
             }
+        }
+
+        @include deviceWidth(mobile) {
+            display: none;
         }
     }
 }

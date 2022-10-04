@@ -68,6 +68,7 @@ const Info = () => {
         <div className={styles.info__edge}>
           <div className={styles.info__title}>Преимущества</div>
           <div className={styles.info__edge__inner}>
+            <div className={styles.info__edge__fake} />
             <div className={styles.info__edge__image}>
               <Image
                 src={furniture}

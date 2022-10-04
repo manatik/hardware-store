@@ -1,5 +1,25 @@
 @import "./variables.scss";
 
+@mixin deviceWidth($size) {
+  @if $size == mobile {
+    @media (min-width: $mobileMin) and (max-width: $mobileMax) {
+      @content;
+    }
+  } @else if $size == tabletPortrait {
+    @media (min-width: $tabletPortraitMin) and (max-width: $tabletPortraitMax) {
+      @content;
+    }
+  } @else if $size == tabletLandscape {
+    @media (min-width: $tabletLandScapeMin) and (max-width: $tabletLandScapeMax) {
+      @content;
+    }
+  } @else if $size == desktopSmall {
+    @media (min-width: $desktopSmallMin) and (max-width: $desktopSmallMax) {
+      @content;
+    }
+  }
+}
+
 @mixin container {
   &_container {
     max-width: 1200px;
@@ -14,8 +34,14 @@
   max-width: 1240px;
   min-width: 320px;
 
-  @media (max-width: 1240px) {
-    margin: 0 16px;
+  @include deviceWidth(tabletLandscape) {
+    padding: 0 15px;
+  }
+  @include deviceWidth(tabletPortrait) {
+    padding: 0 15px;
+  }
+  @include deviceWidth(mobile) {
+    padding: 0 15px;
   }
 }
 
@@ -90,39 +116,17 @@
 @mixin m-margin-link-bottom {
   &:not(:last-child) {
     margin-right: 60px;
+
+    @include deviceWidth(mobile) {
+      margin-right: 0;
+    }
   }
 
   &:first-child {
     margin-left: 60px;
-  }
 
-  @media (max-width: 1180px) {
-    &:not(:last-child) {
-      margin-right: 32px;
-    }
-
-    &:first-child {
-      margin-left: 32px;
-    }
-  }
-
-  @media (max-width: 1075px) {
-    &:not(:last-child) {
-      margin-right: 40px;
-    }
-
-    &:first-child {
-      margin-left: 40px;
-    }
-  }
-
-  @media (max-width: 995px) {
-    &:not(:last-child) {
-      margin-right: 20px;
-    }
-
-    &:first-child {
-      margin-left: 20px;
+    @include deviceWidth(mobile) {
+      margin-left: 0;
     }
   }
 }
