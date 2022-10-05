@@ -129,6 +129,7 @@
             }
             @include deviceWidth(tabletPortrait) {
                 @include m-typography(36px, 36px, 700);
+                padding: 30px 20px 30px 60px;
             }
             @include deviceWidth(mobile) {
                 @include m-typography(24px, 24px, 700);

@@ -15,6 +15,7 @@ import tgDark from 'assets/layout/tg-dark.svg'
 import wuDark from 'assets/layout/wu-dark.svg'
 import basket from 'assets/layout/fa-shopping-bag.svg'
 
+import MobileMenu from '@features/Basic/common/Topline/components/MobileMenu'
 import styles from './index.module.scss'
 
 interface ToplineProps {
@@ -22,7 +23,7 @@ interface ToplineProps {
   absolute: boolean;
 }
 
-enum ToplineLinks {
+export enum ToplineLinks {
   Home = '/',
   Products = '/products',
   Service = '/service',
@@ -35,9 +36,17 @@ const Topline: FC<ToplineProps> = ({
   absolute,
 }): ReactElement => {
   const [toggle, setToggle] = useState<boolean>(false)
+  const [mobileMenu, setMobileMenu] = useState<boolean>(false)
   const { pathname } = useRouter()
 
+  const toggleMobileMenu = (): void => {
+    setMobileMenu(!mobileMenu)
+    document.documentElement.classList.toggle('g_lockscroll')
+  }
+
   const toggleModal = (): void => {
+    if (mobileMenu) toggleMobileMenu()
+
     setToggle(!toggle)
     document.documentElement.classList.toggle('g_lockscroll')
   }
@@ -158,6 +167,7 @@ const Topline: FC<ToplineProps> = ({
               className={cn(styles.topline__mobile, {
                 [styles.topline__mobileDark]: dark,
               })}
+              onClick={toggleMobileMenu}
             >
               <span></span>
               <span></span>
@@ -171,6 +181,13 @@ const Topline: FC<ToplineProps> = ({
         <Opposite
           onClose={toggleModal}
           title="Остались вопросы?"
+        />
+      )}
+
+      {mobileMenu && (
+        <MobileMenu
+          onClose={toggleMobileMenu}
+          openCall={toggleModal}
         />
       )}
     </header>
