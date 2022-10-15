@@ -2,26 +2,72 @@
 @import "@public/styles/variables";
 
 .production {
-    margin-top: 100px;
+  margin-top: 100px;
 
-    &__title {
-        @include w-container-title;
+  @include deviceWidth(tabletPortrait) {
+    margin-top: 70px;
+  }
+  @include deviceWidth(mobile) {
+    margin-top: 60px;
+  }
+
+  &__title {
+    @include w-container-title;
+  }
+
+  &__container {
+    &_desktop {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 30px 20px;
+
+      @include deviceWidth(mobile) {
+        display: none;
+      }
     }
 
-    &__container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 30px 20px;
+    &_mobile {
+      display: none;
+
+      @include deviceWidth(mobile) {
+        display: block;
+      }
+    }
+  }
+
+  &__text {
+    @include m-typography(20px, 28px);
+    margin: auto;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 20px);
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 20px);
+      margin-bottom: 20px;
     }
 
-    &__text {
-        @include m-typography (20px, 28px);
-        margin: auto;
+    & b {
+      @include m-typography(20px, 28px);
+      color: $colorPrimary;
 
-        & b {
-            @include m-typography (20px, 28px);
-            color: $colorPrimary;
-        }
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 20px);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 20px);
+      }
     }
+  }
+
+  &__img {
+    @include deviceWidth(mobile) {
+      display: none;
+    }
+
+    & img {
+      border-radius: 14px;
+    }
+  }
 }

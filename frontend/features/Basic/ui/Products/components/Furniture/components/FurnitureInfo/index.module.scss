@@ -2,36 +2,100 @@
 @import "@public/styles/variables";
 
 .info {
-    display: flex;
-    justify-content: space-between;
-    padding: 80px 0 100px;
+  display: flex;
+  justify-content: space-between;
+  padding: 80px 0 100px;
+
+  @include deviceWidth(tabletPortrait) {
+    padding: 80px 0 70px;
+    width: auto;
+  }
+  @include deviceWidth(mobile) {
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 0 60px;
+  }
+
+  &__title {
+    @include w-container-title();
+    margin-bottom: 40px;
+  }
+
+  &__left {
+    margin-right: 20px;
+    width: 60%;
+
+    @include deviceWidth(tabletPortrait) {
+      margin-right: 80px;
+    }
+    @include deviceWidth(mobile) {
+      margin: 0 0 20px;
+      width: 100%;
+    }
+  }
+
+  &__right {
+    width: 30%;
+
+    @include deviceWidth(tabletPortrait) {
+      width: 50%;
+    }
+    @include deviceWidth(mobile) {
+      width: 100%;
+    }
+  }
+
+  &__image {
+    height: 458px;
+    position: relative;
+
+    @include deviceWidth(tabletPortrait) {
+      width: auto;
+    }
+    @include deviceWidth(mobile) {
+      width: auto;
+    }
+
+    & img {
+      object-fit: cover;
+      border-radius: 25px;
+
+      @include deviceWidth(tabletPortrait) {
+        border-radius: 15px;
+      }
+      @include deviceWidth(mobile) {
+        border-radius: 14px;
+      }
+    }
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
 
     &__title {
-        @include w-container-title();
-        margin-bottom: 40px;
+      @include m-typography(28px, 40px, 700);
+      color: $colorPrimary;
+      margin-bottom: 20px;
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(18px, 25px, 700);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(18px, 25px, 700);
+      }
     }
 
-    &__left {
-        margin-right: 20px;
+    &__text {
+      @include m-typography(16px, 22px, 300);
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 19px, 300);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 19px, 300);
+      }
     }
-
-    &__right {
-        width: 30%;
-    }
-
-    &__item {
-        &:not(:last-child) {
-            margin-bottom: 40px;
-        }
-
-        &__title {
-            @include m-typography(28px, 40px, 700);
-            color: $colorPrimary;
-            margin-bottom: 20px;
-        }
-
-        &__text {
-            @include m-typography(16px, 22px, 300);
-        }
     }
 }

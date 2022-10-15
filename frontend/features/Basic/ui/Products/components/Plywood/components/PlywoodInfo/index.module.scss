@@ -2,23 +2,53 @@
 @import "@public/styles/variables";
 
 .info {
-    display: flex;
-    align-items: center;
-    padding: 80px 0 100px;
+  display: flex;
+  align-items: center;
+  padding: 80px 0 100px;
 
-    &__left {
-        @include m-typography (20px, 28px);
-        width: 50%;
+  @include deviceWidth(tabletPortrait) {
+    padding: 53px 0 73px;
+  }
+  @include deviceWidth(mobile) {
+    flex-direction: column;
+    padding: 50px 0 60px;
+  }
 
-        & b {
-            @include m-typography (20px, 28px);
-            color: $colorPrimary;
-        }
+  &__left {
+    @include m-typography(20px, 28px);
+    margin-right: 20px;
+    width: 50%;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 20px);
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 20px);
+      margin: 0 0 30px;
+      width: 100%;
     }
 
+    & b {
+      @include m-typography(20px, 28px);
+      color: $colorPrimary;
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 20px);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 20px);
+      }
+    }
+  }
+
     &__right {
-        display: flex;
-        justify-content: flex-end;
-        width: 50%;
+      display: flex;
+      justify-content: flex-end;
+      width: 50%;
+
+      @include deviceWidth(mobile) {
+        justify-content: center;
+        width: 100%;
+      }
     }
 }

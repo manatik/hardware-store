@@ -15,7 +15,9 @@ const Service: NextPage = () => {
     >
       <div className={styles.service__wrap}>
         <div className={styles.service__title}>Сервис</div>
-        <ServiceFeature />
+        <div className={styles.service__inner}>
+          <ServiceFeature />
+        </div>
       </div>
     </Layout>
   )

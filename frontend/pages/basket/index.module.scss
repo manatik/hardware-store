@@ -2,9 +2,18 @@
 @import "@public/styles/variables";
 
 .basket {
-    &__title {
-        @include m-typography(48px, 48px, 700);
-        color: $colorPrimary;
-        margin-bottom: 50px;
+  &__title {
+    @include m-typography(48px, 48px, 700);
+    color: $colorPrimary;
+    margin-bottom: 50px;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(32px, 32px, 700);
+      margin-bottom: 50px;
     }
+    @include deviceWidth(mobile) {
+      @include m-typography(28px, 28px, 700);
+      margin-bottom: 40px;
+    }
+  }
 }

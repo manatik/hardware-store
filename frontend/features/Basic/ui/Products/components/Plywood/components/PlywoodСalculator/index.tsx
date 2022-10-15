@@ -58,7 +58,7 @@ const PlywoodCalculator = () => {
 
           <div className={styles.calculator__select__item}>
             <div className={styles.calculator__select__title}>
-              Плотность покрытия (для ламинированной)
+              Плотность покрытия<br/>(для ламинированной)
             </div>
             <SelectField
               name="Сорт"
@@ -73,7 +73,7 @@ const PlywoodCalculator = () => {
         <div className={styles.calculator__right}>
           <div className={styles.calculator__select__item}>
             <div className={styles.calculator__select__title}>
-              Плотность покрытия (для ламинированной)
+              Формат листа <b>*</b>
             </div>
             <SelectField
               name="Сорт"
@@ -86,7 +86,7 @@ const PlywoodCalculator = () => {
 
           <div className={styles.calculator__select__item}>
             <div className={styles.calculator__select__title}>
-              Плотность покрытия (для ламинированной)
+              Тольщина листа <b>*</b>
             </div>
             <SelectField
               name="Сорт"
@@ -99,7 +99,7 @@ const PlywoodCalculator = () => {
 
           <div className={styles.calculator__select__item}>
             <div className={styles.calculator__select__title}>
-              Плотность покрытия (для ламинированной)
+              Количество листов
             </div>
             <SelectField
               name="Сорт"

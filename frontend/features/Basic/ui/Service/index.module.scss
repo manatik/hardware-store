@@ -3,51 +3,56 @@
 
 .service {
     &__wrap {
-        @include w-layout;
-        padding: 100px 0;
+      @include w-layout;
+      padding: 100px 0;
+
+      @include deviceWidth(mobile) {
+        padding: 60px 15px;
+      }
     }
 
     &__title {
         @include w-layout-title;
     }
 
-    &__inner {
-        @include w-layout;
-    }
-
     &__cards {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 64px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 64px 20px;
 
-        @media (max-width: 920px) {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        @media (max-width: 469px) {
-            grid-template-columns: 1fr;
-        }
+      @include deviceWidth(tabletPortrait) {
+        grid-template-columns: 1fr 1fr;
+      }
+      @include deviceWidth(mobile) {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
     }
 
     &__card {
-        max-width: 400px;
+      max-width: 400px;
 
-        &__image {
-           border-radius: 24px;
-            margin-bottom: 20px;
-        }
+      @include deviceWidth(mobile) {
+        max-width: 100%;
+      }
 
-        &__description {
-            font-family: MuseoSansCyrl500;
-            font-size: 18px;
-            line-height: 21px;
-        }
+      &__image {
+        position: relative;
+        border-radius: 24px;
+        margin-bottom: 20px;
+      }
 
-        &__step {
-            font-family: MuseoSansCyrl500;
-            font-size: 18px;
-            line-height: 21px;
-            color: $colorPrimary;
-        }
+      &__description {
+        font-family: MuseoSansCyrl500;
+        font-size: 18px;
+        line-height: 21px;
+      }
+
+      &__step {
+        font-family: MuseoSansCyrl500;
+        font-size: 18px;
+        line-height: 21px;
+        color: $colorPrimary;
+      }
     }
 }

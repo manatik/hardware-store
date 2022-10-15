@@ -2,32 +2,59 @@
 @import "@public/styles/variables";
 
 .calculator {
-    margin-bottom: 100px;
+  margin-bottom: 100px;
 
-    &__title {
-        @include w-container-title;
-    }
+  @include deviceWidth(tabletPortrait) {
+    margin-bottom: 70px;
+  }
+  @include deviceWidth(mobile) {
+    margin-bottom: 60px;
+  }
 
-    &__container {
-        display: flex;
-        justify-content: space-between;
-    }
+  &__title {
+    @include w-container-title;
+  }
 
-    &__left {
-        width: calc(50% - 60px);
-    }
+  &__container {
+    display: flex;
+    justify-content: space-between;
 
-    &__right {
-        width: calc(50% - 60px);
+    @include deviceWidth(mobile) {
+      flex-direction: column;
     }
+  }
+
+  &__left {
+    width: calc(50% - 60px);
+
+    @include deviceWidth(mobile) {
+      width: 100%;
+    }
+  }
+
+  &__right {
+    width: calc(50% - 60px);
+
+    @include deviceWidth(mobile) {
+      width: 100%;
+    }
+  }
 
     &__select {
         &__item {
+          margin-bottom: 35px;
+
+          &:not(:last-child) {
             margin-bottom: 35px;
+          }
+
+          @include deviceWidth(mobile) {
+            margin-bottom: 20px;
 
             &:not(:last-child) {
-                margin-bottom: 35px;
+              margin-bottom: 20px;
             }
+          }
         }
 
         &__title {

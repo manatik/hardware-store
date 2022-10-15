@@ -46,19 +46,39 @@
 }
 
 @mixin w-layout-title {
-  font-family: MuseoSansCyrl700;
-  font-size: 75px;
-  line-height: 77px;
+  @include m-typography(75px, 77px, 700);
   margin-bottom: 70px;
   color: $colorPrimary;
+
+  @include deviceWidth(tabletLandscape) {
+    @include m-typography(48px, 49px, 700);
+  }
+  @include deviceWidth(tabletPortrait) {
+    @include m-typography(48px, 49px, 700);
+  }
+  @include deviceWidth(mobile) {
+    @include m-typography(32px, 32px, 700);
+    margin-bottom: 40px;
+  }
 }
 
 @mixin w-container-title {
-  font-family: MuseoSansCyrl700;
-  font-size: 64px;
-  line-height: 100%;
+  @include m-typography(64px, 100%, 700);
   margin-bottom: 70px;
   color: $colorPrimary;
+
+  @include deviceWidth(tabletLandscape) {
+    @include m-typography(36px, 37px, 700);
+    margin-bottom: 40px;
+  }
+  @include deviceWidth(tabletPortrait) {
+    @include m-typography(36px, 37px, 700);
+    margin-bottom: 40px;
+  }
+  @include deviceWidth(mobile) {
+    @include m-typography(32px, 32px, 700);
+    margin-bottom: 42px;
+  }
 }
 
 @mixin m-typography($size: 16px, $lineHeight: 20px, $font: 300) {
@@ -180,6 +200,7 @@
     &:after {
       transform: rotate(-45deg);
     }
+
     &:before {
       transform: rotate(45deg);
     }
@@ -220,7 +241,7 @@
   }
 
   // only for hovers
-  @media (hover: hover) and (pointer: fine){
+  @media (hover: hover) and (pointer: fine) {
     .form {
       &__button:hover {
         opacity: $opacityHover;
@@ -232,6 +253,12 @@
 @mixin m-offer-card {
   display: flex;
 
+  @include deviceWidth(mobile) {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+  }
+
   &__left {
     @include m-typography(20px, 28px, 300);
     color: $colorOnPrimary;
@@ -240,6 +267,18 @@
     background-color: $colorPrimary;
     width: 50%;
 
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 20px, 300);
+      padding: 24px 27px;
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 20px, 300);
+      padding: 24px 24px 125px;
+      border-radius: 15px;
+      width: 100%;
+    }
+
+
     & a {
       color: $colorOnPrimary;
       border-bottom: 1px solid $colorOnPrimary;
@@ -247,6 +286,13 @@
 
     & b {
       @include m-typography(20px, 28px, 500);
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 20px, 300);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 20px, 300);
+      }
     }
   }
 
@@ -256,9 +302,21 @@
     border-radius: 0 26px 26px 0;
     background-color: $colorPrimary;
 
+    @include deviceWidth(mobile) {
+      top: -105px;
+      width: 90%;
+      height: 180px;
+      border-radius: 15px;
+      background-color: $colorSecondary;
+    }
+
     & img {
       border-radius: 0 26px 26px 0;
       object-fit: cover;
+
+      @include deviceWidth(mobile) {
+        border-radius: 15px;
+      }
     }
   }
 }
@@ -274,16 +332,40 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 70px;
+
+    @include deviceWidth(tabletPortrait) {
+      margin-bottom: 40px;
+    }
+    @include deviceWidth(mobile) {
+      flex-direction: column;
+      margin-bottom: 40px;
+    }
   }
 
   &__left {
-    @include m-typography (20px, 28px);
+    @include m-typography(20px, 28px);
     margin-right: 20px;
     width: 50%;
 
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 14px);
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 14px);
+      margin: 0 0 20px;
+      width: 100%;
+    }
+
     & b {
-      @include m-typography (20px, 28px);
+      @include m-typography(20px, 28px);
       color: $colorPrimary;
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 14px);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 14px);
+      }
     }
   }
 
@@ -292,7 +374,21 @@
     grid-template-columns: 1fr 1fr;
     gap: 16px;
 
+    @include deviceWidth(tabletPortrait) {
+      gap: 10px;
+    }
+    @include deviceWidth(mobile) {
+      gap: 10px;
+    }
+
     &__item {
+      @include deviceWidth(tabletPortrait) {
+        width: 143px;
+      }
+      @include deviceWidth(mobile) {
+        width: 100%;
+      }
+
       & img {
         border-radius: 12px;
       }
@@ -301,10 +397,58 @@
 }
 
 @mixin m-hover {
-  @media (hover: hover) and (pointer: fine){
+  @media (hover: hover) and (pointer: fine) {
     &:hover {
       opacity: $opacityHover;
       cursor: pointer;
+    }
+  }
+}
+
+@mixin m-slider {
+  margin-bottom: 100px;
+
+  @include deviceWidth(tabletLandscape) {
+    margin-bottom: 75px;
+  }
+  @include deviceWidth(tabletPortrait) {
+    margin-bottom: 75px;
+  }
+  @include deviceWidth(mobile) {
+    margin-bottom: 45px;
+  }
+
+  &__slide {
+    max-height: 430px;
+
+    img {
+      object-fit: cover;
+      border-radius: 30px;
+    }
+  }
+
+  &__pagination {
+    position: unset;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    transition: 300ms opacity;
+    margin-top: 10px;
+
+    &__bullet {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba($colorPrimary, .4);
+
+      &:not(:last-child) {
+        margin-right: 4px;
+      }
+
+      &Active {
+        background-color: rgba($colorPrimary, 1);
+      }
     }
   }
 }

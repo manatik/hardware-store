@@ -10,9 +10,11 @@ import Opposite from '@features/Basic/ui/Opposite'
 import vkLight from 'assets/layout/vk.svg'
 import tgLight from 'assets/layout/tg.svg'
 import wuLight from 'assets/layout/wu.svg'
+import ozonLight from 'assets/layout/ozon-light-min.svg'
 import vkDark from 'assets/layout/vk-dark.svg'
 import tgDark from 'assets/layout/tg-dark.svg'
 import wuDark from 'assets/layout/wu-dark.svg'
+import ozonDark from 'assets/layout/ozon-dark-min.svg'
 import basket from 'assets/layout/fa-shopping-bag.svg'
 
 import MobileMenu from '@features/Basic/common/Topline/components/MobileMenu'
@@ -41,14 +43,14 @@ const Topline: FC<ToplineProps> = ({
 
   const toggleMobileMenu = (): void => {
     setMobileMenu(!mobileMenu)
-    document.documentElement.classList.toggle('g_lockscroll')
+    document.documentElement.classList.add('g_lockscroll')
   }
 
   const toggleModal = (): void => {
     if (mobileMenu) toggleMobileMenu()
 
     setToggle(!toggle)
-    document.documentElement.classList.toggle('g_lockscroll')
+    document.documentElement.classList.add('g_lockscroll')
   }
 
   return (
@@ -107,6 +109,12 @@ const Topline: FC<ToplineProps> = ({
             {dark
               ? <>
                 <a
+                  href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.topline__social__link}
+                ><Image src={ozonDark} /></a>
+                <a
                   href="https://vk.com/plywood_market"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -128,6 +136,12 @@ const Topline: FC<ToplineProps> = ({
                 ><Image src={wuDark} /></a>
               </>
               : <>
+                <a
+                  href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.topline__social__link}
+                ><Image src={ozonLight} /></a>
                 <a
                   href="https://vk.com/plywood_market"
                   target="_blank"

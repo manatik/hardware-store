@@ -1,0 +1,32 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.slider {
+  @include m-slider;
+
+  @include deviceWidth(mobile) {
+    margin-bottom: 0;
+  }
+
+  &__card {
+    max-width: 100%;
+
+    &__image {
+      border-radius: 24px;
+      margin-bottom: 20px;
+    }
+
+    &__description {
+      font-family: MuseoSansCyrl500;
+      font-size: 18px;
+      line-height: 21px;
+    }
+
+    &__step {
+      font-family: MuseoSansCyrl500;
+      font-size: 18px;
+      line-height: 21px;
+      color: $colorPrimary;
+    }
+  }
+}

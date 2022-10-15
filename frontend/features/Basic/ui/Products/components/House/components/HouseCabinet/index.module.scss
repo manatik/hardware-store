@@ -2,6 +2,10 @@
 @import "@public/styles/variables";
 
 .cabinet {
-    @include m-card-cabinet;
-    margin-top: 70px;
+  @include m-card-cabinet;
+  margin-top: 70px;
+
+  @include deviceWidth(mobile) {
+    margin-top: -65px
+  }
 }

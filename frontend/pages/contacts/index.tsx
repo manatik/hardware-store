@@ -2,11 +2,12 @@ import React from 'react'
 import { NextPage } from 'next'
 import Layout from '@features/Basic/common/Layout'
 import Image from 'next/image'
+import { wrapper } from '@store/store'
+import { ProjectPage, useServerSideProps } from '@hooks'
+
 import cn from 'classnames'
 
 import map from 'assets/map.png'
-import { wrapper } from '@store/store'
-import { ProjectPage, useServerSideProps } from '@hooks'
 import styles from './index.module.scss'
 
 const Contacts: NextPage = () => {
@@ -19,11 +20,6 @@ const Contacts: NextPage = () => {
         <div className={styles.contacts__inner}>
           <div className={styles.contacts__title}>Контакты</div>
           <div className={styles.contacts__map}>
-            <Image
-              src={map}
-              quality={100}
-              placeholder="blur"
-            />
             <div className={styles.contacts__map__contacts}>
               <div className={styles.contacts__map__contacts__title}>Plywood Market</div>
               <div className={styles.contacts__map__contacts__links}>
@@ -67,6 +63,14 @@ const Contacts: NextPage = () => {
                   г. Киров, ул. Индустриальная 20А
                 </span>
               </div>
+            </div>
+            <div className={styles.contacts__map_desktop}>
+              <Image
+                src={map}
+                quality={100}
+                placeholder="blur"
+                layout="responsive"
+              />
             </div>
           </div>
         </div>

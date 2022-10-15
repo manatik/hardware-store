@@ -2,75 +2,146 @@
 @import "@public/styles/variables";
 
 .basketCard {
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 26px;
+  }
+
+  &__image {
+    position: relative;
+    max-width: 130px;
+    height: 100px;
+    width: 100%;
+    margin-right: 20px;
+
+    & img {
+      border-radius: 10px;
+    }
+  }
+
+  &__right {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
 
-    &:not(:last-child) {
-        margin-bottom: 26px;
+    &_desktop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      @include deviceWidth(tabletPortrait) {
+        display: none;
+      }
+      @include deviceWidth(mobile) {
+        display: none;
+      }
     }
 
-    &__image {
-        width: 130px;
+    &_tablet {
+      display: none;
 
-        & img {
-            border-radius: 10px;
-        }
-    }
+      @include deviceWidth(tabletPortrait) {
+        display: block;
+        width: 100%;
+      }
 
-    &__title {
-        @include m-typography(16px, 22px, 700);
-    }
-
-    &__color {
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-        margin-left: 16px;
-        border: 1px solid rgba($colorBlack, 0.37);
-
-        &_block {
-            @include m-typography(16px, 18px, 500);
-            display: flex;
-            align-items: center;
-        }
-    }
-
-    &__price {
-        @include m-typography(16px, 18px, 500);
-        color: $colorPrimary;
-    }
-
-    &__counter {
+      &__top {
         display: flex;
         align-items: center;
-
-        &__count {
-            @include m-typography(20px, 20px, 500);
-            color: $colorBlack;
-            padding: 0 10px;
-        }
-
-        &__button {
-            @include m-hover;
-            border: 1px solid $colorPrimary;
-            border-radius: 6px;
-            color: $colorPrimary;
-            padding: 6px 10px;
-            cursor: pointer;
-
-            &Active {
-                @include m-hover;
-                border: 1px solid $colorPrimary;
-                background-color: $colorPrimary;
-                border-radius: 6px;
-                color: $colorOnPrimary;
-                padding: 6px 10px;
-            }
-        }
+        justify-content: space-between;
+        width: 100%;
+      }
     }
 
-    &__remove {
+    &_mobile {
+      display: none;
+
+      @include deviceWidth(mobile) {
+        display: block;
+        width: 100%;
+      }
+
+      &__top {
+        margin-bottom: 18px;
+      }
+
+      &__body {
+        display: flex;
+        margin-bottom: 18px;
+      }
+
+      &__bottom {
+        display: flex;
+      }
+    }
+  }
+
+  &__title {
+    @include m-typography(16px, 22px, 700);
+  }
+
+  &__color {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin-left: 16px;
+    border: 1px solid rgba($colorBlack, 0.37);
+
+    &_block {
+      @include m-typography(16px, 18px, 500);
+      display: flex;
+      align-items: center;
+
+      @include deviceWidth(mobile) {
+        margin-right: 25px;
+      }
+    }
+  }
+
+  &__price {
+    @include m-typography(16px, 18px, 500);
+    color: $colorPrimary;
+  }
+
+  &__counter {
+    display: flex;
+    align-items: center;
+
+    @include deviceWidth(mobile) {
+      margin-right: 32px;
+    }
+
+    &__count {
+      @include m-typography(20px, 20px, 500);
+      color: $colorBlack;
+      padding: 0 10px;
+    }
+
+    &__button {
+      @include m-hover;
+      border: 1px solid $colorPrimary;
+      border-radius: 10px;
+      color: $colorPrimary;
+      padding: 6px 10px;
+      cursor: pointer;
+
+      &Active {
         @include m-hover;
+        border: 1px solid $colorPrimary;
+        background-color: $colorPrimary;
+        border-radius: 6px;
+        color: $colorOnPrimary;
+        padding: 6px 10px;
+      }
     }
+  }
+
+  &__remove {
+    @include m-hover;
+    width: 24px;
+  }
 }

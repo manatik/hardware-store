@@ -2,24 +2,31 @@
 @import "@public/styles/variables";
 
 .links {
-    &__item {
-        font-family: MuseoSansCyrl500;
-        font-size: 16px;
-        line-height: 140%;
-        padding: 9px 16px 10px;
-        color: #636161;
-        background-color: $colorSecondary;
-        border: 2px solid $colorPrimary;
-        border-radius: 25px;
-        cursor: pointer;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  height: 65px;
+  padding-top: 10px;
+  overflow-y: unset;
 
-        &:not(:last-child) {
-            margin-right: 15px;
-        }
+  &__item {
+    font-family: MuseoSansCyrl500;
+    font-size: 16px;
+    line-height: 140%;
+    padding: 9px 16px 10px;
+    color: #636161;
+    background-color: $colorSecondary;
+    border: 2px solid $colorPrimary;
+    border-radius: 25px;
+    cursor: pointer;
 
-        &Active {
-            color: $colorOnPrimary;
-            background-color: $colorPrimary;
-        }
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    &Active {
+      color: $colorOnPrimary;
+      background-color: $colorPrimary;
+    }
     }
 }

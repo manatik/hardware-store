@@ -2,31 +2,63 @@
 @import "@public/styles/variables";
 
 .designer {
-    margin-top: 100px;
+  margin-top: 100px;
 
-    &__title {
-        @include w-container-title;
+  @include deviceWidth(tabletPortrait) {
+    margin-top: 70px;
+  }
+  @include deviceWidth(mobile) {
+    margin-top: 0;
+  }
+
+  &__title {
+    @include w-container-title;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 70px 0;
+
+    @include deviceWidth(mobile) {
+      flex-direction: column;
+      margin: 60px 0 40px;
+    }
+  }
+
+  &__left {
+    margin-right: 20px;
+
+    @include deviceWidth(mobile) {
+      margin: 0 0 20px;
+    }
+  }
+
+  &__right {
+    @include m-typography(20px, 28px);
+    margin-right: 20px;
+    width: 50%;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(14px, 20px);
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 20px);
+      margin: 0;
+      width: 100%;
     }
 
-    &__info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 70px 0;
-    }
+    & b {
+      @include m-typography(20px, 28px);
+      color: $colorPrimary;
 
-    &__left {
-        margin-right: 20px;
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 20px);
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 20px);
+      }
     }
-
-    &__right {
-        @include m-typography (20px, 28px);
-        margin-right: 20px;
-        width: 50%;
-
-        & b {
-            @include m-typography (20px, 28px);
-            color: $colorPrimary;
-        }
-    }
+  }
 }
