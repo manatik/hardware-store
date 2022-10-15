@@ -8,7 +8,7 @@ import { UserAllQuery } from 'entities/user/dto/user-all.query';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { UserRoleDto } from './dto/user-role.dto';
 
-// @Roles(Role.Admin)
+@Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.USER)
 export class UserController {
   constructor(private readonly userService: UserService) {}

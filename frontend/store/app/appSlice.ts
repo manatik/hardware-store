@@ -37,7 +37,7 @@ export const appSlice = createSlice({
       })
       .addCase(fetchUserInfoAsync.fulfilled, (state, action) => {
         state.isLoading = false
-        state.userInfo = action.payload.user
+        state.userInfo = action.payload
       })
       .addCase(fetchUserInfoAsync.rejected, (state) => {
         state.isLoading = false
