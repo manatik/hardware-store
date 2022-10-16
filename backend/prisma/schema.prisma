@@ -68,6 +68,25 @@ model Role {
 	@@map("role")
 }
 
+model Config {
+  id            Int         @id @default(autoincrement())
+  emailUser     String      @map("email_user")
+  emailPassword String      @map("email_password")
+  emailHost     String      @map("email_host")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime?   @map("updated_at")
+
+  @@map("config")
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime?   @map("updated_at")
+
+  @@map("order")
+}
+
 /////////////////////////////////////////////////////////////
 //////////////////  PLYWOOD  ///////////////////////////////
 ///////////////////////////////////////////////////////////

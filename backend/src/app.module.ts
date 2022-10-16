@@ -14,6 +14,7 @@ import { getJwtConfig } from 'common/config/jwt.config';
 import { PlywoodEntityModule } from 'entities/plywood-enitities/plywood-entity.module';
 import { HouseEntityModule } from 'entities/house-entities/house-entity.module';
 import { FurnitureEntityModule } from 'entities/furniture-entities/furniture-entity.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { FurnitureEntityModule } from 'entities/furniture-entities/furniture-ent
       inject: [ConfigService],
       useFactory: getJwtConfig,
     }),
+    EmailModule,
     UserModule,
     PrismaModule,
     AuthorizationModule,

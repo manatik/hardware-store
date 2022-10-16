@@ -22,7 +22,7 @@ export class FormatsService {
         return this.errorService.success('Форматы успешно получены', { formats: groupedByFormat });
       }
 
-      return this.errorService.success('Форматы успешно получены', { formats });
+      return this.errorService.success('Форматы успешно получены', { data: formats });
     } catch (e) {
       throw this.errorService.internal('Ошибка получения форматов', e.message);
     }
@@ -32,7 +32,7 @@ export class FormatsService {
     try {
       const format = (await this.prismaService.plywoodFormat.findFirst({ where: { id } })) as any as IPlywoodFormat;
 
-      return this.errorService.success('Формат успешно получен', { format });
+      return this.errorService.success('Формат успешно получен', { data: format });
     } catch (e) {
       throw this.errorService.internal('Ошибка получения формата', e.message);
     }
@@ -42,7 +42,7 @@ export class FormatsService {
     try {
       const format = (await this.prismaService.plywoodFormat.create({ data: dto })) as any as IPlywoodFormat;
 
-      return this.errorService.success('Формат успешно создан', { format });
+      return this.errorService.success('Формат успешно создан', { data: format });
     } catch (e) {
       throw this.errorService.internal('Ошибка создания формата', e.message);
     }
@@ -55,7 +55,7 @@ export class FormatsService {
         data: dto,
       })) as any as IPlywoodFormat;
 
-      return this.errorService.success('Формат успешно обновлен', { format });
+      return this.errorService.success('Формат успешно обновлен', { data: format });
     } catch (e) {
       throw this.errorService.internal('Ошибка обновления формата', e.message);
     }
@@ -71,7 +71,7 @@ export class FormatsService {
 
       const format = (await this.prismaService.plywoodFormat.delete({ where: { id } })) as any as IPlywoodFormat;
 
-      return this.errorService.success('Формат успешно удален', { format });
+      return this.errorService.success('Формат успешно удален', { data: format });
     } catch (e) {
       throw this.errorService.internal('Ошибка удаления формата', e.message);
     }
