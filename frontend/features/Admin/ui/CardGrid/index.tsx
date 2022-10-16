@@ -6,20 +6,19 @@ import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
 import Portal from '@features/Basic/common/Portal'
 import Modal from '@features/Basic/common/Modal'
+import { CoatingDensitySchema } from '@schema/calc'
+import { Formik } from 'formik'
 import styles from './index.module.scss'
 
 const CardGrid: FC<PropsCardGrid> = ({
   title,
-  description,
-  type,
   price,
+  id,
+  endpoint,
+  onUpdate,
+  onRemove,
 }) => {
   const [toggle, setToggle] = useState<boolean>(false)
-  const onChange = (e: any) => {
-    // eslint-disable-next-line no-console
-    console.log(123, e)
-  }
-
   const onToggle = () => {
     setToggle(!toggle)
   }
@@ -29,9 +28,7 @@ const CardGrid: FC<PropsCardGrid> = ({
       <div className={styles.cardGrid}>
         <div className={styles.cardGrid__top}>
           {title && <div className={styles.cardGrid__top__title}>{title}</div>}
-          {description && <div className={styles.cardGrid__top__description}>{description}</div>}
-          {type && <div className={styles.cardGrid__top__description}>{type}</div>}
-          {price && <div className={styles.cardGrid__top__price}>{price}</div>}
+          {price && <div className={styles.cardGrid__top__price}>цена {price}₽</div>}
         </div>
 
         <div className={styles.cardGrid__bottom}>
@@ -42,13 +39,43 @@ const CardGrid: FC<PropsCardGrid> = ({
             >
               Редактировать
             </div>
-            <div className={cn(styles.cardGrid__button, styles.cardGrid__buttonRemove)}>
+            <div
+              className={cn(styles.cardGrid__button, styles.cardGrid__buttonRemove)}
+              onClick={() => onRemove(id, endpoint)}
+            >
               Удалить
             </div>
           </div>
           {toggle && <Portal>
             <Modal>
-              <>
+              <Formik
+                initialValues={{
+                  name: title,
+                  price,
+                }}
+                validateOnChange={false}
+                validateOnBlur={false}
+                validationSchema={CoatingDensitySchema}
+                onSubmit={async (values) => {
+                  await onUpdate(id, endpoint, values)
+                  onToggle()
+                }}
+              >
+                {({
+                  errors,
+                  setErrors,
+                  values,
+                  handleChange,
+                  handleSubmit,
+                }) => (
+                  <form
+                    className="form"
+                    onSubmit={handleSubmit}
+                    onChange={() => {
+                      setErrors({})
+                    }}
+                    noValidate
+                  >
                 <div className={styles.form}>
                   <button
                     onClick={onToggle}
@@ -59,49 +86,35 @@ const CardGrid: FC<PropsCardGrid> = ({
                   <div className={styles.cardGrid__bottom__inputs}>
                     <InputField
                       type={InputType.Text}
-                      name="title"
-                      value={title}
+                      name="name"
+                      value={values.name}
+                      error={errors.name}
                       label="Название"
                       size="md"
-                      onChange={onChange}
+                      onChange={handleChange}
                     />
 
-                    <InputField
-                      type={InputType.Text}
-                      name="description"
-                      value={description}
-                      label="Описание"
-                      size="md"
-                      onChange={onChange}
-                    />
+                    {price && (
+                      <InputField
+                        type={InputType.Number}
+                        name="price"
+                        value={values.price}
+                        label="Цена"
+                        size="md"
+                        onChange={handleChange}
+                      />
+                    )}
 
-                    <InputField
-                      type={InputType.Text}
-                      name="type"
-                      value={type}
-                      label="Тип"
-                      size="md"
-                      onChange={onChange}
-                    />
-
-                    <InputField
-                      type={InputType.Text}
-                      name="price"
-                      value={price}
-                      label="Цена"
-                      size="md"
-                      onChange={onChange}
-                    />
-
-                    <div
+                    <button
                       className={cn(styles.cardGrid__button, styles.cardGrid__buttonEdit)}
-                      onClick={onToggle}
+                      type="submit"
                     >
                       Сохранить
-                    </div>
+                    </button>
                   </div>
                 </div>
-              </>
+                  </form>)}
+              </Formik>
             </Modal>
           </Portal>}
         </div>

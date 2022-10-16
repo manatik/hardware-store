@@ -7,6 +7,7 @@ import { fetchUserInfoAsync } from '@store/app/appSlice'
 import { redirectController } from '@utils/redirectController'
 import { fetchCategoriesAsync } from '@store/category/categorySlice'
 import { setCookieHeader } from '@services/http.service'
+import { fetchCalcParamsAsync } from '@store/calc/calcSlice'
 
 /**
  * Список шаблонов страниц
@@ -39,6 +40,7 @@ export const useServerSideProps = async (
   setCookieHeader(cookie)
 
   await dispatch(fetchUserInfoAsync(cookie))
+  await dispatch(fetchCalcParamsAsync())
 
   if (!getState().app.userInfo?.isAdmin) {
     const redirect = redirectController(pageName)
@@ -59,19 +61,6 @@ export const useServerSideProps = async (
         }
 
         return { props: { categories: null } }
-      }
-    }
-
-    case ProjectPage.Calc: {
-      try {
-        const { format } = getState()
-        return { props: { formatPlywood: format.items } }
-      } catch (e: any) {
-        if (e.statusCode === 401) {
-          await refreshToken(e.statusCode, cookie)
-        }
-
-        return { props: { formatPlywood: null } }
       }
     }
 

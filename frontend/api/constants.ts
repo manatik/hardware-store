@@ -15,4 +15,9 @@ export enum ApiEndpoints {
   UserInfo = '/api/user/info',
   Categories = '/api/category',
   ProductPlywood = '/api/products/plywood',
+  CalcCoatingDensity = '/api/products/plywood-coating-density',
+  CalcType = '/api/products/plywood-type',
+  CalcWidth = '/api/products/plywood-width',
+  CalcSort = '/api/products/plywood-sort',
+  CalcFormat = '/api/products/plywood-format',
 }

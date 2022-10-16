@@ -4,12 +4,14 @@ import indexReducer from '@store/app/appSlice'
 import authReducer from '@store/auth/authSlice'
 import registerReducer from '@store/register/registerSlice'
 import categoryReducer from '@store/category/categorySlice'
+import calcReducer from '@store/calc/calcSlice'
 
 const rootReducer: Reducer = combineReducers({
   app: indexReducer,
   auth: authReducer,
   register: registerReducer,
   category: categoryReducer,
+  calc: calcReducer,
 })
 
 export default rootReducer
