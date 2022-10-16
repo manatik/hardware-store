@@ -10,7 +10,7 @@ export class WidthService {
 
   async getAll() {
     try {
-      const allItems = await this.prismaService.plywoodType.findMany();
+      const allItems = await this.prismaService.plywoodWidth.findMany();
       return this.errorService.success('Успешно', { data: allItems });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -19,7 +19,7 @@ export class WidthService {
 
   async getById(id: number) {
     try {
-      const item = await this.prismaService.plywoodType.findFirst({ where: { id } });
+      const item = await this.prismaService.plywoodWidth.findFirst({ where: { id } });
       return this.errorService.success('Успешно', { data: item });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -28,7 +28,7 @@ export class WidthService {
 
   async add(dto: CreateWidthDto) {
     try {
-      const created = await this.prismaService.plywoodType.create({ data: dto });
+      const created = await this.prismaService.plywoodWidth.create({ data: dto });
       return this.errorService.success('Успешно', { data: created });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -37,7 +37,7 @@ export class WidthService {
 
   async update(id: number, dto: UpdateWidthDto) {
     try {
-      const updated = await this.prismaService.plywoodType.update({ where: { id }, data: dto });
+      const updated = await this.prismaService.plywoodWidth.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -46,7 +46,7 @@ export class WidthService {
 
   async remove(id: number) {
     try {
-      const removed = await this.prismaService.plywoodType.delete({ where: { id } });
+      const removed = await this.prismaService.plywoodWidth.delete({ where: { id } });
       return this.errorService.success('Успешно', { data: removed });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);

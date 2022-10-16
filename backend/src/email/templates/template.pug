@@ -1,0 +1,35 @@
+html
+    head
+        style
+            include style.css
+
+h1 #{typeMail}
+
+block content
+  - var prods = products
+  - var msg = message
+  - var mail = email
+    h2 Пользователь:
+    p Телефон: #{phone}
+    p ФИО: #{fio}
+    if mail
+        p Email: #{mail}
+    if msg
+        p Сообщение: #{msg}
+
+    if prods
+        h2 Продукты:
+        table
+            tr
+                th Название
+                th Цена
+                th Количество
+                th Цвет
+                th HEX код
+        for item in prods
+            tr
+                td= item.name
+                td= item.price
+                td= item.count
+                td(style={background: item.color})= ' '
+                td= item.color
