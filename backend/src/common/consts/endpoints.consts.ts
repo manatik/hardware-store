@@ -8,10 +8,10 @@ export const GLOBAL_PREFIXES = {
   ORDER: 'products/order',
   PLYWOOD: 'products/plywood',
   PLYWOOD_FORMATS: 'products/plywood-format',
-  PLYWOOD_SURFACE: 'products/surface',
-  PLYWOOD_SORT: 'products/sort',
+  PLYWOOD_SURFACE: 'products/plywood-surface',
+  PLYWOOD_SORT: 'products/plywood-sort',
   PLYWOOD_COATING_DENSITY: 'products/plywood-coating-density',
-  PLYWOOD_TYPE: 'products/type',
+  PLYWOOD_TYPE: 'products/plywood-type',
   PLYWOOD_FEATURE: 'products/plywood-feature',
   PLYWOOD_WIDTH: 'products/plywood-width',
 

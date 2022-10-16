@@ -6,10 +6,6 @@ export class UpdateFormatsDto {
   name: string;
 
   @IsOptional()
-  @IsString()
-  size: string;
-
-  @IsOptional()
   @IsNumber()
   price: number;
 }

@@ -14,13 +14,50 @@ import WidthPlywood from '@features/Admin/ui/Calc/WidthPlywood'
 import Type from '@features/Admin/ui/Calc/Type'
 
 import { features } from '@features/Admin/ui/Calc/mockData'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import {
+  getCoatingDensity,
+  getFormats,
+  getSorts,
+  getTypes,
+  getWidthPlywood,
+} from '@store/calc/selector'
+import CardGrid from '@features/Admin/ui/CardGrid'
+import { CalcData } from '@models/Calc'
+import { toast } from 'react-toastify'
+import { fetchCalcRemoveParamsAsync, fetchCalcUpdateParamsAsync } from '@store/calc/calcSlice'
 import styles from './index.module.scss'
 
-const Calc: NextPage = ({ formatPlywood }: any) => {
+const Calc: NextPage = () => {
+  const formats = useAppSelector(getFormats)
+  const sorts = useAppSelector(getSorts)
+  const types = useAppSelector(getTypes)
+  const widthPlywoods = useAppSelector(getWidthPlywood)
+  const coatingDensity = useAppSelector(getCoatingDensity)
+  const dispatch = useAppDispatch()
+
   const [data, setData] = useState({
     name: '',
     value: 1,
   })
+
+  const handleRemoveItem = async (id: number, endpoint: number) => {
+    try {
+      dispatch(fetchCalcRemoveParamsAsync({ id, endpoint }))
+      toast.success('Успешно удалено')
+    } catch (e) {
+      toast.error('Ошибка сервера')
+    }
+  }
+
+  const handleUpdateItem = async (id: number, endpoint: number, data: CalcData) => {
+    try {
+      dispatch(fetchCalcUpdateParamsAsync({ id, endpoint, values: data }))
+      toast.success('Успешно обновлено')
+    } catch (e) {
+      toast.error('Ошибка сервера')
+    }
+  }
 
   const handleChange = (target: any) => {
     setData(target)
@@ -50,17 +87,96 @@ const Calc: NextPage = ({ formatPlywood }: any) => {
         }
       />
       <div className={styles.feature}>
-        <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Характеристики Фанеры</div>
-          <div className={styles.feature__card__container}>
+        {coatingDensity && (
+          <div className={styles.feature__container}>
+            <div className={styles.feature__title}>Плотность покрытия</div>
+            <div className={styles.feature__card__container}>
+              {coatingDensity.map((item: CalcData) => (
+                <CardGrid
+                  key={item.id}
+                  id={item.id as number}
+                  title={item.name}
+                  price={item.price}
+                  endpoint={1}
+                  onUpdate={handleUpdateItem}
+                  onRemove={handleRemoveItem}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Характеристики Мебели</div>
-        </div>
-        <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Характеристики Домов</div>
-        </div>
+        )}
+        {formats && (
+          <div className={styles.feature__container}>
+            <div className={styles.feature__title}>Формат листа</div>
+            <div className={styles.feature__card__container}>
+              {formats.map((item: CalcData) => (
+                <CardGrid
+                  key={item.id}
+                  id={item.id as number}
+                  title={item.name}
+                  price={item.price}
+                  endpoint={2}
+                  onUpdate={handleUpdateItem}
+                  onRemove={handleRemoveItem}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {sorts && (
+          <div className={styles.feature__container}>
+            <div className={styles.feature__title}>Сорт</div>
+            <div className={styles.feature__card__container}>
+              {sorts.map((item: CalcData) => (
+                <CardGrid
+                  key={item.id}
+                  id={item.id as number}
+                  title={item.name}
+                  price={item.price}
+                  endpoint={3}
+                  onUpdate={handleUpdateItem}
+                  onRemove={handleRemoveItem}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {widthPlywoods && (
+          <div className={styles.feature__container}>
+            <div className={styles.feature__title}>Толщина листа</div>
+            <div className={styles.feature__card__container}>
+              {widthPlywoods.map((item: CalcData) => (
+                <CardGrid
+                  key={item.id}
+                  id={item.id as number}
+                  title={item.name}
+                  price={item.price}
+                  endpoint={4}
+                  onUpdate={handleUpdateItem}
+                  onRemove={handleRemoveItem}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        {types && (
+          <div className={styles.feature__container}>
+            <div className={styles.feature__title}>Вид фанеры</div>
+            <div className={styles.feature__card__container}>
+              {types.map((item: CalcData) => (
+                <CardGrid
+                  key={item.id}
+                  id={item.id as number}
+                  title={item.name}
+                  price={item.price}
+                  endpoint={5}
+                  onUpdate={handleUpdateItem}
+                  onRemove={handleRemoveItem}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </AdminLayout>
   )

@@ -8,8 +8,6 @@ import styles from '@features/Admin/ui/Card/index.module.scss'
 import { plywoodService } from '@services/products/plywood.service'
 import { PlywoodSchema } from '@schema/plywood'
 import MultiSelectField from '@features/Admin/ui/MuliSelectField'
-import { useAppSelector } from '@store/hooks'
-import { getFormats } from '@store/format/selector'
 import { flat } from 'radash'
 import { toast } from 'react-toastify'
 
@@ -17,7 +15,6 @@ const PlywoodFormProduct = () => {
   const [option, setOption] = useState()
   const [formatsData, setFormatsData] = useState<any>()
   const formRef = useRef<HTMLFormElement | null>(null)
-  const formats = useAppSelector(getFormats)
 
   const addProduct = async (values: any) => {
     try {
@@ -31,18 +28,18 @@ const PlywoodFormProduct = () => {
   }
 
   const handleCahnge = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const options = Object.entries(formats).map(([_, value]) => {
-      // @ts-ignore
-      const result = value && Array.from(value).map((item) => {
-        // @ts-ignore
-        return { value: item.id, label: `${item.format} => ${item.size}` }
-      })
-      return result
-    })
-
-    // @ts-ignore
-    setOption(flat(options))
+    // // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const options = Object.entries(formats).map(([_, value]) => {
+    //   // @ts-ignore
+    //   const result = value && Array.from(value).map((item) => {
+    //     // @ts-ignore
+    //     return { value: item.id, label: `${item.format} => ${item.size}` }
+    //   })
+    //   return result
+    // })
+    //
+    // // @ts-ignore
+    // setOption(flat(options))
   }
 
   const handleChangeFormatsData = (target: any) => {

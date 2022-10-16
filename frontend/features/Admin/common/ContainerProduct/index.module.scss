@@ -2,35 +2,51 @@
 @import "@public/styles/mixins.scss";
 
 .containerProduct {
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 32px;
-    }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
 
-    &__title {
-        font-size: 36px;
-        line-height: 42px;
-    }
+  &__title {
+    font-size: 36px;
+    line-height: 42px;
 
-    &__button {
-        padding: 12px 16px;
-        border-radius: 8px;
-        background-color: $colorPrimary;
-        cursor: pointer;
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(26px, 26px)
     }
+    @include deviceWidth(mobile) {
+      @include m-typography(26px, 26px)
+    }
+  }
 
-    &__cards {}
+  &__button {
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: $colorPrimary;
+    cursor: pointer;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(18px, 18px)
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(12px, 12px)
+    }
+  }
+
+  &__cards {
+  }
 }
 
 @include m-form-modal;
 
 // only for hovers
-@media (hover: hover) and (pointer: fine){
-    .containerProduct {
-        &__button:hover,
-        &__card__button:hover {
-            opacity: $opacityHover;
-        }
+@media (hover: hover) and (pointer: fine) {
+  .containerProduct {
+    &__button:hover,
+    &__card__button:hover {
+      opacity: $opacityHover;
     }
+  }
 }

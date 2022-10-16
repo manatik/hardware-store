@@ -5,21 +5,39 @@ import InputField from '@features/Admin/ui/InputField'
 import cn from 'classnames'
 import styles from '@features/Admin/ui/Card/index.module.scss'
 import { CoatingDensitySchema } from '@schema/calc'
+import { CalcData } from '@models/Calc'
+import { toast } from 'react-toastify'
+import { useAppDispatch } from '@store/hooks'
+import { fetchCalcAddParamsAsync } from '@store/calc/calcSlice'
 
 const CoatingDensity = () => {
   const formRef = useRef<HTMLFormElement | null>(null)
+  const dispatch = useAppDispatch()
+
+  const addCoatingDensity = async (data: CalcData) => {
+    try {
+      await dispatch(fetchCalcAddParamsAsync({ ...data, id: 1 }))
+      toast.success('Плотность успешно добавлена')
+    } catch (e) {
+      toast.error('Ошибка сервера')
+    }
+  }
 
   return (
     <Formik
       initialValues={{
         name: '',
-        price: '',
+        price: 0,
       }}
       validateOnChange={false}
       validateOnBlur={false}
       validationSchema={CoatingDensitySchema}
-      onSubmit={async (values) => {
-        console.log(values)
+      onSubmit={async (values, formikHelpers) => {
+        await addCoatingDensity(values)
+        formikHelpers.setValues({
+          name: '',
+          price: 0,
+        })
       }}
     >
       {({

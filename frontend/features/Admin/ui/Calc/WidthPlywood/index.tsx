@@ -5,21 +5,39 @@ import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
 import styles from '@features/Admin/ui/Card/index.module.scss'
+import { CalcData } from '@models/Calc'
+import { toast } from 'react-toastify'
+import { fetchCalcAddParamsAsync } from '@store/calc/calcSlice'
+import { useAppDispatch } from '@store/hooks'
 
 const WidthPlywood = () => {
   const formRef = useRef<HTMLFormElement | null>(null)
+  const dispatch = useAppDispatch()
+
+  const addWidthPlywood = async (data: CalcData) => {
+    try {
+      await dispatch(fetchCalcAddParamsAsync({ ...data, id: 4 }))
+      toast.success('Толщина листа успешно добавлена')
+    } catch (e) {
+      toast.error('Ошибка сервера')
+    }
+  }
 
   return (
     <Formik
       initialValues={{
         name: '',
-        price: '',
+        price: 0,
       }}
       validateOnChange={false}
       validateOnBlur={false}
       validationSchema={CoatingDensitySchema}
-      onSubmit={async (values) => {
-        console.log(values)
+      onSubmit={async (values, formikHelpers) => {
+        await addWidthPlywood(values)
+        formikHelpers.setValues({
+          name: '',
+          price: 0,
+        })
       }}
     >
       {({
