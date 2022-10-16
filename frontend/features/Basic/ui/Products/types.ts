@@ -10,6 +10,14 @@ export interface MockLink {
   title: string,
 }
 
+export interface ServiceSlide {
+  image: any,
+  title?: string,
+  number?: string,
+}
+
 export type SliderMock = SliderMockItem[]
 
 export type MockLinksTypes = MockLink[]
+
+export type MockServiceSlide = ServiceSlide[]

@@ -2,33 +2,41 @@
 @import "@public/styles/variables";
 
 .productCards {
-    display: grid;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 20px;
+
+  @include deviceWidth(tabletLandscape) {
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px 20px;
+  }
+  @include deviceWidth(tabletPortrait) {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 20px;
+  }
+  @include deviceWidth(mobile) {
+    grid-template-columns: 1fr;
+    gap: 20px 20px;
+  }
 
-    @media (max-width: 920px) {
-        grid-template-columns: 1fr 1fr;
+  &__item {
+    cursor: pointer;
+
+    &:hover {
+      opacity: $opacityHover;
     }
 
-    @media (max-width: 469px) {
-        grid-template-columns: 1fr;
+    &__image {
+      max-width: 400px;
+      margin-bottom: 15px;
+
+      @include deviceWidth(mobile) {
+        max-width: 100%;
+      }
+
+      & img {
+        border-radius: 24px;
+      }
     }
-
-    &__item {
-        cursor: pointer;
-
-        &:hover {
-            opacity: $opacityHover;
-        }
-
-        &__image {
-            max-width: 400px;
-            margin-bottom: 15px;
-
-            & img {
-                border-radius: 24px;
-            }
-        }
 
         &__title {
             @include m-typography(18px, 21px, 700);

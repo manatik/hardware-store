@@ -5,6 +5,7 @@ import Link from 'next/link'
 import vk from 'assets/layout/vk.svg'
 import tg from 'assets/layout/tg.svg'
 import wu from 'assets/layout/wu.svg'
+import ozon from 'assets/layout/ozon-light-min.svg'
 
 import styles from './index.module.scss'
 
@@ -29,6 +30,12 @@ const Footer = () => {
               </Link>
             </div>
             <div className={styles.footer__links__social_mobile}>
+              <a
+                href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__social__link}
+              ><Image src={ozon} /></a>
               <a
                 href="https://vk.com/plywood_market"
                 target="_blank"
@@ -71,6 +78,12 @@ const Footer = () => {
               </div>
             </div>
             <div className={styles.footer__social}>
+              <a
+                href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__social__link}
+              ><Image src={ozon} /></a>
               <a
                 href="https://vk.com/plywood_market"
                 target="_blank"

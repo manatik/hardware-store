@@ -18,6 +18,7 @@ const FurnitureInfo = () => {
              src={info}
              width={715}
              placeholder="blur"
+             layout="fill"
            />
         </div>
       </div>

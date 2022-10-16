@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import Modal from '@features/Basic/common/Modal'
 import Image from 'next/image'
 import { Formik } from 'formik'
@@ -19,6 +19,10 @@ interface OppositeProps {
   title: string;
 }
 const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
+  useEffect(() => {
+    return () => document.documentElement.classList.remove('g_lockscroll')
+  }, [])
+
   return (
     <Portal>
       <Modal>

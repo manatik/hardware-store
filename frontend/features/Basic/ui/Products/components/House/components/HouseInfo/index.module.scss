@@ -2,45 +2,109 @@
 @import "@public/styles/variables";
 
 .info {
-    padding: 80px 0 100px;
+  padding: 80px 0 100px;
 
-    &__title {
-        @include m-typography(28px, 32px, 700);
-        margin-bottom: 70px;
-        color: $colorPrimary;
+  @include deviceWidth(tabletPortrait) {
+    padding: 70px 0 72px;
+  }
+  @include deviceWidth(mobile) {
+    padding: 40px 0;
+  }
+
+  &__title {
+    @include m-typography(28px, 32px, 700);
+    margin-bottom: 70px;
+    color: $colorPrimary;
+
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(24px, 28px, 700);
+      margin-bottom: 40px;
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(16px, 18px, 700);
+      margin-bottom: 20px;
+    }
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 70px;
+
+    @include deviceWidth(tabletPortrait) {
+      margin-bottom: 48px;
+    }
+    @include deviceWidth(mobile) {
+      flex-direction: column;
+      margin-bottom: 40px;
     }
 
-    &__top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 70px;
+    &__left {
+      @include m-typography(20px, 28px);
+      margin-right: 20px;
+      width: 50%;
 
-        &__left {
-            @include m-typography (20px, 28px);
-            margin-right: 20px;
-            width: 50%;
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 20px);
+        margin-right: 76px;
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 20px);
+        margin: 0 0 20px;
+        width: 100%;
+      }
 
-            & b {
-                @include m-typography (20px, 28px);
-                color: $colorPrimary;
-            }
+      & b {
+        @include m-typography(20px, 28px);
+        color: $colorPrimary;
+
+        @include deviceWidth(tabletPortrait) {
+          @include m-typography(14px, 20px);
+          margin-right: 76px;
         }
+        @include deviceWidth(mobile) {
+          @include m-typography(14px, 20px);
+        }
+      }
+    }
     }
 
     &__bottom {
-        display: flex;
-        justify-content: space-between;
+      display: flex;
+      justify-content: space-between;
 
-        &__right {
-            @include m-typography (20px, 28px);
-            margin-right: 20px;
-            width: 50%;
+      @include deviceWidth(mobile) {
+        flex-direction: column;
+      }
 
-            & b {
-                @include m-typography (20px, 28px);
-                color: $colorPrimary;
-            }
+      &__right {
+        @include m-typography(20px, 28px);
+        margin-left: 20px;
+        width: 50%;
+
+        @include deviceWidth(tabletPortrait) {
+          @include m-typography(14px, 20px);
+          margin-left: 76px;
         }
+        @include deviceWidth(mobile) {
+          @include m-typography(14px, 20px);
+          margin: 20px 0 0;
+          width: 100%;
+        }
+
+        & b {
+          @include m-typography(20px, 28px);
+          color: $colorPrimary;
+
+          @include deviceWidth(tabletPortrait) {
+            @include m-typography(14px, 20px);
+          }
+
+          @include deviceWidth(mobile) {
+            @include m-typography(14px, 20px);
+          }
+        }
+      }
     }
 }

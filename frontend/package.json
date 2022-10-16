@@ -15,6 +15,7 @@
     "classnames": "^2.3.1",
     "cookies-next": "^2.1.1",
     "formik": "^2.2.9",
+    "isomorphic-dompurify": "^0.23.0",
     "locomotive-scroll": "^4.1.4",
     "next": "12.2.3",
     "next-redux-wrapper": "^7.0.5",

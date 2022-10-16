@@ -11,11 +11,10 @@ export interface Users {
   success: boolean;
 }
 
-export interface UserInfo {
+export interface UserInfo extends UserData{
   error: boolean;
   message: string;
   success: boolean;
-  user: UserData;
   statusCode: number
 }
 

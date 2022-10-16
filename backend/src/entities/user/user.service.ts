@@ -84,7 +84,7 @@ export class UserService {
       if (user.roles?.some((role) => role?.name === Role.Admin)) {
         delete user.roles;
         delete user.password;
-        return this.errorService.success('Пользователь успешно получен', { user: { ...user, isAdmin: true } });
+        return this.errorService.success('Пользователь успешно получен', { ...user, isAdmin: true });
       }
 
       delete user.roles;

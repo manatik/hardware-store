@@ -2,13 +2,20 @@
 @import "@public/styles/variables";
 
 .products {
-    padding: 100px 0;
+  padding: 100px 0;
 
-    &__inner {
-        @include w-layout;
-    }
+  @include deviceWidth(tabletPortrait) {
+    padding: 70px 0;
+  }
+  @include deviceWidth(mobile) {
+    padding: 60px 0;
+  }
 
-    &__title {
-        @include w-layout-title;
-    }
+  &__inner {
+    @include w-layout;
+  }
+
+  &__title {
+    @include w-layout-title;
+  }
 }

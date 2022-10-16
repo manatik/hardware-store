@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import Image from 'next/image'
 import Portal from '@features/Basic/common/Portal'
 import Modal from '@features/Basic/common/Modal'
@@ -9,7 +9,6 @@ import { ToplineLinks } from '@features/Basic/common/Topline'
 import vkDark from 'assets/layout/mobile-menu/vk-dark-mobile.svg'
 import tgDark from 'assets/layout/mobile-menu/tg-dark-mobile.svg'
 import wuDark from 'assets/layout/mobile-menu/wu-dark-mobile.svg'
-import wbDark from 'assets/layout/wb-dark.svg'
 import ozonDark from 'assets/layout/ozon-dark.svg'
 import styles from './index.module.scss'
 
@@ -18,6 +17,10 @@ interface MobileMenuProps {
   openCall: () => void;
 }
 const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
+  useEffect(() => {
+    return () => document.documentElement.classList.remove('g_lockscroll')
+  }, [])
+
   return (
     <Portal>
       <Modal>
@@ -99,16 +102,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
 
               <div className={styles.mobileMenu__market}>
                 <a
-                  href="https://t.me/plywood_market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.mobileMenu__market__link}
-                >
-                  <Image src={wbDark} />
-                </a>
-
-                <a
-                  href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                  href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.mobileMenu__market__link}

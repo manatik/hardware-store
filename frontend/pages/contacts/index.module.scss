@@ -2,45 +2,78 @@
 @import "@public/styles/variables.scss";
 
 .contacts {
-    padding: 100px 0;
+  padding: 100px 0;
 
-    &__inner {
-        @include w-layout;
-    }
+  @include deviceWidth(tabletPortrait) {
+    padding: 64px 0;
+  }
+  @include deviceWidth(mobile) {
+    padding: 64px 0;
+  }
 
-    &__title {
-        @include w-layout-title;
-    }
+  &__inner {
+    @include w-layout;
+  }
 
-    &__map {
+  &__title {
+    @include w-layout-title;
+  }
+
+  &__map {
+    position: relative;
+
+    &__contacts {
+      position: absolute;
+      top: 115px;
+      left: 115px;
+      padding: 30px 35px;
+      background-color: $colorOnPrimary;
+      border-radius: 5px;
+      z-index: 12;
+
+      &__title {
+        font-family: MuseoSansCyrl700;
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 16px;
+        color: $colorPrimary;
+      }
+
+      &__links {
+        display: flex;
+        flex-direction: column;
+      }
+
+
+      @include deviceWidth(tabletLandscape) {
+        top: 30px;
+        left: 30px;
+      }
+      @include deviceWidth(tabletPortrait) {
         position: relative;
-
-        &__contacts {
-            position: absolute;
-            top: 115px;
-            left: 115px;
-            padding: 30px 35px;
-            background-color: $colorOnPrimary;
-
-            &__title {
-                font-family: MuseoSansCyrl700;
-                font-size: 20px;
-                line-height: 28px;
-                margin-bottom: 16px;
-                color: $colorPrimary;
-            }
-
-            &__links {
-                display: flex;
-                flex-direction: column;
-            }
-
-            @media (max-width: 1020px) {
-                top: 30px;
-                left: 30px;
-            }
-        }
+        top: auto;
+        left: auto;
+      }
+      @include deviceWidth(mobile) {
+        position: relative;
+        top: auto;
+        left: auto;
+      }
     }
+
+    &_desktop {
+      & img {
+        @include deviceWidth(tabletPortrait) {
+          transform-origin: 62% 50%;
+          transform: scale(1.8);
+        }
+        @include deviceWidth(mobile) {
+          transform-origin: 62% 50%;
+          transform: scale(1.8);
+        }
+      }
+    }
+  }
 
     &__link {
         font-family: MuseoSansCyrl500;
