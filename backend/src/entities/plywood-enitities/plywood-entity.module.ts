@@ -6,9 +6,28 @@ import { SortModule } from 'entities/plywood-enitities/sort/sort.module';
 import { SurfaceModule } from 'entities/plywood-enitities/surface/surface.module';
 import { TypeModule } from 'entities/plywood-enitities/type/type.module';
 import { FeatureModule } from './feature/feature.module';
+import { WidthModule } from './width/width.module';
 
 @Module({
-  imports: [PlywoodModule, CoatingDensityModule, FormatsModule, SortModule, SurfaceModule, TypeModule, FeatureModule],
-  exports: [PlywoodModule, CoatingDensityModule, FormatsModule, SortModule, SurfaceModule, TypeModule, FeatureModule],
+  imports: [
+    PlywoodModule,
+    CoatingDensityModule,
+    FormatsModule,
+    SortModule,
+    SurfaceModule,
+    TypeModule,
+    FeatureModule,
+    WidthModule,
+  ],
+  exports: [
+    PlywoodModule,
+    CoatingDensityModule,
+    FormatsModule,
+    SortModule,
+    SurfaceModule,
+    TypeModule,
+    FeatureModule,
+    WidthModule,
+  ],
 })
 export class PlywoodEntityModule {}

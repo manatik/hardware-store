@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
-import { UpdateTypeDto } from './dto/update-type.dto';
-import { CreateTypeDto } from './dto/create-type.dto';
+import { UpdateWidthDto } from './dto/update-width.dto';
+import { CreateWidthDto } from './dto/create-width.dto';
 
 @Injectable()
-export class TypeService {
+export class WidthService {
   constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
   async getAll() {
@@ -26,7 +26,7 @@ export class TypeService {
     }
   }
 
-  async add(dto: CreateTypeDto) {
+  async add(dto: CreateWidthDto) {
     try {
       const created = await this.prismaService.plywoodType.create({ data: dto });
       return this.errorService.success('Успешно', { data: created });
@@ -35,7 +35,7 @@ export class TypeService {
     }
   }
 
-  async update(id: number, dto: UpdateTypeDto) {
+  async update(id: number, dto: UpdateWidthDto) {
     try {
       const updated = await this.prismaService.plywoodType.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });
