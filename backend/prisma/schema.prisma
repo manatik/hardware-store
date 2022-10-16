@@ -79,6 +79,14 @@ model Config {
   @@map("config")
 }
 
+model Order {
+  id            Int         @id @default(autoincrement())
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime?   @map("updated_at")
+
+  @@map("order")
+}
+
 /////////////////////////////////////////////////////////////
 //////////////////  PLYWOOD  ///////////////////////////////
 ///////////////////////////////////////////////////////////

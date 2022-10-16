@@ -3,6 +3,7 @@ export const GLOBAL_PREFIXES = {
   ROLE: 'role',
   AUTH: 'auth',
   CATEGORY: 'category',
+  EMAIL: 'email',
 
   PLYWOOD: 'products/plywood',
   PLYWOOD_FORMATS: 'products/plywood-format',
@@ -25,6 +26,9 @@ export const ENDPOINTS = {
     LOGIN: 'login',
     REGISTER: 'register',
     REFRESH: 'refresh',
+  },
+  EMAIL: {
+    SEND: 'send',
   },
   USER: {
     ALL: 'all',
