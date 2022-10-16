@@ -24,11 +24,11 @@ const PlywoodProduction = () => {
           Грамотно выстроенный технологический процесс обеспечивает
           <b>эффективное производство с минимальными потерями</b>.
         </div>
-        <Image src={image1}/>
-        <Image src={image2}/>
-        <Image src={image3}/>
+        <Image src={image1} />
+        <Image src={image2} />
+        <Image src={image3} />
       </div>
-      
+
       <div className={styles.production__container_mobile}>
         <div className={styles.production__text}>
           С помощью стабильных поставок фанеры <b>ГОСТ</b> образца любого объема,
@@ -37,8 +37,8 @@ const PlywoodProduction = () => {
           Грамотно выстроенный технологический процесс обеспечивает
           <b>эффективное производство с минимальными потерями</b>.
         </div>
-        
-        <PlywoodSlider cards={productsSlider}/>
+
+        <PlywoodSlider cards={productsSlider} />
       </div>
     </div>
   )
