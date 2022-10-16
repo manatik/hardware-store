@@ -13,8 +13,8 @@ interface SelectFieldProps {
 }
 
 interface Option {
-  value: string,
-  label: string
+  id: string,
+  name: string
 }
 
 const Index: FC<SelectFieldProps> = ({

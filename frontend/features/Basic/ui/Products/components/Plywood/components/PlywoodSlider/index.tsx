@@ -13,10 +13,10 @@ const PlywoodSlider: FC<any> = ({ cards }) => {
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
-        // autoplay={{
-        //   delay: 3000,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         pagination={{
           type: 'bullets',
           modifierClass: `${styles.slider__pagination} `,
@@ -38,7 +38,7 @@ const PlywoodSlider: FC<any> = ({ cards }) => {
               {item.title && (
                 <div className={styles.slider__card__description}>
                   {item.number && <span className={styles.slider__card__step}>{item.number} </span>}
-                  <span dangerouslySetInnerHTML={{ __html: sanitizeHTML(item.title) }}/>
+                  <span dangerouslySetInnerHTML={{ __html: sanitizeHTML(item.title) }} />
                 </div>
               )}
             </div>

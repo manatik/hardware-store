@@ -6,7 +6,6 @@ import { refreshToken } from '@utils/refreshToken'
 import { fetchUserInfoAsync } from '@store/app/appSlice'
 import { redirectController } from '@utils/redirectController'
 import { fetchCategoriesAsync } from '@store/category/categorySlice'
-import { fetchFormatsAsync } from '@store/format/formatSlice'
 import { setCookieHeader } from '@services/http.service'
 
 /**
@@ -16,7 +15,7 @@ export enum ProjectPage {
   Login,
   Register,
   Categories,
-  Feature,
+  Calc,
   Orders,
   Products,
   Users,
@@ -48,7 +47,6 @@ export const useServerSideProps = async (
   }
 
   await dispatch(fetchCategoriesAsync())
-  await dispatch(fetchFormatsAsync())
 
   switch (pageName) {
     case ProjectPage.Categories: {
@@ -64,7 +62,7 @@ export const useServerSideProps = async (
       }
     }
 
-    case ProjectPage.Feature: {
+    case ProjectPage.Calc: {
       try {
         const { format } = getState()
         return { props: { formatPlywood: format.items } }

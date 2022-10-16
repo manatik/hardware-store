@@ -153,11 +153,14 @@ export const serviceSlide = [
 export const productsSlider = [
   {
     image: image1,
+    number: '01',
   },
   {
     image: image2,
+    number: '02',
   },
   {
     image: image3,
+    number: '03',
   },
 ]
