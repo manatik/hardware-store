@@ -61,7 +61,7 @@ const Formats = () => {
             name="name"
             value={values.name}
             error={errors.name}
-            placeholder="1500x3000 мм"
+            placeholder="1500x3000"
             label="Формат листа"
             size="md"
             onChange={handleChange}

@@ -16,6 +16,7 @@ const InputField: FC<PropsInputField> = ({
   isDisabled,
   isRequired,
   withRef,
+  pattern,
 }): ReactElement => {
   return (
     <div className={styles.input__field__wrapper}>
@@ -36,6 +37,7 @@ const InputField: FC<PropsInputField> = ({
           disabled={isDisabled}
           required={isRequired}
           ref={withRef}
+          pattern={pattern}
         />
       </div>
       {error && <div className={styles.input__fieldError}>{error}</div>}

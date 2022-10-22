@@ -10,6 +10,7 @@ export interface PropsInputField {
   isDisabled?: boolean;
   isRequired?: boolean;
   withRef?: React.RefObject<HTMLInputElement>;
+  pattern?: string;
 }
 
 export enum InputType {

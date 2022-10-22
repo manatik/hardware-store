@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { Formik } from 'formik'
-import { CoatingDensitySchema } from '@schema/calc'
+import { calcAllSchema } from '@schema/calc'
 import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
@@ -31,7 +31,7 @@ const WidthPlywood = () => {
       }}
       validateOnChange={false}
       validateOnBlur={false}
-      validationSchema={CoatingDensitySchema}
+      validationSchema={calcAllSchema}
       onSubmit={async (values, formikHelpers) => {
         await addWidthPlywood(values)
         formikHelpers.setValues({

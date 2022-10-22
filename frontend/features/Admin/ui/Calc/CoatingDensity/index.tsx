@@ -4,7 +4,7 @@ import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
 import cn from 'classnames'
 import styles from '@features/Admin/ui/Card/index.module.scss'
-import { CoatingDensitySchema } from '@schema/calc'
+import { calcAllSchema } from '@schema/calc'
 import { CalcData } from '@models/Calc'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '@store/hooks'
@@ -31,7 +31,7 @@ const CoatingDensity = () => {
       }}
       validateOnChange={false}
       validateOnBlur={false}
-      validationSchema={CoatingDensitySchema}
+      validationSchema={calcAllSchema}
       onSubmit={async (values, formikHelpers) => {
         await addCoatingDensity(values)
         formikHelpers.setValues({

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { CoatingDensitySchema } from '@schema/calc'
+import { calcAllSchema } from '@schema/calc'
 import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
@@ -31,7 +31,7 @@ const Sort = () => {
       }}
       validateOnChange={false}
       validateOnBlur={false}
-      validationSchema={CoatingDensitySchema}
+      validationSchema={calcAllSchema}
       onSubmit={async (values, formikHelpers) => {
         await addSort(values)
         formikHelpers.setValues({
