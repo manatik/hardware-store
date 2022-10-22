@@ -27,10 +27,16 @@ const Products: NextPage = ({ products }: any) => {
   const [images, setImages] = useState<File[]>([])
 
   const handleSaveImages = async (id: number) => {
-    const FD = convertModelToFormData({ photos: images, color: '#000000' })
+    const fd = new FormData()
 
-    console.log(FD)
-    const data = await plywoodService.plywoodAddPhoto(id, FD)
+    for (const img of images) {
+      fd.append('photos', img.file)
+    }
+
+    fd.append('color', '#fff')
+
+    console.log(images)
+    const data = await plywoodService.plywoodAddPhoto(id, fd)
     console.log(data)
   }
 
@@ -73,7 +79,7 @@ const Products: NextPage = ({ products }: any) => {
           return (
             <Card
               title={item.name}
-              image={item.photos[0]}
+              image={item.photos?.[0]}
               key={item.id}
               description={item.description}
               form={(

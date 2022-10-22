@@ -18,7 +18,7 @@ export class FilesService {
 
       return {
         filename: name,
-        path: `public/${name}`,
+        path: `/uploads/${name}`,
       };
     } catch (e) {
       throw e;

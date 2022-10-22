@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useStaticAssets(path.join(__dirname, '../..', 'assets'), {
     index: false,
-    prefix: '/public',
+    prefix: '/uploads',
   });
 
   await app.listen(PORT, () => {

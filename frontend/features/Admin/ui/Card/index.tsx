@@ -33,7 +33,8 @@ const Card: FC<CardProps> = ({
         <div className={styles.card__left}>
           {image && <div className={styles.card__image}>
             <Image
-              src={popa}
+              src={image.path}
+              alt={image.filename}
               height={120}
               width={120}
             />

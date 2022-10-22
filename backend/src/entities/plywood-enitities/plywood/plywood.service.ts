@@ -17,8 +17,7 @@ export class PlywoodService {
     private readonly prismaService: PrismaService,
     private readonly errorService: ErrorService,
     private readonly filesService: FilesService,
-  ) {
-  }
+  ) {}
 
   async getAll() {
     try {
@@ -79,7 +78,7 @@ export class PlywoodService {
           types: { connect: idsArrayToArrayObjects(dto.types) },
           coatingDensity: { connect: idsArrayToArrayObjects(dto.coatingDensity) },
           widths: { connect: idsArrayToArrayObjects(dto.widths) },
-        }
+        },
       })) as any as IPlywood;
 
       return this.errorService.success('Продукт успешно добавлен', { product });
@@ -91,6 +90,10 @@ export class PlywoodService {
   async addPhotos(id: number, photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
     try {
       const photoPaths: IPhoto[] = [];
+
+      if (!photos.length) {
+        throw new Error('Фото не получено');
+      }
 
       for (const photo of photos) {
         const { path, filename } = await this.filesService.writeFileWithCompress({
