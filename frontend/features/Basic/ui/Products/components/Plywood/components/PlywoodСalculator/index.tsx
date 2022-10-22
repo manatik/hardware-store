@@ -60,7 +60,7 @@ const PlywoodCalculator = () => {
       const resultVolume = width * height * depth * Number(data.count)
 
       setValume(resultVolume)
-      setMass(Math.trunc(resultVolume * 750))
+      setMass(resultVolume * 750)
     } else {
       setValume(0)
       setMass(0)
@@ -189,7 +189,7 @@ const PlywoodCalculator = () => {
                 Общий объём: <b>{Number(volume).toFixed(1)}</b> м3
               </div>
               <div className={styles.calculator__result__item}>
-                Общая масса: <b>{mass}</b> кг
+                Общая масса: <b>{Number(mass).toFixed(1)}</b> кг
               </div>
               {/* <div className={styles.calculator__result__item}> */}
               {/*  Стоимость: <b>15000</b> руб */}
