@@ -6,12 +6,10 @@ import styles from './index.module.scss'
 const MultiSelectField = ({
   options, onChange, name, label, defaultValue,
 }: any) => {
-  const optionsArray = !Array.isArray(options) && typeof options === 'object'
-    ? Object.keys(options).map((optionName) => ({
-      label: options[optionName].name,
-      value: options[optionName]._id,
-    }))
-    : options
+  const optionsArray = Object.keys(options).map((optionName) => ({
+    label: options[optionName].name,
+    value: options[optionName].id,
+  }))
 
   return (
     <div className={styles.multiSelect}>

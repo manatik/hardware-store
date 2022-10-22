@@ -1,4 +1,4 @@
-@import "@public/styles/mixins";
+@import "@public/styles/mixins.scss";
 @import "@public/styles/variables.scss";
 
 .adminLayout {
@@ -31,7 +31,7 @@
         &__open {
             text-align: center;
             cursor: pointer;
-            z-index: 100;
+            z-index: 10;
             height: 100%;
 
             & span {
