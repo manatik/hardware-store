@@ -66,7 +66,7 @@ export class PlywoodService {
       const duplicate = await this.prismaService.plywood.findFirst({ where: { article: dto.article } });
 
       if (duplicate) {
-        throw this.errorService.badRequest(`Продукт с артикулом - ${dto.article} уже существует`);
+        throw new Error(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
       const product = (await this.prismaService.plywood.create({ data: dto })) as any as IPlywood;
