@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
 import InputImage from '@features/Admin/ui/InputImage'
 import cn from 'classnames'
+import { ImageType } from 'react-images-uploading'
 
 interface AddPhotosProps {
   onChange: (imageList: any, addUpdateIndex: any) => void;
   onClick: (id: number) => void;
-  images: File[];
+  images: ImageType[];
   id: number,
 }
 const AddPhotos: FC<AddPhotosProps> = ({

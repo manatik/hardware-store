@@ -12,11 +12,9 @@ import Furniture from '@features/Admin/ui/Products/Furniture'
 import Plywood from '@features/Admin/ui/Products/Plywood'
 import House from '@features/Admin/ui/Products/House'
 import Card from '@features/Admin/ui/Card'
-import InputImage from '@features/Admin/ui/InputImage'
-import { convertModelToFormData } from '@utils/convertModelToFormData'
-import cn from 'classnames'
 import AddPhotos from '@features/Admin/ui/Products/Plywood/Forms/AddPhotos'
 import { plywoodService } from '@services/products/plywood.service'
+import { ImageType } from 'react-images-uploading'
 
 const Products: NextPage = ({ products }: any) => {
   const categories = useAppSelector(getCategories)
@@ -24,13 +22,14 @@ const Products: NextPage = ({ products }: any) => {
     name: '',
     value: categories[0].id,
   })
-  const [images, setImages] = useState<File[]>([])
+  const [images, setImages] = useState<ImageType[]>([])
 
   const handleSaveImages = async (id: number) => {
+    // TODO: функция конвертирования форм даты кривая, можно поправить, но думаю нахуй надо
     const fd = new FormData()
 
     for (const img of images) {
-      fd.append('photos', img.file)
+      fd.append('photos', img.file || '')
     }
 
     fd.append('color', '#fff')

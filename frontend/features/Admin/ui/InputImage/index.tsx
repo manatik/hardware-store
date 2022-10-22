@@ -1,9 +1,14 @@
-import React from 'react'
-import ImageUploading from 'react-images-uploading'
+import React, { FC } from 'react'
+import ImageUploading, { ImageType } from 'react-images-uploading'
 import cn from 'classnames'
 import styles from './index.module.scss'
 
-const InputImage = ({ value, onChange }: any) => {
+interface InputImageProps {
+  value: ImageType[]
+  onChange: (value: ImageType[], addUpdatedIndex?: (number[] | undefined)) => void
+}
+
+const InputImage: FC<InputImageProps> = ({ value, onChange }) => {
   const maxNumber = 4
 
   return (

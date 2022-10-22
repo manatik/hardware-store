@@ -15,8 +15,9 @@ export const convertModelToFormData = (val: any, formData: FormData = new FormDa
         }
       }
     } else {
-      formData.append(namespace, val.toString())
+      formData.append(namespace, val)
     }
   }
+
   return formData
 }
