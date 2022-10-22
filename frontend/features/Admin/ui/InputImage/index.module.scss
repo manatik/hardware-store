@@ -2,53 +2,61 @@
 @import "@public/styles/mixins.scss";
 
 .inputImage {
-    &__input {
-        position: absolute;
-        left: -9999px;
-        opacity: 0;
-    }
+  &__input {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
 
-    &__label {
-        display: inline-block;
-        font-size: 14px;
-        line-height: 16px;
-        padding: 11px 27px;
-        border: 1px solid #ababab;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-bottom: 16px;
-    }
+  &__label {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 11px 27px;
+    border: 1px solid #ababab;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 16px;
+  }
 
-    &__item {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        padding: 13px 12px 13px 12px;
-        border: 1px solid #ababab;
-        border-radius: 4px;
-        font-size: 14px;
-        line-height: 16px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        margin-bottom: 16px;
-    }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 13px 12px 13px 12px;
+    border: 1px solid #ababab;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
-    &__btn {
-        @include m-button;
+    &:not(:last-child) {
+      margin-bottom: 16px;
     }
+  }
 
-    &__btns {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-    }
+  &__content {
+    margin-top: 16px;
+  }
 
-    &__upload {
-        background-color: #ff7010;
-    }
+  &__btn {
+    @include m-button;
+  }
 
-    &__remove {
-        background-color: #e23535;
-    }
+  &__btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  &__upload {
+    background-color: #ff7010;
+    margin-bottom: 8px;
+  }
+
+  &__remove {
+    background-color: #e23535;
+  }
 }

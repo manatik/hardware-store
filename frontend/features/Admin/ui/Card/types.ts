@@ -5,6 +5,9 @@ export interface CardProps {
   title: string;
   description?: string;
   form?: ReactElement;
+  formPhoto?: ReactElement;
   remove?: boolean;
   edit?: boolean;
+
+  addPhotos?: boolean;
 }

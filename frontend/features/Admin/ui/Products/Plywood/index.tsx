@@ -58,7 +58,7 @@ const PlywoodFormProduct = () => {
       initialValues={{
         name: '',
         article: '',
-        categoryId: 3,
+        categoryId: 1,
         description: '',
         price: '',
       }}

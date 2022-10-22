@@ -1,5 +1,6 @@
 @import "~@csstools/normalize.css";
 @import "variables";
+@import "mixins";
 @import "fonts";
 
 * {
@@ -53,6 +54,23 @@ a {
 
 .form {
     padding-top: 16px;
+}
+
+.button {
+    @include m-button;
+    margin-top: 16px;
+
+    &Edit {
+        background-color: #ff7010;
+    }
+
+    &Remove {
+        background-color: #e23535;
+    }
+
+    &:not(:last-child) {
+        margin-right: 16px;
+    }
 }
 
 .g_lockscroll {

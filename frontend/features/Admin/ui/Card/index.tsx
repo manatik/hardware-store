@@ -12,13 +12,20 @@ const Card: FC<CardProps> = ({
   title,
   description,
   form,
+  formPhoto,
   remove = true,
   edit = true,
+  addPhotos = true,
 }): ReactElement => {
-  const hiddenElem = useRef<HTMLDivElement | null>(null)
+  const hiddenElemForm = useRef<HTMLDivElement | null>(null)
+  const hiddenElemPhoto = useRef<HTMLDivElement | null>(null)
 
   const toggle = () => {
-    slideToggle(hiddenElem.current)
+    slideToggle(hiddenElemForm.current)
+  }
+
+  const toggleFormPhoto = () => {
+    slideToggle(hiddenElemPhoto.current)
   }
   return (
     <div className={styles.card}>
@@ -36,8 +43,18 @@ const Card: FC<CardProps> = ({
             {description && <div className={styles.card__description}>{description}</div>}
           </div>
         </div>
-        {(edit || remove) && <div className={styles.card__right}>
-          {edit
+        {(edit || remove || addPhotos) && <div className={styles.card__right}>
+          {addPhotos && formPhoto
+            && <div
+              className={cn(
+                styles.card__button,
+                styles.card__buttonEdit,
+              )}
+              onClick={toggleFormPhoto}
+               >
+              Добавить фото
+            </div>}
+          {edit && form
             && <div
               className={cn(
                 styles.card__button,
@@ -59,14 +76,26 @@ const Card: FC<CardProps> = ({
         </div>}
       </div>
 
-      {form && <div
-        className={styles.card__hidden}
-        ref={hiddenElem}
-               >
+      {formPhoto && (
+        <div
+          className={styles.card__hidden}
+          ref={hiddenElemPhoto}
+        >
         <div className={styles.card__edit}>
-          {form}
+          {formPhoto}
         </div>
-      </div>}
+      </div>
+      )}
+      {form && (
+        <div
+          className={styles.card__hidden}
+          ref={hiddenElemForm}
+        >
+          <div className={styles.card__edit}>
+            {form}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

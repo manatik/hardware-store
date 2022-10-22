@@ -29,7 +29,7 @@ const InputImage = ({ value, onChange }: any) => {
           >
             Добавить фото
           </button>
-          <div>
+          {imageList.length !== 0 && <div className={styles.inputImage__content}>
             {imageList.map((image, index) => (
               <div
                 key={index}
@@ -56,7 +56,7 @@ const InputImage = ({ value, onChange }: any) => {
                 </div>
               </div>
             ))}
-          </div>
+          </div>}
         </>
       )}
     </ImageUploading>

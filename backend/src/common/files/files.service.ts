@@ -27,7 +27,7 @@ export class FilesService {
 
   async compressFile(buffer: Buffer) {
     try {
-      return await sharp(buffer).toFormat('webp').webp({ quality: 80 }).toBuffer();
+      return await sharp(buffer).toFormat('webp').webp({ quality: 50 }).toBuffer();
     } catch (e) {
       throw e;
     }

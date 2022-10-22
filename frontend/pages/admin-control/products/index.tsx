@@ -11,16 +11,37 @@ import { getCategories } from '@store/category/selector'
 import Furniture from '@features/Admin/ui/Products/Furniture'
 import Plywood from '@features/Admin/ui/Products/Plywood'
 import House from '@features/Admin/ui/Products/House'
+import Card from '@features/Admin/ui/Card'
+import InputImage from '@features/Admin/ui/InputImage'
+import { convertModelToFormData } from '@utils/convertModelToFormData'
+import cn from 'classnames'
+import AddPhotos from '@features/Admin/ui/Products/Plywood/Forms/AddPhotos'
+import { plywoodService } from '@services/products/plywood.service'
 
-const Products: NextPage = () => {
+const Products: NextPage = ({ products }: any) => {
   const categories = useAppSelector(getCategories)
   const [data, setData] = useState({
     name: '',
     value: categories[0].id,
   })
+  const [images, setImages] = useState<File[]>([])
+
+  const handleSaveImages = async (id: number) => {
+    const FD = convertModelToFormData({ photos: images, color: '#000000' })
+
+    console.log(FD)
+    const data = await plywoodService.plywoodAddPhoto(id, FD)
+    console.log(data)
+  }
 
   const handleChange = (target: any) => {
     setData(target)
+  }
+
+  const onChangeImage = (imageList: any, addUpdateIndex: any) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex)
+    setImages(imageList)
   }
 
   return (
@@ -40,12 +61,43 @@ const Products: NextPage = () => {
               defaultOption="Выберите категорию..."
             />
 
-             {Number(data.value) === 1 && <Plywood />}
-             {Number(data.value) === 2 && <House />}
-             {Number(data.value) === 3 && <Furniture />}
+            {Number(data.value) === 1 && <Plywood />}
+            {Number(data.value) === 2 && <House />}
+            {Number(data.value) === 3 && <Furniture />}
           </>
         }
       />
+      <div>
+        {products && products.map((item: any) => {
+          console.log(item)
+          return (
+            <Card
+              title={item.name}
+              image={item.photos[0]}
+              key={item.id}
+              description={item.description}
+              form={(
+                <>
+                  <div>asdasdasd</div>
+                  <div>asdasdasd</div>
+                  <div>asdasdasd</div>
+                  <div>asdasdasd</div>
+                  <div>asdasdasd</div>
+                  <div>asdasdasd</div>
+                </>
+              )}
+              formPhoto={(
+                <AddPhotos
+                  images={images}
+                  id={item.id}
+                  onClick={handleSaveImages}
+                  onChange={onChangeImage}
+                />
+              )}
+            />
+          )
+        })}
+      </div>
     </AdminLayout>
   )
 }

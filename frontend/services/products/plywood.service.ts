@@ -24,4 +24,8 @@ export const plywoodService = {
     const { data } = await httpService.get(`${plywoodEndpoint}/${id}`)
     return data
   },
+  plywoodAddPhoto: async (id: number, dataPhotos: any) => {
+    const { data } = await httpService.post(`${plywoodEndpoint}/photos/${id}`, dataPhotos)
+    return data
+  },
 }
