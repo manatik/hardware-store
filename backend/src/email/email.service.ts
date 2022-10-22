@@ -24,6 +24,8 @@ export class EmailService {
         template: join(process.cwd(), 'dist/email/templates/template'),
         context: { email, phone, fio, message, typeMail, products },
       });
+
+      return this.errorService.success('Сообщение успешно отправлено');
     } catch (e) {
       console.error(e);
       this.errorService.internal('Ошибка отправки E-mail', e.message);

@@ -3,31 +3,31 @@ import { Available } from '../../../../types/enum/Available.enum';
 
 export class CreatePlywoodDto {
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   features: number[];
 
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   formats: number[];
 
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   surfaceTypes: number[];
 
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   types: number[];
 
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   sorts: number[];
 
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   coatingDensity: number[];
 
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   widths: number[];
 
   @IsNotEmpty()

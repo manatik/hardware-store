@@ -5,6 +5,7 @@ export const GLOBAL_PREFIXES = {
   CATEGORY: 'category',
   EMAIL: 'email',
 
+  ORDER: 'products/order',
   PLYWOOD: 'products/plywood',
   PLYWOOD_FORMATS: 'products/plywood-format',
   PLYWOOD_SURFACE: 'products/plywood-surface',
@@ -50,6 +51,13 @@ export const ENDPOINTS = {
     GET_ALL: '',
     GET_BY_ID: ':id',
     UPDATE: ':id',
+  },
+
+  ORDER: {
+    GET_ALL: '',
+    GET_BY_ID: ':id',
+    CREATE: '',
+    DELETE: ':id',
   },
 
   FURNITURE: {

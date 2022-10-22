@@ -15,6 +15,7 @@ import { PlywoodEntityModule } from 'entities/plywood-enitities/plywood-entity.m
 import { HouseEntityModule } from 'entities/house-entities/house-entity.module';
 import { FurnitureEntityModule } from 'entities/furniture-entities/furniture-entity.module';
 import { EmailModule } from './email/email.module';
+import { OrderModule } from './entities/order/order.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { EmailModule } from './email/email.module';
       inject: [ConfigService],
       useFactory: getJwtConfig,
     }),
+    OrderModule,
     EmailModule,
     UserModule,
     PrismaModule,

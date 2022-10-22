@@ -3,7 +3,7 @@ import { Available } from '../../../../types/enum/Available.enum';
 
 export class CreateFurnitureDto {
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   features: number[];
 
   @IsNotEmpty()
