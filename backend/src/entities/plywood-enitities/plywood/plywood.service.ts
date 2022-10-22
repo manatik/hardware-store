@@ -17,7 +17,8 @@ export class PlywoodService {
     private readonly prismaService: PrismaService,
     private readonly errorService: ErrorService,
     private readonly filesService: FilesService,
-  ) {}
+  ) {
+  }
 
   async getAll() {
     try {
@@ -69,7 +70,17 @@ export class PlywoodService {
         throw new Error(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
-      const product = (await this.prismaService.plywood.create({ data: dto })) as any as IPlywood;
+      const product = (await this.prismaService.plywood.create({
+        data: {
+          ...dto,
+          sorts: { connect: idsArrayToArrayObjects(dto.sorts) },
+          formats: { connect: idsArrayToArrayObjects(dto.formats) },
+          surfaceTypes: { connect: idsArrayToArrayObjects(dto.surfaceTypes) },
+          types: { connect: idsArrayToArrayObjects(dto.types) },
+          coatingDensity: { connect: idsArrayToArrayObjects(dto.coatingDensity) },
+          widths: { connect: idsArrayToArrayObjects(dto.widths) },
+        }
+      })) as any as IPlywood;
 
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {
