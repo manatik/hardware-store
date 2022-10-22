@@ -7,9 +7,12 @@ export const PlywoodSchema = Yup.object().shape({
   article: Yup.string()
     .trim()
     .required('Введите артикул'),
-  // price: Yup.string()
-  //   .trim()
-  //   .required('Укажите цену'),
+  price: Yup.string()
+    .trim()
+    .required('Укажите цену'),
+  description: Yup.string()
+    .trim()
+    .required('Укажите описание'),
   // width: Yup.string()
   //   .trim()
   //   .required('Укажите толщину'),

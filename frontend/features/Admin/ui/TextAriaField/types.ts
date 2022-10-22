@@ -4,4 +4,5 @@ export interface TextAria {
   value: string,
   onChange: any,
   placeholder?: string
+  error?: string
 }

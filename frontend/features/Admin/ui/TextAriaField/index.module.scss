@@ -25,4 +25,19 @@
             outline: none;
         }
     }
+
+    &Error {
+        margin-top: 4px;
+        color: #ff3f3f;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 16px;
+        text-transform: inherit;
+    }
+
+    &.error {
+        border-color: #ff3f3f;
+        background-color: rgba(255, 63, 63, .09);
+    }
 }

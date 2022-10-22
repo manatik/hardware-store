@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react'
 import { TextAria } from '@features/Admin/ui/TextAriaField/types'
 
+import cn from 'classnames'
 import styles from './index.module.scss'
 
 const TextAriaField: FC<TextAria> = ({
@@ -9,6 +10,7 @@ const TextAriaField: FC<TextAria> = ({
   value,
   onChange,
   placeholder,
+  error,
 }): ReactElement => {
   return (
     <div className={styles.textAria}>
@@ -25,9 +27,12 @@ const TextAriaField: FC<TextAria> = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className={styles.textAria__input}
+          className={cn(styles.textAria__input, {
+            [styles.error]: error,
+          })}
         />
       </div>
+      {error && <div className={styles.textAriaError}>{error}</div>}
     </div>
   )
 }

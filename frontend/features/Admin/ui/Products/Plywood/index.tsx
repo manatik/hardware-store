@@ -149,6 +149,7 @@ const PlywoodFormProduct = () => {
             onChange={handleChange}
             value={values.description}
             placeholder="Что-то о товаре"
+            error={errors.description}
           />
 
           <button
