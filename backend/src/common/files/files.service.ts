@@ -18,7 +18,7 @@ export class FilesService {
 
       return {
         filename: name,
-        originalFilename: filename,
+        originalFilename: filename.split('.')?.[0] || filename,
         path: `/uploads/${name}`,
         size,
       };
@@ -29,7 +29,12 @@ export class FilesService {
 
   async compressFile(buffer: Buffer) {
     try {
-      return await sharp(buffer).toFormat('webp').webp({ quality: 75 }).toBuffer();
+      return await sharp(buffer)
+        .toFormat('webp')
+        .webp({ quality: 70 })
+        .resize(1366, 768, { fit: 'outside' })
+        .normalise()
+        .toBuffer();
     } catch (e) {
       throw e;
     }

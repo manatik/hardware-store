@@ -34,15 +34,12 @@ export class PhotosController {
     return await this.photosService.getById(id);
   }
 
-  @Roles(Role.Admin)
+  // @Roles(Role.Admin)
+  @Public()
   @UseInterceptors(FilesInterceptor('photos'))
   @Post(ENDPOINTS.PLYWOOD_PHOTOS.CREATE)
-  async add(
-    @UploadedFiles() photos: Array<Express.Multer.File>,
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: AddPhotoDto,
-  ) {
-    return await this.photosService.add(id, photos, dto);
+  async add(@UploadedFiles() photos: Array<Express.Multer.File>, @Body() dto: AddPhotoDto) {
+    return await this.photosService.add(photos, dto);
   }
 
   @Roles(Role.Admin)
@@ -56,7 +53,8 @@ export class PhotosController {
     return await this.photosService.update(id, photos, dto);
   }
 
-  @Roles(Role.Admin)
+  // @Roles(Role.Admin)
+  @Public()
   @Delete(ENDPOINTS.PLYWOOD_PHOTOS.DELETE)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.photosService.remove(id);
