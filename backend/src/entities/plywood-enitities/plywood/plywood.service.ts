@@ -90,6 +90,9 @@ export class PlywoodService {
   async addPhotos(id: number, photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
     try {
       const photoPaths: IPhoto[] = [];
+      const product = await this.prismaService.plywood.findFirst({
+        where: { id, deleted: { in: null } },
+      });
 
       if (!photos.length) {
         throw new Error('Фото не получено');
@@ -110,7 +113,9 @@ export class PlywoodService {
 
       await this.prismaService.plywood.update({
         where: { id },
-        data: { photos: photoPaths as unknown as Prisma.JsonArray },
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        data: { photos: [...product.photos, ...photoPaths] as unknown as Prisma.JsonArray },
       });
 
       return this.errorService.success('Фото успешно добавлено');

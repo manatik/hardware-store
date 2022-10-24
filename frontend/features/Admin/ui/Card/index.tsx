@@ -1,21 +1,22 @@
 import React, { FC, ReactElement, useRef } from 'react'
 import Image from 'next/image'
 import cn from 'classnames'
-import popa from 'assets/popa.jpeg'
 import { slideToggle } from '@utils/slideToogle'
 import { CardProps } from '@features/Admin/ui/Card/types'
 
+import { Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import styles from './index.module.scss'
 
 const Card: FC<CardProps> = ({
-  image,
+  id,
+  images,
   title,
   description,
   form,
   formPhoto,
-  remove = true,
+  remove,
   edit = true,
-  addPhotos = true,
 }): ReactElement => {
   const hiddenElemForm = useRef<HTMLDivElement | null>(null)
   const hiddenElemPhoto = useRef<HTMLDivElement | null>(null)
@@ -31,62 +32,69 @@ const Card: FC<CardProps> = ({
     <div className={styles.card}>
       <div className={styles.card__inner}>
         <div className={styles.card__left}>
-          {image && <div className={styles.card__image}>
-            <Image
-              src={image.path}
-              alt={image.filename}
-              height={120}
-              width={120}
-            />
-          </div>}
+          {images && (
+            <div className={styles.card__image}>
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={1}
+              pagination={true}
+              modules={[Pagination]}
+            >
+              {images.map((item) => (
+                <SwiperSlide key={item.filename}>
+                  <Image
+                    src={item.path}
+                    alt={item.filename}
+                    height={120}
+                    width={120}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+          )}
           <div className={styles.card__left__info}>
             {title && <div className={styles.card__title}>{title}</div>}
             {description && <div className={styles.card__description}>{description}</div>}
           </div>
         </div>
-        {(edit || remove || addPhotos) && <div className={styles.card__right}>
-          {addPhotos && formPhoto
-            && <div
+        {(edit || remove) && <div className={styles.card__right}>
+          {formPhoto && (
+            <div
               className={cn(
                 styles.card__button,
                 styles.card__buttonEdit,
               )}
               onClick={toggleFormPhoto}
-               >
+            >
               Добавить фото
-            </div>}
-          {edit && form
-            && <div
+            </div>
+          )}
+          {edit && form && (
+            <div
               className={cn(
                 styles.card__button,
                 styles.card__buttonEdit,
               )}
               onClick={toggle}
-               >
+            >
               Редактировать
-            </div>}
-          {remove
-            && <div
+            </div>
+          )}
+          {remove && (
+            <div
               className={cn(
                 styles.card__button,
                 styles.card__buttonRemove,
               )}
-               >
+              onClick={() => remove(id)}
+            >
               Удалить
-            </div>}
+            </div>
+          )}
         </div>}
       </div>
 
-      {formPhoto && (
-        <div
-          className={styles.card__hidden}
-          ref={hiddenElemPhoto}
-        >
-        <div className={styles.card__edit}>
-          {formPhoto}
-        </div>
-      </div>
-      )}
       {form && (
         <div
           className={styles.card__hidden}

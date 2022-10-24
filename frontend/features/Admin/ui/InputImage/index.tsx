@@ -24,16 +24,15 @@ const InputImage: FC<InputImageProps> = ({ value, onChange }) => {
         onImageUpload,
         onImageUpdate,
         onImageRemove,
-        dragProps,
+        // dragProps,
       }) => (
         <>
-          <button
+          <div
             className={styles.inputImage__label}
             onClick={onImageUpload}
-            {...dragProps}
           >
             Добавить фото
-          </button>
+          </div>
           {imageList.length !== 0 && <div className={styles.inputImage__content}>
             {imageList.map((image, index) => (
               <div

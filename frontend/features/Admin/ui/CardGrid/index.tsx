@@ -28,7 +28,7 @@ const CardGrid: FC<PropsCardGrid> = ({
       <div className={styles.cardGrid}>
         <div className={styles.cardGrid__top}>
           {title && <div className={styles.cardGrid__top__title}>{title}</div>}
-          {price && <div className={styles.cardGrid__top__price}>цена {price}₽</div>}
+          <div className={styles.cardGrid__top__price}>цена {price}₽</div>
         </div>
 
         <div className={styles.cardGrid__bottom}>
@@ -69,7 +69,6 @@ const CardGrid: FC<PropsCardGrid> = ({
                   handleSubmit,
                 }) => (
                   <form
-                    className="form"
                     onSubmit={handleSubmit}
                     onChange={() => {
                       setErrors({})
@@ -94,16 +93,14 @@ const CardGrid: FC<PropsCardGrid> = ({
                       onChange={handleChange}
                     />
 
-                    {price && (
-                      <InputField
-                        type={InputType.Number}
-                        name="price"
-                        value={values.price}
-                        label="Цена"
-                        size="md"
-                        onChange={handleChange}
-                      />
-                    )}
+                    <InputField
+                      type={InputType.Number}
+                      name="price"
+                      value={values.price}
+                      label="Цена"
+                      size="md"
+                      onChange={handleChange}
+                    />
 
                     <button
                       className={cn(styles.cardGrid__button, styles.cardGrid__buttonEdit)}

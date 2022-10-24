@@ -36,6 +36,7 @@
         height: 120px;
         width: 120px;
         margin-right: 16px;
+        cursor: pointer;
     }
 
     &__title {
@@ -47,6 +48,11 @@
     &__description {
         font-size: 16px;
         line-height: 22px;
+
+        display: block;
+        max-width: 450px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__buttons {

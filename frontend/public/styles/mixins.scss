@@ -226,6 +226,17 @@
     width: 100%;
     overflow: auto;
 
+    @include deviceWidth(tabletPortrait) {
+      max-height: none;
+      border-radius: 0;
+      height: 100vh;
+    }
+    @include deviceWidth(mobile) {
+      max-height: none;
+      border-radius: 0;
+      height: 100vh;
+    }
+
     &__title {
       font-size: 20px;
       font-weight: 600;

@@ -155,7 +155,7 @@ const PlywoodCalculator = () => {
             <SelectField
               name="widthPlywoods"
               onChange={handleChange}
-              value={data.widthPlywoods.id}
+              value={data.widthPlywoods?.id || ''}
               options={widthPlywoods}
               defaultOption="Выберите Тольщину листа..."
             />
