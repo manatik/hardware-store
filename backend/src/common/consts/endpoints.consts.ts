@@ -14,6 +14,7 @@ export const GLOBAL_PREFIXES = {
   PLYWOOD_TYPE: 'products/plywood-type',
   PLYWOOD_FEATURE: 'products/plywood-feature',
   PLYWOOD_WIDTH: 'products/plywood-width',
+  PLYWOOD_PHOTOS: 'products/plywood-photos',
 
   FURNITURE: 'products/furniture',
   FURNITURE_FEATURE: '',
@@ -127,6 +128,13 @@ export const ENDPOINTS = {
     DELETE: ':id',
   },
   PLYWOOD_WIDTH: {
+    GET_ALL: '',
+    GET_BY_ID: ':id',
+    CREATE: '',
+    UPDATE: ':id',
+    DELETE: ':id',
+  },
+  PLYWOOD_PHOTOS: {
     GET_ALL: '',
     GET_BY_ID: ':id',
     CREATE: '',

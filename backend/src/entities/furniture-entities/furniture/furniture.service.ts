@@ -4,7 +4,6 @@ import { ErrorService } from 'common/error/error.service';
 import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
 import { FilesService } from 'common/files/files.service';
 import { AddPhotoDto } from './dto/add-photo.dto';
-import { IPhoto } from '../../../types/IPhoto.type';
 import { Prisma } from '@prisma/client';
 import { UpdateFurnitureDto } from './dto/update-furniture.dto';
 import { idsArrayToArrayObjects } from '../../../common/utils/utils';
@@ -94,7 +93,7 @@ export class FurnitureService {
 
   async addPhotos(id: number, photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
     try {
-      const photoPaths: IPhoto[] = [];
+      const photoPaths: any[] = [];
 
       for (const photo of photos) {
         const { path, filename } = await this.filesService.writeFileWithCompress({
