@@ -25,7 +25,7 @@ export const features: Option[] = [
     id: '5',
   },
   {
-    name: 'Фото фанеры',
+    name: 'Фото продукции',
     id: '6',
   },
 ]
