@@ -9,7 +9,7 @@ import * as uuid from 'uuid';
 export class FilesService {
   private readonly SOURCE_DIR = path.join(process.cwd(), 'assets');
 
-  async writeFileWithCompress({ filename, buffer }: { filename: string; buffer: Buffer }) {
+  async writeFileWithCompress({ filename, buffer, size = 0 }: { filename: string; buffer: Buffer; size?: number }) {
     try {
       const compressedBuffer = await this.compressFile(buffer);
       const name = uuid.v4() + '.webp';
@@ -18,7 +18,9 @@ export class FilesService {
 
       return {
         filename: name,
+        originalFilename: filename,
         path: `/uploads/${name}`,
+        size,
       };
     } catch (e) {
       throw e;
@@ -40,6 +42,24 @@ export class FilesService {
       }
 
       await fsPromises.writeFile(`${this.SOURCE_DIR}/${filename}`, buffer);
+
+      return {
+        success: true,
+        message: 'Файл успешно записан',
+      };
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async removeFile(filename: string) {
+    try {
+      await fsPromises.rm(`${this.SOURCE_DIR}/${filename}`);
+
+      return {
+        success: true,
+        message: 'Файл успешно удалён',
+      };
     } catch (e) {
       throw e;
     }

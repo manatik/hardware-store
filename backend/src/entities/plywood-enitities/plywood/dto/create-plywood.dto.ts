@@ -30,6 +30,10 @@ export class CreatePlywoodDto {
   @IsNumber({}, { each: true })
   widths: number[];
 
+  @IsOptional()
+  @IsNumber({}, { each: true })
+  photos: number[];
+
   @IsNotEmpty()
   @IsString()
   name: string;

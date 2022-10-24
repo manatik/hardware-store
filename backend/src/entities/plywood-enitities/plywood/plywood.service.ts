@@ -3,25 +3,17 @@ import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 import { CreatePlywoodDto } from 'entities/plywood-enitities/plywood/dto/create-plywood.dto';
 import { IPlywood } from 'entities/plywood-enitities/plywood/types/IPlywood.interface';
-import { FilesService } from 'common/files/files.service';
 import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delete-plywood.query';
-import { Prisma } from '@prisma/client';
-import { IPhoto } from 'types/IPhoto.type';
-import { AddPhotoDto } from 'entities/plywood-enitities/plywood/dto/add-photo.dto';
 import { UpdatePlywoodDto } from './dto/update-plywood.dto';
 import { idsArrayToArrayObjects } from '../../../common/utils/utils';
 
 @Injectable()
 export class PlywoodService {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly errorService: ErrorService,
-    private readonly filesService: FilesService,
-  ) {}
+  constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
   async getAll() {
     try {
-      const products = (await this.prismaService.plywood.findMany({
+      const products = await this.prismaService.plywood.findMany({
         where: { deleted: { in: null } },
         include: {
           formats: true,
@@ -30,8 +22,9 @@ export class PlywoodService {
           sorts: true,
           coatingDensity: true,
           features: true,
+          photos: true,
         },
-      })) as any as IPlywood[];
+      });
 
       return this.errorService.success('Продукты успешно получены', {
         products,
@@ -43,7 +36,7 @@ export class PlywoodService {
 
   async getById(id: number) {
     try {
-      const product = (await this.prismaService.plywood.findFirst({
+      const product = await this.prismaService.plywood.findFirst({
         where: { id, deleted: { in: null } },
         include: {
           formats: true,
@@ -52,8 +45,9 @@ export class PlywoodService {
           sorts: true,
           coatingDensity: true,
           features: true,
+          photos: true,
         },
-      })) as any as IPlywood;
+      });
 
       return this.errorService.success('Продукт успешно получен', { product });
     } catch (e) {
@@ -78,49 +72,13 @@ export class PlywoodService {
           types: { connect: idsArrayToArrayObjects(dto.types) },
           coatingDensity: { connect: idsArrayToArrayObjects(dto.coatingDensity) },
           widths: { connect: idsArrayToArrayObjects(dto.widths) },
+          photos: { connect: idsArrayToArrayObjects(dto.photos) },
         },
       })) as any as IPlywood;
 
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {
       throw this.errorService.internal('Ошибка добавления продукта', e.message);
-    }
-  }
-
-  async addPhotos(id: number, photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
-    try {
-      const photoPaths: IPhoto[] = [];
-      const product = await this.prismaService.plywood.findFirst({
-        where: { id, deleted: { in: null } },
-      });
-
-      if (!photos.length) {
-        throw new Error('Фото не получено');
-      }
-
-      for (const photo of photos) {
-        const { path, filename } = await this.filesService.writeFileWithCompress({
-          filename: photo.originalname,
-          buffer: photo.buffer,
-        });
-
-        photoPaths.push({
-          filename,
-          path,
-          color: dto.color,
-        });
-      }
-
-      await this.prismaService.plywood.update({
-        where: { id },
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        data: { photos: [...product.photos, ...photoPaths] as unknown as Prisma.JsonArray },
-      });
-
-      return this.errorService.success('Фото успешно добавлено');
-    } catch (e) {
-      throw this.errorService.internal('Ошибка добавления фото продукта', e.message);
     }
   }
 
@@ -132,14 +90,17 @@ export class PlywoodService {
         // @ts-ignore
         data: {
           ...dto,
-          formats: dto.formats?.length ? { connect: idsArrayToArrayObjects(dto.formats) } : { set: [] },
-          surfaceTypes: dto.surfaceTypes?.length ? { connect: idsArrayToArrayObjects(dto.surfaceTypes) } : { set: [] },
-          types: dto.types?.length ? { connect: idsArrayToArrayObjects(dto.types) } : { set: [] },
-          sorts: dto.sorts?.length ? { connect: idsArrayToArrayObjects(dto.sorts) } : { set: [] },
-          coatingDensity: dto.coatingDensity?.length
-            ? { connect: idsArrayToArrayObjects(dto.coatingDensity) }
+          formats: dto.formats?.length ? { set: [], connect: idsArrayToArrayObjects(dto.formats) } : { set: [] },
+          surfaceTypes: dto.surfaceTypes?.length
+            ? { set: [], connect: idsArrayToArrayObjects(dto.surfaceTypes) }
             : { set: [] },
-          widths: dto.widths?.length ? { connect: idsArrayToArrayObjects(dto.widths) } : { set: [] },
+          types: dto.types?.length ? { set: [], connect: idsArrayToArrayObjects(dto.types) } : { set: [] },
+          sorts: dto.sorts?.length ? { set: [], connect: idsArrayToArrayObjects(dto.sorts) } : { set: [] },
+          coatingDensity: dto.coatingDensity?.length
+            ? { set: [], connect: idsArrayToArrayObjects(dto.coatingDensity) }
+            : { set: [] },
+          widths: dto.widths?.length ? { set: [], connect: idsArrayToArrayObjects(dto.widths) } : { set: [] },
+          photos: dto.photos?.length ? { set: [], connect: idsArrayToArrayObjects(dto.photos) } : { set: [] },
         },
       });
 
@@ -162,45 +123,15 @@ export class PlywoodService {
       if (query.hard) {
         product = await this.prismaService.plywood.delete({ where: { id } });
       } else {
-        product = (await this.prismaService.plywood.update({
+        product = await this.prismaService.plywood.update({
           where: { id },
           data: { deleted: new Date() },
-        })) as any as IPlywood;
+        });
       }
 
       return this.errorService.success('Продукт успешно удален', { product });
     } catch (e) {
       throw this.errorService.internal('Ошибка удаления продута', e.message);
-    }
-  }
-
-  async addFormatsToPlywood(product: IPlywood, formatIds: string[] | number[]) {
-    try {
-      const formats = formatIds.map((id) => ({ id: parseInt(id) }));
-
-      await this.prismaService.plywood.update({
-        where: { id: product.id },
-        data: {
-          formats: { connect: formats },
-        },
-      });
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  async addSurfacesToPlywood(product: IPlywood, surfaceIds: string[] | number[]) {
-    try {
-      const surfaces = surfaceIds.map((id) => ({ id: parseInt(id) }));
-
-      await this.prismaService.plywood.update({
-        where: { id: product.id },
-        data: {
-          surfaceTypes: { connect: surfaces },
-        },
-      });
-    } catch (e) {
-      throw e;
     }
   }
 }

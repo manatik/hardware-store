@@ -31,6 +31,10 @@ export class UpdatePlywoodDto {
   widths: number[];
 
   @IsOptional()
+  @IsNumber({}, { each: true })
+  photos: number[];
+
+  @IsOptional()
   @IsString()
   name: string;
 
