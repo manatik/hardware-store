@@ -74,8 +74,8 @@ const Photos = () => {
             name="name"
             value={values.name}
             error={errors.name as string}
-            placeholder="Фанера с Юпитера"
-            label="Название"
+            placeholder="Ламинированная - коричневая"
+            label="Название + цвет"
             size="md"
             onChange={handleChange}
           />

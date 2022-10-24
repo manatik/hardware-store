@@ -110,7 +110,8 @@ const CardGrid: FC<PropsCardGrid> = ({
                     </button>
                   </div>
                 </div>
-                  </form>)}
+                  </form>
+                )}
               </Formik>
             </Modal>
           </Portal>}

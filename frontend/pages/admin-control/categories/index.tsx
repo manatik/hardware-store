@@ -41,7 +41,6 @@ const Categories: NextPage<{categories: Category[]}> = ({ categories }) => {
           key={item.id}
           title={item.name}
           description={item.article}
-          remove={false}
           form={
             <>
               <Formik
