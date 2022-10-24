@@ -8,7 +8,7 @@ import { redirectController } from '@utils/redirectController'
 import { fetchCategoriesAsync } from '@store/category/categorySlice'
 import { setCookieHeader } from '@services/http.service'
 import { fetchCalcParamsAsync } from '@store/calc/calcSlice'
-import { plywoodService } from '@services/products/plywood.service'
+import { fetchPlywoodAsync } from '@store/products/productsSlice'
 
 /**
  * Список шаблонов страниц
@@ -79,13 +79,7 @@ export const useServerSideProps = async (
     }
 
     case ProjectPage.Products: {
-      try {
-        const { products } = await plywoodService.plywoodAll()
-
-        return { props: { products } }
-      } catch (e) {
-        return { props: { products: null } }
-      }
+      await dispatch(fetchPlywoodAsync())
     }
 
     // eslint-disable-next-line no-fallthrough

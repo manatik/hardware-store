@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { NextPage } from 'next'
 import AdminLayout from '@features/Admin/common/Admin-Layout'
 import ContainerProduct from '@features/Admin/common/ContainerProduct'
-// import CardGrid from '@features/Admin/ui/CardGrid'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
 
@@ -12,6 +11,7 @@ import Formats from '@features/Admin/ui/Calc/Formats'
 import Sort from '@features/Admin/ui/Calc/Sort'
 import WidthPlywood from '@features/Admin/ui/Calc/WidthPlywood'
 import Type from '@features/Admin/ui/Calc/Type'
+import Photos from '@features/Admin/ui/Calc/Photos'
 
 import { features } from '@features/Admin/ui/Calc/mockData'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
@@ -83,6 +83,7 @@ const Calc: NextPage = () => {
             {Number(data.value) === 3 && <Sort />}
             {Number(data.value) === 4 && <WidthPlywood />}
             {Number(data.value) === 5 && <Type />}
+            {Number(data.value) === 6 && <Photos />}
           </>
         }
       />
@@ -177,6 +178,22 @@ const Calc: NextPage = () => {
             </div>
           </div>
         )}
+        <div className={styles.feature__container}>
+          <div className={styles.feature__title}>Фото</div>
+          <div className={styles.feature__card__container}>
+            {/* {types.map((item: CalcData) => ( */}
+            {/*  <CardGrid */}
+            {/*    key={item.id} */}
+            {/*    id={item.id as number} */}
+            {/*    title={item.name} */}
+            {/*    price={item.price} */}
+            {/*    endpoint={5} */}
+            {/*    onUpdate={handleUpdateItem} */}
+            {/*    onRemove={handleRemoveItem} */}
+            {/*  /> */}
+            {/* ))} */}
+          </div>
+        </div>
       </div>
     </AdminLayout>
   )

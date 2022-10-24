@@ -1,4 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, {
+  FC, useEffect, useRef, useState,
+} from 'react'
 import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
@@ -11,14 +13,20 @@ import MultiSelectField from '@features/Admin/ui/MuliSelectField'
 
 import { toast } from 'react-toastify'
 import TextAriaField from '@features/Admin/ui/TextAriaField'
-import { useAppSelector } from '@store/hooks'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getCoatingDensity, getSorts } from '@store/calc/selector'
 import SelectField from '@features/Admin/ui/SelectField'
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
+import { CalcItem, PlywoodItem } from '@models/Products'
+import { fetchPlywoodAsync } from '@store/products/productsSlice'
 
-const PlywoodFormProduct = () => {
+interface PlywoodFormProductProps {
+  item?: PlywoodItem
+}
+const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
   const sorts = useAppSelector(getSorts)
   const coatingDensity = useAppSelector(getCoatingDensity)
+  const dispatch = useAppDispatch()
   const [sortData, setSortData] = useState<any>()
   const [coatingDensityData, setCoatingDensityData] = useState<any>()
   const [availableData, setAvailableData] = useState<any>(available[0].id)
@@ -32,9 +40,39 @@ const PlywoodFormProduct = () => {
         coatingDensity: coatingDensityData,
         available: availableData,
       })
+      toast.success('Товар успешно создан')
+      dispatch(fetchPlywoodAsync())
+      setAvailableData(available[0].id)
+      return 'success'
     } catch (e: any) {
-      toast.error('Ошибка запроса')
+      toast.error(e.error || 'Ошибка запроса')
+      return 'error'
     }
+  }
+
+  const updateProduct = async (values: any) => {
+    try {
+      await plywoodService.plywoodUpdate({
+        ...values,
+        id: item?.id,
+        sorts: sortData,
+        coatingDensity: coatingDensityData,
+        available: availableData,
+      })
+      toast.success('Товар успешно обновлен')
+    } catch (e: any) {
+      toast.error(e.error || 'Ошибка запроса')
+    }
+  }
+
+  const updateDefaultValueSelect = (defaultValues?: CalcItem[]) => {
+    if (!defaultValues) return ''
+    return defaultValues?.map((item) => {
+      return {
+        label: item.name,
+        value: Number(item.id),
+      }
+    })
   }
 
   const handleChangeSortData = (target: any) => {
@@ -53,20 +91,43 @@ const PlywoodFormProduct = () => {
     setAvailableData(result[0].id)
   }
 
+  useEffect(() => {
+    if (item) {
+      setSortData(sorts?.map((item: any) => {
+        return Number(item.id)
+      }))
+      setCoatingDensityData(coatingDensity?.map((item: any) => {
+        return Number(item.id)
+      }))
+    }
+  }, [])
+
   return (
     <Formik
       initialValues={{
-        name: '',
-        article: '',
+        name: item?.name || '',
+        article: item?.article || '',
         categoryId: 1,
-        description: '',
-        price: '',
+        description: item?.description || '',
+        price: item?.price || '',
       }}
       validateOnChange={false}
       validateOnBlur={false}
       validationSchema={PlywoodSchema}
-      onSubmit={async (values) => {
-        await addProduct(values)
+      onSubmit={async (values, formikHelpers) => {
+        if (item) {
+          await updateProduct(values)
+        } else {
+          const data = await addProduct(values)
+          if (data === 'error') return
+          formikHelpers.setValues({
+            name: '',
+            article: '',
+            categoryId: 1,
+            description: '',
+            price: '',
+          })
+        }
       }}
     >
       {({
@@ -89,7 +150,7 @@ const PlywoodFormProduct = () => {
             type={InputType.Text}
             name="name"
             value={values.name}
-            error={errors.name}
+            error={errors.name as string}
             placeholder="Фанера с Юпитера"
             label="Название"
             size="md"
@@ -100,24 +161,26 @@ const PlywoodFormProduct = () => {
             type={InputType.Text}
             name="article"
             value={values.article}
-            error={errors.article}
+            error={errors.article as string}
             placeholder="2123-2"
             label="Артикул"
             size="md"
             onChange={handleChange}
           />
 
-           <MultiSelectField
-             name="sorts"
-             options={sorts}
-             label="Сорт"
-             size="md"
-             onChange={handleChangeSortData}
-           />
-
           <MultiSelectField
             name="sorts"
+            options={sorts}
+            defaultValue={updateDefaultValueSelect(item?.sorts)}
+            label="Сорт"
+            size="md"
+            onChange={handleChangeSortData}
+          />
+
+          <MultiSelectField
+            name="coatingDensity"
             options={coatingDensity}
+            defaultValue={updateDefaultValueSelect(item?.coatingDensity)}
             label="Плотность"
             size="md"
             onChange={handleChangeCoatingDensityData}
@@ -125,7 +188,7 @@ const PlywoodFormProduct = () => {
 
           <SelectField
             label="Наличие"
-            value={availableData.id}
+            value={item?.available || availableData.id}
             onChange={handleChangeAvailable}
             options={available}
             name="available"
@@ -136,7 +199,7 @@ const PlywoodFormProduct = () => {
             type={InputType.Number}
             name="price"
             value={values.price}
-            error={errors.price}
+            error={errors.price as string}
             placeholder="1000 Р"
             label="Цена"
             size="md"
@@ -149,18 +212,30 @@ const PlywoodFormProduct = () => {
             onChange={handleChange}
             value={values.description}
             placeholder="Что-то о товаре"
-            error={errors.description}
+            error={errors.description as string}
           />
 
-          <button
-            type="submit"
-            className={cn(
-              styles.card__button,
-              styles.card__buttonEdit,
-            )}
-          >
-            Создать
-          </button>
+          {item ? (
+            <button
+              type="submit"
+              className={cn(
+                styles.card__button,
+                styles.card__buttonEdit,
+              )}
+            >
+              Сохранить изменения
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className={cn(
+                styles.card__button,
+                styles.card__buttonEdit,
+              )}
+            >
+              Создать
+            </button>
+          )}
         </form>)}
     </Formik>
   )

@@ -13,7 +13,7 @@ export class PlywoodService {
 
   async getAll() {
     try {
-      const products = (await this.prismaService.plywood.findMany({
+      const products = await this.prismaService.plywood.findMany({
         where: { deleted: { in: null } },
         include: {
           formats: true,
@@ -24,7 +24,7 @@ export class PlywoodService {
           features: true,
           photos: true,
         },
-      })) as any as IPlywood[];
+      });
 
       return this.errorService.success('Продукты успешно получены', {
         products,
@@ -36,7 +36,7 @@ export class PlywoodService {
 
   async getById(id: number) {
     try {
-      const product = (await this.prismaService.plywood.findFirst({
+      const product = await this.prismaService.plywood.findFirst({
         where: { id, deleted: { in: null } },
         include: {
           formats: true,
@@ -47,7 +47,7 @@ export class PlywoodService {
           features: true,
           photos: true,
         },
-      })) as any as IPlywood;
+      });
 
       return this.errorService.success('Продукт успешно получен', { product });
     } catch (e) {
@@ -123,10 +123,10 @@ export class PlywoodService {
       if (query.hard) {
         product = await this.prismaService.plywood.delete({ where: { id } });
       } else {
-        product = (await this.prismaService.plywood.update({
+        product = await this.prismaService.plywood.update({
           where: { id },
           data: { deleted: new Date() },
-        })) as any as IPlywood;
+        });
       }
 
       return this.errorService.success('Продукт успешно удален', { product });

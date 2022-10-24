@@ -6,47 +6,39 @@ import ContainerProduct from '@features/Admin/common/ContainerProduct'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
 import SelectField from '@features/Admin/ui/SelectField'
-import { useAppSelector } from '@store/hooks'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getCategories } from '@store/category/selector'
 import Furniture from '@features/Admin/ui/Products/Furniture'
 import Plywood from '@features/Admin/ui/Products/Plywood'
 import House from '@features/Admin/ui/Products/House'
 import Card from '@features/Admin/ui/Card'
-import AddPhotos from '@features/Admin/ui/Products/Plywood/Forms/AddPhotos'
 import { plywoodService } from '@services/products/plywood.service'
-import { ImageType } from 'react-images-uploading'
+import { toast } from 'react-toastify'
+import { getPlywood } from '@store/products/selector'
+import { fetchPlywoodAsync } from '@store/products/productsSlice'
+import { PlywoodItem } from '@models/Products'
 
-const Products: NextPage = ({ products }: any) => {
+const Products: NextPage = () => {
   const categories = useAppSelector(getCategories)
+  const plywood = useAppSelector(getPlywood)
+  const dispatch = useAppDispatch()
   const [data, setData] = useState({
     name: '',
     value: categories[0].id,
   })
-  const [images, setImages] = useState<ImageType[]>([])
 
-  const handleSaveImages = async (id: number) => {
-    // TODO: функция конвертирования форм даты кривая, можно поправить, но думаю нахуй надо
-    const fd = new FormData()
-
-    for (const img of images) {
-      fd.append('photos', img.file || '')
+  const removeProductPlywood = async (id: number) => {
+    try {
+      await plywoodService.plywoodRemove(id)
+      toast.success('Товар успешно удален')
+      dispatch(fetchPlywoodAsync())
+    } catch (e: any) {
+      toast.error(e.error || 'Ошибка запроса')
     }
-
-    fd.append('color', '#fff')
-
-    console.log(images)
-    const data = await plywoodService.plywoodAddPhoto(id, fd)
-    console.log(data)
   }
 
   const handleChange = (target: any) => {
     setData(target)
-  }
-
-  const onChangeImage = (imageList: any, addUpdateIndex: any) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex)
-    setImages(imageList)
   }
 
   return (
@@ -73,35 +65,22 @@ const Products: NextPage = ({ products }: any) => {
         }
       />
       <div>
-        {products && products.map((item: any) => {
-          console.log(item)
-          return (
-            <Card
-              title={item.name}
-              image={item.photos?.[0]}
-              key={item.id}
-              description={item.description}
-              form={(
-                <>
-                  <div>asdasdasd</div>
-                  <div>asdasdasd</div>
-                  <div>asdasdasd</div>
-                  <div>asdasdasd</div>
-                  <div>asdasdasd</div>
-                  <div>asdasdasd</div>
-                </>
+        {plywood && plywood.map((item: PlywoodItem) => (
+          <Card
+            id={item.id}
+            title={item.name}
+            images={item.photos}
+            key={item.id}
+            description={item.description}
+            remove={removeProductPlywood}
+            form={(
+              <Plywood
+                key={item.id}
+                item={item}
+              />
               )}
-              formPhoto={(
-                <AddPhotos
-                  images={images}
-                  id={item.id}
-                  onClick={handleSaveImages}
-                  onChange={onChangeImage}
-                />
-              )}
-            />
-          )
-        })}
+          />
+        ))}
       </div>
     </AdminLayout>
   )

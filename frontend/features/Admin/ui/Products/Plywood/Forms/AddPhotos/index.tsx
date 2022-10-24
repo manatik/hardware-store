@@ -1,19 +1,18 @@
 import React, { FC } from 'react'
 import InputImage from '@features/Admin/ui/InputImage'
-import cn from 'classnames'
 import { ImageType } from 'react-images-uploading'
 
 interface AddPhotosProps {
   onChange: (imageList: any, addUpdateIndex: any) => void;
-  onClick: (id: number) => void;
   images: ImageType[];
-  id: number,
+  onChangeColor: (target: any) => void;
+  color: string;
 }
 const AddPhotos: FC<AddPhotosProps> = ({
   onChange,
-  onClick,
   images,
-  id,
+  color,
+  onChangeColor,
 }) => {
   return (
     <>
@@ -21,14 +20,15 @@ const AddPhotos: FC<AddPhotosProps> = ({
         value={images}
         onChange={onChange}
       />
-      {images.length !== 0 && (
-        <button
-          className={cn('button', 'buttonEdit')}
-          onClick={() => onClick(id)}
-        >
-          Сохранить
-        </button>
-      )}
+      <div>
+        Цвет:{' '}
+        <input
+          onChange={(e) => onChangeColor(e.target.value)}
+          style={{ marginBottom: '16px', marginTop: '16px' }}
+          value={color}
+          type="color"
+        />
+      </div>
     </>
   )
 }
