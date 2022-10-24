@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../../database/prisma/prisma.service';
-import { ErrorService } from '../../../common/error/error.service';
-import { CreateFeatureDto } from '../../furniture-entities/feature/dto/create-feature.dto';
+import { PrismaService } from 'database/prisma/prisma.service';
+import { ErrorService } from 'common/error/error.service';
+import { CreateFeatureDto } from './dto/create-feature.dto';
 import { UpdateFeatureDto } from './dto/update-feature.dto';
 
 @Injectable()

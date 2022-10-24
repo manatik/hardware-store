@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
-import { Public } from 'authorization/decorators/public.decorator';
-import { Roles } from 'authorization/decorators/roles.decorator';
+import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { CreateWidthDto } from './dto/create-width.dto';
 import { UpdateWidthDto } from './dto/update-width.dto';
 import { WidthService } from './width.service';
 
+@Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.PLYWOOD_WIDTH)
 export class WidthController {
   constructor(private readonly widthService: WidthService) {}
@@ -23,19 +23,16 @@ export class WidthController {
     return await this.widthService.getById(id);
   }
 
-  @Roles(Role.Admin)
   @Post(ENDPOINTS.PLYWOOD_WIDTH.CREATE)
   async add(@Body() dto: CreateWidthDto) {
     return await this.widthService.add(dto);
   }
 
-  @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD_WIDTH.UPDATE)
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateWidthDto) {
     return await this.widthService.update(id, dto);
   }
 
-  @Roles(Role.Admin)
   @Delete(ENDPOINTS.PLYWOOD_WIDTH.DELETE)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.widthService.remove(id);

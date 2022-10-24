@@ -2,7 +2,7 @@ import { Body, Controller, Post, Res } from '@nestjs/common';
 import { AuthorizationService } from 'authorization/authorization.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { Public } from './decorators/public.decorator';
+import { Public } from './decorators';
 import { ErrorService } from 'common/error/error.service';
 import { Response } from 'express';
 import { ENDPOINTS, GLOBAL_PREFIXES } from '../common/consts/endpoints.consts';
@@ -12,11 +12,11 @@ enum TOKENS {
   ACCESS = 'a_t',
 }
 
+@Public()
 @Controller(GLOBAL_PREFIXES.AUTH)
 export class AuthorizationController {
   constructor(private readonly authService: AuthorizationService, private readonly errorService: ErrorService) {}
 
-  @Public()
   @Post(ENDPOINTS.AUTH.LOGIN)
   async login(@Body() dto: LoginDto, @Res() res: Response) {
     const { refreshToken, accessToken } = await this.authService.login(dto);
@@ -25,7 +25,6 @@ export class AuthorizationController {
     res.json(this.errorService.success('Успешный вход', { accessToken }));
   }
 
-  @Public()
   @Post(ENDPOINTS.AUTH.REGISTER)
   async register(@Body() dto: RegisterDto, @Res() res: Response) {
     const { refreshToken, accessToken } = await this.authService.register(dto);
@@ -34,7 +33,6 @@ export class AuthorizationController {
     res.json(this.errorService.success('Успешная регистрация', { accessToken }));
   }
 
-  @Public()
   @Post(ENDPOINTS.AUTH.REFRESH)
   async refresh(@Body() cookies, @Res() res: Response) {
     const tokens = await this.authService.refresh(cookies);

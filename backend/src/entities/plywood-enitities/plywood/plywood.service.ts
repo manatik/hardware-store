@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
-import { CreatePlywoodDto } from 'entities/plywood-enitities/plywood/dto/create-plywood.dto';
-import { IPlywood } from 'entities/plywood-enitities/plywood/types/IPlywood.interface';
-import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delete-plywood.query';
+import { CreatePlywoodDto } from './dto/create-plywood.dto';
+import { DeletePlywoodQuery } from './dto/delete-plywood.query';
 import { UpdatePlywoodDto } from './dto/update-plywood.dto';
-import { idsArrayToArrayObjects } from '../../../common/utils/utils';
+import { idsArrayToArrayObjects } from 'common/utils/utils';
 
 @Injectable()
 export class PlywoodService {
@@ -63,7 +62,7 @@ export class PlywoodService {
         throw new Error(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
-      const product = (await this.prismaService.plywood.create({
+      const product = await this.prismaService.plywood.create({
         data: {
           ...dto,
           sorts: { connect: idsArrayToArrayObjects(dto.sorts) },
@@ -74,7 +73,7 @@ export class PlywoodService {
           widths: { connect: idsArrayToArrayObjects(dto.widths) },
           photos: { connect: idsArrayToArrayObjects(dto.photos) },
         },
-      })) as any as IPlywood;
+      });
 
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {

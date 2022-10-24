@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { RoleService } from 'entities/role/role.service';
-import { CreateRoleDto } from 'entities/role/dto/create-role.dto';
-import { Roles } from 'authorization/decorators/roles.decorator';
+import { RoleService } from './role.service';
+import { CreateRoleDto } from './dto/create-role.dto';
+import { Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 
@@ -9,6 +9,7 @@ import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 @Controller(GLOBAL_PREFIXES.ROLE)
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
+
   @Get(ENDPOINTS.ROLE.ALL)
   async getAll() {
     return await this.roleService.getAll();

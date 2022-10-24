@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
-import { Public } from 'authorization/decorators/public.decorator';
-import { Roles } from 'authorization/decorators/roles.decorator';
+import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
-import { TypeService } from 'entities/plywood-enitities/type/type.service';
+import { TypeService } from './type.service';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
 
+@Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.PLYWOOD_TYPE)
 export class TypeController {
   constructor(private readonly typeService: TypeService) {}
@@ -23,19 +23,16 @@ export class TypeController {
     return await this.typeService.getById(id);
   }
 
-  @Roles(Role.Admin)
   @Post(ENDPOINTS.PLYWOOD_TYPE.CREATE)
   async add(@Body() dto: CreateTypeDto) {
     return await this.typeService.add(dto);
   }
 
-  @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD_TYPE.UPDATE)
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateTypeDto) {
     return await this.typeService.update(id, dto);
   }
 
-  @Roles(Role.Admin)
   @Delete(ENDPOINTS.PLYWOOD_TYPE.DELETE)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.typeService.remove(id);

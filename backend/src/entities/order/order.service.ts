@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { ErrorService } from '../../common/error/error.service';
-import { PrismaService } from '../../database/prisma/prisma.service';
+import { ErrorService } from 'common/error/error.service';
+import { PrismaService } from 'database/prisma/prisma.service';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { idsArrayToArrayObjects } from '../../common/utils/utils';
+import { idsArrayToArrayObjects } from 'common/utils/utils';
 
 @Injectable()
 export class OrderService {

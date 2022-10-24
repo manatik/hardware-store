@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
-import { Public } from 'authorization/decorators/public.decorator';
-import { Roles } from 'authorization/decorators/roles.decorator';
+import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { CoatingDensityService } from 'entities/plywood-enitities/coating-density/coating-density.service';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { CreateCoatingDensityDto } from './dto/create-coating-density.dto';
 import { UpdateCoatingDensityDto } from './dto/update-coating-density.dto';
 
+@Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.PLYWOOD_COATING_DENSITY)
 export class CoatingDensityController {
   constructor(private readonly coatingService: CoatingDensityService) {}
@@ -23,19 +23,16 @@ export class CoatingDensityController {
     return await this.coatingService.getById(id);
   }
 
-  @Roles(Role.Admin)
   @Post(ENDPOINTS.PLYWOOD_COATING_DENSITY.CREATE)
   async add(@Body() dto: CreateCoatingDensityDto) {
     return await this.coatingService.add(dto);
   }
 
-  @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD_COATING_DENSITY.UPDATE)
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateCoatingDensityDto) {
     return await this.coatingService.update(id, dto);
   }
 
-  @Roles(Role.Admin)
   @Delete(ENDPOINTS.PLYWOOD_COATING_DENSITY.DELETE)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.coatingService.remove(id);

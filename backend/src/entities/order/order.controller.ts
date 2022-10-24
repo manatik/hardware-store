@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
-import { ENDPOINTS, GLOBAL_PREFIXES } from '../../common/consts/endpoints.consts';
+import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { Roles } from '../../authorization/decorators/roles.decorator';
-import { Role } from '../../authorization/enum/role.enum';
+import { Role } from 'authorization/enum/role.enum';
+import { Public, Roles } from 'authorization/decorators';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.ORDER)
@@ -20,6 +20,7 @@ export class OrderController {
     return await this.orderService.getById(id);
   }
 
+  @Public()
   @Post(ENDPOINTS.ORDER.CREATE)
   async create(@Body() dto: CreateOrderDto) {
     return this.orderService.create(dto);

@@ -1,13 +1,13 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
-import { FormatsService } from 'entities/plywood-enitities/formats/formats.service';
-import { CreatePlywoodFormatsDto } from 'entities/plywood-enitities/formats/dto/create-plywood-formats.dto';
-import { Public } from 'authorization/decorators/public.decorator';
-import { Roles } from 'authorization/decorators/roles.decorator';
+import { FormatsService } from './formats.service';
+import { CreatePlywoodFormatsDto } from './dto/create-plywood-formats.dto';
+import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
-import { PlywoodFormatsAllQuery } from 'entities/plywood-enitities/formats/dto/plywood-formats-all.query';
+import { PlywoodFormatsAllQuery } from './dto/plywood-formats-all.query';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { UpdateFormatsDto } from './dto/update-formats.dto';
 
+@Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.PLYWOOD_FORMATS)
 export class FormatsController {
   constructor(private readonly plywoodFormatsService: FormatsService) {}
@@ -24,19 +24,16 @@ export class FormatsController {
     return await this.plywoodFormatsService.getById(id);
   }
 
-  @Roles(Role.Admin)
   @Post(ENDPOINTS.PLYWOOD_FORMATS.CREATE)
   async add(@Body() dto: CreatePlywoodFormatsDto) {
     return await this.plywoodFormatsService.add(dto);
   }
 
-  @Roles(Role.Admin)
   @Patch(ENDPOINTS.PLYWOOD_FORMATS.UPDATE)
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFormatsDto) {
     return await this.plywoodFormatsService.update(id, dto);
   }
 
-  @Roles(Role.Admin)
   @Delete(ENDPOINTS.PLYWOOD_FORMATS.DELETE)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.plywoodFormatsService.remove(id);

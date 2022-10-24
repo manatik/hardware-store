@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, Req } from '@nestjs/common';
-import { UserService } from 'entities/user/user.service';
-import { Roles } from 'authorization/decorators/roles.decorator';
+import { UserService } from './user.service';
+import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { Request } from 'express';
-import { UserInfoQuery } from 'entities/user/dto/user-info.query';
-import { UserAllQuery } from 'entities/user/dto/user-all.query';
+import { UserInfoQuery } from './dto/user-info.query';
+import { UserAllQuery } from './dto/user-all.query';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { UserRoleDto } from './dto/user-role.dto';
 
@@ -18,7 +18,7 @@ export class UserController {
     return await this.userService.getAll(query);
   }
 
-  @Roles(Role.User)
+  @Public()
   @Get(ENDPOINTS.USER.INFO)
   async byId(@Req() req: Request & { user: any }, @Query() query: UserInfoQuery) {
     return await this.userService.getById(req.user.id, query);
