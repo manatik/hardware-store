@@ -22,7 +22,7 @@ export const PlywoodOrderSchema = Yup.object().shape({
   widthPlywood: Yup.string()
     .trim()
     .required('Укажите толщину листа'),
-  sorts: Yup.string()
+  sort: Yup.string()
     .trim()
     .required('Укажите сорт'),
 })

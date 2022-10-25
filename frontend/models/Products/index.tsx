@@ -32,7 +32,12 @@ export interface PlywoodItem {
   price: number;
   sorts: CalcItem[];
   surfaceTypes: CalcItem[];
-  photos: PhotosModal[]
+  photos: PhotosModal[];
+  currentColor?: string;
+  widthPlywood?: string;
+  format?: string;
+  sort?: string;
+  count?: number;
 }
 
 export interface PlywoodModal {

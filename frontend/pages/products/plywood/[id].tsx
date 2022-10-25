@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
@@ -20,7 +20,8 @@ import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
 import { PlywoodOrderSchema } from '@schema/plywood'
 import { useAppDispatch } from '@store/hooks'
-import { addProduct } from '@store/basket/basketSlice'
+import { addProduct, initBasket } from '@store/basket/basketSlice'
+import { toast } from 'react-toastify'
 
 interface CardItemPlywoodProps {
   product: PlywoodItem
@@ -62,6 +63,10 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
     const result = available.filter((item) => item.id === id)
     return result[0].name
   }
+
+  useEffect(() => {
+    dispatch(initBasket())
+  }, [])
 
   return (
     <LayoutCard>
@@ -225,7 +230,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
                 initialValues={{
                   format: '',
                   widthPlywood: '',
-                  sorts: '',
+                  sort: '',
                 }}
                 validationSchema={PlywoodOrderSchema}
                 validateOnChange={false}
@@ -239,6 +244,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
                   }))
                   toggleModal()
                   setCount(0)
+                  toast.success('Товар добавлен в корзину')
                 }}
               >
                 {({
@@ -279,9 +285,9 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
 
                     <InputField
                       type={InputType.Text}
-                      name="sorts"
-                      value={values.sorts}
-                      error={errors.sorts}
+                      name="sort"
+                      value={values.sort}
+                      error={errors.sort}
                       placeholder="S/ВВВ (ls/ll)"
                       label="Сорт"
                       size="md"

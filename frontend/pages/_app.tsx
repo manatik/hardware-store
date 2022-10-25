@@ -12,12 +12,12 @@ import 'swiper/scss/pagination'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const store = useStore()
+
   return (
     <>
       <PersistGate
         // @ts-ignore
         persistor={store.__persistor}
-        loading={<div>Loading</div>}
       >
         <Component {...pageProps} />
         <ToastContainer

@@ -5,31 +5,48 @@ import Image from 'next/image'
 import remove from 'assets/remove.svg'
 import { BlockProps } from '@features/Basic/ui/Basket/components/BasketCard/types'
 
-const Mobile: FC<BlockProps> = ({ increment, decrement }) => {
+const Mobile: FC<BlockProps> = ({
+  increment, decrement, item, removeItem, id,
+}) => {
   return (
     <div className={styles.basketCard__right_mobile}>
       <div className={styles.basketCard__right_mobile__top}>
-        <div className={styles.basketCard__title}>Ламинированная  (F/H)</div>
+        {item?.name && (
+          <div className={styles.basketCard__title}>{item?.name}</div>
+        )}
       </div>
 
       <div className={styles.basketCard__right_mobile__body}>
-        <div className={styles.basketCard__color_block}>
-          Цвет
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.basketCard__color}
-          />
-        </div>
-        <div className={styles.basketCard__price}>Цена по запросу</div>
+        {item.currentColor && (
+          <div className={styles.basketCard__color_block}>
+            Цвет
+            <div
+              style={{ backgroundColor: item.currentColor }}
+              className={styles.basketCard__color}
+            />
+          </div>
+        )}
+        {item.price > 0 ? (
+          <div className={styles.basketCard__price}>
+            <b>от {item.price}</b> руб./шт
+          </div>
+        ) : (
+          <div className={styles.basketCard__price}>
+            <b>Цена по запросу</b>
+          </div>
+        )}
       </div>
       <div className={styles.basketCard__right_mobile__bottom}>
         <BasketCounter
-          addProduct={() => increment('1')}
-          deleteProduct={() => decrement('1')}
-          count={10}
+          addProduct={() => increment(id)}
+          deleteProduct={() => decrement(id)}
+          count={item.count as number}
         />
 
-        <div className={styles.basketCard__remove}>
+        <div
+          className={styles.basketCard__remove}
+          onClick={() => removeItem(id)}
+        >
           <Image
             src={remove}
           />

@@ -1,5 +1,5 @@
 const TOKEN_KEY = 'jwt-token'
-const BASKET = 'basket'
+const BASKET = 'plywood-basket'
 
 function setTokens(accessToken: string) {
   try {

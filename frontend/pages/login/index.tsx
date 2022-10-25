@@ -14,6 +14,7 @@ import { ProjectPage, useServerSideProps } from '@hooks'
 import { fetchAuthAsync } from '@store/auth/authSlice'
 import { getAuthInfo, getAuthError, getAuthLoading } from '@store/auth/selector'
 import cn from 'classnames'
+import { initBasket } from '@store/basket/basketSlice'
 import styles from './index.module.scss'
 
 const Login = () => {
@@ -36,6 +37,8 @@ const Login = () => {
   }, [auth, isError])
 
   useEffect(() => {
+    dispatch(initBasket())
+
     return () => {
       storageService.removeItem('email')
     }
