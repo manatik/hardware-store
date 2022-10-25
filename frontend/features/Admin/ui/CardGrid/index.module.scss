@@ -12,6 +12,16 @@
         padding: 8px;
     }
 
+    &__images {
+        max-width: 320px;
+        height: 260px;
+    }
+
+    &__image {
+        max-width: 320px;
+        height: 260px;
+    }
+
     &__top {
         &__title {
             font-size: 20px;

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Image from 'next/image'
-import img from 'assets/slider/slide-3.png'
+import img from 'assets/slider/slide-3.webp'
 import Desktop from '@features/Basic/ui/Basket/components/BasketCard/components/Desktop'
 import Tablet from '@features/Basic/ui/Basket/components/BasketCard/components/Tablet'
 import Mobile from '@features/Basic/ui/Basket/components/BasketCard/components/Mobile'

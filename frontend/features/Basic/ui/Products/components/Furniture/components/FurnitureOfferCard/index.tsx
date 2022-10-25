@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import img from 'assets/furniture/cabinet-5.png'
+import img from 'assets/furniture/cabinet-5.webp'
 import styles from './index.module.scss'
 
 const FurnitureOfferCard = () => {

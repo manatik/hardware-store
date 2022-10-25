@@ -37,12 +37,8 @@ export class PhotosController {
   @Roles(Role.Admin)
   @UseInterceptors(FilesInterceptor('photos'))
   @Post(ENDPOINTS.PLYWOOD_PHOTOS.CREATE)
-  async add(
-    @UploadedFiles() photos: Array<Express.Multer.File>,
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: AddPhotoDto,
-  ) {
-    return await this.photosService.add(id, photos, dto);
+  async add(@UploadedFiles() photos: Array<Express.Multer.File>, @Body() dto: AddPhotoDto) {
+    return await this.photosService.add(photos, dto);
   }
 
   @Roles(Role.Admin)

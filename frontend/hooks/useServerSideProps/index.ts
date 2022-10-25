@@ -9,6 +9,7 @@ import { fetchCategoriesAsync } from '@store/category/categorySlice'
 import { setCookieHeader } from '@services/http.service'
 import { fetchCalcParamsAsync } from '@store/calc/calcSlice'
 import { fetchPlywoodAsync } from '@store/products/productsSlice'
+import { plywoodService } from '@services/products/plywood.service'
 
 /**
  * Список шаблонов страниц
@@ -27,6 +28,8 @@ export enum ProjectPage {
   Contacts,
   Service,
   ProductsPage,
+  ProductsPagePlywood,
+  ProductsPageFurniture,
 }
 
 export const useServerSideProps = async (
@@ -35,7 +38,8 @@ export const useServerSideProps = async (
   store: Store,
 ): Promise<GetServerSidePropsResult<any>> => {
   const { dispatch, getState } = store
-  const { headers } = context.req
+  const { query, req } = context
+  const { headers } = req
   const cookie = headers.cookie ? headers.cookie : ''
 
   setCookieHeader(cookie)
@@ -80,6 +84,22 @@ export const useServerSideProps = async (
 
     case ProjectPage.Products: {
       await dispatch(fetchPlywoodAsync())
+      break
+    }
+
+    case ProjectPage.ProductsPage: {
+      await dispatch(fetchPlywoodAsync())
+      break
+    }
+
+    case ProjectPage.ProductsPagePlywood: {
+      try {
+        const { id } = query
+        const { product } = await plywoodService.plywood(id as string)
+        return { props: { product } }
+      } catch (e) {
+        return { props: { product: null } }
+      }
     }
 
     // eslint-disable-next-line no-fallthrough

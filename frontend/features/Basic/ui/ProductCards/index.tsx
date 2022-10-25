@@ -1,147 +1,87 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import Image from 'next/image'
-import img from 'assets/slider/slide-3.png'
+import { PlywoodItem } from '@models/Products'
+import { available } from '@features/Admin/ui/Products/Plywood/mockData'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styles from './index.module.scss'
 
-const ProductCards = () => {
+export enum Links {
+  Plywood = 'plywood',
+  Furniture = 'furniture'
+}
+
+interface ProductCardsProps {
+  products: PlywoodItem[];
+  link: Links;
+}
+
+const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
+  const { pathname } = useRouter()
+  const setAvailable = (id: string) => {
+    const result = available.filter((item) => item.id === id)
+    return result[0].name
+  }
+
   return (
     <div className={styles.productCards}>
-      <div className={styles.productCards__item}>
-        <div className={styles.productCards__item__image}>
-          <Image src={img} />
-        </div>
+      {products && products.map((item: PlywoodItem) => {
+        return (
+          <Link
+            key={item.id}
+            href={`/products/${link}/${item.id}?redirectUrl=${pathname}`}
+          >
+            <a
+              className={styles.productCards__item}
+            >
+              {item.photos && (
+                <div className={styles.productCards__item__image}>
+                  <Image
+                    src={item.photos[0].photos[0].path}
+                    alt={item.photos[0].photos[0].filename}
+                    width={400}
+                    height={250}
+                  />
+                </div>
+              )}
 
-        <div className={styles.productCards__item__title}>ФК</div>
+              {item.name && <div className={styles.productCards__item__title}>{item.name}</div>}
 
-        <div className={styles.productCards__item__colors}>
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.productCards__item__color}
-          />
-        </div>
+              {item.photos && (
+                <div className={styles.productCards__item__colors}>
+                  {item.photos.map((item) => (
+                    <div
+                      key={item.id}
+                      style={{ backgroundColor: item.color }}
+                      className={styles.productCards__item__color}
+                    />
+                  ))}
+                </div>
+              )}
 
-        <div className={styles.productCards__item__bottom}>
-          <div className={styles.productCards__item__price}><b>400</b> руб./шт</div>
-          <div className={styles.productCards__item__availability}>В наличии</div>
-        </div>
-      </div>
-
-      <div className={styles.productCards__item}>
-        <div className={styles.productCards__item__image}>
-          <Image src={img} />
-        </div>
-
-        <div className={styles.productCards__item__title}>ФК</div>
-
-        <div className={styles.productCards__item__colors}>
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.productCards__item__color}
-          />
-        </div>
-
-        <div className={styles.productCards__item__bottom}>
-          <div className={styles.productCards__item__price}><b>400</b> руб./шт</div>
-          <div className={styles.productCards__item__availability}>В наличии</div>
-        </div>
-      </div>
-      <div className={styles.productCards__item}>
-        <div className={styles.productCards__item__image}>
-          <Image src={img} />
-        </div>
-
-        <div className={styles.productCards__item__title}>ФК</div>
-
-        <div className={styles.productCards__item__colors}>
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.productCards__item__color}
-          />
-        </div>
-
-        <div className={styles.productCards__item__bottom}>
-          <div className={styles.productCards__item__price}><b>400</b> руб./шт</div>
-          <div className={styles.productCards__item__availability}>В наличии</div>
-        </div>
-      </div>
-      <div className={styles.productCards__item}>
-        <div className={styles.productCards__item__image}>
-          <Image src={img} />
-        </div>
-
-        <div className={styles.productCards__item__title}>ФК</div>
-
-        <div className={styles.productCards__item__colors}>
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.productCards__item__color}
-          />
-        </div>
-
-        <div className={styles.productCards__item__bottom}>
-          <div className={styles.productCards__item__price}><b>400</b> руб./шт</div>
-          <div className={styles.productCards__item__availability}>В наличии</div>
-        </div>
-      </div>
-      <div className={styles.productCards__item}>
-        <div className={styles.productCards__item__image}>
-          <Image src={img} />
-        </div>
-
-        <div className={styles.productCards__item__title}>ФК</div>
-
-        <div className={styles.productCards__item__colors}>
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.productCards__item__color}
-          />
-        </div>
-
-        <div className={styles.productCards__item__bottom}>
-          <div className={styles.productCards__item__price}><b>400</b> руб./шт</div>
-          <div className={styles.productCards__item__availability}>В наличии</div>
-        </div>
-      </div>
-      <div className={styles.productCards__item}>
-        <div className={styles.productCards__item__image}>
-          <Image src={img} />
-        </div>
-
-        <div className={styles.productCards__item__title}>ФК</div>
-
-        <div className={styles.productCards__item__colors}>
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.productCards__item__color}
-          />
-        </div>
-
-        <div className={styles.productCards__item__bottom}>
-          <div className={styles.productCards__item__price}><b>400</b> руб./шт</div>
-          <div className={styles.productCards__item__availability}>В наличии</div>
-        </div>
-      </div>
-      <div className={styles.productCards__item}>
-        <div className={styles.productCards__item__image}>
-          <Image src={img} />
-        </div>
-
-        <div className={styles.productCards__item__title}>ФК</div>
-
-        <div className={styles.productCards__item__colors}>
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.productCards__item__color}
-          />
-        </div>
-
-        <div className={styles.productCards__item__bottom}>
-          <div className={styles.productCards__item__price}><b>400</b> руб./шт</div>
-          <div className={styles.productCards__item__availability}>В наличии</div>
-        </div>
-      </div>
-
+              {(item.price || item.available) && (
+                <div className={styles.productCards__item__bottom}>
+                  {item.price > 0 ? (
+                    <div className={styles.productCards__item__price}>
+                      <b>от {item.price}</b> руб./шт
+                    </div>
+                  ) : (
+                    <div className={styles.productCards__item__availability}>
+                      <b>Цена по запросу</b>
+                    </div>
+                  )}
+                  {item.available && (
+                    <div className={styles.productCards__item__availability}>
+                      {setAvailable(item.available)}
+                    </div>
+                  )}
+                </div>
+              )}
+            </a>
+          </Link>
+        )
+      })}
     </div>
   )
 }

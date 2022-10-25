@@ -13,6 +13,7 @@ const PlywoodSlider: FC<any> = ({ cards }) => {
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
+        className={styles.slider}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
@@ -31,8 +32,9 @@ const PlywoodSlider: FC<any> = ({ cards }) => {
               <div className={styles.slider__card__image}>
                 <Image
                   src={item.image}
+                  width={614}
+                  height={400}
                   placeholder="blur"
-                  layout="responsive"
                 />
               </div>
               {item.title && (

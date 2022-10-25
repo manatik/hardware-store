@@ -14,10 +14,10 @@ import MultiSelectField from '@features/Admin/ui/MuliSelectField'
 import { toast } from 'react-toastify'
 import TextAriaField from '@features/Admin/ui/TextAriaField'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getCoatingDensity, getSorts } from '@store/calc/selector'
+import { getCoatingDensity, getPhotos, getSorts } from '@store/calc/selector'
 import SelectField from '@features/Admin/ui/SelectField'
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
-import { CalcItem, PlywoodItem } from '@models/Products'
+import { PlywoodItem } from '@models/Products'
 import { fetchPlywoodAsync } from '@store/products/productsSlice'
 
 interface PlywoodFormProductProps {
@@ -26,8 +26,10 @@ interface PlywoodFormProductProps {
 const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
   const sorts = useAppSelector(getSorts)
   const coatingDensity = useAppSelector(getCoatingDensity)
+  const photos = useAppSelector(getPhotos)
   const dispatch = useAppDispatch()
   const [sortData, setSortData] = useState<any>()
+  const [photoData, setPhotoData] = useState<any>()
   const [coatingDensityData, setCoatingDensityData] = useState<any>()
   const [availableData, setAvailableData] = useState<any>(available[0].id)
   const formRef = useRef<HTMLFormElement | null>(null)
@@ -37,6 +39,7 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
       await plywoodService.plywoodAdd({
         ...values,
         sorts: sortData,
+        photos: photoData,
         coatingDensity: coatingDensityData,
         available: availableData,
       })
@@ -56,18 +59,20 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
         ...values,
         id: item?.id,
         sorts: sortData,
+        photos: photoData,
         coatingDensity: coatingDensityData,
         available: availableData,
       })
       toast.success('Товар успешно обновлен')
+      dispatch(fetchPlywoodAsync())
     } catch (e: any) {
       toast.error(e.error || 'Ошибка запроса')
     }
   }
 
-  const updateDefaultValueSelect = (defaultValues?: CalcItem[]) => {
+  const updateDefaultValueSelect = (defaultValues?: any) => {
     if (!defaultValues) return ''
-    return defaultValues?.map((item) => {
+    return defaultValues?.map((item: any) => {
       return {
         label: item.name,
         value: Number(item.id),
@@ -85,6 +90,11 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
     setCoatingDensityData(result)
   }
 
+  const handleChangePhotoData = (target: any) => {
+    const result = target.map((item: any) => Number(item.value))
+    setPhotoData(result)
+  }
+
   const handleChangeAvailable = (target: { name: string, value: string }) => {
     const result = available.filter((item) => item.id === target.value)
 
@@ -99,8 +109,12 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
       setCoatingDensityData(coatingDensity?.map((item: any) => {
         return Number(item.id)
       }))
+      setPhotoData(item.photos?.map((item: any) => {
+        return Number(item.id)
+      }))
+      setAvailableData(item.available)
     }
-  }, [])
+  }, [item])
 
   return (
     <Formik
@@ -186,9 +200,18 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
             onChange={handleChangeCoatingDensityData}
           />
 
+          <MultiSelectField
+            name="photos"
+            options={photos}
+            defaultValue={updateDefaultValueSelect(item?.photos)}
+            label="Фотографии"
+            size="md"
+            onChange={handleChangePhotoData}
+          />
+
           <SelectField
             label="Наличие"
-            value={item?.available || availableData.id}
+            value={availableData}
             onChange={handleChangeAvailable}
             options={available}
             name="available"

@@ -3,6 +3,8 @@ export interface SliderMockItem {
   image: any;
   title: string;
   description: string;
+  width: number;
+  height: number;
 }
 
 export interface MockLink {

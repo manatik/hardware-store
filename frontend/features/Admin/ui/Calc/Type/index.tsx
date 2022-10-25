@@ -33,7 +33,7 @@ const Type = () => {
       validateOnBlur={false}
       validationSchema={calcAllSchema}
       onSubmit={async (values, formikHelpers) => {
-        await addType(values)
+        await addType(values as CalcData)
         formikHelpers.setValues({
           name: '',
           price: 0,

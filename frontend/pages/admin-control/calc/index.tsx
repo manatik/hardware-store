@@ -17,7 +17,7 @@ import { features } from '@features/Admin/ui/Calc/mockData'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import {
   getCoatingDensity,
-  getFormats,
+  getFormats, getPhotos,
   getSorts,
   getTypes,
   getWidthPlywood,
@@ -26,6 +26,7 @@ import CardGrid from '@features/Admin/ui/CardGrid'
 import { CalcData } from '@models/Calc'
 import { toast } from 'react-toastify'
 import { fetchCalcRemoveParamsAsync, fetchCalcUpdateParamsAsync } from '@store/calc/calcSlice'
+import { PhotosModal } from '@models/Products'
 import styles from './index.module.scss'
 
 const Calc: NextPage = () => {
@@ -34,6 +35,8 @@ const Calc: NextPage = () => {
   const types = useAppSelector(getTypes)
   const widthPlywoods = useAppSelector(getWidthPlywood)
   const coatingDensity = useAppSelector(getCoatingDensity)
+  const images = useAppSelector(getPhotos)
+
   const dispatch = useAppDispatch()
 
   const [data, setData] = useState({
@@ -178,22 +181,24 @@ const Calc: NextPage = () => {
             </div>
           </div>
         )}
-        <div className={styles.feature__container}>
+        {images && (
+          <div className={styles.feature__container}>
           <div className={styles.feature__title}>Фото</div>
           <div className={styles.feature__card__container}>
-            {/* {types.map((item: CalcData) => ( */}
-            {/*  <CardGrid */}
-            {/*    key={item.id} */}
-            {/*    id={item.id as number} */}
-            {/*    title={item.name} */}
-            {/*    price={item.price} */}
-            {/*    endpoint={5} */}
-            {/*    onUpdate={handleUpdateItem} */}
-            {/*    onRemove={handleRemoveItem} */}
-            {/*  /> */}
-            {/* ))} */}
+            {images.map((item: PhotosModal) => (
+              <CardGrid
+                key={item.id}
+                id={item.id as number}
+                title={item.name}
+                images={item.photos}
+                endpoint={6}
+                price={0}
+                onRemove={handleRemoveItem}
+              />
+            ))}
           </div>
         </div>
+        )}
       </div>
     </AdminLayout>
   )

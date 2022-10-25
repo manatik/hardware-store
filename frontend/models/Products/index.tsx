@@ -7,9 +7,15 @@ export interface CalcItem {
 }
 
 export interface Photo {
-  color: string;
   filename: string;
   path: string;
+}
+
+export interface PhotosModal {
+    photos: Photo[];
+    id: number;
+    name: string;
+    color: string;
 }
 
 export interface PlywoodItem {
@@ -26,7 +32,7 @@ export interface PlywoodItem {
   price: number;
   sorts: CalcItem[];
   surfaceTypes: CalcItem[];
-  photos: Photo[]
+  photos: PhotosModal[]
 }
 
 export interface PlywoodModal {

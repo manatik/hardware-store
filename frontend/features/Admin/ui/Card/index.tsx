@@ -1,11 +1,13 @@
-import React, { FC, ReactElement, useRef } from 'react'
+import React, {
+  FC, ReactElement, useEffect, useRef, useState,
+} from 'react'
 import Image from 'next/image'
 import cn from 'classnames'
 import { slideToggle } from '@utils/slideToogle'
 import { CardProps } from '@features/Admin/ui/Card/types'
-
 import { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Photo } from '@models/Products'
 import styles from './index.module.scss'
 
 const Card: FC<CardProps> = ({
@@ -20,10 +22,16 @@ const Card: FC<CardProps> = ({
 }): ReactElement => {
   const hiddenElemForm = useRef<HTMLDivElement | null>(null)
   const hiddenElemPhoto = useRef<HTMLDivElement | null>(null)
+  const [photos, setPhotos] = useState<[Photo]>()
 
   const toggle = () => {
     slideToggle(hiddenElemForm.current)
   }
+
+  useEffect(() => {
+    // @ts-ignore
+    setPhotos(images?.reduce((acc, img) => [...acc, ...img.photos], []))
+  }, [images])
 
   const toggleFormPhoto = () => {
     slideToggle(hiddenElemPhoto.current)
@@ -40,7 +48,7 @@ const Card: FC<CardProps> = ({
               pagination={true}
               modules={[Pagination]}
             >
-              {images.map((item) => (
+              {photos?.map((item) => (
                 <SwiperSlide key={item.filename}>
                   <Image
                     src={item.path}
@@ -87,7 +95,7 @@ const Card: FC<CardProps> = ({
                 styles.card__button,
                 styles.card__buttonRemove,
               )}
-              onClick={() => remove(id)}
+              onClick={() => remove(id as number)}
             >
               Удалить
             </div>

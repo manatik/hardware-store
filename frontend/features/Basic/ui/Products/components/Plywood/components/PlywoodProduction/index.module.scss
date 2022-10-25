@@ -25,6 +25,17 @@
       @include deviceWidth(mobile) {
         display: none;
       }
+
+      & img {
+        border-radius: 24px;
+
+        @include deviceWidth(tabletPortrait) {
+          border-radius: 14px;
+        }
+        @include deviceWidth(mobile) {
+          border-radius: 14px;
+        }
+      }
     }
 
     &_mobile {

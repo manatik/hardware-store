@@ -41,3 +41,15 @@ export const PlywoodSchema = Yup.object().shape({
   //   .trim()
   //   .required('Укажите износостойкость'),
 })
+
+export const PlywoodOrderSchema = Yup.object().shape({
+  format: Yup.string()
+    .trim()
+    .required('Укажите формат листа'),
+  widthPlywood: Yup.string()
+    .trim()
+    .required('Укажите толщину листа'),
+  sorts: Yup.string()
+    .trim()
+    .required('Укажите сорт'),
+})

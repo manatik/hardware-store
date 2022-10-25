@@ -3,8 +3,8 @@ import { formatService } from '@services/calc/formats/formats.services'
 import { sortService } from '@services/calc/sort/sort.services'
 import { widthPlywoodService } from '@services/calc/widthPlywood/widthPlywood.services'
 import { typeService } from '@services/calc/type/type.services'
-import { updateData } from '@features/Admin/ui/CardGrid/types'
 import { CalcData } from '@models/Calc'
+import { photosService } from '@services/calc/photos/photos.servise'
 
 export const updateFeature = (state: any, action: any) => {
   switch (action.payload.endpoint) {
@@ -28,11 +28,15 @@ export const updateFeature = (state: any, action: any) => {
       state.types = action.payload.data
       break
     }
+    case 6: {
+      state.photos = action.payload.data
+      break
+    }
     default: break
   }
 }
 
-export const fetchUpdate = async (id: number, endpoint: number, values: updateData) => {
+export const fetchUpdate = async (id: number, endpoint: number, values: CalcData) => {
   switch (endpoint) {
     case 1: {
       await coatingDensityService.update(id, values)
@@ -88,6 +92,11 @@ export const fetchRemove = async (id: number, endpoint: number) => {
     case 5: {
       await typeService.remove(id)
       const { data } = await typeService.getAll()
+      return { data, endpoint }
+    }
+    case 6: {
+      await photosService.remove(id)
+      const { data } = await photosService.getAll()
       return { data, endpoint }
     }
     default: return null

@@ -6,6 +6,8 @@ import Furniture from '@features/Basic/ui/Products/components/Furniture'
 import House from '@features/Basic/ui/Products/components/House'
 import { getCookie, setCookie } from 'cookies-next'
 
+import { plywood } from '@features/Basic/ui/Products/mockData'
+import Slider from '@features/Basic/ui/Products/components/Slider'
 import styles from './index.module.scss'
 
 enum Blocks {
@@ -64,6 +66,7 @@ const Products = () => {
         </div>
       </div>
 
+      <Slider sliders={plywood} />
       <CurrentComponent />
     </div>
   )

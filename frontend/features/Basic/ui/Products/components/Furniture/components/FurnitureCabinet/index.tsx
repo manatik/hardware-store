@@ -2,10 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 import FurnitureOfferCard from '@features/Basic/ui/Products/components/Furniture/components/FurnitureOfferCard'
 
-import img1 from 'assets/furniture/cabinet-1.png'
-import img2 from 'assets/furniture/cabinet-2.png'
-import img3 from 'assets/furniture/cabinet-3.png'
-import img4 from 'assets/furniture/cabinet-4.png'
+import img1 from 'assets/furniture/cabinet-1.webp'
+import img2 from 'assets/furniture/cabinet-2.webp'
+import img3 from 'assets/furniture/cabinet-3.webp'
+import img4 from 'assets/furniture/cabinet-4.webp'
 import styles from './index.module.scss'
 
 const FurnitureCabinet = () => {
@@ -33,24 +33,32 @@ const FurnitureCabinet = () => {
           <div className={styles.cabinet__right__item}>
              <Image
                src={img1}
+               width={244}
+               height={157}
                placeholder="blur"
              />
           </div>
           <div className={styles.cabinet__right__item}>
              <Image
                src={img2}
+               width={244}
+               height={157}
                placeholder="blur"
              />
           </div>
           <div className={styles.cabinet__right__item}>
              <Image
                src={img3}
+               width={244}
+               height={157}
                placeholder="blur"
              />
           </div>
           <div className={styles.cabinet__right__item}>
              <Image
                src={img4}
+               width={244}
+               height={157}
                placeholder="blur"
              />
           </div>

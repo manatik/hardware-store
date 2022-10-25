@@ -34,7 +34,7 @@ export class PhotosService {
     }
   }
 
-  async add(id: number, photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
+  async add(photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
     try {
       const photoPaths: IPhoto[] = [];
 

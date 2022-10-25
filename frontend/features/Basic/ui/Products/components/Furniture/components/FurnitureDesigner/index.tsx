@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import img from 'assets/furniture/cabinet-6.png'
-import ProductCards from '@features/Basic/ui/ProductCards'
+import img from 'assets/furniture/cabinet-6.webp'
+import ProductCards, { Links } from '@features/Basic/ui/ProductCards'
 import FurnitureOfferCard from '@features/Basic/ui/Products/components/Furniture/components/FurnitureOfferCard'
 
 import styles from './index.module.scss'
@@ -13,11 +13,18 @@ const FurnitureDesigner = () => {
       id="designer"
     >
       <div className={styles.designer__title}>Дизайнерская мебель</div>
-      <ProductCards />
+      <ProductCards
+        products={[]}
+        link={Links.Furniture}
+      />
 
       <div className={styles.designer__info}>
         <div className={styles.designer__left}>
-          <Image src={img} />
+          <Image
+            src={img}
+            width={505}
+            height={318}
+          />
         </div>
         <div className={styles.designer__right}>
           Окружая себя красивыми предметами и интересными дизайнерскими вещицами,

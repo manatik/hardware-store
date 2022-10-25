@@ -7,10 +7,10 @@ import styles from '@features/Admin/ui/Card/index.module.scss'
 import { Formik } from 'formik'
 import AddPhotos from '@features/Admin/ui/Products/Plywood/Forms/AddPhotos'
 import { ImageType } from 'react-images-uploading'
-import { plywoodService } from '@services/products/plywood.service'
 import { toast } from 'react-toastify'
 import { fetchPlywoodAsync } from '@store/products/productsSlice'
 import { useAppDispatch } from '@store/hooks'
+import { photosService } from '@services/calc/photos/photos.servise'
 
 const Photos = () => {
   const dispatch = useAppDispatch()
@@ -30,7 +30,7 @@ const Photos = () => {
     fd.append('name', name)
 
     try {
-      const { message } = await plywoodService.plywoodAddPhoto(fd)
+      const { message } = await photosService.add(fd)
       toast.success(message || 'Фотографии успешно добавлены')
       dispatch(fetchPlywoodAsync())
     } catch (e: any) {

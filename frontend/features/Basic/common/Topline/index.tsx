@@ -18,6 +18,8 @@ import ozonDark from 'assets/layout/ozon-dark-min.svg'
 import basket from 'assets/layout/fa-shopping-bag.svg'
 
 import MobileMenu from '@features/Basic/common/Topline/components/MobileMenu'
+import { useAppSelector } from '@store/hooks'
+import { getBasketEntities } from '@store/basket/selector'
 import styles from './index.module.scss'
 
 interface ToplineProps {
@@ -39,6 +41,7 @@ const Topline: FC<ToplineProps> = ({
 }): ReactElement => {
   const [toggle, setToggle] = useState<boolean>(false)
   const [mobileMenu, setMobileMenu] = useState<boolean>(false)
+  const basketEntities = useAppSelector(getBasketEntities)
   const { pathname } = useRouter()
 
   const toggleMobileMenu = (): void => {
@@ -174,7 +177,9 @@ const Topline: FC<ToplineProps> = ({
             <Link href={`${ToplineLinks.Basket}?redirectUrl=${pathname || ''}`}>
               <a className={styles.topline__basket}>
                 <Image src={basket} />
-                <span className={styles.topline__basket__point}>3</span>
+                {basketEntities.length > 0 && (
+                  <span className={styles.topline__basket__point}>{basketEntities.length}</span>
+                )}
               </a>
             </Link>
             <div

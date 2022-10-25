@@ -1,7 +1,6 @@
 import React from 'react'
-import Slider from '@features/Basic/ui/Products/components/Slider'
 import {
-  plywood, plywoodLinks, ProductLinks, serviceSlide,
+  plywoodLinks, ProductLinks, serviceSlide,
 } from '@features/Basic/ui/Products/mockData'
 import Links from '@features/Basic/ui/Products/components/Links'
 import PlywoodInfo from '@features/Basic/ui/Products/components/Plywood/components/PlywoodInfo'
@@ -16,7 +15,6 @@ import styles from './index.module.scss'
 const Plywood = () => {
   return (
     <>
-      <Slider sliders={plywood} />
       <Links
         links={plywoodLinks}
         defaultLink={ProductLinks.Plywood}
