@@ -41,4 +41,16 @@ export class Product {
   @IsNotEmpty()
   @IsString()
   color: string;
+
+  @IsNotEmpty()
+  @IsString()
+  format: string;
+
+  @IsNotEmpty()
+  @IsString()
+  widthPlywood: string;
+
+  @IsNotEmpty()
+  @IsString()
+  sorts: string;
 }
