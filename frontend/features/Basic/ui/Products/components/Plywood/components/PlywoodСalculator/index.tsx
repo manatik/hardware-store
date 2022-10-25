@@ -24,8 +24,8 @@ const PlywoodCalculator = () => {
     // sorts: sorts[0],
     // types: types[0],
     // coatingDensity: coatingDensity[0],
-    formats: formats[0],
-    widthPlywoods: widthPlywoods[0],
+    formats: formats ? formats[0] : null,
+    widthPlywoods: widthPlywoods ? widthPlywoods[0] : null,
     count: '',
     square: '',
   })
@@ -142,7 +142,7 @@ const PlywoodCalculator = () => {
             <SelectField
               name="formats"
               onChange={handleChange}
-              value={data.formats.id}
+              value={data.formats?.id || ''}
               options={formats}
               defaultOption="Выберите Формат листа..."
             />

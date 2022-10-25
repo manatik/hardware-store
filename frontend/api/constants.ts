@@ -14,6 +14,8 @@ export enum ApiEndpoints {
   Users = '/api/user/all',
   UserInfo = '/api/user/info',
   Categories = '/api/category',
+  Email = '/api/email',
+  ProductOrder = '/api/products/order',
   ProductPlywood = '/api/products/plywood',
   CalcPlywoodPhotos = '/api/products/plywood-photos',
   CalcCoatingDensity = '/api/products/plywood-coating-density',

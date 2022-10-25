@@ -18,7 +18,6 @@ const Users: NextPage = ({ users }: any) => {
           key={item.id}
           title={item.email}
           edit={false}
-          remove={false}
         />
       ))
         : <div>Произошла ошибка на сервере или у вас не достаточно прав.</div>

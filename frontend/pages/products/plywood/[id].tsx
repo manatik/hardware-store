@@ -68,99 +68,123 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
       <div className={styles.products__item}>
         <div className={styles.products__item__left}>
           <div className={styles.products__item__mobile}>
-            <div className={styles.products__item__available}>
-              {setAvailable(product?.available)}
+            {product?.available && (
+              <div className={styles.products__item__available}>
+                {setAvailable(product?.available)}
+              </div>
+            )}
+            {product.name && (
+              <div className={styles.products__item__title}>
+                {product.name}
+              </div>
+            )}
+            {product.photos && (
+              <div className={styles.products__item__colors}>
+                <div className={styles.products__item__colorsName}>Цвет</div>
+                <div className={styles.products__item__colorsValue}>
+                  {product.photos.map((item) => (
+                    <div
+                      key={item.id}
+                      style={{ backgroundColor: item.color }}
+                      onClick={() => handleChangeImages(item.id)}
+                      className={cn(styles.products__item__color, {
+                        [styles.products__item__colorActive]: images.id === item.id,
+                      })}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          {product?.photos && (
+            <div className={styles.products__item__currentImage}>
+              <Image
+                src={currentImage.path}
+                alt={currentImage.filename}
+                width={610}
+                height={400}
+                quality={100}
+              />
             </div>
-            <div className={styles.products__item__title}>{product.name}</div>
-            <div className={styles.products__item__colors}>
-              <div className={styles.products__item__colorsName}>Цвет</div>
-              <div className={styles.products__item__colorsValue}>
-                {product.photos.map((item) => (
-                  <div
-                    key={item.id}
-                    style={{ backgroundColor: item.color }}
-                    onClick={() => handleChangeImages(item.id)}
-                    className={cn(styles.products__item__color, {
-                      [styles.products__item__colorActive]: images.id === item.id,
-                    })}
+          )}
+          {product?.photos && (
+            <div className={styles.products__item__images}>
+              {images.photos.map((item) => (
+                <div
+                  key={item.filename}
+                  className={cn(styles.products__item__images__item, {
+                    [styles.products__item__images__itemActive]:
+                    item.filename === currentImage.filename,
+                  })}
+                  onClick={() => handleSetCurrentImage(item.filename)}
+                >
+                  <Image
+                    src={item.path}
+                    alt={item.filename}
+                    width={187}
+                    height={124}
+                    quality={100}
+                    layout="responsive"
                   />
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          </div>
-          <div className={styles.products__item__currentImage}>
-            <Image
-              src={currentImage.path}
-              alt={currentImage.filename}
-              width={610}
-              height={400}
-              quality={100}
-            />
-          </div>
-          <div className={styles.products__item__images}>
-            {images.photos.map((item) => (
-              <div
-                key={item.filename}
-                className={cn(styles.products__item__images__item, {
-                  [styles.products__item__images__itemActive]:
-                  item.filename === currentImage.filename,
-                })}
-                onClick={() => handleSetCurrentImage(item.filename)}
-              >
-                <Image
-                  src={item.path}
-                  alt={item.filename}
-                  width={187}
-                  height={124}
-                  quality={100}
-                  layout="responsive"
-                />
-              </div>
-            ))}
-          </div>
+          )}
         </div>
         <div className={styles.products__item__right}>
           <div className={styles.products__item__desktop}>
-            <div className={styles.products__item__available}>
-              {setAvailable(product.available)}
-            </div>
-            <div className={styles.products__item__title}>{product.name}</div>
-            <div className={styles.products__item__colors}>
-              <div className={styles.products__item__colorsName}>Цвет</div>
-              <div className={styles.products__item__colorsValue}>
-                {product.photos.map((item) => (
-                  <div
-                    key={item.id}
-                    style={{ backgroundColor: item.color }}
-                    onClick={() => handleChangeImages(item.id)}
-                    className={cn(styles.products__item__color, {
-                      [styles.products__item__colorActive]: images.id === item.id,
-                    })}
-                  />
-                ))}
+            {product.available && (
+              <div className={styles.products__item__available}>
+                {setAvailable(product.available)}
+              </div>
+            )}
+            {product.name && (
+              <div className={styles.products__item__title}>{product.name}</div>
+            )}
+            {product.photos && (
+              <div className={styles.products__item__colors}>
+                <div className={styles.products__item__colorsName}>Цвет</div>
+                <div className={styles.products__item__colorsValue}>
+                  {product.photos.map((item) => (
+                    <div
+                      key={item.id}
+                      style={{ backgroundColor: item.color }}
+                      onClick={() => handleChangeImages(item.id)}
+                      className={cn(styles.products__item__color, {
+                        [styles.products__item__colorActive]: images.id === item.id,
+                      })}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          {product.description && (
+            <div className={styles.products__item__description}>{product.description}</div>
+          )}
+          {product.sorts && (
+            <div className={styles.products__item__sorts}>
+              <div className={styles.products__item__sortsName}>Сорт</div>
+              <div className={styles.products__item__sortsValue}>
+                {product.sorts.map((item) => (
+                  item.name
+                )).join(', ')}
               </div>
             </div>
-          </div>
-          <div className={styles.products__item__description}>{product.description}</div>
-          <div className={styles.products__item__sorts}>
-            <div className={styles.products__item__sortsName}>Сорт</div>
-            <div className={styles.products__item__sortsValue}>
-              {product.sorts.map((item) => (
-                item.name
-              )).join(', ')}
+          )}
+          {product.coatingDensity && (
+            <div className={styles.products__item__density}>
+              <div className={styles.products__item__densityName}>Плотность</div>
+              <div className={styles.products__item__densityValue}>
+                {product.coatingDensity.map((item) => (
+                  item.name
+                )).join(', ')}
+              </div>
             </div>
-          </div>
-          <div className={styles.products__item__density}>
-            <div className={styles.products__item__densityName}>Плотность</div>
-            <div className={styles.products__item__densityValue}>
-              {product.coatingDensity.map((item) => (
-                item.name
-              )).join(', ')}
-            </div>
-          </div>
+          )}
           <div className={styles.products__item__price}>
-            {product.price > 0 ? (
-              <span><b>от {product.price}</b> руб./шт</span>
+            {product?.price > 0 ? (
+              <span><b>от {product?.price}</b> руб./шт</span>
             ) : (
               <div className={styles.products__item__priceLow}>Цена по запросу</div>
             )}
@@ -207,7 +231,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
                 validateOnChange={false}
                 validateOnBlur={false}
                 onSubmit={async (values) => {
-                  dispatch(addProduct({
+                  await dispatch(addProduct({
                     ...product,
                     ...values,
                     count,

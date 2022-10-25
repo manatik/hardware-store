@@ -31,10 +31,6 @@ export const redirectController = (page: ProjectPage) => {
       return returnRedirect()
     }
 
-    case ProjectPage.Feature: {
-      return returnRedirect()
-    }
-
     // eslint-disable-next-line no-fallthrough
     default: break
   }

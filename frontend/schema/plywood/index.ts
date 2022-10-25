@@ -13,33 +13,6 @@ export const PlywoodSchema = Yup.object().shape({
   description: Yup.string()
     .trim()
     .required('Укажите описание'),
-  // width: Yup.string()
-  //   .trim()
-  //   .required('Укажите толщину'),
-  // class: Yup.string()
-  //   .trim()
-  //   .required('Укажите класс эмиссии'),
-  // densityPlywood: Yup.string()
-  //   .trim()
-  //   .required('Укажите плотность фанеры'),
-  // glue: Yup.string()
-  //   .trim()
-  //   .required('Укажите категорию клея'),
-  // membraneType: Yup.string()
-  //   .trim()
-  //   .required('Укажите тип пленки'),
-  // densityMembrane: Yup.string()
-  //   .trim()
-  //   .required('Укажите плотность пленки'),
-  // guaranteePeriod: Yup.string()
-  //   .trim()
-  //   .required('Укажите гарантийный срок'),
-  // humidity: Yup.string()
-  //   .trim()
-  //   .required('Укажите влажность фанеры'),
-  // wearResistance: Yup.string()
-  //   .trim()
-  //   .required('Укажите износостойкость'),
 })
 
 export const PlywoodOrderSchema = Yup.object().shape({
