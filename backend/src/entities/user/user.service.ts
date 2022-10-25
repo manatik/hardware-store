@@ -3,8 +3,8 @@ import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 import { Role } from 'authorization/enum/role.enum';
 import { RoleService } from 'entities/role/role.service';
-import { UserInfoQuery } from 'entities/user/dto/user-info.query';
-import { UserAllQuery } from 'entities/user/dto/user-all.query';
+import { UserInfoQuery } from './dto/user-info.query';
+import { UserAllQuery } from './dto/user-all.query';
 
 @Injectable()
 export class UserService {

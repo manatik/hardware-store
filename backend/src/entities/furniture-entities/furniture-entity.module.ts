@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { FurnitureModule } from 'entities/furniture-entities/furniture/furniture.module';
+import { FurnitureModule } from './furniture/furniture.module';
 import { FeatureModule } from './feature/feature.module';
 
 @Module({

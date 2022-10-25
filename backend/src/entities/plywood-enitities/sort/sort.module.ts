@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from 'database/prisma/prisma.module';
 import { ErrorModule } from 'common/error/error.module';
-import { SortController } from 'entities/plywood-enitities/sort/sort.controller';
-import { SortService } from 'entities/plywood-enitities/sort/sort.service';
+import { SortController } from './sort.controller';
+import { SortService } from './sort.service';
 
 @Module({
   imports: [PrismaModule, ErrorModule],

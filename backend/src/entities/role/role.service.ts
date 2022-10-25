@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateRoleDto } from 'entities/role/dto/create-role.dto';
+import { CreateRoleDto } from './dto/create-role.dto';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 

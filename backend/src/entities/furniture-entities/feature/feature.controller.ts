@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
-import { Public } from '../../../authorization/decorators/public.decorator';
-import { ENDPOINTS, GLOBAL_PREFIXES } from '../../../common/consts/endpoints.consts';
-import { Roles } from '../../../authorization/decorators/roles.decorator';
-import { Role } from '../../../authorization/enum/role.enum';
+import { Public, Roles } from 'authorization/decorators';
+import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { Role } from 'authorization/enum/role.enum';
 import { FeatureService } from './feature.service';
 import { CreateFeatureDto } from './dto/create-feature.dto';
 import { UpdateFeatureDto } from './dto/update-feature.dto';

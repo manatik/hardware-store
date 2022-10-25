@@ -13,9 +13,8 @@ import {
 import { FurnitureService } from 'entities/furniture-entities/furniture/furniture.service';
 import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
-import { Roles } from '../../../authorization/decorators/roles.decorator';
-import { Role } from '../../../authorization/enum/role.enum';
-import { Public } from '../../../authorization/decorators/public.decorator';
+import { Public, Roles } from 'authorization/decorators';
+import { Role } from 'authorization/enum/role.enum';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { AddPhotoDto } from './dto/add-photo.dto';
 import { UpdateFurnitureDto } from './dto/update-furniture.dto';

@@ -38,6 +38,12 @@ export class PhotosService {
     try {
       const photoPaths: IPhoto[] = [];
 
+      const checkUniq = await this.prismaService.plywoodPhotos.findUnique({ where: { name: dto.name } });
+
+      if (checkUniq) {
+        throw new Error(`Характеристика Фото с названием - ${dto.name} уже существует`);
+      }
+
       if (!photos.length) {
         throw new Error('Фото не получено');
       }
@@ -46,6 +52,7 @@ export class PhotosService {
         const { path, filename, originalFilename, size } = await this.filesService.writeFileWithCompress({
           filename: photo.originalname,
           buffer: photo.buffer,
+          size: photo.size,
         });
 
         photoPaths.push({ filename, path, originalFilename, size });
@@ -100,7 +107,7 @@ export class PhotosService {
     try {
       const { error, data } = await this.getById(id);
 
-      if (!error) {
+      if (error || !data) {
         throw this.errorService.badRequest(`Фото фанеры с id=${id} не существует`);
       }
 

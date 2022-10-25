@@ -25,6 +25,9 @@ block content
                 th Цена
                 th Количество
                 th Цвет
+                th Формат
+                th Сорт
+                th Толщина
                 th HEX код
         for item in prods
             tr
@@ -33,3 +36,6 @@ block content
                 td= item.count
                 td(style={background: item.color})= ' '
                 td= item.color
+                td= item.format
+                td= item.widthPlywood
+                td= item.sorts

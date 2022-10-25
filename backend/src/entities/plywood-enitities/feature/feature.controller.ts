@@ -1,10 +1,9 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { FeatureService } from './feature.service';
-import { Public } from '../../../authorization/decorators/public.decorator';
-import { ENDPOINTS, GLOBAL_PREFIXES } from '../../../common/consts/endpoints.consts';
-import { Roles } from '../../../authorization/decorators/roles.decorator';
-import { Role } from '../../../authorization/enum/role.enum';
-import { CreateFeatureDto } from '../../furniture-entities/feature/dto/create-feature.dto';
+import { Public, Roles } from 'authorization/decorators';
+import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { Role } from 'authorization/enum/role.enum';
+import { CreateFeatureDto } from './dto/create-feature.dto';
 import { UpdateFeatureDto } from './dto/update-feature.dto';
 
 @Roles(Role.Admin)

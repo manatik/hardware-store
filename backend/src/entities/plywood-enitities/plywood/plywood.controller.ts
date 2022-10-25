@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { PlywoodService } from 'entities/plywood-enitities/plywood/plywood.service';
 import { CreatePlywoodDto } from 'entities/plywood-enitities/plywood/dto/create-plywood.dto';
-import { Public } from 'authorization/decorators/public.decorator';
-import { Roles } from 'authorization/decorators/roles.decorator';
+import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delete-plywood.query';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';

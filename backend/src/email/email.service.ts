@@ -3,7 +3,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { SendEmailDto } from './dto/send-email.dto';
-import { ErrorService } from '../common/error/error.service';
+import { ErrorService } from 'common/error/error.service';
 
 @Injectable()
 export class EmailService {
