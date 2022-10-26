@@ -17,7 +17,7 @@ export class UserService {
   async getAll({ deleted }: UserAllQuery) {
     try {
       const users = await this.prismaService.user.findMany({
-        where: deleted ? undefined : { deleted: null },
+        where: deleted ? undefined : { deleted: { in: null } },
         select: {
           id: true,
           email: true,
@@ -64,7 +64,7 @@ export class UserService {
       const { roles: withRoles } = query;
 
       const user = await this.prismaService.user.findFirst({
-        where: { id, deleted: null },
+        where: { id, deleted: { in: null } },
         include: { roles: withRoles },
       });
 

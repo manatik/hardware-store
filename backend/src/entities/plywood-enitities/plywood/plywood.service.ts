@@ -14,7 +14,7 @@ export class PlywoodService {
   async getAll({ deleted }: PlywoodAllQuery) {
     try {
       const products = await this.prismaService.plywood.findMany({
-        where: deleted ? undefined : { deleted: null },
+        where: deleted ? undefined : { deleted: { in: null } },
         select: {
           formats: true,
           surfaceTypes: true,
