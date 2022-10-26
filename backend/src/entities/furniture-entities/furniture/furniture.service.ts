@@ -14,7 +14,7 @@ export class FurnitureService {
   async getAll({ deleted }: FurnitureAllQuery) {
     try {
       const products = await this.prismaService.furniture.findMany({
-        where: deleted ? undefined : { deleted: null },
+        where: deleted ? undefined : { deleted: { in: null } },
         select: { category: true, features: true, deleted: deleted || false },
       });
 
