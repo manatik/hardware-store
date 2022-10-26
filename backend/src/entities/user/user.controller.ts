@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, Req } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Public, Roles } from 'authorization/decorators';
+import { Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { Request } from 'express';
 import { UserInfoQuery } from './dto/user-info.query';
@@ -18,7 +18,7 @@ export class UserController {
     return await this.userService.getAll(query);
   }
 
-  @Public()
+  @Roles(Role.User)
   @Get(ENDPOINTS.USER.INFO)
   async byId(@Req() req: Request & { user: any }, @Query() query: UserInfoQuery) {
     return await this.userService.getById(req.user.id, query);
@@ -40,6 +40,7 @@ export class UserController {
     return await this.userService.removeRole(req.user.id, dto.roleId);
   }
 
+  @Roles(Role.User)
   @Patch(ENDPOINTS.USER.UPDATE)
   async update(@Req() req: Request & { user: any }, @Body() dto) {
     return await this.userService.update(req.user.id, dto);
