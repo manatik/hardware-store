@@ -14,17 +14,17 @@ const Slider: FC<{sliders: SliderMock}> = ({ sliders }) => {
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
-        // autoplay={{
-          // delay: 3000,
-          // disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         pagination={{
           type: 'bullets',
           modifierClass: `${styles.slider__pagination} `,
           bulletClass: styles.slider__pagination__bullet,
           bulletActiveClass: styles.slider__pagination__bulletActive,
         }}
-        modules={[Pagination]}
+        modules={[Autoplay, Pagination]}
       >
         {sliders && sliders.map((item, index) => (
           <SwiperSlide key={item.id}>
