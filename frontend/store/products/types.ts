@@ -1,8 +1,8 @@
-import { Plywood } from '@models/Products'
+import { PlywoodItem } from '@models/Products'
 
 export interface ProductsState {
   isLoading: boolean;
   isError: boolean;
-  plywood: Plywood[] | null;
+  plywood: PlywoodItem[] | null;
   house: any;
 }

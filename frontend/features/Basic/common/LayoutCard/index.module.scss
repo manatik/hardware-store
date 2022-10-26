@@ -4,6 +4,13 @@
 .layoutCard {
   padding: 45px 0 70px;
 
+  @include deviceWidth(tabletPortrait) {
+    padding: 30px 0 50px;
+  }
+  @include deviceWidth(mobile) {
+    padding: 20px 0 67px;
+  }
+
   &__inner {
     @include w-layout;
     flex: 1 0 auto;
@@ -11,6 +18,14 @@
 
   &__close {
     @include m-hover;
+    @include deviceWidth(tabletPortrait) {
+      width: 13px;
+      height: 13px;
+    }
+    @include deviceWidth(mobile) {
+      width: 13px;
+      height: 13px;
+    }
 
     &_block {
       display: flex;
@@ -21,7 +36,7 @@
         margin: 0 15px 30px 0;
       }
       @include deviceWidth(mobile) {
-        margin: 0 15px 45px 0;
+        margin: 0 0 34px 0;
       }
     }
   }

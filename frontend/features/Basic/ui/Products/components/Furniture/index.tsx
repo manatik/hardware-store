@@ -1,6 +1,5 @@
 import React from 'react'
-import { furnitureLinks, plywood, ProductLinks } from '@features/Basic/ui/Products/mockData'
-import Slider from '@features/Basic/ui/Products/components/Slider'
+import { furnitureLinks, ProductLinks } from '@features/Basic/ui/Products/mockData'
 import Links from '@features/Basic/ui/Products/components/Links'
 import FurnitureInfo from '@features/Basic/ui/Products/components/Furniture/components/FurnitureInfo'
 import FurnitureCabinet from '@features/Basic/ui/Products/components/Furniture/components/FurnitureCabinet'
@@ -10,7 +9,6 @@ import FurnitureDelivery from '@features/Basic/ui/Products/components/Furniture/
 const Furniture = () => {
   return (
     <>
-      <Slider sliders={plywood} />
       <Links
         links={furnitureLinks}
         defaultLink={ProductLinks.Furniture}

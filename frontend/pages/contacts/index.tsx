@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NextPage } from 'next'
 import Layout from '@features/Basic/common/Layout'
 import Image from 'next/image'
@@ -8,9 +8,17 @@ import { ProjectPage, useServerSideProps } from '@hooks'
 import cn from 'classnames'
 
 import map from 'assets/map.png'
+import { useAppDispatch } from '@store/hooks'
+import { initBasket } from '@store/basket/basketSlice'
 import styles from './index.module.scss'
 
 const Contacts: NextPage = () => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(initBasket())
+  }, [])
+
   return (
     <Layout
       dark={true}
@@ -30,28 +38,6 @@ const Contacts: NextPage = () => {
                   +79091349009
                 </a>
                 <a
-                  href="mailto:info@plywoodmarket.ru"
-                  className={cn(styles.contacts__link, styles.contacts__linkEmail)}
-                >
-                  info@plywoodmarket.ru
-                </a>
-                <a
-                  href="https://vk.com/plywood_market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(styles.contacts__link, styles.contacts__linkVK)}
-                >
-                  https://vk.com/plywood_market
-                </a>
-                <a
-                  href="https://t.me/plywood_market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(styles.contacts__link, styles.contacts__linkTG)}
-                >
-                  https://t.me/plywood_market
-                </a>
-                <a
                   href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -62,6 +48,36 @@ const Contacts: NextPage = () => {
                 <span className={cn(styles.contacts__link, styles.contacts__linkPin)}>
                   г. Киров, ул. Индустриальная 20А
                 </span>
+                <a
+                  href="https://t.me/plywood_market"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(styles.contacts__link, styles.contacts__linkTG)}
+                >
+                  https://t.me/plywood_market
+                </a>
+                <a
+                  href="https://vk.com/plywood_market"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(styles.contacts__link, styles.contacts__linkVK)}
+                >
+                  https://vk.com/plywood_market
+                </a>
+                <a
+                  href="mailto:info@plywoodmarket.ru"
+                  className={cn(styles.contacts__link, styles.contacts__linkEmail)}
+                >
+                  info@plywoodmarket.ru
+                </a>
+                <a
+                  href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(styles.contacts__link, styles.contacts__linkOzon)}
+                >
+                  Plywood market
+                </a>
               </div>
             </div>
             <div className={styles.contacts__map_desktop}>

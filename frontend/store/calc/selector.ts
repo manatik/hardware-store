@@ -27,3 +27,8 @@ export const getCoatingDensity = createSelector(
   selectCalc,
   (calc) => calc.coatingDensity,
 )
+
+export const getPhotos = createSelector(
+  selectCalc,
+  (calc) => calc.photos,
+)

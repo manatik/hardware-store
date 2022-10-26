@@ -1,3 +1,5 @@
+import { PhotosModal } from '@models/Products'
+
 interface CalcData {
   id: number;
   name: string;
@@ -11,6 +13,7 @@ export interface CalcState {
   sorts: CalcData[] | null;
   types: CalcData[] | null;
   widthPlywood: CalcData[] | null;
+  photos: PhotosModal[] | null;
   isLoading: boolean;
   isError: boolean;
 }

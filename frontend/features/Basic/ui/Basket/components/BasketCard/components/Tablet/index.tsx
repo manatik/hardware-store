@@ -5,30 +5,47 @@ import BasketCounter from '@features/Basic/ui/Basket/components/BasketCounter'
 import Image from 'next/image'
 import remove from 'assets/remove.svg'
 
-const Tablet: FC<BlockProps> = ({ increment, decrement }) => {
+const Tablet: FC<BlockProps> = ({
+  increment, decrement, item, removeItem, id,
+}) => {
   return (
     <div className={styles.basketCard__right_tablet}>
       <div className={styles.basketCard__right_tablet__top}>
-        <div className={styles.basketCard__title}>Ламинированная  (F/H)</div>
-        <div className={styles.basketCard__color_block}>
-          Цвет
-          <div
-            style={{ backgroundColor: '#000' }}
-            className={styles.basketCard__color}
-          />
-        </div>
+        {item?.name && (
+          <div className={styles.basketCard__title}>{item?.name}</div>
+        )}
+        {item.currentColor && (
+          <div className={styles.basketCard__color_block}>
+            Цвет
+            <div
+              style={{ backgroundColor: item.currentColor }}
+              className={styles.basketCard__color}
+            />
+          </div>
+        )}
         <BasketCounter
-          addProduct={() => increment('1')}
-          deleteProduct={() => decrement('1')}
-          count={10}
+          addProduct={() => increment(id)}
+          deleteProduct={() => decrement(id)}
+          count={item.count as number}
         />
 
-        <div className={styles.basketCard__remove}>
+        <div
+          className={styles.basketCard__remove}
+          onClick={() => removeItem(id)}
+        >
           <Image src={remove} />
         </div>
       </div>
       <div className={styles.basketCard__right_tablet__bottom}>
-        <div className={styles.basketCard__price}>Цена по запросу</div>
+        {item.price > 0 ? (
+          <div className={styles.basketCard__price}>
+            <b>от {item.price}</b> руб./шт
+          </div>
+        ) : (
+          <div className={styles.basketCard__price}>
+            <b>Цена по запросу</b>
+          </div>
+        )}
       </div>
     </div>
   )

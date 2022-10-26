@@ -2,8 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import cn from 'classnames'
 
-import plywood from 'assets/slider/slide-3.png'
-import furniture from 'assets/slider/slide-7.jpg'
+import plywood from 'assets/slider/slide-3.webp'
+import furniture from 'assets/slider/slide-7.webp'
 import styles from './index.module.scss'
 
 const Info = () => {

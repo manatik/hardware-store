@@ -1,9 +1,9 @@
 import { ReactElement } from 'react'
-import { Photo } from '@models/Products'
+import { PhotosModal } from '@models/Products'
 
 export interface CardProps {
   id?: number;
-  images?: Photo[];
+  images?: PhotosModal[];
   title: string;
   description?: string;
   form?: ReactElement;

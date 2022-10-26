@@ -33,7 +33,7 @@ const Formats = () => {
       validateOnBlur={false}
       validationSchema={CoatingDensitySchema}
       onSubmit={async (values, formikHelpers) => {
-        await addFormats(values)
+        await addFormats(values as CalcData)
         formikHelpers.setValues({
           name: '',
           price: 0,

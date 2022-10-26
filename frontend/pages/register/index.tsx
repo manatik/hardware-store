@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { fetchRegisterAsync } from '@store/register/registerSlice'
 import { getRegisterLoading, getRegisterError, getRegisterInfo } from '@store/register/selector'
 import cn from 'classnames'
+import { initBasket } from '@store/basket/basketSlice'
 
 const Register = () => {
   const dispatch = useAppDispatch()
@@ -36,6 +37,8 @@ const Register = () => {
   }, [register, isError])
 
   useEffect(() => {
+    dispatch(initBasket())
+
     return () => {
       storageService.removeItem('email')
     }

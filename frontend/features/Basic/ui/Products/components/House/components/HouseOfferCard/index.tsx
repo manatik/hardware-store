@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Image from 'next/image'
-import img from 'assets/house/offer.png'
+import img from 'assets/house/offer.webp'
 import styles from './index.module.scss'
 
 const HouseOfferCard = () => {

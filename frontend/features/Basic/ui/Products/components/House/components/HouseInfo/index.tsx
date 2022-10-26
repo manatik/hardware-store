@@ -1,7 +1,7 @@
 import React from 'react'
 
-import house1 from 'assets/house/house-1.png'
-import house2 from 'assets/house/house-2.png'
+import house1 from 'assets/house/house-1.webp'
+import house2 from 'assets/house/house-2.webp'
 import Image from 'next/image'
 import styles from './index.module.scss'
 
@@ -30,12 +30,20 @@ const HouseInfo = () => {
             технологии при утеплении 300 мм имеет высокую теплозащиту
           </div>
           <div className={styles.info__top__right}>
-            <Image src={house1} />
+            <Image
+              src={house1}
+              width={505}
+              height={337}
+            />
           </div>
         </div>
         <div className={styles.info__bottom}>
           <div className={styles.info__bottom__left}>
-            <Image src={house2} />
+            <Image
+              src={house2}
+              width={505}
+              height={337}
+            />
           </div>
           <div className={styles.info__bottom__right}>
             Конструкционные детали из фанеры <b>выдерживают большие

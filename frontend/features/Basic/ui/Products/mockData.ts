@@ -1,15 +1,15 @@
-import plywood1 from 'assets/slider/slide-1.png'
-import plywood2 from 'assets/slider/slide-2.png'
-import plywood3 from 'assets/slider/slide-3.png'
-import card from 'assets/service/card-1.png'
-import card2 from 'assets/service/card-2.png'
-import card3 from 'assets/service/card-3.png'
-import card4 from 'assets/service/card-4.png'
-import card5 from 'assets/service/card-5.png'
-import card6 from 'assets/service/card-6.png'
-import card7 from 'assets/service/card-7.png'
-import card8 from 'assets/service/card-8.png'
-import card9 from 'assets/service/card-9.png'
+import plywood1 from 'assets/slider/slide-3.webp'
+import plywood2 from 'assets/slider/slide-8.webp'
+import plywood3 from 'assets/slider/slide-9.webp'
+import card from 'assets/service/card-1.webp'
+import card2 from 'assets/service/card-2.webp'
+import card3 from 'assets/service/card-3.webp'
+import card4 from 'assets/service/card-4.webp'
+import card5 from 'assets/service/card-5.webp'
+import card6 from 'assets/service/card-6.webp'
+import card7 from 'assets/service/card-7.webp'
+import card8 from 'assets/service/card-8.webp'
+import card9 from 'assets/service/card-9.webp'
 import image1 from 'assets/products/plywood/production1.webp'
 import image2 from 'assets/products/plywood/production2.webp'
 import image3 from 'assets/products/plywood/production3.webp'
@@ -20,18 +20,24 @@ export const plywood = [
     image: plywood1,
     title: 'sdfsdf',
     description: 'sdfsdf',
+    height: 431,
+    width: 1240,
   },
   {
     id: 2,
     image: plywood2,
     title: 'sdfsdf',
     description: 'sdfsdf',
+    height: 431,
+    width: 1240,
   },
   {
     id: 3,
     image: plywood3,
     title: 'sdfsdf',
     description: 'sdfsdf',
+    height: 431,
+    width: 1240,
   },
 ]
 

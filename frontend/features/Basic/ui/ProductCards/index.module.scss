@@ -38,44 +38,44 @@
       }
     }
 
-        &__title {
-            @include m-typography(18px, 21px, 700);
-            margin-bottom: 10px;
-        }
-
-        &__colors {
-            display: flex;
-            margin-bottom: 10px;
-        }
-
-        &__color {
-            width: 13px;
-            height: 13px;
-            border-radius: 50%;
-            border: 1px solid rgba($colorBlack, 0.37);
-
-            &:not(:last-child) {
-                margin-right: 4px;
-            }
-        }
-
-        &__bottom {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        &__price {
-            @include m-typography(20px, 23px, 700);
-
-            & b {
-                @include m-typography(20px, 23px, 900);
-                color: $colorPrimary;
-            }
-        }
-
-        &__availability {
-            @include m-typography(20px, 23px, 700);
-            color: $colorPrimary;
-        }
+    &__title {
+      @include m-typography(18px, 21px, 700);
+      margin-bottom: 10px;
     }
+
+    &__colors {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    &__color {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 1px solid rgba($colorBlack, 0.37);
+
+      &:not(:last-child) {
+        margin-right: 4px;
+      }
+    }
+
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__price {
+      @include m-typography(20px, 23px, 700);
+
+      & b {
+        @include m-typography(20px, 23px, 900);
+        color: $colorPrimary;
+      }
+    }
+
+    &__availability {
+      @include m-typography(20px, 23px, 700);
+      color: $colorPrimary;
+    }
+  }
 }

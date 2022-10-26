@@ -40,6 +40,19 @@
       margin-bottom: 40px;
     }
 
+    &__right {
+      & img {
+        border-radius: 20px;
+
+        @include deviceWidth(tabletPortrait) {
+          border-radius: 14px;
+        }
+        @include deviceWidth(mobile) {
+          border-radius: 14px;
+        }
+      }
+    }
+
     &__left {
       @include m-typography(20px, 28px);
       margin-right: 20px;
@@ -71,10 +84,24 @@
 
     &__bottom {
       display: flex;
+      align-items: center;
       justify-content: space-between;
 
       @include deviceWidth(mobile) {
         flex-direction: column;
+      }
+
+      &__left {
+        & img {
+          border-radius: 20px;
+
+          @include deviceWidth(tabletPortrait) {
+            border-radius: 14px;
+          }
+          @include deviceWidth(mobile) {
+            border-radius: 14px;
+          }
+        }
       }
 
       &__right {

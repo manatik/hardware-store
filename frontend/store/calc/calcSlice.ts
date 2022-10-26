@@ -5,11 +5,11 @@ import { sortService } from '@services/calc/sort/sort.services'
 import { typeService } from '@services/calc/type/type.services'
 import { widthPlywoodService } from '@services/calc/widthPlywood/widthPlywood.services'
 import { coatingDensityService } from '@services/calc/coatingDensity/coatingDensity.services'
-import { updateData } from '@features/Admin/ui/CardGrid/types'
 import {
   fetchAdd, fetchRemove, fetchUpdate, updateFeature,
 } from '@utils/storeHelper'
 import { CalcData } from '@models/Calc'
+import { photosService } from '@services/calc/photos/photos.servise'
 
 export const initialState: CalcState = {
   globalError: null,
@@ -20,6 +20,7 @@ export const initialState: CalcState = {
   types: null,
   widthPlywood: null,
   coatingDensity: null,
+  photos: null,
 }
 
 export const fetchCalcParamsAsync = createAsyncThunk(
@@ -31,6 +32,7 @@ export const fetchCalcParamsAsync = createAsyncThunk(
       const types = await typeService.getAll()
       const widthPlywood = await widthPlywoodService.getAll()
       const coatingDensity = await coatingDensityService.getAll()
+      const photos = await photosService.getAll()
 
       const data = {
         formats: formats.data,
@@ -38,6 +40,7 @@ export const fetchCalcParamsAsync = createAsyncThunk(
         types: types.data,
         widthPlywood: widthPlywood.data,
         coatingDensity: coatingDensity.data,
+        photos: photos.data,
       }
       return data
     } catch (err: any) {
@@ -59,7 +62,7 @@ export const fetchCalcRemoveParamsAsync = createAsyncThunk<any, { id: number, en
 )
 
 export const fetchCalcUpdateParamsAsync = createAsyncThunk<any,
-  { id: number, endpoint: number, values: updateData }>(
+  { id: number, endpoint: number, values: CalcData }>(
     'calc/fetchCalcUpdateParams',
     async (dataUpdate, { rejectWithValue }) => {
       const { id, endpoint, values } = dataUpdate
@@ -102,6 +105,7 @@ export const calcSlice = createSlice({
         state.widthPlywood = action.payload.widthPlywood
         state.formats = action.payload.formats
         state.coatingDensity = action.payload.coatingDensity
+        state.photos = action.payload.photos
       })
       .addCase(fetchCalcParamsAsync.rejected, (state) => {
         state.isLoading = false

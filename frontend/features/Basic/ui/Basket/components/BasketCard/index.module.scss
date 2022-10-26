@@ -104,7 +104,11 @@
 
   &__price {
     @include m-typography(16px, 18px, 500);
-    color: $colorPrimary;
+
+    & b {
+      @include m-typography(16px, 18px, 700);
+      color: $colorPrimary;
+    }
   }
 
   &__counter {

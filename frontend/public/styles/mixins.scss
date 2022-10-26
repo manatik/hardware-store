@@ -402,11 +402,16 @@
   }
 }
 
+@mixin m-transition {
+  transition: .300s;
+}
+
 @mixin m-hover {
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       opacity: $opacityHover;
       cursor: pointer;
+      @include m-transition;
     }
   }
 }
@@ -427,9 +432,19 @@
   &__slide {
     max-height: 430px;
 
+    &__first {
+      & img {
+        object-position: 50% 100%;
+      }
+    }
+
     img {
       object-fit: cover;
       border-radius: 30px;
+
+      @include deviceWidth(mobile) {
+        border-radius: 15px;
+      }
     }
   }
 

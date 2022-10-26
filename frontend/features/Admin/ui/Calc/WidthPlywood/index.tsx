@@ -33,7 +33,7 @@ const WidthPlywood = () => {
       validateOnBlur={false}
       validationSchema={calcAllSchema}
       onSubmit={async (values, formikHelpers) => {
-        await addWidthPlywood(values)
+        await addWidthPlywood(values as CalcData)
         formikHelpers.setValues({
           name: '',
           price: 0,

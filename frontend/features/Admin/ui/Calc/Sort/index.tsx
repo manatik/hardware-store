@@ -33,7 +33,7 @@ const Sort = () => {
       validateOnBlur={false}
       validationSchema={calcAllSchema}
       onSubmit={async (values, formikHelpers) => {
-        await addSort(values)
+        await addSort(values as CalcData)
         formikHelpers.setValues({
           name: '',
           price: 0,

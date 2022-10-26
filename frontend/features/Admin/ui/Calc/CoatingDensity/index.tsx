@@ -33,7 +33,7 @@ const CoatingDensity = () => {
       validateOnBlur={false}
       validationSchema={calcAllSchema}
       onSubmit={async (values, formikHelpers) => {
-        await addCoatingDensity(values)
+        await addCoatingDensity(values as CalcData)
         formikHelpers.setValues({
           name: '',
           price: 0,

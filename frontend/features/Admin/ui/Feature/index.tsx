@@ -1,21 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
 import styles from '@features/Admin/ui/Card/index.module.scss'
 import { Formik } from 'formik'
-import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { fetchAddFormatAsync } from '@store/format/formatSlice'
-import { toast } from 'react-toastify'
-import { getFormatIsError } from '@store/format/selector'
+import { useAppDispatch } from '@store/hooks'
 
 const FeatureForm = () => {
   const dispatch = useAppDispatch()
-  const isError = useAppSelector(getFormatIsError)
-
-  useEffect(() => {
-    if (isError) toast.error('Ошибка запроса')
-  }, [isError])
 
   return (
     <Formik

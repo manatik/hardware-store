@@ -61,6 +61,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'arrow-body-style': 0,
     'default-param-last': 'off',
+    'no-underscore-dangle': 'off',
     semi: ['error', 'never'],
   },
   settings: {

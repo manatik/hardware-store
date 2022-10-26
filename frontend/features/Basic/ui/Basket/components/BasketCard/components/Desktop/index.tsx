@@ -6,26 +6,43 @@ import remove from 'assets/remove.svg'
 import styles from '@features/Basic/ui/Basket/components/BasketCard/index.module.scss'
 import { BlockProps } from '@features/Basic/ui/Basket/components/BasketCard/types'
 
-const Desktop: FC<BlockProps> = ({ increment, decrement }) => {
+const Desktop: FC<BlockProps> = ({
+  increment, decrement, item, removeItem, id,
+}) => {
   return (
     <div className={styles.basketCard__right_desktop}>
-      <div className={styles.basketCard__title}>Ламинированная  (F/H)</div>
-      <div className={styles.basketCard__color_block}>
+      {item?.name && (
+        <div className={styles.basketCard__title}>{item?.name}</div>
+      )}
+      {item.currentColor && (
+        <div className={styles.basketCard__color_block}>
         Цвет
-        <div
-          style={{ backgroundColor: '#000' }}
-          className={styles.basketCard__color}
-        />
-      </div>
-      <div className={styles.basketCard__price}>Цена по запросу</div>
+          <div
+            style={{ backgroundColor: item.currentColor }}
+            className={styles.basketCard__color}
+          />
+        </div>
+      )}
+      {item.price > 0 ? (
+        <div className={styles.basketCard__price}>
+          <b>от {item.price}</b> руб./шт
+        </div>
+      ) : (
+        <div className={styles.basketCard__price}>
+          <b>Цена по запросу</b>
+        </div>
+      )}
 
       <BasketCounter
-        addProduct={() => increment('1')}
-        deleteProduct={() => decrement('1')}
-        count={10}
+        addProduct={() => increment(id)}
+        deleteProduct={() => decrement(id)}
+        count={item.count as number}
       />
 
-      <div className={styles.basketCard__remove}>
+      <div
+        className={styles.basketCard__remove}
+        onClick={() => removeItem(id)}
+      >
         <Image src={remove} />
       </div>
     </div>
