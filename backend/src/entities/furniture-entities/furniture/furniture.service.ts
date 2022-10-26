@@ -11,11 +11,28 @@ import { DeleteFurnitureQuery } from './dto/delete-furniture.query';
 export class FurnitureService {
   constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
-  async getAll({ deleted }: FurnitureAllQuery) {
+  async getAll({ deleted = false }: FurnitureAllQuery) {
     try {
       const products = await this.prismaService.furniture.findMany({
         where: deleted ? undefined : { deleted: null },
-        select: { category: true, features: true, deleted: deleted || false },
+        select: {
+          category: true,
+          features: true,
+          description: true,
+          updatedAt: true,
+          price: true,
+          createdAt: true,
+          available: true,
+          categoryId: true,
+          name: true,
+          photos: true,
+          article: true,
+          depth: true,
+          height: true,
+          id: true,
+          width: true,
+          deleted: deleted,
+        },
       });
 
       return this.errorService.success('Продукты успешно получены', {
@@ -30,7 +47,7 @@ export class FurnitureService {
     try {
       const product = await this.prismaService.furniture.findFirst({
         where: { id, deleted: null },
-        include: { category: true, features: true },
+        include: { category: true, features: true, photos: true },
       });
 
       return this.errorService.success('Продукт успешно получен', { product });

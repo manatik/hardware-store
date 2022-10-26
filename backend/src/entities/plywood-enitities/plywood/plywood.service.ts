@@ -11,11 +11,21 @@ import { PlywoodAllQuery } from './dto/plywood-all.query';
 export class PlywoodService {
   constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
-  async getAll({ deleted }: PlywoodAllQuery) {
+  async getAll({ deleted = false }: PlywoodAllQuery) {
     try {
       const products = await this.prismaService.plywood.findMany({
         where: deleted ? undefined : { deleted: null },
         select: {
+          name: true,
+          categoryId: true,
+          article: true,
+          available: true,
+          createdAt: true,
+          description: true,
+          price: true,
+          updatedAt: true,
+          widths: true,
+          types: true,
           formats: true,
           surfaceTypes: true,
           category: true,
@@ -23,7 +33,8 @@ export class PlywoodService {
           coatingDensity: true,
           features: true,
           photos: true,
-          deleted: deleted || false,
+          deleted: deleted,
+          id: true,
         },
       });
 
@@ -47,6 +58,8 @@ export class PlywoodService {
           coatingDensity: true,
           features: true,
           photos: true,
+          types: true,
+          widths: true,
         },
       });
 
