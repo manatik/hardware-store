@@ -14,7 +14,7 @@ export class PlywoodService {
   async getAll({ deleted }: PlywoodAllQuery) {
     try {
       const products = await this.prismaService.plywood.findMany({
-        where: deleted ? undefined : { deleted: { in: null } },
+        where: deleted ? undefined : { deleted: null },
         select: {
           formats: true,
           surfaceTypes: true,
@@ -38,7 +38,7 @@ export class PlywoodService {
   async getById(id: number) {
     try {
       const product = await this.prismaService.plywood.findFirst({
-        where: { id, deleted: { in: null } },
+        where: { id, deleted: null },
         include: {
           formats: true,
           surfaceTypes: true,
