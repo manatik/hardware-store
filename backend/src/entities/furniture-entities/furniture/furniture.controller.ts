@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { FurnitureService } from 'entities/furniture-entities/furniture/furniture.service';
 import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { UpdateFurnitureDto } from './dto/update-furniture.dto';
+import { FurnitureAllQuery } from './dto/furniture-all.query';
+import { DeleteFurnitureQuery } from './dto/delete-furniture.query';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.FURNITURE)
@@ -13,8 +15,8 @@ export class FurnitureController {
 
   @Public()
   @Get(ENDPOINTS.FURNITURE.GET_ALL)
-  async all() {
-    return await this.furnitureService.getAll();
+  async all(@Query() query: FurnitureAllQuery) {
+    return await this.furnitureService.getAll(query);
   }
 
   @Public()
@@ -34,7 +36,7 @@ export class FurnitureController {
   }
 
   @Delete(ENDPOINTS.FURNITURE.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
-    return await this.furnitureService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number, @Query() query: DeleteFurnitureQuery) {
+    return await this.furnitureService.remove(id, query);
   }
 }

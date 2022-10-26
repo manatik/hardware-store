@@ -1,6 +1,6 @@
 version: "3.10"
 
-x-node-version: &node-version node:16.15.0
+x-node-version: &node-version node:18.0
 
 services:
   db:
@@ -34,9 +34,9 @@ services:
     working_dir: /api
     command: bash -c "
       yarn install
+      && yarn prisma generate
       && yarn prisma migrate dev
       && yarn prisma db seed
-      && yarn prisma generate
       && yarn start:dev"
 
   frontend:
@@ -56,8 +56,6 @@ services:
       && yarn dev"
 
 volumes:
-  db:
-    driver: local
   pgdata:
   pgsql-sock:
 

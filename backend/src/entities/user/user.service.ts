@@ -16,29 +16,16 @@ export class UserService {
 
   async getAll({ deleted }: UserAllQuery) {
     try {
-      let users;
-
-      if (deleted) {
-        users = await this.prismaService.user.findMany({
-          select: {
-            id: true,
-            email: true,
-            createdAt: true,
-            updatedAt: true,
-            deleted: true,
-          },
-        });
-      } else {
-        users = await this.prismaService.user.findMany({
-          where: { deleted: { in: null } },
-          select: {
-            id: true,
-            email: true,
-            createdAt: true,
-            updatedAt: true,
-          },
-        });
-      }
+      const users = await this.prismaService.user.findMany({
+        where: deleted ? undefined : { deleted: null },
+        select: {
+          id: true,
+          email: true,
+          createdAt: true,
+          updatedAt: true,
+          deleted: deleted || false,
+        },
+      });
 
       return this.errorService.success('Пользователи успешно получены', { users });
     } catch (e) {
@@ -54,7 +41,7 @@ export class UserService {
       const { withRoles, withPassword } = params;
 
       const user = await this.prismaService.user.findFirst({
-        where: { email, deleted: { in: null } },
+        where: { email, deleted: null },
         select: {
           roles: withRoles,
           id: true,
@@ -77,7 +64,7 @@ export class UserService {
       const { roles: withRoles } = query;
 
       const user = await this.prismaService.user.findFirst({
-        where: { id, deleted: { in: null } },
+        where: { id, deleted: null },
         include: { roles: withRoles },
       });
 

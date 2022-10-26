@@ -5,16 +5,17 @@ import { CreatePlywoodDto } from './dto/create-plywood.dto';
 import { DeletePlywoodQuery } from './dto/delete-plywood.query';
 import { UpdatePlywoodDto } from './dto/update-plywood.dto';
 import { idsArrayToArrayObjects } from 'common/utils/utils';
+import { PlywoodAllQuery } from './dto/plywood-all.query';
 
 @Injectable()
 export class PlywoodService {
   constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
-  async getAll() {
+  async getAll({ deleted }: PlywoodAllQuery) {
     try {
       const products = await this.prismaService.plywood.findMany({
-        where: { deleted: { in: null } },
-        include: {
+        where: deleted ? undefined : { deleted: null },
+        select: {
           formats: true,
           surfaceTypes: true,
           category: true,
@@ -22,6 +23,7 @@ export class PlywoodService {
           coatingDensity: true,
           features: true,
           photos: true,
+          deleted: deleted || false,
         },
       });
 
@@ -89,7 +91,7 @@ export class PlywoodService {
         throw new Error(`Артикул ${dto.article} уже существует`);
       }
 
-      const updated = await this.prismaService.plywood.update({
+      const product = await this.prismaService.plywood.update({
         where: { id },
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -109,7 +111,7 @@ export class PlywoodService {
         },
       });
 
-      return this.errorService.success('Продукт успешно обновлен', { data: updated });
+      return this.errorService.success('Продукт успешно обновлен', { product });
     } catch (e) {
       throw this.errorService.internal('Ошибка обновления продукта', e.message);
     }
