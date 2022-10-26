@@ -12,11 +12,11 @@ export const photosService = {
     const { data } = await httpService.get(photosEndpoint)
     return data
   },
-  update: async (id: number, dataType: any) => {
+  update: async (id: string, dataType: any) => {
     const { data } = await httpService.patch(`${photosEndpoint}/${id}`, dataType)
     return data
   },
-  remove: async (id: number) => {
+  remove: async (id: string) => {
     const { data } = await httpService.delete(`${photosEndpoint}/${id}`)
     return data
   },

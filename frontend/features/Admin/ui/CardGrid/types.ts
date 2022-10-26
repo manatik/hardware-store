@@ -9,9 +9,9 @@ export interface UpdateData {
 export interface PropsCardGrid {
   title: string;
   price: number;
-  id: number;
+  id: string;
   endpoint: number;
-  onUpdate?: (id: number, endpoint: number, data: CalcData) => void;
-  onRemove?: (id: number, endpoint: number) => void;
+  onUpdate?: (id: string, data: CalcData, endpoint: number) => void;
+  onRemove?: (id: string, endpoint: number) => void;
   images?: Photo[]
 }

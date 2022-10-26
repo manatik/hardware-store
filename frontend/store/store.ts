@@ -16,7 +16,7 @@ const reducer = (state: ReturnType<typeof rootReducer>, action: AnyAction) => {
 
 const customMiddleware: any[] = []
 
-if (!isDev) {
+if (isDev) {
   customMiddleware.push(logger)
 }
 

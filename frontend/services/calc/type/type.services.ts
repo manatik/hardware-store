@@ -13,11 +13,11 @@ export const typeService = {
     const { data } = await httpService.get(typeEndpoint)
     return data
   },
-  update: async (id: number, dataType: CalcData) => {
+  update: async (id: string, dataType: CalcData) => {
     const { data } = await httpService.patch(`${typeEndpoint}/${id}`, dataType)
     return data
   },
-  remove: async (id: number) => {
+  remove: async (id: string) => {
     const { data } = await httpService.delete(`${typeEndpoint}/${id}`)
     return data
   },

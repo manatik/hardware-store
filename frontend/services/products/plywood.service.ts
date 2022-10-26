@@ -21,7 +21,7 @@ export const plywoodService = {
     const { data } = await httpService.patch(`${plywoodEndpoint}/${plywoodData.id}`, plywoodData)
     return data
   },
-  plywoodRemove: async (id: number) => {
+  plywoodRemove: async (id: string) => {
     const { data } = await httpService.delete(`${plywoodEndpoint}/${id}`)
     return data
   },

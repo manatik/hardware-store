@@ -2,87 +2,91 @@
 @import "@public/styles/mixins.scss";
 
 .cardGrid {
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15%);
 
-    &__wrapper {
-        padding: 8px;
+  &__wrapper {
+    padding: 8px;
+  }
+
+  &__images {
+    max-width: 320px;
+    height: 260px;
+  }
+
+  &__image {
+    max-width: 320px;
+    height: 260px;
+  }
+
+  &__top {
+    &__title {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 8px;
     }
 
-    &__images {
-        max-width: 320px;
-        height: 260px;
+    &__description {
+      font-size: 16px;
+      line-height: 20px;
+      margin-bottom: 8px;
     }
 
-    &__image {
-        max-width: 320px;
-        height: 260px;
+    &__price {
+      font-size: 16px;
+      line-height: 20px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__bottom {
+    &__buttons {
+
     }
 
-    &__top {
-        &__title {
-            font-size: 20px;
-            line-height: 24px;
-            margin-bottom: 8px;
-        }
+    &__inputs {
 
-        &__description {
-            font-size: 16px;
-            line-height: 20px;
-            margin-bottom: 8px;
-        }
+    }
+  }
 
-        &__price {
-            font-size: 16px;
-            line-height: 20px;
-            margin-bottom: 8px;
-        }
+  &__button {
+    @include m-button;
+
+    &Edit {
+      background-color: #ff7010;
     }
 
-    &__bottom {
-        &__buttons {
-
-        }
-
-        &__inputs {
-
-        }
+    &Remove {
+      background-color: #e23535;
     }
 
-    &__button {
-        @include m-button;
-
-        &Edit {
-            background-color: #ff7010;
-        }
-
-        &Remove {
-            background-color: #e23535;
-        }
-
-        &:not(:last-child) {
-            margin-bottom: 8px;
-        }
+    &:not(:last-child) {
+      margin-bottom: 8px;
     }
+  }
 }
 
 @include m-form-modal;
 
 // only for hovers
-@media (hover: hover) and (pointer: fine){
-    .cardGrid {
-        &__button:hover {
-            opacity: $opacityHover;
-        }
+@media (hover: hover) and (pointer: fine) {
+  .cardGrid {
+    &__button:hover {
+      opacity: $opacityHover;
     }
+  }
 }
 
 // < 640
-@media (max-width: 640px){
-    .cardGrid {
-        max-width: 100%;
-    }
+@media (max-width: 640px) {
+  .cardGrid {
+    max-width: 100%;
+  }
 }

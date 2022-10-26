@@ -13,11 +13,11 @@ export const orderService = {
     const { data } = await httpService.get(orderEndpoint)
     return data
   },
-  order: async (id: number) => {
+  order: async (id: string) => {
     const { data } = await httpService.get(`${orderEndpoint}/${id}`)
     return data
   },
-  orderRemove: async (id: number) => {
+  orderRemove: async (id: string) => {
     const { data } = await httpService.delete(`${orderEndpoint}/${id}`)
     return data
   },

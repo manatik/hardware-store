@@ -95,7 +95,7 @@ const Card: FC<CardProps> = ({
                 styles.card__button,
                 styles.card__buttonRemove,
               )}
-              onClick={() => remove(id as number)}
+              onClick={() => remove(id as string)}
             >
               Удалить
             </div>

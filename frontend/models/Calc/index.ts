@@ -1,5 +1,5 @@
 export interface CalcData {
-  id: number | string
+  id: string | number;
   name: string;
   price: number;
 }

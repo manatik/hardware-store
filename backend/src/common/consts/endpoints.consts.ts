@@ -17,7 +17,7 @@ export const GLOBAL_PREFIXES = {
   PLYWOOD_PHOTOS: 'products/plywood-photos',
 
   FURNITURE: 'products/furniture',
-  FURNITURE_FEATURE: '',
+  FURNITURE_FEATURE: 'products/furniture-feature',
   FURNITURE_PHOTOS: 'products/furniture-photos',
 
   HOUSE: 'products/house',

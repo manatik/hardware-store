@@ -27,7 +27,7 @@ const Products: NextPage = () => {
     value: categories[0].id,
   })
 
-  const removeProductPlywood = async (id: number) => {
+  const removeProductPlywood = async (id: string) => {
     try {
       await plywoodService.plywoodRemove(id)
       toast.success('Товар успешно удален')
@@ -58,9 +58,9 @@ const Products: NextPage = () => {
               defaultOption="Выберите категорию..."
             />
 
-            {Number(data.value) === 1 && <Plywood />}
-            {Number(data.value) === 2 && <House />}
-            {Number(data.value) === 3 && <Furniture />}
+            {data.value === categories[0].id && <Plywood />}
+            {data.value === categories[1].id && <House />}
+            {data.value === categories[2].id && <Furniture />}
           </>
         }
       />

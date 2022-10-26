@@ -19,11 +19,13 @@ import SelectField from '@features/Admin/ui/SelectField'
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
 import { PlywoodItem } from '@models/Products'
 import { fetchPlywoodAsync } from '@store/products/productsSlice'
+import { getCategories } from '@store/category/selector'
 
 interface PlywoodFormProductProps {
   item?: PlywoodItem
 }
 const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
+  const categories = useAppSelector(getCategories)
   const sorts = useAppSelector(getSorts)
   const coatingDensity = useAppSelector(getCoatingDensity)
   const photos = useAppSelector(getPhotos)
@@ -75,23 +77,23 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
     return defaultValues?.map((item: any) => {
       return {
         label: item.name,
-        value: Number(item.id),
+        value: item.id,
       }
     })
   }
 
   const handleChangeSortData = (target: any) => {
-    const result = target.map((item: any) => Number(item.value))
+    const result = target.map((item: any) => item.value)
     setSortData(result)
   }
 
   const handleChangeCoatingDensityData = (target: any) => {
-    const result = target.map((item: any) => Number(item.value))
+    const result = target.map((item: any) => item.value)
     setCoatingDensityData(result)
   }
 
   const handleChangePhotoData = (target: any) => {
-    const result = target.map((item: any) => Number(item.value))
+    const result = target.map((item: any) => item.value)
     setPhotoData(result)
   }
 
@@ -104,13 +106,13 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
   useEffect(() => {
     if (item) {
       setSortData(sorts?.map((item: any) => {
-        return Number(item.id)
+        return item.id
       }))
       setCoatingDensityData(coatingDensity?.map((item: any) => {
-        return Number(item.id)
+        return item.id
       }))
       setPhotoData(item.photos?.map((item: any) => {
-        return Number(item.id)
+        return item.id
       }))
       setAvailableData(item.available)
     }
@@ -121,7 +123,7 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
       initialValues={{
         name: item?.name || '',
         article: item?.article || '',
-        categoryId: 1,
+        categoryId: categories[0].id,
         description: item?.description || '',
         price: item?.price || '',
       }}

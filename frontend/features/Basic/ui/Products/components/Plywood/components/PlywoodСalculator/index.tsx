@@ -52,7 +52,7 @@ const PlywoodCalculator = () => {
   }
 
   const results = () => {
-    if (data.count) {
+    if (data.count && data.formats && data.widthPlywoods) {
       const width = Number(data.formats.name.split('x')[0]) / 1000
       const height = Number(data.formats.name.split('x')[1]) / 1000
       const depth = Number(data.widthPlywoods.name) / 1000

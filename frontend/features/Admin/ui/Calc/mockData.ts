@@ -29,3 +29,25 @@ export const features: Option[] = [
     id: '6',
   },
 ]
+
+export const furniture: Option[] = [
+  {
+    name: 'Цена',
+    id: '1',
+  },
+  {
+    name: 'Фото товара',
+    id: '2',
+  },
+]
+
+export const products: Option[] = [
+  {
+    name: 'Фанера',
+    id: '1',
+  },
+  {
+    name: 'Мебель',
+    id: '2',
+  },
+]
