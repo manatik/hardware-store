@@ -4,8 +4,9 @@ x-node-version: &node-version node:16.15.0
 
 services:
   db:
-    image: postgres
+    image: postgres:14.5
     restart: always
+    container_name: plywood_db
     ports:
       - "25432:5432"
     environment:
@@ -26,15 +27,14 @@ services:
     networks:
       - web
     depends_on:
-      - db
+      - "db"
     volumes:
       - ../backend:/api
-      - pgsql-sock:/var/run/postgresql
       - ../backend/assets:/var/lib/images
+      - pgsql-sock:/var/run/postgresql
     working_dir: /api
     command: bash -c "
       yarn install
-      && yarn prisma generate
       && yarn prisma migrate dev
       && yarn prisma db seed
       && yarn start:dev"

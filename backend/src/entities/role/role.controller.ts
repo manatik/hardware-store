@@ -16,7 +16,7 @@ export class RoleController {
   }
 
   @Get(ENDPOINTS.ROLE.GET_BY_ID)
-  async getById(@Param('id') id: number) {
+  async getById(@Param('id') id: string) {
     return await this.roleService.getById(id);
   }
 
@@ -26,12 +26,12 @@ export class RoleController {
   }
 
   @Patch(ENDPOINTS.ROLE.UPDATE)
-  async update(@Param('id') id: number, @Body() dto) {
+  async update(@Param('id') id: string, @Body() dto) {
     return await this.roleService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.ROLE.DELETE)
-  async delete(@Param('id') id: number) {
+  async delete(@Param('id') id: string) {
     return await this.roleService.delete(id);
   }
 }

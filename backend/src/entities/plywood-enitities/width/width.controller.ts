@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
@@ -19,7 +19,7 @@ export class WidthController {
 
   @Public()
   @Get(ENDPOINTS.PLYWOOD_WIDTH.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.widthService.getById(id);
   }
 
@@ -29,12 +29,12 @@ export class WidthController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD_WIDTH.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateWidthDto) {
+  async update(@Param('id') id: string, @Body() dto: UpdateWidthDto) {
     return await this.widthService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.PLYWOOD_WIDTH.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id') id: string) {
     return await this.widthService.remove(id);
   }
 }

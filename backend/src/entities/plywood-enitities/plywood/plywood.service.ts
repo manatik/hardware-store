@@ -16,14 +16,13 @@ export class PlywoodService {
       const products = await this.prismaService.plywood.findMany({
         where: deleted ? undefined : { deleted: null },
         select: {
-          name: true,
-          categoryId: true,
+          id: true,
           article: true,
           available: true,
-          createdAt: true,
+          categoryId: true,
+          name: true,
           description: true,
           price: true,
-          updatedAt: true,
           widths: true,
           types: true,
           formats: true,
@@ -33,8 +32,9 @@ export class PlywoodService {
           coatingDensity: true,
           features: true,
           photos: true,
+          createdAt: true,
+          updatedAt: true,
           deleted: deleted,
-          id: true,
         },
       });
 
@@ -46,7 +46,7 @@ export class PlywoodService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const product = await this.prismaService.plywood.findFirst({
         where: { id, deleted: null },
@@ -96,7 +96,7 @@ export class PlywoodService {
     }
   }
 
-  async update(id: number, dto: UpdatePlywoodDto) {
+  async update(id: string, dto: UpdatePlywoodDto) {
     try {
       const duplicate = await this.prismaService.plywood.findUnique({ where: { article: dto.article } });
 
@@ -130,7 +130,7 @@ export class PlywoodService {
     }
   }
 
-  async remove(id: number, query: DeletePlywoodQuery) {
+  async remove(id: string, query: DeletePlywoodQuery) {
     try {
       const plywoodIsExist = await this.getById(id);
 

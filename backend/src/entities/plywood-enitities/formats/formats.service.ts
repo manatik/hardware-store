@@ -28,7 +28,7 @@ export class FormatsService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const format = (await this.prismaService.plywoodFormat.findFirst({ where: { id } })) as any as IPlywoodFormat;
 
@@ -48,7 +48,7 @@ export class FormatsService {
     }
   }
 
-  async update(id: number, dto: UpdateFormatsDto) {
+  async update(id: string, dto: UpdateFormatsDto) {
     try {
       const format = (await this.prismaService.plywoodFormat.update({
         where: { id },
@@ -61,7 +61,7 @@ export class FormatsService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const isFormatExist = await this.getById(id);
 

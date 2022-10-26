@@ -43,7 +43,7 @@ export class FurnitureService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const product = await this.prismaService.furniture.findFirst({
         where: { id, deleted: null },
@@ -78,7 +78,7 @@ export class FurnitureService {
     }
   }
 
-  async update(id: number, dto: UpdateFurnitureDto) {
+  async update(id: string, dto: UpdateFurnitureDto) {
     try {
       const product = await this.prismaService.furniture.update({
         where: { id },
@@ -97,7 +97,7 @@ export class FurnitureService {
     }
   }
 
-  async remove(id: number, query: DeleteFurnitureQuery) {
+  async remove(id: string, query: DeleteFurnitureQuery) {
     try {
       const furnitureIsExist = await this.getById(id);
 

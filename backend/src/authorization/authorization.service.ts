@@ -97,7 +97,7 @@ export class AuthorizationService {
     }
   }
 
-  private async generateRefreshToken(payload: any, idUser: number) {
+  private async generateRefreshToken(payload: any, userId: string) {
     const refreshToken = await this.jwtService.signAsync(payload, {
       expiresIn: '30d',
       secret: this.configService.get('JWT_SECRET'),
@@ -105,13 +105,13 @@ export class AuthorizationService {
     const expireInDate = dayjs().add(30, 'days').toISOString();
 
     const findToken = await this.prismaService.userToken.findFirst({
-      where: { userId: idUser },
+      where: { userId: userId },
     });
 
     if (findToken) {
       await this.prismaService.userToken.update({
         where: { id: findToken.id },
-        data: { token: refreshToken, expireIn: expireInDate, userId: idUser },
+        data: { token: refreshToken, expireIn: expireInDate, userId: userId },
       });
 
       return refreshToken;
@@ -121,7 +121,7 @@ export class AuthorizationService {
       data: {
         token: refreshToken,
         expireIn: expireInDate,
-        userId: idUser,
+        userId: userId,
       },
     });
 

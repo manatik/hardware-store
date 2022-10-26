@@ -16,7 +16,7 @@ enum Available {
 }
 
 model Category {
-  id                Int         @id @default(autoincrement())
+  id                String      @id @default(uuid())
   name              String      @unique
   article           String      @unique
   plywoodProducts   Plywood[]
@@ -34,7 +34,7 @@ model Category {
 ///////////////////////////////////////////////////////////
 
 model User {
-  id        Int         @id @default(autoincrement())
+  id        String      @id @default(uuid())
   email     String      @unique
   password  String
   tokens    UserToken[]
@@ -47,9 +47,9 @@ model User {
 }
 
 model UserToken {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int      @map("user_id")
+  userId    String   @map("user_id")
   token     String   @unique
   expireIn  DateTime @map("expire_in")
   createdAt DateTime @default(now()) @map("created_at")
@@ -58,7 +58,7 @@ model UserToken {
 }
 
 model Role {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   name      String    @unique
   users     User[]
   createdAt DateTime  @default(now()) @map("created_at")
@@ -68,7 +68,7 @@ model Role {
 }
 
 model Config {
-  id            Int       @id @default(autoincrement())
+  id            String    @id @default(uuid())
   emailUser     String    @map("email_user")
   emailPassword String    @map("email_password")
   emailHost     String    @map("email_host")
@@ -79,7 +79,7 @@ model Config {
 }
 
 model Order {
-  id         Int         @id @default(autoincrement())
+  id         String      @id @default(uuid())
   plywoods   Plywood[]
   houses     House[]
   furnitures Furniture[]
@@ -98,12 +98,12 @@ model Order {
 ///////////////////////////////////////////////////////////
 
 model Plywood {
-  id             Int                     @id @default(autoincrement())
+  id             String                  @id @default(uuid())
   name           String
   article        String                  @unique
   photos         PlywoodPhotos[]
   category       Category                @relation(fields: [categoryId], references: [id])
-  categoryId     Int                     @map("category_id")
+  categoryId     String                  @map("category_id")
   orders         Order[]
   formats        PlywoodFormat[]
   surfaceTypes   PlywoodSurfaceType[]
@@ -123,7 +123,7 @@ model Plywood {
 }
 
 model PlywoodFeature {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid())
   plywoods    Plywood[]
   name        String    @unique
   description String?
@@ -136,7 +136,7 @@ model PlywoodFeature {
 }
 
 model PlywoodFormat {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   plywoods  Plywood[]
   name      String
   price     Int
@@ -147,7 +147,7 @@ model PlywoodFormat {
 }
 
 model PlywoodSurfaceType {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   plywood   Plywood[]
   name      String    @unique
   price     Int
@@ -158,7 +158,7 @@ model PlywoodSurfaceType {
 }
 
 model PlywoodWidth {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   plywood   Plywood[]
   name      String
   price     Int
@@ -169,7 +169,7 @@ model PlywoodWidth {
 }
 
 model PlywoodType {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   plywood   Plywood[]
   name      String    @unique
   price     Int
@@ -180,7 +180,7 @@ model PlywoodType {
 }
 
 model PlywoodSort {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   plywood   Plywood[]
   name      String
   price     Int
@@ -191,7 +191,7 @@ model PlywoodSort {
 }
 
 model PlywoodCoatingDensity {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   plywood   Plywood[]
   name      String
   price     Int
@@ -202,7 +202,7 @@ model PlywoodCoatingDensity {
 }
 
 model PlywoodPhotos {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid())
   plywood     Plywood[]
   name        String    @unique
   photos      Json
@@ -219,13 +219,13 @@ model PlywoodPhotos {
 ///////////////////////////////////////////////////////////
 
 model Furniture {
-  id          Int                @id @default(autoincrement())
+  id          String             @id @default(uuid())
   name        String
   article     String             @unique
   photos      FurniturePhotos[]
   orders      Order[]
   category    Category           @relation(fields: [categoryId], references: [id])
-  categoryId  Int                @map("category_id")
+  categoryId  String             @map("category_id")
   available   Available          @default(AVAILABLE)
   price       Int
   description String
@@ -241,7 +241,7 @@ model Furniture {
 }
 
 model FurnitureFeature {
-  id          Int         @id @default(autoincrement())
+  id          String      @id @default(uuid())
   furniture   Furniture[]
   name        String      @unique
   description String?
@@ -254,7 +254,7 @@ model FurnitureFeature {
 }
 
 model FurniturePhotos {
-  id          Int         @id @default(autoincrement())
+  id          String      @id @default(uuid())
   furniture   Furniture[]
   name        String      @unique
   photos      Json
@@ -271,13 +271,13 @@ model FurniturePhotos {
 ///////////////////////////////////////////////////////////
 
 model House {
-  id         Int       @id @default(autoincrement())
+  id         String    @id @default(uuid())
   name       String
   article    String    @unique
   photos     Json?
   orders     Order[]
   category   Category  @relation(fields: [categoryId], references: [id])
-  categoryId Int       @map("category_id")
+  categoryId String    @map("category_id")
   price      Int
   createdAt  DateTime  @default(now()) @map("created_at")
   updatedAt  DateTime? @map("updated_at")

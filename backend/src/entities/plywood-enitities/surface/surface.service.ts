@@ -17,7 +17,7 @@ export class SurfaceService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const surface = await this.prismaService.plywoodSurfaceType.findFirst({
         where: { id },
@@ -39,7 +39,7 @@ export class SurfaceService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: string, dto) {
     try {
       const duplicate = await this.prismaService.plywoodSurfaceType.findUnique({ where: { name: dto.name } });
 
@@ -58,7 +58,7 @@ export class SurfaceService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const isSurfaceExist = await this.getById(id);
 

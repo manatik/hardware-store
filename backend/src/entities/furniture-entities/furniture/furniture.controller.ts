@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { FurnitureService } from 'entities/furniture-entities/furniture/furniture.service';
 import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
@@ -21,7 +21,7 @@ export class FurnitureController {
 
   @Public()
   @Get(ENDPOINTS.FURNITURE.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.furnitureService.getById(id);
   }
 
@@ -31,12 +31,12 @@ export class FurnitureController {
   }
 
   @Patch(ENDPOINTS.FURNITURE.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFurnitureDto) {
+  async update(@Param('id') id: string, @Body() dto: UpdateFurnitureDto) {
     return await this.furnitureService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.FURNITURE.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number, @Query() query: DeleteFurnitureQuery) {
+  async remove(@Param('id') id: string, @Query() query: DeleteFurnitureQuery) {
     return await this.furnitureService.remove(id, query);
   }
 }

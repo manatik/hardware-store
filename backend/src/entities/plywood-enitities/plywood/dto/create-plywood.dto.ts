@@ -3,36 +3,36 @@ import { Available } from 'types/enum/Available.enum';
 
 export class CreatePlywoodDto {
   @IsOptional()
-  @IsNumber({}, { each: true })
-  features: number[];
+  @IsString({ each: true })
+  features: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  formats: number[];
+  @IsString({ each: true })
+  formats: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  surfaceTypes: number[];
+  @IsString({ each: true })
+  surfaceTypes: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  types: number[];
+  @IsString({ each: true })
+  types: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  sorts: number[];
+  @IsString({ each: true })
+  sorts: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  coatingDensity: number[];
+  @IsString({ each: true })
+  coatingDensity: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  widths: number[];
+  @IsString({ each: true })
+  widths: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  photos: number[];
+  @IsString({ each: true })
+  photos: string[];
 
   @IsNotEmpty()
   @IsString()
@@ -43,8 +43,8 @@ export class CreatePlywoodDto {
   article: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  categoryId: number;
+  @IsString()
+  categoryId: string;
 
   @IsNotEmpty()
   @IsEnum(Available)

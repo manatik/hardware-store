@@ -1,15 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Patch,
-  Post,
-  UploadedFiles,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { Public, Roles } from 'authorization/decorators';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { Role } from 'authorization/enum/role.enum';
@@ -30,7 +19,7 @@ export class PhotosController {
 
   @Public()
   @Get(ENDPOINTS.FURNITURE_PHOTOS.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.photosService.getById(id);
   }
 
@@ -42,16 +31,12 @@ export class PhotosController {
 
   @UseInterceptors(FilesInterceptor('photos'))
   @Patch(ENDPOINTS.FURNITURE_PHOTOS.UPDATE)
-  async update(
-    @UploadedFiles() photos: Array<Express.Multer.File>,
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: AddPhotoDto,
-  ) {
+  async update(@UploadedFiles() photos: Array<Express.Multer.File>, @Param('id') id: string, @Body() dto: AddPhotoDto) {
     return await this.photosService.update(id, photos, dto);
   }
 
   @Delete(ENDPOINTS.FURNITURE_PHOTOS.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id') id: string) {
     return await this.photosService.remove(id);
   }
 }

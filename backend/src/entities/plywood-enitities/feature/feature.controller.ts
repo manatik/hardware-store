@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { FeatureService } from './feature.service';
 import { Public, Roles } from 'authorization/decorators';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
@@ -19,7 +19,7 @@ export class FeatureController {
 
   @Public()
   @Get(ENDPOINTS.PLYWOOD_FEATURE.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.featureService.getById(id);
   }
 
@@ -29,12 +29,12 @@ export class FeatureController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD_FEATURE.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFeatureDto) {
+  async update(@Param('id') id: string, @Body() dto: UpdateFeatureDto) {
     return await this.featureService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.PLYWOOD_FEATURE.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id') id: string) {
     return await this.featureService.remove(id);
   }
 }

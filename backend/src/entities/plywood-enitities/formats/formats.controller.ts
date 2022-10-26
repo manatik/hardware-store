@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { FormatsService } from './formats.service';
 import { CreatePlywoodFormatsDto } from './dto/create-plywood-formats.dto';
 import { Public, Roles } from 'authorization/decorators';
@@ -20,7 +20,7 @@ export class FormatsController {
 
   @Public()
   @Get(ENDPOINTS.PLYWOOD_FORMATS.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.plywoodFormatsService.getById(id);
   }
 
@@ -30,12 +30,12 @@ export class FormatsController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD_FORMATS.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateFormatsDto) {
+  async update(@Param('id') id: string, @Body() dto: UpdateFormatsDto) {
     return await this.plywoodFormatsService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.PLYWOOD_FORMATS.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id') id: string) {
     return await this.plywoodFormatsService.remove(id);
   }
 }

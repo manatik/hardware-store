@@ -59,7 +59,7 @@ export class UserService {
     }
   }
 
-  async getById(id: number, query: UserInfoQuery) {
+  async getById(id: string, query: UserInfoQuery) {
     try {
       const { roles: withRoles } = query;
 
@@ -98,7 +98,7 @@ export class UserService {
     }
   }
 
-  async addRole(userId: number, roleId: number) {
+  async addRole(userId: string, roleId: string) {
     try {
       await this.checkUserAndRole(userId, roleId);
 
@@ -111,7 +111,7 @@ export class UserService {
     }
   }
 
-  async removeRole(userId: number, roleId: number) {
+  async removeRole(userId: string, roleId: string) {
     try {
       await this.checkUserAndRole(userId, roleId);
 
@@ -124,7 +124,7 @@ export class UserService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: string, dto) {
     try {
       const user = await this.prismaService.user.update({
         where: { id },
@@ -138,7 +138,7 @@ export class UserService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const user = await this.prismaService.user.update({ where: { id }, data: { deleted: new Date() } });
 
@@ -148,7 +148,7 @@ export class UserService {
     }
   }
 
-  private async checkUserAndRole(userId: number, roleId: number) {
+  private async checkUserAndRole(userId: string, roleId: string) {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
     });

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { PlywoodService } from 'entities/plywood-enitities/plywood/plywood.service';
 import { CreatePlywoodDto } from 'entities/plywood-enitities/plywood/dto/create-plywood.dto';
 import { Public, Roles } from 'authorization/decorators';
@@ -21,7 +21,7 @@ export class PlywoodController {
 
   @Public()
   @Get(ENDPOINTS.PLYWOOD.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.plywoodService.getById(id);
   }
 
@@ -31,12 +31,12 @@ export class PlywoodController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdatePlywoodDto) {
+  async update(@Param('id') id: string, @Body() dto: UpdatePlywoodDto) {
     return await this.plywoodService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.PLYWOOD.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number, @Query() query: DeletePlywoodQuery) {
+  async remove(@Param('id') id: string, @Query() query: DeletePlywoodQuery) {
     return await this.plywoodService.remove(id, query);
   }
 }

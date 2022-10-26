@@ -16,7 +16,7 @@ export class HouseService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const product = await this.prismaService.house.findFirst({ where: { id, deleted: null } });
 
@@ -36,7 +36,7 @@ export class HouseService {
     }
   }
 
-  async update(id: number, dto) {
+  async update(id: string, dto) {
     try {
       const product = await this.prismaService.house.update({ where: { id }, data: dto });
 
@@ -46,7 +46,7 @@ export class HouseService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const product = await this.prismaService.house.update({ where: { id }, data: { deleted: new Date() } });
 

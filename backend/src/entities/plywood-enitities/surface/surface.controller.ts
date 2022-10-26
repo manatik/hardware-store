@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { SurfaceService } from './surface.service';
 import { CreatePlywoodSurfaceDto } from './dto/create-plywood-surface.dto';
 import { Public, Roles } from 'authorization/decorators';
@@ -18,7 +18,7 @@ export class SurfaceController {
 
   @Public()
   @Get(ENDPOINTS.PLYWOOD_SURFACE.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.plywoodSurfaceService.getById(id);
   }
 
@@ -28,12 +28,12 @@ export class SurfaceController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD_SURFACE.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto) {
+  async update(@Param('id') id: string, @Body() dto) {
     return await this.plywoodSurfaceService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.PLYWOOD_SURFACE.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id') id: string) {
     return await this.plywoodSurfaceService.remove(id);
   }
 }

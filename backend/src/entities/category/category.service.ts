@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ICategory } from 'entities/category/types/ICategory.interface';
 
 @Injectable()
 export class CategoryService {
@@ -10,7 +9,7 @@ export class CategoryService {
 
   async getAll() {
     try {
-      const categories = (await this.prismaService.category.findMany()) as any as ICategory[];
+      const categories = await this.prismaService.category.findMany();
 
       return this.errorService.success('Категории успешно получены', {
         categories,
@@ -20,11 +19,11 @@ export class CategoryService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
-      const category = (await this.prismaService.category.findUnique({
+      const category = await this.prismaService.category.findUnique({
         where: { id },
-      })) as any as ICategory;
+      });
 
       return this.errorService.success('Категория успешно получена', {
         category,
@@ -34,12 +33,12 @@ export class CategoryService {
     }
   }
 
-  async update(id: number, dto: UpdateCategoryDto) {
+  async update(id: string, dto: UpdateCategoryDto) {
     try {
-      const category = (await this.prismaService.category.update({
+      const category = await this.prismaService.category.update({
         where: { id },
         data: dto,
-      })) as any as ICategory;
+      });
 
       return this.errorService.success('Категория успешно обновлена', {
         category,

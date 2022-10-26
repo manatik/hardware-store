@@ -24,7 +24,7 @@ export class PhotosService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const photo = await this.prismaService.plywoodPhotos.findFirst({ where: { id } });
 
@@ -71,7 +71,7 @@ export class PhotosService {
     }
   }
 
-  async update(id: number, photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
+  async update(id: string, photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
     try {
       const photoPaths: IPhoto[] = [];
 
@@ -103,7 +103,7 @@ export class PhotosService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const { error, data } = await this.getById(id);
 

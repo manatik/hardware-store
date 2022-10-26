@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
@@ -19,7 +19,7 @@ export class SortController {
 
   @Public()
   @Get(ENDPOINTS.PLYWOOD_SORT.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.sortService.getById(id);
   }
 
@@ -29,12 +29,12 @@ export class SortController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD_SORT.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateSortDto) {
+  async update(@Param('id') id: string, @Body() dto: UpdateSortDto) {
     return await this.sortService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.PLYWOOD_SORT.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id') id: string) {
     return await this.sortService.remove(id);
   }
 }

@@ -1,10 +1,8 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ICategory } from 'entities/category/types/ICategory.interface';
-import { ISuccessResponseType } from 'types/ISuccessResponse.type';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 
 @Roles(Role.Admin)
@@ -14,21 +12,18 @@ export class CategoryController {
 
   @Public()
   @Get(ENDPOINTS.CATEGORY.GET_ALL)
-  async all(): Promise<ISuccessResponseType & { categories: ICategory[] }> {
+  async all() {
     return await this.categoryService.getAll();
   }
 
   @Public()
   @Get(ENDPOINTS.CATEGORY.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number): Promise<ISuccessResponseType & { category: ICategory }> {
+  async byId(@Param('id') id: string) {
     return await this.categoryService.getById(id);
   }
 
   @Patch(ENDPOINTS.CATEGORY.UPDATE)
-  async update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: UpdateCategoryDto,
-  ): Promise<ISuccessResponseType & { category: ICategory }> {
+  async update(@Param('id') id: string, @Body() dto: UpdateCategoryDto) {
     return await this.categoryService.update(id, dto);
   }
 }
