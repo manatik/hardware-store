@@ -6,6 +6,7 @@ import { Role } from 'authorization/enum/role.enum';
 import { DeletePlywoodQuery } from 'entities/plywood-enitities/plywood/dto/delete-plywood.query';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { UpdatePlywoodDto } from './dto/update-plywood.dto';
+import { PlywoodAllQuery } from './dto/plywood-all.query';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.PLYWOOD)
@@ -14,8 +15,8 @@ export class PlywoodController {
 
   @Public()
   @Get(ENDPOINTS.PLYWOOD.GET_ALL)
-  async all() {
-    return await this.plywoodService.getAll();
+  async all(@Query() query: PlywoodAllQuery) {
+    return await this.plywoodService.getAll(query);
   }
 
   @Public()
