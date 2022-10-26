@@ -37,6 +37,12 @@ export class TypeService {
 
   async update(id: number, dto: UpdateTypeDto) {
     try {
+      const duplicate = await this.prismaService.plywoodType.findUnique({ where: { name: dto.name } });
+
+      if (duplicate) {
+        throw new Error(`Тип с названием - ${dto.name} уже существует`);
+      }
+
       const updated = await this.prismaService.plywoodType.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });
     } catch (e) {

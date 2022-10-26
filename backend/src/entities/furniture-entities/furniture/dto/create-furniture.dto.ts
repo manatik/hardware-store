@@ -6,6 +6,10 @@ export class CreateFurnitureDto {
   @IsNumber({}, { each: true })
   features: number[];
 
+  @IsOptional()
+  @IsNumber({}, { each: true })
+  photos: number[];
+
   @IsNotEmpty()
   @IsString()
   name: string;

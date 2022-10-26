@@ -1,22 +1,9 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Patch,
-  Post,
-  UploadedFiles,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { FurnitureService } from 'entities/furniture-entities/furniture/furniture.service';
 import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
-import { FilesInterceptor } from '@nestjs/platform-express';
-import { AddPhotoDto } from './dto/add-photo.dto';
 import { UpdateFurnitureDto } from './dto/update-furniture.dto';
 
 @Roles(Role.Admin)
@@ -39,16 +26,6 @@ export class FurnitureController {
   @Post(ENDPOINTS.FURNITURE.CREATE)
   async add(@Body() dto: CreateFurnitureDto) {
     return await this.furnitureService.add(dto);
-  }
-
-  @UseInterceptors(FilesInterceptor('photos'))
-  @Post(ENDPOINTS.PLYWOOD.ADD_PHOTOS)
-  async addPhotos(
-    @UploadedFiles() photos: Array<Express.Multer.File>,
-    @Param('id', ParseIntPipe) id: number,
-    @Body() dto: AddPhotoDto,
-  ) {
-    return await this.furnitureService.addPhotos(id, photos, dto);
   }
 
   @Patch(ENDPOINTS.FURNITURE.UPDATE)

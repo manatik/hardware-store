@@ -174,8 +174,8 @@ model PlywoodType {
 	plywood     Plywood[]
 	name        String      @unique
 	price       Int
-	createdAt   DateTime  @map("created_at") @default(now())
-	updatedAt   DateTime? @map("updated_at")
+	createdAt   DateTime    @map("created_at") @default(now())
+	updatedAt   DateTime?   @map("updated_at")
 
   @@map("plywood_type")
 }
@@ -185,7 +185,7 @@ model PlywoodSort {
   plywood     Plywood[]
   name        String
   price       Int
-  createdAt   DateTime  @map("created_at") @default(now())
+  createdAt   DateTime    @map("created_at") @default(now())
   updatedAt   DateTime?   @map("updated_at")
 
   @@map("plywood_sort")
@@ -223,7 +223,7 @@ model Furniture {
   id          Int                 @id @default(autoincrement())
   name        String
   article     String              @unique
-  photos      Json?
+  photos      FurniturePhotos[]
   orders      Order[]
   category    Category            @relation(fields: [categoryId], references: [id])
   categoryId  Int                 @map("category_id")
@@ -252,6 +252,19 @@ model FurnitureFeature {
   updatedAt   DateTime?       @map("updated_at")
 
   @@map("furniture_feature")
+}
+
+model FurniturePhotos {
+  id          Int         @id @default(autoincrement())
+  furniture   Furniture[]
+  name        String      @unique
+  photos      Json
+  color       String
+  description String?
+  createdAt   DateTime    @map("created_at") @default(now())
+  updatedAt   DateTime?   @map("updated_at")
+
+  @@map("furniture_photos")
 }
 
 /////////////////////////////////////////////////////////////

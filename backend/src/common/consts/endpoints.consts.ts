@@ -18,6 +18,7 @@ export const GLOBAL_PREFIXES = {
 
   FURNITURE: 'products/furniture',
   FURNITURE_FEATURE: '',
+  FURNITURE_PHOTOS: 'products/furniture-photos',
 
   HOUSE: 'products/house',
   HOUSE_FEATURE: '',
@@ -70,6 +71,13 @@ export const ENDPOINTS = {
     DELETE: ':id',
   },
   FURNITURE_FEATURE: {
+    GET_ALL: '',
+    GET_BY_ID: ':id',
+    CREATE: '',
+    UPDATE: ':id',
+    DELETE: ':id',
+  },
+  FURNITURE_PHOTOS: {
     GET_ALL: '',
     GET_BY_ID: ':id',
     CREATE: '',

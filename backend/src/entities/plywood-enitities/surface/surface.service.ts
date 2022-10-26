@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CreatePlywoodSurfaceDto } from './dto/create-plywood-surface.dto';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
-import { IPlywoodSurface } from './types/IPlywoodSurface.interface';
 
 @Injectable()
 export class SurfaceService {
@@ -10,7 +9,7 @@ export class SurfaceService {
 
   async getAll() {
     try {
-      const surfaces = (await this.prismaService.plywoodSurfaceType.findMany()) as any as IPlywoodSurface[];
+      const surfaces = await this.prismaService.plywoodSurfaceType.findMany();
 
       return this.errorService.success('Типы покрытий успешно получены', { surfaces });
     } catch (e) {
@@ -20,9 +19,9 @@ export class SurfaceService {
 
   async getById(id: number) {
     try {
-      const surface = (await this.prismaService.plywoodSurfaceType.findFirst({
+      const surface = await this.prismaService.plywoodSurfaceType.findFirst({
         where: { id },
-      })) as any as IPlywoodSurface;
+      });
 
       return this.errorService.success('Тип покрытия успешно получен', { surface });
     } catch (e) {
@@ -32,7 +31,7 @@ export class SurfaceService {
 
   async add(dto: CreatePlywoodSurfaceDto) {
     try {
-      const surface = (await this.prismaService.plywoodSurfaceType.create({ data: dto })) as any as IPlywoodSurface;
+      const surface = await this.prismaService.plywoodSurfaceType.create({ data: dto });
 
       return this.errorService.success('Тип покрытия успешно создан', { surface });
     } catch (e) {
@@ -42,10 +41,16 @@ export class SurfaceService {
 
   async update(id: number, dto) {
     try {
-      const surface = (await this.prismaService.plywoodSurfaceType.update({
+      const duplicate = await this.prismaService.plywoodSurfaceType.findUnique({ where: { name: dto.name } });
+
+      if (duplicate) {
+        throw new Error(`Тип покрытия с названием - ${dto.name} уже существует`);
+      }
+
+      const surface = await this.prismaService.plywoodSurfaceType.update({
         where: { id },
         data: dto,
-      })) as any as IPlywoodSurface;
+      });
 
       return this.errorService.success('Тип покрытия успешно обновлен', { surface });
     } catch (e) {
@@ -61,7 +66,7 @@ export class SurfaceService {
         throw this.errorService.badRequest(`Типа поверхности с id=${id} не существует`);
       }
 
-      const surface = (await this.prismaService.plywoodSurfaceType.delete({ where: { id } })) as any as IPlywoodSurface;
+      const surface = await this.prismaService.plywoodSurfaceType.delete({ where: { id } });
 
       return this.errorService.success('Тип покрытия успешно удален', { surface });
     } catch (e) {

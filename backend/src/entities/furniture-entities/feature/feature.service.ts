@@ -28,6 +28,12 @@ export class FeatureService {
 
   async add(dto: CreateFeatureDto) {
     try {
+      const duplicate = await this.prismaService.furnitureFeature.findUnique({ where: { name: dto.name } });
+
+      if (duplicate) {
+        throw new Error(`Характеристика с названием - ${dto.name} уже существует`);
+      }
+
       const created = await this.prismaService.furnitureFeature.create({ data: dto });
       return this.errorService.success('Успешно', { data: created });
     } catch (e) {
@@ -37,6 +43,12 @@ export class FeatureService {
 
   async update(id: number, dto: UpdateFeatureDto) {
     try {
+      const duplicate = await this.prismaService.furnitureFeature.findUnique({ where: { name: dto.name } });
+
+      if (duplicate) {
+        throw new Error(`Характеристика с названием - ${dto.name} уже существует`);
+      }
+
       const updated = await this.prismaService.furnitureFeature.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });
     } catch (e) {

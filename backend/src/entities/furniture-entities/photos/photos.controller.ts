@@ -18,30 +18,30 @@ import { AddPhotoDto } from './dto/add-photo.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Roles(Role.Admin)
-@Controller(GLOBAL_PREFIXES.PLYWOOD_PHOTOS)
+@Controller(GLOBAL_PREFIXES.FURNITURE_PHOTOS)
 export class PhotosController {
   constructor(private photosService: PhotosService) {}
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_PHOTOS.GET_ALL)
+  @Get(ENDPOINTS.FURNITURE_PHOTOS.GET_ALL)
   async all() {
     return await this.photosService.getAll();
   }
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_PHOTOS.GET_BY_ID)
+  @Get(ENDPOINTS.FURNITURE_PHOTOS.GET_BY_ID)
   async byId(@Param('id', ParseIntPipe) id: number) {
     return await this.photosService.getById(id);
   }
 
   @UseInterceptors(FilesInterceptor('photos'))
-  @Post(ENDPOINTS.PLYWOOD_PHOTOS.CREATE)
+  @Post(ENDPOINTS.FURNITURE_PHOTOS.CREATE)
   async add(@UploadedFiles() photos: Array<Express.Multer.File>, @Body() dto: AddPhotoDto) {
     return await this.photosService.add(photos, dto);
   }
 
   @UseInterceptors(FilesInterceptor('photos'))
-  @Patch(ENDPOINTS.PLYWOOD_PHOTOS.UPDATE)
+  @Patch(ENDPOINTS.FURNITURE_PHOTOS.UPDATE)
   async update(
     @UploadedFiles() photos: Array<Express.Multer.File>,
     @Param('id', ParseIntPipe) id: number,
@@ -50,7 +50,7 @@ export class PhotosController {
     return await this.photosService.update(id, photos, dto);
   }
 
-  @Delete(ENDPOINTS.PLYWOOD_PHOTOS.DELETE)
+  @Delete(ENDPOINTS.FURNITURE_PHOTOS.DELETE)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.photosService.remove(id);
   }

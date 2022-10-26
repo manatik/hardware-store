@@ -16,7 +16,7 @@ export class PhotosService {
 
   async getAll() {
     try {
-      const photos = await this.prismaService.plywoodPhotos.findMany();
+      const photos = await this.prismaService.furniturePhotos.findMany();
 
       return this.errorService.success('Фото успешно получены', { data: photos });
     } catch (e) {
@@ -26,7 +26,7 @@ export class PhotosService {
 
   async getById(id: number) {
     try {
-      const photo = await this.prismaService.plywoodPhotos.findFirst({ where: { id } });
+      const photo = await this.prismaService.furniturePhotos.findFirst({ where: { id } });
 
       return this.errorService.success('Фото успешно получены', { data: photo });
     } catch (e) {
@@ -38,7 +38,7 @@ export class PhotosService {
     try {
       const photoPaths: IPhoto[] = [];
 
-      const checkUniq = await this.prismaService.plywoodPhotos.findUnique({ where: { name: dto.name } });
+      const checkUniq = await this.prismaService.furniturePhotos.findUnique({ where: { name: dto.name } });
 
       if (checkUniq) {
         throw new Error(`Характеристика Фото с названием - ${dto.name} уже существует`);
@@ -58,7 +58,7 @@ export class PhotosService {
         photoPaths.push({ filename, path, originalFilename, size });
       }
 
-      const createdPhotos = await this.prismaService.plywoodPhotos.create({
+      const createdPhotos = await this.prismaService.furniturePhotos.create({
         data: {
           ...dto,
           photos: photoPaths as any as Prisma.JsonArray,
@@ -79,6 +79,12 @@ export class PhotosService {
         throw new Error('Фото не получено');
       }
 
+      const duplicate = await this.prismaService.furniturePhotos.findUnique({ where: { name: dto.name } });
+
+      if (duplicate) {
+        throw new Error(`Характеристика фото с названием - ${dto.name} уже существует`);
+      }
+
       for await (const photo of photos) {
         const { path, filename, originalFilename, size } = await this.filesService.writeFileWithCompress({
           filename: photo.originalname,
@@ -89,7 +95,7 @@ export class PhotosService {
         photoPaths.push({ filename, path, originalFilename, size });
       }
 
-      const photo = await this.prismaService.plywoodPhotos.update({
+      const photo = await this.prismaService.furniturePhotos.update({
         where: { id },
         data: {
           ...dto,
@@ -116,7 +122,7 @@ export class PhotosService {
         await this.filesService.removeFile(photo.filename);
       }
 
-      const photos = await this.prismaService.plywoodPhotos.delete({ where: { id } });
+      const photos = await this.prismaService.furniturePhotos.delete({ where: { id } });
 
       return this.errorService.success('Фото успешно удалены', { data: photos });
     } catch (e) {

@@ -10,7 +10,8 @@ export class FeatureService {
 
   async getAll() {
     try {
-      const allItems = await this.prismaService.furnitureFeature.findMany();
+      const allItems = await this.prismaService.plywoodFeature.findMany();
+
       return this.errorService.success('Успешно', { data: allItems });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -19,7 +20,8 @@ export class FeatureService {
 
   async getById(id: number) {
     try {
-      const item = await this.prismaService.furnitureFeature.findFirst({ where: { id } });
+      const item = await this.prismaService.plywoodFeature.findFirst({ where: { id } });
+
       return this.errorService.success('Успешно', { data: item });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -28,7 +30,8 @@ export class FeatureService {
 
   async add(dto: CreateFeatureDto) {
     try {
-      const created = await this.prismaService.furnitureFeature.create({ data: dto });
+      const created = await this.prismaService.plywoodFeature.create({ data: dto });
+
       return this.errorService.success('Успешно', { data: created });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -37,7 +40,14 @@ export class FeatureService {
 
   async update(id: number, dto: UpdateFeatureDto) {
     try {
-      const updated = await this.prismaService.furnitureFeature.update({ where: { id }, data: dto });
+      const duplicate = await this.prismaService.plywoodFeature.findUnique({ where: { name: dto.name } });
+
+      if (duplicate) {
+        throw new Error(`Характеристика с названием - ${dto.name} уже существует`);
+      }
+
+      const updated = await this.prismaService.plywoodFeature.update({ where: { id }, data: dto });
+
       return this.errorService.success('Успешно', { data: updated });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);
@@ -46,7 +56,8 @@ export class FeatureService {
 
   async remove(id: number) {
     try {
-      const removed = await this.prismaService.furnitureFeature.delete({ where: { id } });
+      const removed = await this.prismaService.plywoodFeature.delete({ where: { id } });
+
       return this.errorService.success('Успешно', { data: removed });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);

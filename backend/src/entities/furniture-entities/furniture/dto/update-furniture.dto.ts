@@ -3,8 +3,12 @@ import { Available } from '../../../../types/enum/Available.enum';
 
 export class UpdateFurnitureDto {
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { each: true })
   features: number[];
+
+  @IsOptional()
+  @IsNumber({}, { each: true })
+  photos: number[];
 
   @IsOptional()
   @IsString()

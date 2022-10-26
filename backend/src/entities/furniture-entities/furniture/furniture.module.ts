@@ -3,10 +3,9 @@ import { FurnitureController } from 'entities/furniture-entities/furniture/furni
 import { FurnitureService } from 'entities/furniture-entities/furniture/furniture.service';
 import { PrismaModule } from 'database/prisma/prisma.module';
 import { ErrorModule } from 'common/error/error.module';
-import { FilesModule } from 'common/files/files.module';
 
 @Module({
-  imports: [PrismaModule, ErrorModule, FilesModule],
+  imports: [PrismaModule, ErrorModule],
   controllers: [FurnitureController],
   providers: [FurnitureService],
   exports: [],

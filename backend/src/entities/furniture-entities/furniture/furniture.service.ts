@@ -2,19 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
-import { FilesService } from 'common/files/files.service';
-import { AddPhotoDto } from './dto/add-photo.dto';
-import { Prisma } from '@prisma/client';
 import { UpdateFurnitureDto } from './dto/update-furniture.dto';
 import { idsArrayToArrayObjects } from '../../../common/utils/utils';
 
 @Injectable()
 export class FurnitureService {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly errorService: ErrorService,
-    private readonly filesService: FilesService,
-  ) {}
+  constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
   async getAll() {
     try {
@@ -49,10 +42,16 @@ export class FurnitureService {
       const duplicate = await this.prismaService.furniture.findFirst({ where: { article: dto.article } });
 
       if (duplicate) {
-        throw this.errorService.badRequest(`Продукт с артикулом - ${dto.article} уже существует`);
+        throw new Error(`Продукт с артикулом - ${dto.article} уже существует`);
       }
 
-      const product = await this.prismaService.furniture.create({ data: dto });
+      const product = await this.prismaService.furniture.create({
+        data: {
+          ...dto,
+          features: { connect: idsArrayToArrayObjects(dto.features) },
+          photos: { connect: idsArrayToArrayObjects(dto.photos) },
+        },
+      });
 
       return this.errorService.success('Продукт успешно добавлен', { product });
     } catch (e) {
@@ -68,7 +67,8 @@ export class FurnitureService {
         // @ts-ignore
         data: {
           ...dto,
-          features: dto.features?.length ? { connect: idsArrayToArrayObjects(dto.features) } : { set: [] },
+          features: dto.features?.length ? { set: [], connect: idsArrayToArrayObjects(dto.features) } : { set: [] },
+          photos: dto.photos?.length ? { set: [], connect: idsArrayToArrayObjects(dto.photos) } : { set: [] },
         },
       });
 
@@ -88,32 +88,6 @@ export class FurnitureService {
       return this.errorService.success('Продукт успешно удален', { product });
     } catch (e) {
       throw this.errorService.internal('Ошибка удаления продута', e.message);
-    }
-  }
-
-  async addPhotos(id: number, photos: Array<Express.Multer.File>, dto: AddPhotoDto) {
-    try {
-      const photoPaths: any[] = [];
-
-      for (const photo of photos) {
-        const { path, filename } = await this.filesService.writeFileWithCompress({
-          filename: photo.originalname,
-          buffer: photo.buffer,
-        });
-
-        photoPaths.push({
-          filename,
-          path,
-          color: dto.color,
-        });
-      }
-
-      this.prismaService.furniture.update({
-        where: { id },
-        data: { photos: photoPaths as unknown as Prisma.JsonArray },
-      });
-    } catch (e) {
-      throw this.errorService.internal('Ошибка добавления фото продукта', e.message);
     }
   }
 }
