@@ -28,7 +28,7 @@ export class OrderService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const order = await this.prismaService.order.findFirst({
         where: { id },
@@ -96,7 +96,7 @@ export class OrderService {
     }
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     try {
       const order = await this.prismaService.order.delete({ where: { id } });
 

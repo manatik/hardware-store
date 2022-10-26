@@ -17,7 +17,7 @@ export class WidthService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const item = await this.prismaService.plywoodWidth.findFirst({ where: { id } });
       return this.errorService.success('Успешно', { data: item });
@@ -35,7 +35,7 @@ export class WidthService {
     }
   }
 
-  async update(id: number, dto: UpdateWidthDto) {
+  async update(id: string, dto: UpdateWidthDto) {
     try {
       const updated = await this.prismaService.plywoodWidth.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });
@@ -44,7 +44,7 @@ export class WidthService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const removed = await this.prismaService.plywoodWidth.delete({ where: { id } });
       return this.errorService.success('Успешно', { data: removed });

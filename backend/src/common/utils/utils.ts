@@ -3,4 +3,4 @@ export const isTrue = (value: string | boolean) => {
   return value;
 };
 
-export const idsArrayToArrayObjects = (ids: number[]) => (ids?.length ? ids.map((id) => ({ id })) : []);
+export const idsArrayToArrayObjects = (ids: string[]) => (ids?.length ? ids.map((id) => ({ id })) : []);

@@ -17,7 +17,7 @@ export class TypeService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const item = await this.prismaService.plywoodType.findFirst({ where: { id } });
       return this.errorService.success('Успешно', { data: item });
@@ -35,7 +35,7 @@ export class TypeService {
     }
   }
 
-  async update(id: number, dto: UpdateTypeDto) {
+  async update(id: string, dto: UpdateTypeDto) {
     try {
       const duplicate = await this.prismaService.plywoodType.findUnique({ where: { name: dto.name } });
 
@@ -50,7 +50,7 @@ export class TypeService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const removed = await this.prismaService.plywoodType.delete({ where: { id } });
       return this.errorService.success('Успешно', { data: removed });

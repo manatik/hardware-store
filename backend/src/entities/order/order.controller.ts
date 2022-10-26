@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -16,7 +16,7 @@ export class OrderController {
   }
 
   @Get(ENDPOINTS.ORDER.GET_BY_ID)
-  async getById(@Param('id', ParseIntPipe) id: number) {
+  async getById(@Param('id') id: string) {
     return await this.orderService.getById(id);
   }
 
@@ -27,7 +27,7 @@ export class OrderController {
   }
 
   @Delete(ENDPOINTS.ORDER.DELETE)
-  async delete(@Param('id', ParseIntPipe) id: number) {
+  async delete(@Param('id') id: string) {
     return await this.orderService.delete(id);
   }
 }

@@ -3,9 +3,9 @@ import { IsNumber, IsOptional, IsString } from 'class-validator';
 export class UpdateFormatsDto {
   @IsOptional()
   @IsString()
-  name: string;
+  name?: string;
 
   @IsOptional()
   @IsNumber()
-  price: number;
+  price?: number;
 }

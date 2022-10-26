@@ -18,7 +18,7 @@ export class FeatureService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const item = await this.prismaService.plywoodFeature.findFirst({ where: { id } });
 
@@ -38,7 +38,7 @@ export class FeatureService {
     }
   }
 
-  async update(id: number, dto: UpdateFeatureDto) {
+  async update(id: string, dto: UpdateFeatureDto) {
     try {
       const duplicate = await this.prismaService.plywoodFeature.findUnique({ where: { name: dto.name } });
 
@@ -54,7 +54,7 @@ export class FeatureService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const removed = await this.prismaService.plywoodFeature.delete({ where: { id } });
 

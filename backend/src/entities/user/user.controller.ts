@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
@@ -47,7 +47,7 @@ export class UserController {
   }
 
   @Delete(ENDPOINTS.USER.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id') id: string) {
     return await this.userService.remove(id);
   }
 }

@@ -3,12 +3,12 @@ import { Available } from '../../../../types/enum/Available.enum';
 
 export class UpdateFurnitureDto {
   @IsOptional()
-  @IsNumber({}, { each: true })
-  features: number[];
+  @IsString({ each: true })
+  features: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  photos: number[];
+  @IsString({ each: true })
+  photos: string[];
 
   @IsOptional()
   @IsString()
@@ -19,8 +19,8 @@ export class UpdateFurnitureDto {
   article: string;
 
   @IsOptional()
-  @IsNumber()
-  categoryId: number;
+  @IsString()
+  categoryId: string;
 
   @IsOptional()
   @IsEnum(Available)

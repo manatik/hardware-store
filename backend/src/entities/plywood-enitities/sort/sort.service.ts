@@ -16,7 +16,7 @@ export class SortService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const item = await this.prismaService.plywoodSort.findFirst({ where: { id } });
       return this.errorService.success('Успешно', { data: item });
@@ -34,7 +34,7 @@ export class SortService {
     }
   }
 
-  async update(id: number, dto: UpdateSortDto) {
+  async update(id: string, dto: UpdateSortDto) {
     try {
       const updated = await this.prismaService.plywoodSort.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });
@@ -43,7 +43,7 @@ export class SortService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const removed = await this.prismaService.plywoodSort.delete({ where: { id } });
       return this.errorService.success('Успешно', { data: removed });

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Public, Roles } from 'authorization/decorators';
 import { Role } from 'authorization/enum/role.enum';
 import { CoatingDensityService } from 'entities/plywood-enitities/coating-density/coating-density.service';
@@ -19,7 +19,7 @@ export class CoatingDensityController {
 
   @Public()
   @Get(ENDPOINTS.PLYWOOD_COATING_DENSITY.GET_BY_ID)
-  async byId(@Param('id', ParseIntPipe) id: number) {
+  async byId(@Param('id') id: string) {
     return await this.coatingService.getById(id);
   }
 
@@ -29,12 +29,12 @@ export class CoatingDensityController {
   }
 
   @Patch(ENDPOINTS.PLYWOOD_COATING_DENSITY.UPDATE)
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateCoatingDensityDto) {
+  async update(@Param('id') id: string, @Body() dto: UpdateCoatingDensityDto) {
     return await this.coatingService.update(id, dto);
   }
 
   @Delete(ENDPOINTS.PLYWOOD_COATING_DENSITY.DELETE)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id') id: string) {
     return await this.coatingService.remove(id);
   }
 }

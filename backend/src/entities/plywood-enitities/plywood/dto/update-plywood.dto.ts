@@ -3,58 +3,58 @@ import { Available } from 'types/enum/Available.enum';
 
 export class UpdatePlywoodDto {
   @IsOptional()
-  @IsNumber({}, { each: true })
-  features: number[];
+  @IsString({ each: true })
+  features?: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  formats: number[];
+  @IsString({ each: true })
+  formats?: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  surfaceTypes: number[];
+  @IsString({ each: true })
+  surfaceTypes?: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  types: number[];
+  @IsString({ each: true })
+  types?: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  sorts: number[];
+  @IsString({ each: true })
+  sorts?: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  coatingDensity: number[];
+  @IsString({ each: true })
+  coatingDensity?: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  widths: number[];
+  @IsString({ each: true })
+  widths?: string[];
 
   @IsOptional()
-  @IsNumber({}, { each: true })
-  photos: number[];
-
-  @IsOptional()
-  @IsString()
-  name: string;
+  @IsString({ each: true })
+  photos?: string[];
 
   @IsOptional()
   @IsString()
-  article: string;
+  name?: string;
 
   @IsOptional()
-  @IsNumber()
-  categoryId: number;
+  @IsString()
+  article?: string;
+
+  @IsOptional()
+  @IsString()
+  categoryId?: string;
 
   @IsOptional()
   @IsEnum(Available)
-  available: Available;
+  available?: Available;
 
   @IsOptional()
   @IsString()
-  description: string;
+  description?: string;
 
   @IsOptional()
   @IsNumber()
-  price: number;
+  price?: number;
 }

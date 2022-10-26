@@ -16,7 +16,7 @@ export class CoatingDensityService {
     }
   }
 
-  async getById(id: number) {
+  async getById(id: string) {
     try {
       const item = await this.prismaService.plywoodCoatingDensity.findFirst({ where: { id } });
       return this.errorService.success('Успешно', { data: item });
@@ -34,7 +34,7 @@ export class CoatingDensityService {
     }
   }
 
-  async update(id: number, dto: UpdateCoatingDensityDto) {
+  async update(id: string, dto: UpdateCoatingDensityDto) {
     try {
       const updated = await this.prismaService.plywoodCoatingDensity.update({ where: { id }, data: dto });
       return this.errorService.success('Успешно', { data: updated });
@@ -43,7 +43,7 @@ export class CoatingDensityService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     try {
       const removed = await this.prismaService.plywoodCoatingDensity.delete({ where: { id } });
       return this.errorService.success('Успешно', { data: removed });

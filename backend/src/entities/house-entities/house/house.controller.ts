@@ -1,14 +1,4 @@
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Patch,
-  Post,
-  UploadedFiles,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Controller, Delete, Get, Param, Patch, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('products/house')
@@ -30,7 +20,7 @@ export class HouseController {
 
   @Post('photos/:id')
   @UseInterceptors(FilesInterceptor('photos'))
-  async addPhotos(@UploadedFiles() photos: Array<Express.Multer.File>, @Param('id', ParseIntPipe) id: number) {
+  async addPhotos(@UploadedFiles() photos: Array<Express.Multer.File>, @Param('id') id: string) {
     return Promise.resolve('add photos');
   }
 

@@ -3,18 +3,18 @@ import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-valid
 export class CreateOrderDto {
   @IsOptional()
   @IsArray()
-  @IsNumber({}, { each: true })
-  plywoods: number[];
+  @IsString({ each: true })
+  plywoods?: string[];
 
   @IsOptional()
   @IsArray()
-  @IsNumber({}, { each: true })
-  houses: number[];
+  @IsString({ each: true })
+  houses?: string[];
 
   @IsOptional()
   @IsArray()
-  @IsNumber({}, { each: true })
-  furnitures: number[];
+  @IsString({ each: true })
+  furnitures?: string[];
 
   @IsOptional()
   @IsNumber()
