@@ -8,7 +8,7 @@ export class HouseService {
 
   async getAll() {
     try {
-      const products = await this.prismaService.house.findMany({ where: { deleted: { in: null } } });
+      const products = await this.prismaService.house.findMany({ where: { deleted: null } });
 
       return this.errorService.success('Продукты успешно получены', { products });
     } catch (e) {
@@ -18,7 +18,7 @@ export class HouseService {
 
   async getById(id: number) {
     try {
-      const product = await this.prismaService.house.findFirst({ where: { id, deleted: { in: null } } });
+      const product = await this.prismaService.house.findFirst({ where: { id, deleted: null } });
 
       return this.errorService.success('Продукт успешно получен', { product });
     } catch (e) {
