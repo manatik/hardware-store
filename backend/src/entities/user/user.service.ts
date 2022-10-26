@@ -41,7 +41,7 @@ export class UserService {
       const { withRoles, withPassword } = params;
 
       const user = await this.prismaService.user.findFirst({
-        where: { email, deleted: null },
+        where: { email, deleted: { in: null } },
         select: {
           roles: withRoles,
           id: true,
