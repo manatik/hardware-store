@@ -12,28 +12,28 @@ export class FeatureController {
   constructor(private readonly featureService: FeatureService) {}
 
   @Public()
-  @Get(ENDPOINTS.FURNITURE_FEATURE.GET_ALL)
+  @Get(ENDPOINTS.FURNITURE_CHARACTERS.GET_ALL)
   async all() {
     return await this.featureService.getAll();
   }
 
   @Public()
-  @Get(ENDPOINTS.FURNITURE_FEATURE.GET_BY_ID)
+  @Get(ENDPOINTS.FURNITURE_CHARACTERS.GET_BY_ID)
   async byId(@Param('id') id: string) {
     return await this.featureService.getById(id);
   }
 
-  @Post(ENDPOINTS.FURNITURE_FEATURE.CREATE)
+  @Post(ENDPOINTS.FURNITURE_CHARACTERS.CREATE)
   async add(@Body() dto: CreateFeatureDto) {
     return await this.featureService.add(dto);
   }
 
-  @Patch(ENDPOINTS.FURNITURE_FEATURE.UPDATE)
+  @Patch(ENDPOINTS.FURNITURE_CHARACTERS.UPDATE)
   async update(@Param('id') id: string, @Body() dto: UpdateFeatureDto) {
     return await this.featureService.update(id, dto);
   }
 
-  @Delete(ENDPOINTS.FURNITURE_FEATURE.DELETE)
+  @Delete(ENDPOINTS.FURNITURE_CHARACTERS.DELETE)
   async remove(@Param('id') id: string) {
     return await this.featureService.remove(id);
   }

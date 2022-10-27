@@ -70,14 +70,7 @@ export const ENDPOINTS = {
     UPDATE: ':id',
     DELETE: ':id',
   },
-  FURNITURE_FEATURE: {
-    GET_ALL: '',
-    GET_BY_ID: ':id',
-    CREATE: '',
-    UPDATE: ':id',
-    DELETE: ':id',
-  },
-  FURNITURE_PHOTOS: {
+  FURNITURE_CHARACTERS: {
     GET_ALL: '',
     GET_BY_ID: ':id',
     CREATE: '',
@@ -93,56 +86,7 @@ export const ENDPOINTS = {
     UPDATE: ':id',
     DELETE: ':id',
   },
-  PLYWOOD_FORMATS: {
-    GET_ALL: '',
-    GET_BY_ID: ':id',
-    CREATE: '',
-    UPDATE: ':id',
-    DELETE: ':id',
-  },
-  PLYWOOD_SURFACE: {
-    GET_ALL: '',
-    GET_BY_ID: ':id',
-    CREATE: '',
-    UPDATE: ':id',
-    DELETE: ':id',
-  },
-  PLYWOOD_SORT: {
-    GET_ALL: '',
-    GET_BY_ID: ':id',
-    CREATE: '',
-    UPDATE: ':id',
-    DELETE: ':id',
-  },
-  PLYWOOD_COATING_DENSITY: {
-    GET_ALL: '',
-    GET_BY_ID: ':id',
-    CREATE: '',
-    UPDATE: ':id',
-    DELETE: ':id',
-  },
-  PLYWOOD_TYPE: {
-    GET_ALL: '',
-    GET_BY_ID: ':id',
-    CREATE: '',
-    UPDATE: ':id',
-    DELETE: ':id',
-  },
-  PLYWOOD_FEATURE: {
-    GET_ALL: '',
-    GET_BY_ID: ':id',
-    CREATE: '',
-    UPDATE: ':id',
-    DELETE: ':id',
-  },
-  PLYWOOD_WIDTH: {
-    GET_ALL: '',
-    GET_BY_ID: ':id',
-    CREATE: '',
-    UPDATE: ':id',
-    DELETE: ':id',
-  },
-  PLYWOOD_PHOTOS: {
+  PLYWOOD_CHARACTERS: {
     GET_ALL: '',
     GET_BY_ID: ':id',
     CREATE: '',

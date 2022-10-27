@@ -12,28 +12,28 @@ export class WidthController {
   constructor(private readonly widthService: WidthService) {}
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_WIDTH.GET_ALL)
+  @Get(ENDPOINTS.PLYWOOD_CHARACTERS.GET_ALL)
   async all() {
     return await this.widthService.getAll();
   }
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_WIDTH.GET_BY_ID)
+  @Get(ENDPOINTS.PLYWOOD_CHARACTERS.GET_BY_ID)
   async byId(@Param('id') id: string) {
     return await this.widthService.getById(id);
   }
 
-  @Post(ENDPOINTS.PLYWOOD_WIDTH.CREATE)
+  @Post(ENDPOINTS.PLYWOOD_CHARACTERS.CREATE)
   async add(@Body() dto: CreateWidthDto) {
     return await this.widthService.add(dto);
   }
 
-  @Patch(ENDPOINTS.PLYWOOD_WIDTH.UPDATE)
+  @Patch(ENDPOINTS.PLYWOOD_CHARACTERS.UPDATE)
   async update(@Param('id') id: string, @Body() dto: UpdateWidthDto) {
     return await this.widthService.update(id, dto);
   }
 
-  @Delete(ENDPOINTS.PLYWOOD_WIDTH.DELETE)
+  @Delete(ENDPOINTS.PLYWOOD_CHARACTERS.DELETE)
   async remove(@Param('id') id: string) {
     return await this.widthService.remove(id);
   }

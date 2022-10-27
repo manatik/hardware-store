@@ -2,25 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { CreatePlywoodFormatsDto } from './dto/create-plywood-formats.dto';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
-import { IPlywoodFormat } from './types/IPlywoodFormat.interface';
-import * as _ from 'radash';
-import { isTrue } from 'common/utils/utils';
-import { PlywoodFormatsAllQuery } from './dto/plywood-formats-all.query';
 import { UpdateFormatsDto } from './dto/update-formats.dto';
 
 @Injectable()
 export class FormatsService {
   constructor(private readonly prismaService: PrismaService, private readonly errorService: ErrorService) {}
 
-  async getAll(query: PlywoodFormatsAllQuery) {
+  async getAll() {
     try {
-      const formats = (await this.prismaService.plywoodFormat.findMany()) as any as IPlywoodFormat[];
-
-      if (isTrue(query.group)) {
-        const groupedByFormat = _.group(formats, (format) => format.format);
-
-        return this.errorService.success('Форматы успешно получены', { formats: groupedByFormat });
-      }
+      const formats = await this.prismaService.plywoodFormat.findMany();
 
       return this.errorService.success('Форматы успешно получены', { data: formats });
     } catch (e) {
@@ -30,7 +20,7 @@ export class FormatsService {
 
   async getById(id: string) {
     try {
-      const format = (await this.prismaService.plywoodFormat.findFirst({ where: { id } })) as any as IPlywoodFormat;
+      const format = await this.prismaService.plywoodFormat.findFirst({ where: { id } });
 
       return this.errorService.success('Формат успешно получен', { data: format });
     } catch (e) {
@@ -40,7 +30,7 @@ export class FormatsService {
 
   async add(dto: CreatePlywoodFormatsDto) {
     try {
-      const format = (await this.prismaService.plywoodFormat.create({ data: dto })) as any as IPlywoodFormat;
+      const format = await this.prismaService.plywoodFormat.create({ data: dto });
 
       return this.errorService.success('Формат успешно создан', { data: format });
     } catch (e) {
@@ -50,10 +40,10 @@ export class FormatsService {
 
   async update(id: string, dto: UpdateFormatsDto) {
     try {
-      const format = (await this.prismaService.plywoodFormat.update({
+      const format = await this.prismaService.plywoodFormat.update({
         where: { id },
         data: dto,
-      })) as any as IPlywoodFormat;
+      });
 
       return this.errorService.success('Формат успешно обновлен', { data: format });
     } catch (e) {
@@ -69,7 +59,7 @@ export class FormatsService {
         throw this.errorService.badRequest(`Формата фанеры с id=${id} не существует`);
       }
 
-      const format = (await this.prismaService.plywoodFormat.delete({ where: { id } })) as any as IPlywoodFormat;
+      const format = await this.prismaService.plywoodFormat.delete({ where: { id } });
 
       return this.errorService.success('Формат успешно удален', { data: format });
     } catch (e) {

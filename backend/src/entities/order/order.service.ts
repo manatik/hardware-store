@@ -49,31 +49,31 @@ export class OrderService {
     }
   }
 
-  async create(dto: CreateOrderDto) {
+  async create({ products, ...dto }: CreateOrderDto) {
     try {
       let sum = 0;
 
-      if (dto.plywoods) {
+      if (products.plywood) {
         const plywoods = await this.prismaService.plywood.findMany({
-          where: { id: { in: dto.plywoods } },
+          where: { id: { in: products.plywood } },
           select: { id: true, price: true },
         });
 
         sum = plywoods.reduce((acc, plywood) => acc + plywood.price, 0);
       }
 
-      if (dto.houses) {
+      if (products.house) {
         const houses = await this.prismaService.house.findMany({
-          where: { id: { in: dto.houses } },
+          where: { id: { in: products.house } },
           select: { id: true, price: true },
         });
 
         sum = houses.reduce((acc, house) => acc + house.price, 0);
       }
 
-      if (dto.furnitures) {
+      if (products.furniture) {
         const furnitures = await this.prismaService.furniture.findMany({
-          where: { id: { in: dto.plywoods } },
+          where: { id: { in: products.plywood } },
           select: { id: true, price: true },
         });
 
@@ -83,9 +83,9 @@ export class OrderService {
       const order = await this.prismaService.order.create({
         data: {
           ...dto,
-          plywoods: { connect: idsArrayToArrayObjects(dto.plywoods) },
-          furnitures: { connect: idsArrayToArrayObjects(dto.furnitures) },
-          houses: { connect: idsArrayToArrayObjects(dto.houses) },
+          plywoods: { connect: idsArrayToArrayObjects(products.plywood) },
+          furnitures: { connect: idsArrayToArrayObjects(products.furniture) },
+          houses: { connect: idsArrayToArrayObjects(products.house) },
           price: sum,
         },
       });

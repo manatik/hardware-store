@@ -15,7 +15,7 @@ export class EmailService {
 
   async sendOrder({ email, fio, phone, message, products }: SendEmailDto) {
     try {
-      const typeMail = products?.length ? 'Информация о заказе' : 'Запрос на обратный звонок';
+      const typeMail = products ? 'Информация о заказе' : 'Запрос на обратный звонок';
 
       await this.mailerService.sendMail({
         to: this.configService.get('MAIL_RECIPIENT'),

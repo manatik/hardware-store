@@ -12,28 +12,28 @@ export class TypeController {
   constructor(private readonly typeService: TypeService) {}
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_TYPE.GET_ALL)
+  @Get(ENDPOINTS.PLYWOOD_CHARACTERS.GET_ALL)
   async all() {
     return await this.typeService.getAll();
   }
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_TYPE.GET_BY_ID)
+  @Get(ENDPOINTS.PLYWOOD_CHARACTERS.GET_BY_ID)
   async byId(@Param('id') id: string) {
     return await this.typeService.getById(id);
   }
 
-  @Post(ENDPOINTS.PLYWOOD_TYPE.CREATE)
+  @Post(ENDPOINTS.PLYWOOD_CHARACTERS.CREATE)
   async add(@Body() dto: CreateTypeDto) {
     return await this.typeService.add(dto);
   }
 
-  @Patch(ENDPOINTS.PLYWOOD_TYPE.UPDATE)
+  @Patch(ENDPOINTS.PLYWOOD_CHARACTERS.UPDATE)
   async update(@Param('id') id: string, @Body() dto: UpdateTypeDto) {
     return await this.typeService.update(id, dto);
   }
 
-  @Delete(ENDPOINTS.PLYWOOD_TYPE.DELETE)
+  @Delete(ENDPOINTS.PLYWOOD_CHARACTERS.DELETE)
   async remove(@Param('id') id: string) {
     return await this.typeService.remove(id);
   }

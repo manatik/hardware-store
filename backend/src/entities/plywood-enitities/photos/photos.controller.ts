@@ -12,30 +12,30 @@ export class PhotosController {
   constructor(private photosService: PhotosService) {}
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_PHOTOS.GET_ALL)
+  @Get(ENDPOINTS.PLYWOOD_CHARACTERS.GET_ALL)
   async all() {
     return await this.photosService.getAll();
   }
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_PHOTOS.GET_BY_ID)
+  @Get(ENDPOINTS.PLYWOOD_CHARACTERS.GET_BY_ID)
   async byId(@Param('id') id: string) {
     return await this.photosService.getById(id);
   }
 
   @UseInterceptors(FilesInterceptor('photos'))
-  @Post(ENDPOINTS.PLYWOOD_PHOTOS.CREATE)
+  @Post(ENDPOINTS.PLYWOOD_CHARACTERS.CREATE)
   async add(@UploadedFiles() photos: Array<Express.Multer.File>, @Body() dto: AddPhotoDto) {
     return await this.photosService.add(photos, dto);
   }
 
   @UseInterceptors(FilesInterceptor('photos'))
-  @Patch(ENDPOINTS.PLYWOOD_PHOTOS.UPDATE)
+  @Patch(ENDPOINTS.PLYWOOD_CHARACTERS.UPDATE)
   async update(@UploadedFiles() photos: Array<Express.Multer.File>, @Param('id') id: string, @Body() dto: AddPhotoDto) {
     return await this.photosService.update(id, photos, dto);
   }
 
-  @Delete(ENDPOINTS.PLYWOOD_PHOTOS.DELETE)
+  @Delete(ENDPOINTS.PLYWOOD_CHARACTERS.DELETE)
   async remove(@Param('id') id: string) {
     return await this.photosService.remove(id);
   }

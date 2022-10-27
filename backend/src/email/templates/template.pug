@@ -12,30 +12,57 @@ block content
     h2 Пользователь:
     p Телефон: #{phone}
     p ФИО: #{fio}
+
     if mail
         p Email: #{mail}
+
     if msg
         p Сообщение: #{msg}
 
-    if prods
+    if prods.plywood
         h2 Продукты:
         table
-            tr
-                th Название
-                th Цена
-                th Количество
-                th Цвет
-                th Формат
-                th Сорт
-                th Толщина
-                th HEX код
-        for item in prods
-            tr
-                td= item.name
-                td= item.price
-                td= item.count
-                td(style={background: item.color})= ' '
-                td= item.color
-                td= item.format
-                td= item.widthPlywood
-                td= item.sorts
+            thead
+                tr
+                    th Название
+                    th Цена
+                    th Количество
+                    th Цвет
+                    th HEX код
+                    th Формат
+                    th Толщина
+                    th Сорт
+
+                for item in prods.plywood
+                    tbody
+                        tr
+                            td= item.name
+                            td= item.price
+                            td= item.count
+                            td(style={ background: item.color })= ' '
+                            td= item.color
+                            td= item.format
+                            td= item.widthPlywood
+                            td= item.sorts
+
+    if prods.furniture
+        h2 Мебель:
+        table
+            thead
+                tr
+                    th Название
+                    th Цена
+                    th Количество
+                    th Ширина
+                    th Высота
+                    th Глубина
+
+                for item in prods.furniture
+                    tbody
+                        tr
+                            td= item.name
+                            td= item.price
+                            td= item.count
+                            td= item.width
+                            td= item.height
+                            td= item.depth

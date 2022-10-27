@@ -12,28 +12,28 @@ export class CoatingDensityController {
   constructor(private readonly coatingService: CoatingDensityService) {}
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_COATING_DENSITY.GET_ALL)
+  @Get(ENDPOINTS.PLYWOOD_CHARACTERS.GET_ALL)
   async all() {
     return await this.coatingService.getAll();
   }
 
   @Public()
-  @Get(ENDPOINTS.PLYWOOD_COATING_DENSITY.GET_BY_ID)
+  @Get(ENDPOINTS.PLYWOOD_CHARACTERS.GET_BY_ID)
   async byId(@Param('id') id: string) {
     return await this.coatingService.getById(id);
   }
 
-  @Post(ENDPOINTS.PLYWOOD_COATING_DENSITY.CREATE)
+  @Post(ENDPOINTS.PLYWOOD_CHARACTERS.CREATE)
   async add(@Body() dto: CreateCoatingDensityDto) {
     return await this.coatingService.add(dto);
   }
 
-  @Patch(ENDPOINTS.PLYWOOD_COATING_DENSITY.UPDATE)
+  @Patch(ENDPOINTS.PLYWOOD_CHARACTERS.UPDATE)
   async update(@Param('id') id: string, @Body() dto: UpdateCoatingDensityDto) {
     return await this.coatingService.update(id, dto);
   }
 
-  @Delete(ENDPOINTS.PLYWOOD_COATING_DENSITY.DELETE)
+  @Delete(ENDPOINTS.PLYWOOD_CHARACTERS.DELETE)
   async remove(@Param('id') id: string) {
     return await this.coatingService.remove(id);
   }
