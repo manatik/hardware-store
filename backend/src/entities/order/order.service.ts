@@ -19,6 +19,9 @@ export class OrderService {
           furnitures: true,
           updatedAt: true,
           createdAt: true,
+          email: true,
+          fio: true,
+          phone: true,
         },
       });
 
@@ -40,6 +43,9 @@ export class OrderService {
           furnitures: true,
           updatedAt: true,
           createdAt: true,
+          email: true,
+          fio: true,
+          phone: true,
         },
       });
 
