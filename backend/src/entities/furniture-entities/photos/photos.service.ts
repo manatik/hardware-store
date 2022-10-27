@@ -79,7 +79,9 @@ export class PhotosService {
         throw new Error('Фото не получено');
       }
 
-      const duplicate = await this.prismaService.furniturePhotos.findUnique({ where: { name: dto.name } });
+      const duplicate = await this.prismaService.furniturePhotos.findFirst({
+        where: { name: dto.name, id: { not: id } },
+      });
 
       if (duplicate) {
         throw new Error(`Характеристика фото с названием - ${dto.name} уже существует`);

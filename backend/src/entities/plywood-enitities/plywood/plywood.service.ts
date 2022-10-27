@@ -98,7 +98,9 @@ export class PlywoodService {
 
   async update(id: string, dto: UpdatePlywoodDto) {
     try {
-      const duplicate = await this.prismaService.plywood.findUnique({ where: { article: dto.article } });
+      const duplicate = await this.prismaService.plywood.findFirst({
+        where: { article: dto.article, id: { not: id } },
+      });
 
       if (duplicate) {
         throw new Error(`Артикул ${dto.article} уже существует`);

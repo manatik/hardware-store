@@ -38,6 +38,7 @@ export class WidthService {
   async update(id: string, dto: UpdateWidthDto) {
     try {
       const updated = await this.prismaService.plywoodWidth.update({ where: { id }, data: dto });
+
       return this.errorService.success('Успешно', { data: updated });
     } catch (e) {
       return this.errorService.internal('Ошибка', e.message);

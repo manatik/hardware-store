@@ -40,7 +40,9 @@ export class FeatureService {
 
   async update(id: string, dto: UpdateFeatureDto) {
     try {
-      const duplicate = await this.prismaService.plywoodFeature.findUnique({ where: { name: dto.name } });
+      const duplicate = await this.prismaService.plywoodFeature.findFirst({
+        where: { name: dto.name, id: { not: id } },
+      });
 
       if (duplicate) {
         throw new Error(`Характеристика с названием - ${dto.name} уже существует`);

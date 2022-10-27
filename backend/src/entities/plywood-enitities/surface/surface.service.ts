@@ -41,7 +41,9 @@ export class SurfaceService {
 
   async update(id: string, dto) {
     try {
-      const duplicate = await this.prismaService.plywoodSurfaceType.findUnique({ where: { name: dto.name } });
+      const duplicate = await this.prismaService.plywoodSurfaceType.findFirst({
+        where: { name: dto.name, id: { not: id } },
+      });
 
       if (duplicate) {
         throw new Error(`Тип покрытия с названием - ${dto.name} уже существует`);
