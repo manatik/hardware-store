@@ -227,8 +227,8 @@ model Furniture {
   category    Category           @relation(fields: [categoryId], references: [id])
   categoryId  String             @map("category_id")
   available   Available          @default(AVAILABLE)
-  price       Int
-  description String
+  price       Int?
+  description String?
   height      Int?
   width       Int?
   depth       Int?

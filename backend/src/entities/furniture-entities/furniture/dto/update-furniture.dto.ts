@@ -4,45 +4,45 @@ import { Available } from '../../../../types/enum/Available.enum';
 export class UpdateFurnitureDto {
   @IsOptional()
   @IsString({ each: true })
-  features: string[];
+  features?: string[];
 
   @IsOptional()
   @IsString({ each: true })
-  photos: string[];
+  photos?: string[];
 
   @IsOptional()
   @IsString()
-  name: string;
+  name?: string;
 
   @IsOptional()
   @IsString()
-  article: string;
+  article?: string;
 
   @IsOptional()
   @IsString()
-  categoryId: string;
+  categoryId?: string;
 
   @IsOptional()
   @IsEnum(Available)
-  available: Available;
+  available?: Available;
 
   @IsOptional()
   @IsNumber()
-  price: number;
+  price?: number;
 
   @IsOptional()
   @IsString()
-  description: string;
+  description?: string;
 
   @IsOptional()
   @IsNumber()
-  width: number;
+  width?: number;
 
   @IsOptional()
   @IsNumber()
-  height: number;
+  height?: number;
 
   @IsOptional()
   @IsNumber()
-  depth: number;
+  depth?: number;
 }

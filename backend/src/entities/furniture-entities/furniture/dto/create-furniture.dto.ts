@@ -26,11 +26,11 @@ export class CreateFurnitureDto {
   @IsEnum(Available)
   available: Available;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   price: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   description: string;
 
