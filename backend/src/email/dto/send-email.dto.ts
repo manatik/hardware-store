@@ -50,9 +50,9 @@ export class Furniture {
   @IsString()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
-  price: number;
+  price?: number;
 
   @IsNotEmpty()
   @IsNumber()

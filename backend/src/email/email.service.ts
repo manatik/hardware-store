@@ -13,7 +13,7 @@ export class EmailService {
     private errorService: ErrorService,
   ) {}
 
-  async sendOrder({ email, fio, phone, message, products }: SendEmailDto) {
+  async sendOrder({ email, fio, phone, message, products = {} }: SendEmailDto) {
     try {
       const typeMail = products ? 'Информация о заказе' : 'Запрос на обратный звонок';
 
