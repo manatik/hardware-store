@@ -15,12 +15,12 @@ export class EmailService {
 
   async sendOrder({ email, fio, phone, message, products = {} }: SendEmailDto) {
     try {
-      const typeMail = products ? 'Информация о заказе' : 'Запрос на обратный звонок';
+      const typeMail = Object.keys(products) ? `Информация о заказе от ${email}` : `Запрос на обратный звонок ${phone}`;
 
       await this.mailerService.sendMail({
         to: this.configService.get('MAIL_RECIPIENT'),
         from: this.configService.get('MAIL_USER'),
-        subject: `${typeMail} от ${email}`,
+        subject: typeMail,
         template: join(process.cwd(), 'dist/email/templates/template'),
         context: { email, phone, fio, message, typeMail, products },
       });
