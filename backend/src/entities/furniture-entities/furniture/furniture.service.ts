@@ -3,7 +3,7 @@ import { PrismaService } from 'database/prisma/prisma.service';
 import { ErrorService } from 'common/error/error.service';
 import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
 import { UpdateFurnitureDto } from './dto/update-furniture.dto';
-import { idsArrayToArrayObjects } from '../../../common/utils/utils';
+import { idsArrayToArrayOfObjects } from '../../../common/utils/utils';
 import { FurnitureAllQuery } from './dto/furniture-all.query';
 import { DeleteFurnitureQuery } from './dto/delete-furniture.query';
 
@@ -67,8 +67,8 @@ export class FurnitureService {
       const product = await this.prismaService.furniture.create({
         data: {
           ...dto,
-          features: { connect: idsArrayToArrayObjects(dto.features) },
-          photos: { connect: idsArrayToArrayObjects(dto.photos) },
+          features: { connect: idsArrayToArrayOfObjects(dto.features) },
+          photos: { connect: idsArrayToArrayOfObjects(dto.photos) },
         },
       });
 
@@ -86,8 +86,8 @@ export class FurnitureService {
         // @ts-ignore
         data: {
           ...dto,
-          features: dto.features?.length ? { set: [], connect: idsArrayToArrayObjects(dto.features) } : { set: [] },
-          photos: dto.photos?.length ? { set: [], connect: idsArrayToArrayObjects(dto.photos) } : { set: [] },
+          features: dto.features?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.features) } : { set: [] },
+          photos: dto.photos?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.photos) } : { set: [] },
         },
       });
 

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ErrorService } from 'common/error/error.service';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { arrayOfObjectsToArrayIds, idsArrayToArrayOfObjects } from '../../common/utils/utils';
 
 @Injectable()
 export class OrderService {
@@ -51,55 +52,55 @@ export class OrderService {
   async create({ products, ...dto }: CreateOrderDto) {
     try {
       let sum = 0;
+      let connectPlywoodIds: { id: string }[] | undefined = undefined;
+      let connectFurnitureIds: { id: string }[] | undefined = undefined;
 
       if (products.plywood?.length) {
-        const plywoods = await this.prismaService.plywood.findMany({
-          where: { id: { in: products.plywood.map((ply) => ply.id) } },
+        const ids = arrayOfObjectsToArrayIds(products.plywood);
+
+        const plywood = await this.prismaService.plywood.findMany({
+          where: { id: { in: ids } },
           select: { id: true, price: true },
         });
 
-        if (products.plywood.length !== plywoods.length) {
+        if (products.plywood.length !== plywood.length) {
           throw new Error('Ошибка заказа, имеется недействительный товар фанеры');
         }
 
-        sum = products.plywood.reduce((acc, plywood) => acc + plywood.price * plywood.count, 0);
+        sum += this.calcProductPrice(plywood.map((ply, index) => ({ ...ply, count: products.plywood[index].count })));
+        connectPlywoodIds = idsArrayToArrayOfObjects(ids);
       }
 
       if (products.furniture?.length) {
-        const furnitures = await this.prismaService.furniture.findMany({
-          where: { id: { in: products.furniture.map((fur) => fur.id) } },
+        const ids = arrayOfObjectsToArrayIds(products.furniture);
+
+        const furniture = await this.prismaService.furniture.findMany({
+          where: { id: { in: ids } },
           select: { id: true, price: true },
         });
 
-        if (products.furniture.length !== furnitures.length) {
+        if (products.furniture.length !== furniture.length) {
           throw new Error('Ошибка заказа, имеется недействительный товар мебели');
         }
 
-        sum = products.furniture.reduce((acc, furniture) => acc + (furniture.price || 0) * furniture.count, 0);
-      }
-
-      if (products.house?.length) {
-        const houses = await this.prismaService.house.findMany({
-          where: { id: { in: products.house.map((house) => house.id) } },
-          select: { id: true, price: true },
-        });
-
-        sum = houses.reduce((acc, house) => acc + house.price, 0);
+        sum += this.calcProductPrice(
+          furniture.map((fur, index) => ({ ...fur, count: products.furniture[index].count })),
+        );
+        connectFurnitureIds = idsArrayToArrayOfObjects(ids);
       }
 
       const order = await this.prismaService.order.create({
         data: {
           ...dto,
-          plywoods: { connect: products.plywood.map((ply) => ({ id: ply.id })) },
-          furnitures: { connect: products.furniture.map((fur) => ({ id: fur.id })) },
-          houses: { connect: products.house.map((house) => ({ id: house.id })) },
+          plywoods: { connect: connectPlywoodIds },
+          furnitures: { connect: connectFurnitureIds },
           price: sum,
         },
       });
 
       return this.errorService.success('Заказ успешно создан', { data: order });
     } catch (e) {
-      this.errorService.internal('Ошибка создания заказа', e.message);
+      return this.errorService.internal('Ошибка создания заказа', e.message);
     }
   }
 
@@ -111,5 +112,9 @@ export class OrderService {
     } catch (e) {
       return this.errorService.internal('Ошибка удаления заказа', e.message);
     }
+  }
+
+  private calcProductPrice(arr: any[]) {
+    return arr.reduce((acc, product) => acc + product.price * product.count, 0);
   }
 }

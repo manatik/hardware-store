@@ -30,7 +30,7 @@ export class EmailService {
       return this.errorService.success('Сообщение успешно отправлено');
     } catch (e) {
       console.error(e);
-      this.errorService.internal('Ошибка отправки E-mail', e.message);
+      return this.errorService.internal('Ошибка отправки E-mail', e.message);
     }
   }
 }

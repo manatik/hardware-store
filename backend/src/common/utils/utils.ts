@@ -3,4 +3,7 @@ export const isTrue = (value: string | boolean) => {
   return value;
 };
 
-export const idsArrayToArrayObjects = (ids: string[]) => (ids?.length ? ids.map((id) => ({ id })) : []);
+export const idsArrayToArrayOfObjects = (ids: string[]): { id: string }[] =>
+  ids?.length ? ids.map((id) => ({ id })) : [];
+
+export const arrayOfObjectsToArrayIds = (arr: any[]): string[] => (arr?.length ? arr.map((item) => item.id) : []);

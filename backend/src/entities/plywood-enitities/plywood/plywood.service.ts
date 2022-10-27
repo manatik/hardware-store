@@ -4,7 +4,7 @@ import { ErrorService } from 'common/error/error.service';
 import { CreatePlywoodDto } from './dto/create-plywood.dto';
 import { DeletePlywoodQuery } from './dto/delete-plywood.query';
 import { UpdatePlywoodDto } from './dto/update-plywood.dto';
-import { idsArrayToArrayObjects } from 'common/utils/utils';
+import { idsArrayToArrayOfObjects } from 'common/utils/utils';
 import { PlywoodAllQuery } from './dto/plywood-all.query';
 
 @Injectable()
@@ -80,13 +80,13 @@ export class PlywoodService {
       const product = await this.prismaService.plywood.create({
         data: {
           ...dto,
-          sorts: { connect: idsArrayToArrayObjects(dto.sorts) },
-          formats: { connect: idsArrayToArrayObjects(dto.formats) },
-          surfaceTypes: { connect: idsArrayToArrayObjects(dto.surfaceTypes) },
-          types: { connect: idsArrayToArrayObjects(dto.types) },
-          coatingDensity: { connect: idsArrayToArrayObjects(dto.coatingDensity) },
-          widths: { connect: idsArrayToArrayObjects(dto.widths) },
-          photos: { connect: idsArrayToArrayObjects(dto.photos) },
+          sorts: { connect: idsArrayToArrayOfObjects(dto.sorts) },
+          formats: { connect: idsArrayToArrayOfObjects(dto.formats) },
+          surfaceTypes: { connect: idsArrayToArrayOfObjects(dto.surfaceTypes) },
+          types: { connect: idsArrayToArrayOfObjects(dto.types) },
+          coatingDensity: { connect: idsArrayToArrayOfObjects(dto.coatingDensity) },
+          widths: { connect: idsArrayToArrayOfObjects(dto.widths) },
+          photos: { connect: idsArrayToArrayOfObjects(dto.photos) },
         },
       });
 
@@ -112,17 +112,17 @@ export class PlywoodService {
         // @ts-ignore
         data: {
           ...dto,
-          formats: dto.formats?.length ? { set: [], connect: idsArrayToArrayObjects(dto.formats) } : { set: [] },
+          formats: dto.formats?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.formats) } : { set: [] },
           surfaceTypes: dto.surfaceTypes?.length
-            ? { set: [], connect: idsArrayToArrayObjects(dto.surfaceTypes) }
+            ? { set: [], connect: idsArrayToArrayOfObjects(dto.surfaceTypes) }
             : { set: [] },
-          types: dto.types?.length ? { set: [], connect: idsArrayToArrayObjects(dto.types) } : { set: [] },
-          sorts: dto.sorts?.length ? { set: [], connect: idsArrayToArrayObjects(dto.sorts) } : { set: [] },
+          types: dto.types?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.types) } : { set: [] },
+          sorts: dto.sorts?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.sorts) } : { set: [] },
           coatingDensity: dto.coatingDensity?.length
-            ? { set: [], connect: idsArrayToArrayObjects(dto.coatingDensity) }
+            ? { set: [], connect: idsArrayToArrayOfObjects(dto.coatingDensity) }
             : { set: [] },
-          widths: dto.widths?.length ? { set: [], connect: idsArrayToArrayObjects(dto.widths) } : { set: [] },
-          photos: dto.photos?.length ? { set: [], connect: idsArrayToArrayObjects(dto.photos) } : { set: [] },
+          widths: dto.widths?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.widths) } : { set: [] },
+          photos: dto.photos?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.photos) } : { set: [] },
         },
       });
 

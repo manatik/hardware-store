@@ -29,12 +29,6 @@ export class Furniture {
   price?: number;
 }
 
-export class House {
-  @IsNotEmpty()
-  @IsString()
-  id: string;
-}
-
 export class Products {
   @IsOptional()
   @IsArray()
@@ -47,12 +41,6 @@ export class Products {
   @ValidateNested({ each: true })
   @Type(() => Furniture)
   furniture?: Furniture[];
-
-  @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => House)
-  house?: House[];
 }
 
 export class CreateOrderDto {
