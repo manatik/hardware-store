@@ -14,6 +14,14 @@ const HeadDocument = () => {
         name="theme-color"
         content="#ffffff"
       />
+      <link
+        rel="frontend"
+        href="https://github.com/ZedByl"
+      />
+      <link
+        rel="backend"
+        href="https://github.com/manatik"
+      />
     </>
   )
 }

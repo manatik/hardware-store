@@ -13,6 +13,7 @@ import { furnitureService } from '@services/products/furniture.service'
 const Photos = () => {
   const formRef = useRef<HTMLFormElement | null>(null)
   const [images, setImages] = useState<ImageType[]>([])
+  const [color, setColor] = useState<string>('#fff')
 
   const handleSaveImages = async (name: string) => {
     const fd = new FormData()
@@ -22,13 +23,16 @@ const Photos = () => {
       fd.append('photos', img.file || '')
     }
 
+    fd.append('color', color || '#fff')
     fd.append('name', name)
 
     try {
-      const { message } = await furnitureService.furniturePhotosAdd(fd)
-      toast.success(message || 'Фотографии успешно добавлены')
+      const data = await furnitureService.furniturePhotosAdd(fd)
+      toast.success(data.message || 'Фотографии успешно добавлены')
+      return 'success'
     } catch (e: any) {
       toast.error(e.error || 'Ошибка запроса')
+      return 'error'
     }
   }
 
@@ -44,8 +48,13 @@ const Photos = () => {
       validateOnChange={false}
       validateOnBlur={false}
       validationSchema={photosSchema}
-      onSubmit={async (values) => {
-        await handleSaveImages(values.name)
+      onSubmit={async (values, formikHelpers) => {
+        const data = await handleSaveImages(values.name)
+        if (data === 'success') {
+          formikHelpers.setValues({
+            name: '',
+          })
+        }
       }}
     >
       {({
@@ -76,6 +85,8 @@ const Photos = () => {
 
           <AddPhotos
             images={images}
+            color={color}
+            onChangeColor={setColor}
             onChange={onChangeImage}
           />
 

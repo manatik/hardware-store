@@ -3,10 +3,13 @@ import Image from 'next/image'
 import img from 'assets/furniture/cabinet-6.webp'
 import ProductCards, { Links } from '@features/Basic/ui/ProductCards'
 import FurnitureOfferCard from '@features/Basic/ui/Products/components/Furniture/components/FurnitureOfferCard'
+import { useAppSelector } from '@store/hooks'
+import { getFurniture } from '@store/products/selector'
 
 import styles from './index.module.scss'
 
 const FurnitureDesigner = () => {
+  const furniture = useAppSelector(getFurniture)
   return (
     <div
       className={styles.designer}
@@ -14,7 +17,7 @@ const FurnitureDesigner = () => {
     >
       <div className={styles.designer__title}>Дизайнерская мебель</div>
       <ProductCards
-        products={[]}
+        products={furniture}
         link={Links.Furniture}
       />
 

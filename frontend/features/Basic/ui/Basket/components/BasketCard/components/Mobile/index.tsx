@@ -17,11 +17,11 @@ const Mobile: FC<BlockProps> = ({
       </div>
 
       <div className={styles.basketCard__right_mobile__body}>
-        {item.currentColor && (
+        {item.color && (
           <div className={styles.basketCard__color_block}>
             Цвет
             <div
-              style={{ backgroundColor: item.currentColor }}
+              style={{ backgroundColor: item.color }}
               className={styles.basketCard__color}
             />
           </div>
@@ -43,12 +43,10 @@ const Mobile: FC<BlockProps> = ({
           count={item.count as number}
         />
 
-        <div
-          className={styles.basketCard__remove}
-          onClick={() => removeItem(id)}
-        >
+        <div className={styles.basketCard__remove}>
           <Image
             src={remove}
+            onClick={() => removeItem(id)}
           />
         </div>
       </div>

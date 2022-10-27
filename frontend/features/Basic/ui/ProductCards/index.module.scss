@@ -75,7 +75,14 @@
 
     &__availability {
       @include m-typography(20px, 23px, 700);
-      color: $colorPrimary;
+
+      &No {
+        color: #8D8D8D;
+      }
+
+      & b {
+        color: $colorPrimary;
+      }
     }
   }
 }

@@ -8,8 +8,15 @@ import { redirectController } from '@utils/redirectController'
 import { fetchCategoriesAsync } from '@store/category/categorySlice'
 import { setCookieHeader } from '@services/http.service'
 import { fetchCalcParamsAsync } from '@store/calc/calcSlice'
-import { fetchFurnitureFeatureAsync, fetchFurniturePhotosAsync, fetchPlywoodAsync } from '@store/products/productsSlice'
+import {
+  fetchFurnitureAsync,
+  fetchFurnitureFeatureAsync,
+  fetchFurniturePhotosAsync,
+  fetchPlywoodAsync,
+} from '@store/products/productsSlice'
 import { plywoodService } from '@services/products/plywood.service'
+import { furnitureService } from '@services/products/furniture.service'
+import { orderService } from '@services/order/order.service'
 
 /**
  * Список шаблонов страниц
@@ -27,6 +34,7 @@ export enum ProjectPage {
   Index,
   Contacts,
   Service,
+  Basket,
   ProductsPage,
   ProductsPagePlywood,
   ProductsPageFurniture,
@@ -46,14 +54,12 @@ export const useServerSideProps = async (
 
   await dispatch(fetchUserInfoAsync(cookie))
   await dispatch(fetchCalcParamsAsync())
+  await dispatch(fetchCategoriesAsync())
 
   if (!getState().app.userInfo?.isAdmin) {
     const redirect = redirectController(pageName)
-
     if (redirect) return redirect
   }
-
-  await dispatch(fetchCategoriesAsync())
 
   switch (pageName) {
     case ProjectPage.Categories: {
@@ -90,11 +96,15 @@ export const useServerSideProps = async (
 
     case ProjectPage.Products: {
       await dispatch(fetchPlywoodAsync())
+      await dispatch(fetchFurnitureAsync())
+      await dispatch(fetchFurnitureFeatureAsync())
+      await dispatch(fetchFurniturePhotosAsync())
       break
     }
 
     case ProjectPage.ProductsPage: {
       await dispatch(fetchPlywoodAsync())
+      await dispatch(fetchFurnitureAsync())
       break
     }
 
@@ -102,6 +112,25 @@ export const useServerSideProps = async (
       try {
         const { id } = query
         const { product } = await plywoodService.plywood(id as string)
+        return { props: { product } }
+      } catch (e) {
+        return { props: { product: null } }
+      }
+    }
+
+    case ProjectPage.Orders: {
+      try {
+        const { data } = await orderService.orderAll()
+        return { props: { orders: data } }
+      } catch (e) {
+        return { props: { product: null } }
+      }
+    }
+
+    case ProjectPage.ProductsPageFurniture: {
+      try {
+        const { id } = query
+        const { product } = await furnitureService.furniture(id as string)
         return { props: { product } }
       } catch (e) {
         return { props: { product: null } }

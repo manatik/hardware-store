@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
 
 import Image from 'next/image'
-import { PlywoodItem } from '@models/Products'
+import { FurnitureItemModal, PlywoodItem } from '@models/Products'
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import cn from 'classnames'
 import styles from './index.module.scss'
 
 export enum Links {
@@ -26,7 +27,23 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
 
   return (
     <div className={styles.productCards}>
-      {products && products.map((item: PlywoodItem) => {
+      {products && products.map((item: PlywoodItem | FurnitureItemModal) => {
+        const allPrice = item.features?.map((item) => item.price)
+        const lowPrice = allPrice && allPrice.length ? Math.min(...allPrice) : null
+
+        const PriceElement = () => {
+          return lowPrice ? (
+            <div className={styles.productCards__item__price}>
+              <b>от {lowPrice}</b> руб./шт
+            </div>
+          ) : (
+            <div
+              className={styles.productCards__item__availability}
+            >
+              <b>Цена по запросу</b>
+            </div>
+          )
+        }
         return (
           <Link
             key={item.id}
@@ -48,7 +65,7 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
 
               {item.name && <div className={styles.productCards__item__title}>{item.name}</div>}
 
-              {item.photos && (
+              {item.photos && link === Links.Plywood && (
                 <div className={styles.productCards__item__colors}>
                   {item.photos.map((item) => (
                     <div
@@ -62,17 +79,19 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
 
               {(item.price || item.available) && (
                 <div className={styles.productCards__item__bottom}>
-                  {item.price > 0 ? (
+                  {item?.price as number > 0 ? (
                     <div className={styles.productCards__item__price}>
                       <b>от {item.price}</b> руб./шт
                     </div>
                   ) : (
-                    <div className={styles.productCards__item__availability}>
-                      <b>Цена по запросу</b>
-                    </div>
+                    PriceElement()
                   )}
                   {item.available && (
-                    <div className={styles.productCards__item__availability}>
+                    <div
+                      className={cn(styles.productCards__item__availability, {
+                        [styles.productCards__item__availabilityNo]: item.available === 'NOT_AVAILABLE',
+                      })}
+                    >
                       {setAvailable(item.available)}
                     </div>
                   )}

@@ -14,14 +14,16 @@ const Desktop: FC<BlockProps> = ({
       {item?.name && (
         <div className={styles.basketCard__title}>{item?.name}</div>
       )}
-      {item.currentColor && (
+      {item.color ? (
         <div className={styles.basketCard__color_block}>
         Цвет
           <div
-            style={{ backgroundColor: item.currentColor }}
+            style={{ backgroundColor: item.color }}
             className={styles.basketCard__color}
           />
         </div>
+      ) : (
+        <div />
       )}
       {item.price > 0 ? (
         <div className={styles.basketCard__price}>
@@ -41,9 +43,11 @@ const Desktop: FC<BlockProps> = ({
 
       <div
         className={styles.basketCard__remove}
-        onClick={() => removeItem(id)}
       >
-        <Image src={remove} />
+        <Image
+          src={remove}
+          onClick={() => removeItem(id)}
+        />
       </div>
     </div>
   )

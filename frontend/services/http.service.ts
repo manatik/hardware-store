@@ -11,10 +11,11 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const requireAuth = config?.data && config?.data?.auth ? config?.data?.auth : false
+    // @ts-ignore
+    const requireAuth = config.headers.common.cookie
     const authToken = localStorageService.getAccessToken()
     if (requireAuth || authToken) {
-      const token = config.data?.accessToken?.split('a_t=')[1] || authToken
+      const token = requireAuth?.split('a_t=')[1].split(';')[0] || authToken
       // eslint-disable-next-line no-param-reassign
       config.headers = {
         ...config.headers,

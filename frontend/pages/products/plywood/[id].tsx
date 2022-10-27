@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
-import { Photo, PhotosModal, PlywoodItem } from '@models/Products'
+import {
+  FurniturePhotosModal, Photo, PlywoodItem,
+} from '@models/Products'
 import LayoutCard from '@features/Basic/common/LayoutCard'
 
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
@@ -30,9 +32,9 @@ interface CardItemPlywoodProps {
 const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
   const dispatch = useAppDispatch()
   const [toggle, setToggle] = useState<boolean>(false)
-  const [images, setImages] = useState<PhotosModal>(product?.photos[0])
+  const [images, setImages] = useState<FurniturePhotosModal>(product?.photos[0])
   const [currentImage, setCurrentImage] = useState<Photo>(product?.photos[0].photos[0])
-  const [count, setCount] = useState<number>(0)
+  const [count, setCount] = useState<number>(1)
 
   const toggleModal = (): void => {
     if (!count) return
@@ -240,10 +242,10 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
                     ...product,
                     ...values,
                     count,
-                    currentColor: images.color,
+                    color: images.color,
                   }))
                   toggleModal()
-                  setCount(0)
+                  setCount(1)
                   toast.success('Товар добавлен в корзину')
                 }}
               >

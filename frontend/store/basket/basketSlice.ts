@@ -17,21 +17,29 @@ export const basketSlice = createSlice({
         state.entities = JSON.parse(basket)
       }
     },
+    removeBasket: (state) => {
+      localStorageService.removeBasket()
+      state.entities = []
+    },
     addProduct: (state, actions) => {
       const basket = localStorageService.getBasket()
-      const curentItem = actions.payload
+      const currentItem = actions.payload
       let updateCurrent: boolean = false
 
       if (basket) {
         const result = JSON.parse(basket).map((item: PlywoodItem) => {
-          const isId = item.id === curentItem.id
-          const isColor = item.currentColor === curentItem.currentColor
-          const isFormat = item.format === curentItem.format
-          const isSorts = item.sort === curentItem.sort
-          const isWidthPlywood = item.widthPlywood === curentItem.widthPlywood
-          const sum = curentItem.count + item.count
+          const isId = item.id === currentItem.id
+          const isColor = item.color === currentItem.color
+          const isFormat = item.format === currentItem.format
+          const isSorts = item.sort === currentItem.sort
+          const isWidthPlywood = item.widthPlywood === currentItem.widthPlywood
+          const sum = currentItem.count + item.count
 
           if (isId && isColor && isFormat && isSorts && isWidthPlywood) {
+            updateCurrent = true
+            return { ...item, count: sum }
+          }
+          if (isId && isColor && currentItem.category.article === 3000) {
             updateCurrent = true
             return { ...item, count: sum }
           }
@@ -39,12 +47,12 @@ export const basketSlice = createSlice({
         })
 
         if (!updateCurrent) {
-          result.push(curentItem)
+          result.push(currentItem)
         }
 
         state.entities = result
       } else {
-        state.entities.push(curentItem)
+        state.entities.push(currentItem)
       }
 
       localStorageService.addBasketElement(state.entities)
@@ -55,7 +63,8 @@ export const basketSlice = createSlice({
         // @ts-ignore
         const itemId = String(item.id) + item.sort
           // @ts-ignore
-          + item.widthPlywood + item.format + item.currentColor
+          + item.widthPlywood + item.format + item.color
+
         return itemId !== currentId
       })
       localStorageService.addBasketElement(state.entities)
@@ -66,7 +75,7 @@ export const basketSlice = createSlice({
         // @ts-ignore
         const itemId = String(item.id) + item.sort
           // @ts-ignore
-          + item.widthPlywood + item.format + item.currentColor
+          + item.widthPlywood + item.format + item.color
 
         if (currentId === itemId) {
           // @ts-ignore
@@ -82,7 +91,7 @@ export const basketSlice = createSlice({
         // @ts-ignore
         const itemId = String(item.id) + item.sort
           // @ts-ignore
-          + item.widthPlywood + item.format + item.currentColor
+          + item.widthPlywood + item.format + item.color
 
         if (currentId === itemId) {
           // @ts-ignore
@@ -104,6 +113,7 @@ export const {
   initBasket,
   incrementCount,
   decrementCount,
+  removeBasket,
 } = basketSlice.actions
 
 export default basketSlice.reducer

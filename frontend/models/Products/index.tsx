@@ -12,7 +12,7 @@ export interface Photo {
 }
 
 export interface PhotosModal {
-    photos: Photo[];
+    data: Photo[];
     id: string;
     name: string;
     color: string;
@@ -32,8 +32,8 @@ export interface PlywoodItem {
   price: number;
   sorts: CalcItem[];
   surfaceTypes: CalcItem[];
-  photos: PhotosModal[];
-  currentColor?: string;
+  photos: FurniturePhotosModal[];
+  color?: string;
   widthPlywood?: string;
   format?: string;
   sort?: string;
@@ -47,7 +47,30 @@ export interface PlywoodModal {
   products: PlywoodItem[];
 }
 
-export interface FurnitureItem {
+export interface FurnitureItemModal {
+  id: string;
+  category: Category;
+  categoryId: number;
+  features?: FurnitureFeatureItem[];
+  photos: FurniturePhotosModal[];
+  name: string;
+  article: string;
+  available: string;
+  price?: number;
+  description: string;
+  width: number;
+  height: number;
+  depth: number;
+}
+
+export interface FurnitureModal {
+  error: boolean;
+  success: boolean;
+  message: string;
+  products: FurnitureItemModal[];
+}
+
+export interface FurnitureFeatureItem {
   id: string;
   name: string;
   price: number;
@@ -55,18 +78,16 @@ export interface FurnitureItem {
   description?: string;
 }
 
-export interface FurnitureModal {
-  error: boolean;
-  success: boolean;
-  message: string;
-  products: any;
-}
-
 export interface FurnitureFeatureModal {
   error: boolean;
   success: boolean;
   message: string;
-  data: FurnitureItem[];
+  data: FurnitureFeatureItem[];
 }
 
-export type FurniturePhotosModal = Omit<PhotosModal, 'color'>
+export interface FurniturePhotosModal {
+  photos: Photo[];
+  id: string;
+  name: string;
+  color: string;
+}

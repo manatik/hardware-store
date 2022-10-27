@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { ProductsState } from '@store/products/types'
 import {
-  FurnitureFeatureModal, FurnitureModal, FurniturePhotosModal, PlywoodModal,
+  FurnitureFeatureModal, FurnitureModal, PhotosModal, PlywoodModal,
 } from '@models/Products'
 import { plywoodService } from '@services/products/plywood.service'
 import { furnitureService } from '@services/products/furniture.service'
@@ -48,21 +48,7 @@ export const fetchFurnitureFeatureAsync = createAsyncThunk<FurnitureFeatureModal
   },
 )
 
-export const fetchFurnitureFeatureUpdateAsync = createAsyncThunk<any,
-  { id: string, name: string, price: number }>(
-    'products/fetchFurnitureFeatureUpdate',
-    async (dataUpdate, { rejectWithValue }) => {
-      try {
-        await furnitureService.furnitureFeatureUpdate(dataUpdate)
-        const { data } = await furnitureService.furnitureFeatureAll()
-        return data
-      } catch (err: any) {
-        return rejectWithValue(err)
-      }
-    },
-  )
-
-export const fetchFurniturePhotosAsync = createAsyncThunk<FurniturePhotosModal>(
+export const fetchFurniturePhotosAsync = createAsyncThunk<PhotosModal>(
   'products/fetchFurniturePhoto',
   async (_, { rejectWithValue }) => {
     try {
@@ -120,21 +106,9 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchFurniturePhotosAsync.fulfilled, (state, action) => {
         state.isLoading = false
-        state.furniturePhotos = action.payload.photos
+        state.furniturePhotos = action.payload.data
       })
       .addCase(fetchFurniturePhotosAsync.rejected, (state) => {
-        state.isLoading = false
-        state.isError = true
-      })
-
-      .addCase(fetchFurnitureFeatureUpdateAsync.pending, (state) => {
-        state.isLoading = true
-      })
-      .addCase(fetchFurnitureFeatureUpdateAsync.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.furnitureFeature = action.payload
-      })
-      .addCase(fetchFurnitureFeatureUpdateAsync.rejected, (state) => {
         state.isLoading = false
         state.isError = true
       })

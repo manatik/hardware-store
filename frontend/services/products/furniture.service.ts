@@ -1,7 +1,7 @@
 import { ApiEndpoints, baseApiEndpoints } from '@api'
 import httpService from '@services/http.service'
 import {
-  FurnitureFeatureModal, FurnitureModal, FurniturePhotosModal, PhotosModal,
+  FurnitureFeatureModal, FurnitureModal, PhotosModal,
 } from '@models/Products'
 
 const furnitureEndpoint = `${baseApiEndpoints.baseEndpoint}${ApiEndpoints.ProductFurniture}`
@@ -25,7 +25,7 @@ export const furnitureService = {
     const { data } = await httpService.patch(`${furnitureEndpoint}/${furnitureData.id}`, furnitureData)
     return data
   },
-  furnitureRemove: async (id: number) => {
+  furnitureRemove: async (id: string) => {
     const { data } = await httpService.delete(`${furnitureEndpoint}/${id}`)
     return data
   },
@@ -56,7 +56,7 @@ export const furnitureService = {
     return data
   },
   furniturePhotosAll: async () => {
-    const { data } = await httpService.get<FurniturePhotosModal>(furniturePhotosEndpoint)
+    const { data } = await httpService.get<PhotosModal>(furniturePhotosEndpoint)
     return data
   },
   furniturePhotos: async (id: string) => {

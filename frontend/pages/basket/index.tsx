@@ -9,6 +9,8 @@ import { getBasketEntities } from '@store/basket/selector'
 import { PlywoodItem } from '@models/Products'
 import Link from 'next/link'
 import { ToplineLinks } from '@features/Basic/common/Topline'
+import { wrapper } from '@store/store'
+import { ProjectPage, useServerSideProps } from '@hooks'
 import styles from './index.module.scss'
 
 const Basket = () => {
@@ -46,7 +48,7 @@ const Basket = () => {
       )}
 
       {basketEntities && basketEntities.map((item: PlywoodItem) => {
-        const id = String(item.id) + item.sort + item.widthPlywood + item.format + item.currentColor
+        const id = String(item.id) + item.sort + item.widthPlywood + item.format + item.color
 
         return (
           <BasketCard
@@ -61,5 +63,9 @@ const Basket = () => {
     </LayoutCard>
   )
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => useServerSideProps(ProjectPage.Basket, context, store),
+)
 
 export default Basket

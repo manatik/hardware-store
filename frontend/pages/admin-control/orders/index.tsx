@@ -3,13 +3,28 @@ import { NextPage } from 'next'
 import AdminLayout from '@features/Admin/common/Admin-Layout'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
+import ContainerProduct from '@features/Admin/common/ContainerProduct'
+import Card from '@features/Admin/ui/Card'
+import { OrderItem } from '@models/Order'
 
-const Orders: NextPage = () => {
+const Orders: NextPage<{ orders: OrderItem[] }> = ({ orders }) => {
+  console.log(orders)
   return (
     <AdminLayout>
-      <div>
-        Тут будут отображаться ваши заказы
-      </div>
+      <ContainerProduct
+        title="Заказы"
+      />
+      {orders?.length > 0 ? orders.map((item) => (
+        <Card
+          key={item.id}
+          title={item.email}
+          edit={false}
+        />
+      )) : (
+        <div>
+          Тут будут отображаться ваши заказы
+        </div>
+      )}
     </AdminLayout>
   )
 }

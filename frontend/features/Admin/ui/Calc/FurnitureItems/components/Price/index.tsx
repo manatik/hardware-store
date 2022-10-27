@@ -7,14 +7,22 @@ import styles from '@features/Admin/ui/Card/index.module.scss'
 import { Formik } from 'formik'
 import { toast } from 'react-toastify'
 import { furnitureService } from '@services/products/furniture.service'
+import { fetchFurnitureAsync } from '@store/products/productsSlice'
+import { useAppDispatch } from '@store/hooks'
 
 const Price = () => {
+  const dispatch = useAppDispatch()
   const addPrice = async (values: { name: string, price: number }) => {
     try {
-      await furnitureService.furnitureFeatureAdd(values)
-      toast.success('Прайс успешно добавлен')
+      const data = await furnitureService.furnitureFeatureAdd(values)
+      if (data.success) {
+        await dispatch(fetchFurnitureAsync())
+        toast.success('Прайс успешно добавлен')
+      }
+      return 'success'
     } catch (e: any) {
       toast.error(e.message || 'Ошибка сервера')
+      return 'error'
     }
   }
   return (
@@ -28,8 +36,14 @@ const Price = () => {
       validateOnChange={false}
       validateOnBlur={false}
       validationSchema={calcAllSchema}
-      onSubmit={async (values) => {
-        await addPrice(values)
+      onSubmit={async (values, formikHelpers) => {
+        const data = await addPrice(values)
+        if (data === 'success') {
+          formikHelpers.setValues({
+            name: '',
+            price: 0,
+          })
+        }
       }}
     >
       {({

@@ -43,6 +43,14 @@
 
       @include deviceWidth(mobile) {
         display: block;
+
+        &_furniture {
+          margin-bottom: 20px;
+        }
+
+        &_description {
+          margin-top: 20px;
+        }
       }
     }
 
@@ -227,6 +235,10 @@
       @include deviceWidth(mobile) {
         @include m-typography(14px, 20px, 300);
         margin: 20px 0 15px;
+
+        &_furniture {
+          margin-top: 20px;
+        }
       }
     }
 
@@ -264,6 +276,59 @@
       @include deviceWidth(mobile) {
         @include m-typography(14px, 16px, 500);
         margin-right: 15px;
+      }
+
+      &Name {
+        color: $colorPrimary;
+      }
+    }
+
+    &__prices {
+      @include m-typography(16px, 18px, 500);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      @include deviceWidth(tabletPortrait) {
+        @include m-typography(14px, 16px, 500);
+        margin-right: 15px;
+      }
+      @include deviceWidth(mobile) {
+        @include m-typography(14px, 16px, 500);
+        margin-right: 15px;
+      }
+
+      &__title {
+        @include m-typography(20px, 23px, 700);
+        margin: 25px 0 15px;
+
+        @include deviceWidth(tabletPortrait) {
+          @include m-typography(16px, 18px, 700);
+          margin: 17px 0 10px;
+        }
+        @include deviceWidth(mobile) {
+          @include m-typography(16px, 18px, 700);
+          margin: 17px 0 10px;
+        }
+      }
+
+      &Name {
+        color: $colorPrimary;
+      }
+    }
+
+    &__param {
+      @include m-typography(16px, 18px, 500);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+
+      @include deviceWidth(tabletPortrait) {
+        margin-right: 10px;
+      }
+      @include deviceWidth(mobile) {
+        margin-right: 10px;
       }
 
       &Name {

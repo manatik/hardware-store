@@ -1,3 +1,5 @@
+import { FurnitureItemModal, PlywoodItem } from '@models/Products'
+
 export interface OrderModal {
   email: string;
   phone: string;
@@ -24,4 +26,15 @@ export interface EmailModal {
   phone: string;
   email: string;
   message: string;
+}
+
+export interface OrderItem {
+  id: string
+  email: string;
+  phone: string;
+  fio: string;
+  price?: number;
+  furnitures?: FurnitureItemModal[];
+  plywoods?: PlywoodItem[];
+  createdAt: string;
 }

@@ -11,7 +11,9 @@ import ReactInputMask from 'react-input-mask'
 import TextAriaField from '@features/Basic/ui/TextAriaField'
 import Portal from '@features/Basic/common/Portal'
 
+import { orderService } from '@services/order/order.service'
 import close from 'assets/close.svg'
+import { toast } from 'react-toastify'
 import styles from './index.module.scss'
 
 interface OppositeProps {
@@ -19,6 +21,15 @@ interface OppositeProps {
   title: string;
 }
 const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
+  const handleSubmit = async (values: any) => {
+    try {
+      const { success } = await orderService.orderEmail(values)
+      if (success) toast.success('Заявка отправлена, скоро мы вам перезвоним!')
+    } catch (e: any) {
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
     return () => document.documentElement.classList.remove('g_lockscroll')
   }, [])
@@ -41,7 +52,7 @@ const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
           </div>
           <Formik
             initialValues={{
-              name: '',
+              fio: '',
               phone: '',
               message: '',
             }}
@@ -49,7 +60,7 @@ const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
             validateOnChange={false}
             validateOnBlur={false}
             onSubmit={async (values) => {
-              console.log(values)
+              await handleSubmit(values)
             }}
           >
             {({
@@ -69,11 +80,11 @@ const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
               >
                 <InputField
                   type={InputType.Text}
-                  name="name"
+                  name="fio"
                   placeholder="Имя*"
                   onChange={handleChange}
-                  value={values.name}
-                  error={errors.name}
+                  value={values.fio}
+                  error={errors.fio}
                   size="md"
                 />
 

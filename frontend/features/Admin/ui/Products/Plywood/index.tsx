@@ -139,7 +139,7 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
           formikHelpers.setValues({
             name: '',
             article: '',
-            categoryId: 1,
+            categoryId: categories[0].id,
             description: '',
             price: '',
           })

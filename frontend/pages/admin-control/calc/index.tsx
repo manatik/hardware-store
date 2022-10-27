@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
-import AdminLayout from '@features/Admin/common/Admin-Layout'
-import ContainerProduct from '@features/Admin/common/ContainerProduct'
+import dynamic from 'next/dynamic'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
-
+import { getCookie, setCookie } from 'cookies-next'
+import { features, furniture, products } from '@features/Admin/ui/Calc/mockData'
+import AdminLayout from '@features/Admin/common/Admin-Layout'
+import ContainerProduct from '@features/Admin/common/ContainerProduct'
 import SelectField from '@features/Admin/ui/SelectField'
+
 import CoatingDensity from '@features/Admin/ui/Calc/PlywoodItems/components/CoatingDensity'
 import Formats from '@features/Admin/ui/Calc/PlywoodItems/components/Formats'
 import Sort from '@features/Admin/ui/Calc/PlywoodItems/components/Sort'
@@ -13,15 +16,17 @@ import WidthPlywood from '@features/Admin/ui/Calc/PlywoodItems/components/WidthP
 import Type from '@features/Admin/ui/Calc/PlywoodItems/components/Type'
 import PhotosPlywood from '@features/Admin/ui/Calc/PlywoodItems/components/Photos'
 
-import {
-  features,
-  furniture,
-  products,
-} from '@features/Admin/ui/Calc/mockData'
-import PlywoodItems from '@features/Admin/ui/Calc/PlywoodItems'
-import FurnitureItems from '@features/Admin/ui/Calc/FurnitureItems'
 import Price from '@features/Admin/ui/Calc/FurnitureItems/components/Price'
 import PhotosFurniture from '@features/Admin/ui/Calc/FurnitureItems/components/Photos'
+
+const PlywoodItems: any = dynamic(
+  () => import('@features/Admin/ui/Calc/PlywoodItems'),
+  { ssr: false },
+)
+const FurnitureItems: any = dynamic(
+  () => import('@features/Admin/ui/Calc/FurnitureItems'),
+  { ssr: false },
+)
 
 const Calc: NextPage = () => {
   const [dataPlywood, setDataPlywood] = useState({
@@ -49,10 +54,21 @@ const Calc: NextPage = () => {
   const handleChange = (target: any) => {
     setDataPlywood(target)
   }
+
+  useEffect(() => {
+    setDataProduct({
+      name: '',
+      value: Number(getCookie('AdminCalcSelect')) || 1,
+    })
+  }, [])
+
+  useEffect(() => {
+    setCookie('AdminCalcSelect', dataProduct.value)
+  }, [dataProduct])
   return (
     <AdminLayout>
       <ContainerProduct
-        title="Калькулятор"
+        title="Характеристики товаров"
         buttonName="Добавить характеристику"
         form={
           <>

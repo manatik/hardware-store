@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 
 export const BasketFormSchema = Yup.object().shape({
-  name: Yup.string()
+  fio: Yup.string()
     .required('Введите имя'),
   phone: Yup.string()
     .test('len', 'Некорректно введен номер телефона', (val: any) => {
