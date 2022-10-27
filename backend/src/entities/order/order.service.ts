@@ -96,6 +96,11 @@ export class OrderService {
           furnitures: { connect: connectFurnitureIds },
           price: sum,
         },
+        include: {
+          furnitures: true,
+          houses: true,
+          plywoods: true,
+        },
       });
 
       return this.errorService.success('Заказ успешно создан', { data: order });
