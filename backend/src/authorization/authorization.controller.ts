@@ -39,6 +39,7 @@ export class AuthorizationController {
 
     if (tokens.refreshToken) {
       res.cookie(TOKENS.REFRESH, tokens.refreshToken, { httpOnly: true });
+      res.cookie(TOKENS.ACCESS, tokens.accessToken, { httpOnly: true });
     }
 
     res.json(this.errorService.success('Токены успешно обновлены', { ...tokens }));
