@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { NextPage } from 'next'
 import AdminLayout from '@features/Admin/common/Admin-Layout'
 import ContainerProduct from '@features/Admin/common/ContainerProduct'
@@ -13,7 +13,11 @@ import WidthPlywood from '@features/Admin/ui/Calc/PlywoodItems/components/WidthP
 import Type from '@features/Admin/ui/Calc/PlywoodItems/components/Type'
 import PhotosPlywood from '@features/Admin/ui/Calc/PlywoodItems/components/Photos'
 
-import { features, furniture, products } from '@features/Admin/ui/Calc/mockData'
+import {
+  features,
+  furniture,
+  products,
+} from '@features/Admin/ui/Calc/mockData'
 import PlywoodItems from '@features/Admin/ui/Calc/PlywoodItems'
 import FurnitureItems from '@features/Admin/ui/Calc/FurnitureItems'
 import Price from '@features/Admin/ui/Calc/FurnitureItems/components/Price'

@@ -40,7 +40,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
     document.documentElement.classList.toggle('g_lockscroll')
   }
 
-  const handleChangeImages = (id: number) => {
+  const handleChangeImages = (id: string) => {
     const result = product?.photos.filter((item) => item.id === id)
     setImages(result[0])
     setCurrentImage(result[0].photos[0])
