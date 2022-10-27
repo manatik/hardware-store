@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { ErrorService } from 'common/error/error.service';
 import { PrismaService } from 'database/prisma/prisma.service';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { idsArrayToArrayObjects } from 'common/utils/utils';
 
 @Injectable()
 export class OrderService {
@@ -53,39 +52,47 @@ export class OrderService {
     try {
       let sum = 0;
 
-      if (products.plywood) {
+      if (products.plywood?.length) {
         const plywoods = await this.prismaService.plywood.findMany({
-          where: { id: { in: products.plywood } },
+          where: { id: { in: products.plywood.map((ply) => ply.id) } },
           select: { id: true, price: true },
         });
 
-        sum = plywoods.reduce((acc, plywood) => acc + plywood.price, 0);
+        if (products.plywood.length !== plywoods.length) {
+          throw new Error('Ошибка заказа, имеется недействительный товар фанеры');
+        }
+
+        sum = products.plywood.reduce((acc, plywood) => acc + plywood.price * plywood.count, 0);
       }
 
-      if (products.house) {
+      if (products.furniture?.length) {
+        const furnitures = await this.prismaService.furniture.findMany({
+          where: { id: { in: products.furniture.map((fur) => fur.id) } },
+          select: { id: true, price: true },
+        });
+
+        if (products.furniture.length !== furnitures.length) {
+          throw new Error('Ошибка заказа, имеется недействительный товар мебели');
+        }
+
+        sum = products.furniture.reduce((acc, furniture) => acc + (furniture.price || 0) * furniture.count, 0);
+      }
+
+      if (products.house?.length) {
         const houses = await this.prismaService.house.findMany({
-          where: { id: { in: products.house } },
+          where: { id: { in: products.house.map((house) => house.id) } },
           select: { id: true, price: true },
         });
 
         sum = houses.reduce((acc, house) => acc + house.price, 0);
       }
 
-      if (products.furniture) {
-        const furnitures = await this.prismaService.furniture.findMany({
-          where: { id: { in: products.plywood } },
-          select: { id: true, price: true },
-        });
-
-        sum = furnitures.reduce((acc, furniture) => acc + furniture.price, 0);
-      }
-
       const order = await this.prismaService.order.create({
         data: {
           ...dto,
-          plywoods: { connect: idsArrayToArrayObjects(products.plywood) },
-          furnitures: { connect: idsArrayToArrayObjects(products.furniture) },
-          houses: { connect: idsArrayToArrayObjects(products.house) },
+          plywoods: { connect: products.plywood.map((ply) => ({ id: ply.id })) },
+          furnitures: { connect: products.furniture.map((fur) => ({ id: fur.id })) },
+          houses: { connect: products.house.map((house) => ({ id: house.id })) },
           price: sum,
         },
       });

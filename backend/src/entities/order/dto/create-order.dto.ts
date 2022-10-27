@@ -1,18 +1,58 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
+
+export class Plywood {
+  @IsNotEmpty()
+  @IsString()
+  id: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  count: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  price: number;
+}
+
+export class Furniture {
+  @IsNotEmpty()
+  @IsString()
+  id: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  count: number;
+
+  @IsOptional()
+  @IsNumber()
+  price?: number;
+}
+
+export class House {
+  @IsNotEmpty()
+  @IsString()
+  id: string;
+}
 
 export class Products {
   @IsOptional()
-  @IsString({ each: true })
-  plywood?: string[];
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Plywood)
+  plywood?: Plywood[];
 
   @IsOptional()
-  @IsString({ each: true })
-  furniture?: string[];
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Furniture)
+  furniture?: Furniture[];
 
   @IsOptional()
-  @IsString({ each: true })
-  house?: string[];
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => House)
+  house?: House[];
 }
 
 export class CreateOrderDto {

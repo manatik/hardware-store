@@ -42,7 +42,7 @@ export class Plywood {
 
   @IsNotEmpty()
   @IsString()
-  sorts: string;
+  sort: string;
 }
 
 export class Furniture {
