@@ -101,7 +101,7 @@ export class FurnitureService {
     try {
       const furnitureIsExist = await this.getById(id);
 
-      if (!furnitureIsExist) {
+      if (!furnitureIsExist.product) {
         throw this.errorService.badRequest(`Продукта с id=${id} не существует`);
       }
 

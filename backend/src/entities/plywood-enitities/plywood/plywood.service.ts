@@ -136,7 +136,7 @@ export class PlywoodService {
     try {
       const plywoodIsExist = await this.getById(id);
 
-      if (!plywoodIsExist) {
+      if (!plywoodIsExist.product) {
         throw this.errorService.badRequest(`Продукта с id=${id} не существует`);
       }
 
