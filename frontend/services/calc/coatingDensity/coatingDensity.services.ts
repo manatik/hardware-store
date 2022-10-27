@@ -13,11 +13,11 @@ export const coatingDensityService = {
     const { data } = await httpService.get(coatingDensityEndpoint)
     return data
   },
-  update: async (id: number, dataCoatingDensity: CalcData) => {
+  update: async (id: string, dataCoatingDensity: CalcData) => {
     const { data } = await httpService.patch(`${coatingDensityEndpoint}/${id}`, dataCoatingDensity)
     return data
   },
-  remove: async (id: number) => {
+  remove: async (id: string) => {
     const { data } = await httpService.delete(`${coatingDensityEndpoint}/${id}`)
     return data
   },

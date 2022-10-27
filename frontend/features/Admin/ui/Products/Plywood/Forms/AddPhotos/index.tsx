@@ -5,9 +5,10 @@ import { ImageType } from 'react-images-uploading'
 interface AddPhotosProps {
   onChange: (imageList: any, addUpdateIndex: any) => void;
   images: ImageType[];
-  onChangeColor: (target: any) => void;
-  color: string;
+  onChangeColor?: (target: any) => void;
+  color?: string;
 }
+
 const AddPhotos: FC<AddPhotosProps> = ({
   onChange,
   images,
@@ -20,15 +21,17 @@ const AddPhotos: FC<AddPhotosProps> = ({
         value={images}
         onChange={onChange}
       />
-      <div>
-        Цвет:{' '}
-        <input
-          onChange={(e) => onChangeColor(e.target.value)}
-          style={{ marginBottom: '16px', marginTop: '16px' }}
-          value={color}
-          type="color"
-        />
-      </div>
+      {color && onChangeColor && (
+        <div>
+          Цвет:{' '}
+          <input
+            onChange={(e) => onChangeColor(e.target.value)}
+            style={{ marginBottom: '16px', marginTop: '16px' }}
+            value={color}
+            type="color"
+          />
+        </div>
+      )}
     </>
   )
 }

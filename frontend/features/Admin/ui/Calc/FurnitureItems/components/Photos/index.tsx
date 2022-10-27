@@ -1,0 +1,96 @@
+import React, { useRef, useState } from 'react'
+import { ImageType } from 'react-images-uploading'
+import { toast } from 'react-toastify'
+import { Formik } from 'formik'
+import { photosSchema } from '@schema/calc'
+import InputField from '@features/Admin/ui/InputField'
+import { InputType } from '@features/Admin/ui/InputField/types'
+import AddPhotos from '@features/Admin/ui/Products/Plywood/Forms/AddPhotos'
+import cn from 'classnames'
+import styles from '@features/Admin/ui/Card/index.module.scss'
+import { furnitureService } from '@services/products/furniture.service'
+
+const Photos = () => {
+  const formRef = useRef<HTMLFormElement | null>(null)
+  const [images, setImages] = useState<ImageType[]>([])
+
+  const handleSaveImages = async (name: string) => {
+    const fd = new FormData()
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const img of images) {
+      fd.append('photos', img.file || '')
+    }
+
+    fd.append('name', name)
+
+    try {
+      const { message } = await furnitureService.furniturePhotosAdd(fd)
+      toast.success(message || 'Фотографии успешно добавлены')
+    } catch (e: any) {
+      toast.error(e.error || 'Ошибка запроса')
+    }
+  }
+
+  const onChangeImage = (imageList: any) => {
+    setImages(imageList)
+  }
+
+  return (
+    <Formik
+      initialValues={{
+        name: '',
+      }}
+      validateOnChange={false}
+      validateOnBlur={false}
+      validationSchema={photosSchema}
+      onSubmit={async (values) => {
+        await handleSaveImages(values.name)
+      }}
+    >
+      {({
+        errors,
+        setErrors,
+        values,
+        handleChange,
+        handleSubmit,
+      }) => (
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          onChange={() => {
+            setErrors({})
+          }}
+          noValidate
+        >
+          <InputField
+            type={InputType.Text}
+            name="name"
+            value={values.name}
+            error={errors.name as string}
+            placeholder="Диван такой-то"
+            label="Фото мебели"
+            size="md"
+            onChange={handleChange}
+          />
+
+          <AddPhotos
+            images={images}
+            onChange={onChangeImage}
+          />
+
+          <button
+            type="submit"
+            className={cn(
+              styles.card__button,
+              styles.card__buttonEdit,
+            )}
+          >
+            Создать
+          </button>
+        </form>)}
+    </Formik>
+  )
+}
+
+export default Photos

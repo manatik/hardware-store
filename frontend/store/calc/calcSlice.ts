@@ -49,7 +49,7 @@ export const fetchCalcParamsAsync = createAsyncThunk(
   },
 )
 
-export const fetchCalcRemoveParamsAsync = createAsyncThunk<any, { id: number, endpoint: number }>(
+export const fetchCalcRemoveParamsAsync = createAsyncThunk<any, { id: string, endpoint: number }>(
   'calc/fetchCalcRemoveParam',
   async (dataRemove, { rejectWithValue }) => {
     const { id, endpoint } = dataRemove
@@ -62,7 +62,7 @@ export const fetchCalcRemoveParamsAsync = createAsyncThunk<any, { id: number, en
 )
 
 export const fetchCalcUpdateParamsAsync = createAsyncThunk<any,
-  { id: number, endpoint: number, values: CalcData }>(
+  { id: string, endpoint: number, values: CalcData }>(
     'calc/fetchCalcUpdateParams',
     async (dataUpdate, { rejectWithValue }) => {
       const { id, endpoint, values } = dataUpdate

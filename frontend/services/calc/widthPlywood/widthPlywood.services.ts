@@ -13,11 +13,11 @@ export const widthPlywoodService = {
     const { data } = await httpService.get(widthPlywoodEndpoint)
     return data
   },
-  update: async (id: number, dataWidthPlywood: CalcData) => {
+  update: async (id: string, dataWidthPlywood: CalcData) => {
     const { data } = await httpService.patch(`${widthPlywoodEndpoint}/${id}`, dataWidthPlywood)
     return data
   },
-  remove: async (id: number) => {
+  remove: async (id: string) => {
     const { data } = await httpService.delete(`${widthPlywoodEndpoint}/${id}`)
     return data
   },

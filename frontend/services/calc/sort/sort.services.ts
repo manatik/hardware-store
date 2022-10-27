@@ -13,11 +13,11 @@ export const sortService = {
     const { data } = await httpService.get(sortEndpoint)
     return data
   },
-  update: async (id: number, dataSort: CalcData) => {
+  update: async (id: string, dataSort: CalcData) => {
     const { data } = await httpService.patch(`${sortEndpoint}/${id}`, dataSort)
     return data
   },
-  remove: async (id: number) => {
+  remove: async (id: string) => {
     const { data } = await httpService.delete(`${sortEndpoint}/${id}`)
     return data
   },

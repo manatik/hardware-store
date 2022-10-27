@@ -8,7 +8,7 @@ import { redirectController } from '@utils/redirectController'
 import { fetchCategoriesAsync } from '@store/category/categorySlice'
 import { setCookieHeader } from '@services/http.service'
 import { fetchCalcParamsAsync } from '@store/calc/calcSlice'
-import { fetchPlywoodAsync } from '@store/products/productsSlice'
+import { fetchFurnitureFeatureAsync, fetchFurniturePhotosAsync, fetchPlywoodAsync } from '@store/products/productsSlice'
 import { plywoodService } from '@services/products/plywood.service'
 
 /**
@@ -67,6 +67,12 @@ export const useServerSideProps = async (
 
         return { props: { categories: null } }
       }
+    }
+
+    case ProjectPage.Calc: {
+      await dispatch(fetchFurnitureFeatureAsync())
+      await dispatch(fetchFurniturePhotosAsync())
+      break
     }
 
     case ProjectPage.Users: {

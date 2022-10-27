@@ -1,8 +1,10 @@
-import { PlywoodItem } from '@models/Products'
+import { FurnitureItem, Photo, PlywoodItem } from '@models/Products'
 
 export interface ProductsState {
   isLoading: boolean;
   isError: boolean;
   plywood: PlywoodItem[] | null;
-  house: any;
+  furniture: FurnitureItem[] | null;
+  furnitureFeature: FurnitureItem[] | null;
+  furniturePhotos: Photo[] | null;
 }

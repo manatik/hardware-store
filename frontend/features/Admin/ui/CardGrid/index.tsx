@@ -6,7 +6,7 @@ import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
 import Portal from '@features/Basic/common/Portal'
 import Modal from '@features/Basic/common/Modal'
-import { CoatingDensitySchema } from '@schema/calc'
+import { calcAllSchema, CoatingDensitySchema } from '@schema/calc'
 import { Formik } from 'formik'
 import { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -16,7 +16,7 @@ import styles from './index.module.scss'
 const CardGrid: FC<PropsCardGrid> = ({
   title,
   price = 0,
-  id = 0,
+  id = '',
   endpoint = 0,
   onUpdate,
   onRemove,
@@ -88,10 +88,10 @@ const CardGrid: FC<PropsCardGrid> = ({
                 }}
                 validateOnChange={false}
                 validateOnBlur={false}
-                validationSchema={CoatingDensitySchema}
+                validationSchema={endpoint === 2 ? CoatingDensitySchema : calcAllSchema}
                 onSubmit={async (values) => {
                   if (onUpdate) {
-                    await onUpdate(id, endpoint, values)
+                    await onUpdate(id, values, endpoint)
                     onToggle()
                   }
                 }}

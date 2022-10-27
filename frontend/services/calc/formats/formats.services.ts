@@ -13,11 +13,11 @@ export const formatService = {
     const { data } = await httpService.get(formatEndpoint)
     return data
   },
-  update: async (id: number, dataFormat: CalcData) => {
+  update: async (id: string, dataFormat: CalcData) => {
     const { data } = await httpService.patch(`${formatEndpoint}/${id}`, dataFormat)
     return data
   },
-  remove: async (id: number) => {
+  remove: async (id: string) => {
     const { data } = await httpService.delete(`${formatEndpoint}/${id}`)
     return data
   },

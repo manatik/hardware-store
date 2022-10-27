@@ -36,7 +36,7 @@ export const updateFeature = (state: any, action: any) => {
   }
 }
 
-export const fetchUpdate = async (id: number, endpoint: number, values: CalcData) => {
+export const fetchUpdate = async (id: string, endpoint: number, values: CalcData) => {
   switch (endpoint) {
     case 1: {
       await coatingDensityService.update(id, values)
@@ -67,7 +67,7 @@ export const fetchUpdate = async (id: number, endpoint: number, values: CalcData
   }
 }
 
-export const fetchRemove = async (id: number, endpoint: number) => {
+export const fetchRemove = async (id: string, endpoint: number) => {
   switch (endpoint) {
     case 1: {
       await coatingDensityService.remove(id)
