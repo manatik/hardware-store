@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,16 @@ async function main() {
       { name: 'мебель', article: '3000' },
     ],
     skipDuplicates: true,
+  });
+
+  const role = await prisma.role.findFirst({ where: { name: 'admin' } });
+
+  await prisma.user.create({
+    data: {
+      email: 'plywood@admin.ru',
+      password: await bcrypt.hash('!Afythf543216', 10),
+      roles: { connect: { id: role.id } },
+    },
   });
 }
 
