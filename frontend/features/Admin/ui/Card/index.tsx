@@ -19,6 +19,7 @@ const Card: FC<CardProps> = ({
   formPhoto,
   remove,
   edit = true,
+  buttonName = 'Редактировать',
 }): ReactElement => {
   const hiddenElemForm = useRef<HTMLDivElement | null>(null)
   const hiddenElemPhoto = useRef<HTMLDivElement | null>(null)
@@ -86,7 +87,7 @@ const Card: FC<CardProps> = ({
               )}
               onClick={toggle}
             >
-              Редактировать
+              {buttonName}
             </div>
           )}
           {remove && (

@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Children } from '@models/Props/props'
 import Topline from '@features/Basic/common/Topline'
 import Footer from '@features/Basic/common/Footer'
 
+import cn from 'classnames'
 import styles from './index.module.scss'
 
 interface LayoutProps {
@@ -16,6 +17,29 @@ const Layout: FC<LayoutProps> = ({
   absolute = true,
   dark = false,
 }) => {
+  const [scroll, setScroll] = React.useState(0)
+
+  const handleScroll = () => {
+    setScroll(window.scrollY)
+  }
+
+  const handleScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    })
+  }
+
+  useEffect(() => {
+    if (window.innerWidth > 960) {
+      window.addEventListener('scroll', handleScroll)
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
   return (
     <>
       <div className={!absolute ? styles.layout : ''}>
@@ -25,6 +49,16 @@ const Layout: FC<LayoutProps> = ({
         />
         <main className={styles.layout__content}>
           {children}
+          <div
+            className={cn(styles.layout__scroll, {
+              [styles.layout__scrollActive]: scroll > 100,
+            })}
+          >
+            <div
+              className={styles.layout__scroll_btn}
+              onClick={handleScrollTop}
+            />
+          </div>
         </main>
         <Footer />
       </div>

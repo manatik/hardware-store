@@ -13,6 +13,7 @@ import slide3 from 'assets/slider/slide-3.webp'
 import slide4 from 'assets/slider/slide-4.webp'
 import slide5 from 'assets/slider/slide-5.webp'
 
+import cn from 'classnames'
 import styles from './index.module.scss'
 
 const Slider: FC = (): ReactElement => {
@@ -64,7 +65,7 @@ const Slider: FC = (): ReactElement => {
         }}
       >
         <SwiperSlide>
-          <div className={styles.slide__wrap}>
+          <div className={cn(styles.slide__wrap, styles.slide__wrap_one)}>
             <div className={styles.slide}>
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>
@@ -87,7 +88,7 @@ const Slider: FC = (): ReactElement => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className={styles.slide__wrap}>
+          <div className={cn(styles.slide__wrap, styles.slide__wrap_two)}>
             <div className={styles.slide}>
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>
@@ -110,7 +111,7 @@ const Slider: FC = (): ReactElement => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className={styles.slide__wrap}>
+          <div className={cn(styles.slide__wrap, styles.slide__wrap_three)}>
             <div className={styles.slide}>
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>Жизнь, полная фанеры</div>
@@ -154,7 +155,7 @@ const Slider: FC = (): ReactElement => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className={styles.slide__wrap}>
+          <div className={cn(styles.slide__wrap, styles.slide__wrap_)}>
             <div className={styles.slide}>
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>Ценим искусство природы</div>

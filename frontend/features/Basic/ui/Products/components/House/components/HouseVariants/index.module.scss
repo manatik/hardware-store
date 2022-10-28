@@ -1,0 +1,27 @@
+@import "@public/styles/mixins";
+@import "@public/styles/variables";
+
+.variant {
+  &__title {
+    @include w-container-title;
+    margin: 100px 0 80px;
+
+    @include deviceWidth(tabletPortrait) {
+      margin-top: 70px;
+    }
+    @include deviceWidth(mobile) {
+      margin-top: 60px;
+    }
+  }
+
+  &__container > div {
+    margin: 35px 0 0;
+
+    @include deviceWidth(tabletPortrait) {
+      margin-top: 10px;
+    }
+    @include deviceWidth(mobile) {
+      margin-top: 0;
+    }
+  }
+}

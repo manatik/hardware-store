@@ -5,6 +5,7 @@ import HouseInfo from '@features/Basic/ui/Products/components/House/components/H
 import HouseOfferCard from '@features/Basic/ui/Products/components/House/components/HouseOfferCard'
 import HouseCabinet from '@features/Basic/ui/Products/components/House/components/HouseCabinet'
 import HouseEquipment from '@features/Basic/ui/Products/components/House/components/HouseEquipment'
+import HouseVariants from '@features/Basic/ui/Products/components/House/components/HouseVariants'
 
 const House = () => {
   return (
@@ -18,6 +19,7 @@ const House = () => {
       <HouseOfferCard />
       <HouseCabinet />
       <HouseEquipment />
+      <HouseVariants />
     </>
   )
 }

@@ -431,6 +431,12 @@
 
   &__slide {
     max-height: 430px;
+    background: $colorOnPrimary;
+    border-radius: 30px;
+
+    @include deviceWidth(mobile) {
+      border-radius: 15px;
+    }
 
     &__first {
       & img {
@@ -444,6 +450,12 @@
 
       @include deviceWidth(mobile) {
         border-radius: 15px;
+      }
+    }
+
+    &__noCover {
+      & img {
+        object-fit: contain;
       }
     }
   }

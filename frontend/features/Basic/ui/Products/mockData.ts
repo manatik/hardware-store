@@ -18,7 +18,7 @@ export const plywood = [
   {
     id: 1,
     image: plywood1,
-    title: 'sdfsdf',
+    title: 'plywood',
     description: 'sdfsdf',
     height: 431,
     width: 1240,
@@ -53,6 +53,7 @@ export enum ProductLinks {
   Delivery = '#delivery',
   House = '#house',
   Options = '#options',
+  OneHouseDefault = '#one',
 }
 
 export const plywoodLinks = [
@@ -105,6 +106,34 @@ export const houseLinks = [
   {
     link: ProductLinks.Options,
     title: 'Корпусная мебель',
+  },
+]
+
+export const houseVariantsLinks = [
+  {
+    noLink: true,
+    link: '#one',
+    title: '25 м2',
+  },
+  {
+    noLink: true,
+    link: '#two',
+    title: '40 м2',
+  },
+  {
+    noLink: true,
+    link: '#three',
+    title: '60 м2',
+  },
+  {
+    noLink: true,
+    link: '#four',
+    title: '90 м2',
+  },
+  {
+    noLink: true,
+    link: '#five',
+    title: '125 м2',
   },
 ]
 

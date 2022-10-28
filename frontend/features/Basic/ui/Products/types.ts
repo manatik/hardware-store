@@ -8,6 +8,7 @@ export interface SliderMockItem {
 }
 
 export interface MockLink {
+  noLink?: boolean,
   link: string,
   title: string,
 }

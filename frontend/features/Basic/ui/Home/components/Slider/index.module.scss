@@ -2,183 +2,212 @@
 @import "@public/styles/variables.scss";
 
 .slider {
-    height: 100vh;
-    background-color: $colorSecondary;
+  height: 100vh;
+  background-color: $colorSecondary;
 
-    &__nav {
-        @include w-layout;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 122px;
-        z-index: 10;
-        margin: auto;
+  &__nav {
+    @include w-layout;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 122px;
+    z-index: 10;
+    margin: auto;
+  }
+
+  &__pagination {
+    @include m-typography(20px, 28px, 500);
+    color: $colorOnPrimary;
+    text-align: center;
+    transition: 300ms opacity;
+    transform: translate3d(0, 0, 0);
+    margin-right: 20px;
+
+    @include deviceWidth(mobile) {
+      @include m-typography(16px, 20px, 500);
     }
 
-    &__pagination {
+    &__current {
+      @include m-typography(32px, 44px, 500);
+      color: $colorOnPrimary;
+      margin-right: 3px;
+
+      @include deviceWidth(mobile) {
         @include m-typography(20px, 28px, 500);
-        color: $colorOnPrimary;
-        text-align: center;
-        transition: 300ms opacity;
-        transform: translate3d(0, 0, 0);
-        margin-right: 20px;
-
-        @include deviceWidth(mobile) {
-            @include m-typography(16px, 20px, 500);
-        }
-
-        &__current {
-            @include m-typography(32px, 44px, 500);
-            color: $colorOnPrimary;
-            margin-right: 3px;
-
-            @include deviceWidth(mobile) {
-                @include m-typography(20px, 28px, 500);
-            }
-        }
-
-        &__total {
-            @include m-typography(20px, 28px, 500);
-            color: $colorOnPrimary;
-            margin-left: 3px;
-
-            @include deviceWidth(mobile) {
-                @include m-typography(16px, 20px, 500);
-            }
-        }
+      }
     }
 
-    &__navigation {
-        display: flex;
+    &__total {
+      @include m-typography(20px, 28px, 500);
+      color: $colorOnPrimary;
+      margin-left: 3px;
 
-        &__next {
-            border: 1px solid $colorPrimary;
-            background-color: $colorPrimary;
-            border-radius: 50%;
-            padding: 8px 3px;
-            cursor: pointer;
+      @include deviceWidth(mobile) {
+        @include m-typography(16px, 20px, 500);
+      }
+    }
+  }
 
-            &:before {
-                content: '';
-                display: block;
-                width: 23px;
-                height: 11px;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: 23px 11px;
-                background-image: url('../../../../../../assets/slider/arrow.svg');
-                transform: rotate(180deg);
-            }
-        }
+  &__navigation {
+    display: flex;
 
-        &__prev {
-            border: 1px solid $colorPrimary;
-            background-color: $colorPrimary;
-            border-radius: 50%;
-            padding: 8px 3px;
-            margin-right: 10px;
-            cursor: pointer;
+    &__next {
+      border: 1px solid $colorPrimary;
+      background-color: $colorPrimary;
+      border-radius: 50%;
+      padding: 8px 3px;
+      cursor: pointer;
 
-            &:before {
-                content: '';
-                display: block;
-                width: 23px;
-                height: 11px;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: 23px 11px;
-                background-image: url('../../../../../../assets/slider/arrow.svg');
-            }
-        }
-
-        &__disable {
-            border: 1px solid $colorOnPrimary;
-            background-color: transparent;
-        }
+      &:before {
+        content: '';
+        display: block;
+        width: 23px;
+        height: 11px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 23px 11px;
+        background-image: url('../../../../../../assets/slider/arrow.svg');
+        transform: rotate(180deg);
+      }
     }
 
-    &__progress {
-        @include w-layout;
-        position: absolute;
-        z-index: 10;
-        bottom: 90px;
-        height: 2px;
-        background-color: $colorOnPrimary;
-        margin: auto;
-        left: 0;
-        right: 0;
+    &__prev {
+      border: 1px solid $colorPrimary;
+      background-color: $colorPrimary;
+      border-radius: 50%;
+      padding: 8px 3px;
+      margin-right: 10px;
+      cursor: pointer;
 
-        @include deviceWidth(tabletLandscape) {
-            left: 15px;
-            right: 15px;
-        }
-        @include deviceWidth(tabletPortrait) {
-            left: 15px;
-            right: 15px;
-        }
-        @include deviceWidth(mobile) {
-            left: 15px;
-            right: 15px;
-        }
-
-        &__fill {
-            background-color: #85BE65;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            transform: scale(0);
-            transform-origin: left top;
-        }
+      &:before {
+        content: '';
+        display: block;
+        width: 23px;
+        height: 11px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 23px 11px;
+        background-image: url('../../../../../../assets/slider/arrow.svg');
+      }
     }
+
+    &__disable {
+      border: 1px solid $colorOnPrimary;
+      background-color: transparent;
+    }
+  }
+
+  &__progress {
+    @include w-layout;
+    position: absolute;
+    z-index: 10;
+    bottom: 90px;
+    height: 2px;
+    background-color: $colorOnPrimary;
+    margin: auto;
+    left: 0;
+    right: 0;
+
+    @include deviceWidth(tabletLandscape) {
+      left: 15px;
+      right: 15px;
+    }
+    @include deviceWidth(tabletPortrait) {
+      left: 15px;
+      right: 15px;
+    }
+    @include deviceWidth(mobile) {
+      left: 15px;
+      right: 15px;
+    }
+
+    &__fill {
+      background-color: #85BE65;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform: scale(0);
+      transform-origin: left top;
+    }
+  }
 }
 
 .slide {
-    @include w-container;
+  @include w-container;
 
-    &__wrap {
-        img {
-            filter: brightness(60%);
-            object-fit: cover;
-        }
+  &__wrap {
+    img {
+      filter: brightness(60%);
+      object-fit: cover;
     }
 
-    &__position {
-        @include w-layout;
-        position: absolute;
-        z-index: 6;
-        max-width: 840px;
-        top: 290px;
+    @include deviceWidth(mobile) {
+      &_one {
+        & img {
+          object-position: 73% 50%;
+        }
+      }
     }
-
-    &__title {
-        @include m-typography(75px, 103%, 700);
-        color: $colorOnPrimary;
-        margin-bottom: 30px;
-        cursor: default;
-
-        @include deviceWidth(tabletLandscape) {
-            @include m-typography(48px, 49px, 700);
+    @include deviceWidth(mobile) {
+      &_two {
+        & img {
+          object-position: 73% 50%;
         }
-        @include deviceWidth(tabletPortrait) {
-            @include m-typography(48px, 48px, 700);
-        }
-        @include deviceWidth(mobile) {
-            @include m-typography(32px, 32px, 700);
-        }
+      }
     }
-
-    &__description {
-        @include m-typography(20px, 140%, 300);
-        color: $colorOnPrimary;
-        cursor: default;
-
-        @include deviceWidth(mobile) {
-            @include m-typography(14px, 19px, 300);
+    @include deviceWidth(mobile) {
+      &_three {
+        & img {
+          object-position: 15% 100%;
         }
+      }
     }
+    @include deviceWidth(mobile) {
+      &_five {
+        & img {
+          object-position: 35% 100%;
+        }
+      }
+    }
+  }
+
+  &__position {
+    @include w-layout;
+    position: absolute;
+    z-index: 6;
+    max-width: 840px;
+    top: 290px;
+  }
+
+  &__title {
+    @include m-typography(75px, 103%, 700);
+    color: $colorOnPrimary;
+    margin-bottom: 30px;
+    cursor: default;
+
+    @include deviceWidth(tabletLandscape) {
+      @include m-typography(48px, 49px, 700);
+    }
+    @include deviceWidth(tabletPortrait) {
+      @include m-typography(48px, 48px, 700);
+    }
+    @include deviceWidth(mobile) {
+      @include m-typography(32px, 32px, 700);
+    }
+  }
+
+  &__description {
+    @include m-typography(20px, 140%, 300);
+    color: $colorOnPrimary;
+    cursor: default;
+
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 19px, 300);
+    }
+  }
 }

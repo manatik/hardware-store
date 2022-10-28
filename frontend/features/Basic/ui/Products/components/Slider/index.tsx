@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, MutableRefObject } from 'react'
 
 import { Autoplay, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -8,9 +8,14 @@ import { SliderMock } from '@features/Basic/ui/Products/types'
 import cn from 'classnames'
 import styles from './index.module.scss'
 
-const Slider: FC<{sliders: SliderMock}> = ({ sliders }) => {
+const Slider: FC<{ sliders: SliderMock, sliderRef?: MutableRefObject<unknown> }> = ({
+  sliders, sliderRef,
+}) => {
   return (
-    <div className={styles.slider}>
+    <div
+      id="slider"
+      className={styles.slider}
+    >
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
@@ -18,6 +23,8 @@ const Slider: FC<{sliders: SliderMock}> = ({ sliders }) => {
           delay: 3000,
           disableOnInteraction: false,
         }}
+        // @ts-ignore
+        ref={sliderRef}
         pagination={{
           type: 'bullets',
           modifierClass: `${styles.slider__pagination} `,
@@ -30,7 +37,8 @@ const Slider: FC<{sliders: SliderMock}> = ({ sliders }) => {
           <SwiperSlide key={item.id}>
             <div
               className={cn(styles.slider__slide, {
-                [styles.slider__slide__first]: index === 0,
+                [styles.slider__slide__first]: index === 0 && item.title === 'plywood',
+                [styles.slider__slide__noCover]: item.title === 'noCover',
               })}
             >
               <Image

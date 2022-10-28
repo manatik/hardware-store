@@ -11,4 +11,5 @@ export interface CardProps {
   remove?: (id: string) => void;
   edit?: boolean;
   addPhotos?: boolean;
+  buttonName?: string;
 }
