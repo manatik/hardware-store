@@ -51,7 +51,7 @@ services:
       && yarn start"
 
   nginx:
-    build: ../deploy/nginx
+    build: nginx
     container_name: plywood_nginx
     ports:
       - "80:80"
@@ -62,8 +62,8 @@ services:
       - backend
       - frontend
     volumes:
-      - ../deploy/certbot/conf:/etc/letsencrypt
-      - ../deploy/certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     working_dir: /frontend
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
@@ -71,8 +71,8 @@ services:
     image: certbot/certbot
     container_name: plywood_cert
     volumes:
-      - ../deploy/certbot/conf:/etc/letsencrypt
-      - ../deploy/certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
