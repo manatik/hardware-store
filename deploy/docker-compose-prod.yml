@@ -1,6 +1,4 @@
-version: "3.10"
-
-x-node-version: &node-version node:16.15.0
+version: "3.3"
 
 services:
   db:
@@ -18,7 +16,7 @@ services:
       - web
 
   backend:
-    image: *node-version
+    image: node:16.15.0
     container_name: plywood_nestjs
     networks:
       - web
@@ -31,12 +29,12 @@ services:
     working_dir: /api
     command: bash -c "
       yarn install
-      && yarn prisma migrate deploy
+      && yarn prisma migrate dev
       && yarn prisma db seed
-      && yarn start"
+      && yarn start:dev"
 
   frontend:
-    image: *node-version
+    image: node:16.15.0
     container_name: plywood_nextjs
     networks:
       - web
@@ -52,7 +50,6 @@ services:
 
   nginx:
     build: nginx
-    container_name: plywood_nginx
     ports:
       - "80:80"
       - "443:443"
@@ -60,16 +57,13 @@ services:
       - web
     depends_on:
       - backend
-      - frontend
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    working_dir: /frontend
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
   certbot:
     image: certbot/certbot
-    container_name: plywood_cert
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot

@@ -6,7 +6,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
 fi
 
 # set domains
-domains=(plywoodmarket.ru)
+domains=(plywoodmarket.ru www.plywoodmarket.ru)
 rsa_key_size=4096
 data_path="./certbot"
 email="info@plywood.ru" # Adding a valid address is strongly recommended
@@ -78,5 +78,4 @@ docker-compose run --rm --entrypoint "\
 echo
 
 echo "### Reloading nginx ..."
-
 docker-compose exec nginx nginx -s reload
