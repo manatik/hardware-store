@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { CalcData } from '@models/Calc'
 import styles from '@pages/admin-control/calc/index.module.scss'
 import CardGrid from '@features/Admin/ui/CardGrid'
-import { PhotosModal } from '@models/Products'
+import { FurniturePhotosModal, PhotosModal } from '@models/Products'
 
 const PlywoodItems = () => {
   const formats = useAppSelector(getFormats)
@@ -133,7 +133,7 @@ const PlywoodItems = () => {
         <div className={styles.feature__container}>
           <div className={styles.feature__title}>Фото</div>
           <div className={styles.feature__card__container}>
-            {images.map((item: PhotosModal) => (
+            {images.map((item: FurniturePhotosModal) => (
               <CardGrid
                 key={item.id}
                 id={item.id as string}
