@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { ProductsState } from '@store/products/types'
 import {
-  FurnitureFeatureModal, FurnitureItemModal, FurnitureModal, PhotosModal, PlywoodItem, PlywoodModal,
+  FurnitureFeatureModal,
+  FurnitureItemData,
+  FurnitureModal,
+  PhotosModal,
+  PlywoodItemData,
+  PlywoodModal,
 } from '@models/Products'
 import { plywoodService } from '@services/products/plywood.service'
 import { furnitureService } from '@services/products/furniture.service'
@@ -61,7 +66,7 @@ export const fetchFurniturePhotosAsync = createAsyncThunk<PhotosModal>(
   },
 )
 
-export const fetchPlywoodItemAsync = createAsyncThunk<PlywoodItem, string>(
+export const fetchPlywoodItemAsync = createAsyncThunk<PlywoodItemData, string>(
   'products/fetchPlywoodItem',
   async (id, { rejectWithValue }) => {
     try {
@@ -72,7 +77,7 @@ export const fetchPlywoodItemAsync = createAsyncThunk<PlywoodItem, string>(
   },
 )
 
-export const fetchFurnitureItemAsync = createAsyncThunk<FurnitureItemModal, string>(
+export const fetchFurnitureItemAsync = createAsyncThunk<FurnitureItemData, string>(
   'products/fetchFurnitureItem',
   async (id, { rejectWithValue }) => {
     try {
@@ -149,7 +154,7 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchPlywoodItemAsync.fulfilled, (state, action) => {
         state.isLoading = false
-        state.plywoodItem = action.payload
+        state.plywoodItem = action.payload.product
       })
       .addCase(fetchPlywoodItemAsync.rejected, (state) => {
         state.isLoading = false
@@ -161,7 +166,7 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchFurnitureItemAsync.fulfilled, (state, action) => {
         state.isLoading = false
-        state.furnitureItem = action.payload
+        state.furnitureItem = action.payload.product
       })
       .addCase(fetchFurnitureItemAsync.rejected, (state) => {
         state.isLoading = false

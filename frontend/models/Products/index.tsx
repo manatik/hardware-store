@@ -40,6 +40,13 @@ export interface PlywoodItem {
   count?: number;
 }
 
+export interface PlywoodItemData {
+  error: boolean;
+  success: boolean;
+  message: string;
+  product: PlywoodItem;
+}
+
 export interface PlywoodModal {
   error: boolean;
   success: boolean;
@@ -61,6 +68,13 @@ export interface FurnitureItemModal {
   width: number;
   height: number;
   depth: number;
+}
+
+export interface FurnitureItemData {
+  error: boolean;
+  success: boolean;
+  message: string;
+  product: FurnitureItemModal;
 }
 
 export interface FurnitureModal {
