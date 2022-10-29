@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import { useAppDispatch } from '@store/hooks'
-import { addProduct, initBasket } from '@store/basket/basketSlice'
+import { addProduct } from '@store/basket/basketSlice'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
 import LayoutCard from '@features/Basic/common/LayoutCard'
@@ -12,11 +12,9 @@ import BasketCounter from '@features/Basic/ui/Basket/components/BasketCounter'
 import { FurnitureItemModal, FurniturePhotosModal, Photo } from '@models/Products'
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
 import { toast } from 'react-toastify'
-// import { getFurnitureItem } from '@store/products/selector'
 import { removeFurnitureItem } from '@store/products/productsSlice'
 
 const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
-  // const product: FurnitureItemModal = useAppSelector(getFurnitureItem)
   const dispatch = useAppDispatch()
   const [images, setImages] = useState<FurniturePhotosModal>()
   const [currentImage, setCurrentImage] = useState<Photo>()
@@ -58,8 +56,6 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
   }, [product])
 
   useEffect(() => {
-    dispatch(initBasket())
-
     return () => {
       dispatch(removeFurnitureItem())
     }

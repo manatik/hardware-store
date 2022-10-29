@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use(
     const requireAuth = config.headers.common.cookie
     const authToken = localStorageService.getAccessToken()
     if (requireAuth || authToken) {
-      const token = requireAuth?.split('a_t=')[1].split(';')[0] || authToken
+      const token = requireAuth?.split('a_t=')[1]?.split(';')[0] || authToken
       // eslint-disable-next-line no-param-reassign
       config.headers = {
         ...config.headers,
@@ -24,30 +24,30 @@ axiosInstance.interceptors.request.use(
       }
     }
 
-    // if (isSSR()) {
-    //   // eslint-disable-next-line no-console
-    //   console.log('request', {
-    //     data: config.data,
-    //     headers: config.headers,
-    //     method: config.method,
-    //     url: config.url,
-    //     baseURL: config.baseURL,
-    //   })
-    // }
+    if (isSSR()) {
+      // eslint-disable-next-line no-console
+      console.log('request', {
+        data: config.data,
+        headers: config.headers,
+        method: config.method,
+        url: config.url,
+        baseURL: config.baseURL,
+      })
+    }
 
     return config
   },
   (error) => {
-    // if (isSSR()) {
-    //   // eslint-disable-next-line no-console
-    //   console.error('request Error', {
-    //     data: error.data,
-    //     headers: error.headers,
-    //     method: error.method,
-    //     url: error.url,
-    //     baseURL: error.baseURL,
-    //   })
-    // }
+    if (isSSR()) {
+      // eslint-disable-next-line no-console
+      console.error('request Error', {
+        data: error.data,
+        headers: error.headers,
+        method: error.method,
+        url: error.url,
+        baseURL: error.baseURL,
+      })
+    }
 
     return Promise.reject(error?.response?.data || error)
   },
