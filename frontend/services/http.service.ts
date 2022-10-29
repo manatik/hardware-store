@@ -55,13 +55,13 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   async (config) => {
-    // if (isSSR()) {
-    //   // eslint-disable-next-line no-console
-    //   console.log('response', {
-    //     data: config.data,
-    //     headers: config.headers,
-    //   })
-    // }
+    if (isSSR()) {
+      // eslint-disable-next-line no-console
+      console.log('response', {
+        data: config.data,
+        headers: config.headers,
+      })
+    }
     return config
   },
   async (error) => {

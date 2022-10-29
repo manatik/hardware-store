@@ -111,11 +111,13 @@ export const useServerSideProps = async (
     case ProjectPage.ProductsPagePlywood: {
       try {
         const { id } = query
-        // eslint-disable-next-line no-console
-        console.log('query', query)
         const { product } = await plywoodService.plywood(id as string)
+        // eslint-disable-next-line no-console
+        console.log(product)
         return { props: { product } }
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e)
         return { props: { product: null } }
       }
     }
@@ -132,11 +134,13 @@ export const useServerSideProps = async (
     case ProjectPage.ProductsPageFurniture: {
       try {
         const { id } = query
-        // eslint-disable-next-line no-console
-        console.log('query', query)
         const { product } = await furnitureService.furniture(id as string)
+        // eslint-disable-next-line no-console
+        console.log(product)
         return { props: { product } }
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e)
         return { props: { product: null } }
       }
     }
