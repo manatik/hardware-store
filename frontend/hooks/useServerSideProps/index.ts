@@ -111,6 +111,8 @@ export const useServerSideProps = async (
     case ProjectPage.ProductsPagePlywood: {
       try {
         const { id } = query
+        // eslint-disable-next-line no-console
+        console.log('query', query)
         const { product } = await plywoodService.plywood(id as string)
         return { props: { product } }
       } catch (e) {
