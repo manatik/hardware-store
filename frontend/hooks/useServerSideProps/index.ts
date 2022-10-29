@@ -114,7 +114,12 @@ export const useServerSideProps = async (
         const { product } = await plywoodService.plywood(id as string)
         return { props: { product } }
       } catch (e) {
-        return { props: { product: null } }
+        return {
+          redirect: {
+            destination: '/products',
+            permanent: false,
+          },
+        }
       }
     }
 
@@ -133,7 +138,12 @@ export const useServerSideProps = async (
         const { product } = await furnitureService.furniture(id as string)
         return { props: { product } }
       } catch (e) {
-        return { props: { product: null } }
+        return {
+          redirect: {
+            destination: '/products',
+            permanent: false,
+          },
+        }
       }
     }
 

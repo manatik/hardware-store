@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { baseApiEndpoints } from '@api'
 import localStorageService from '@services/localStorage/localStorage.service'
+import { isSSR } from '@utils/isSSR'
 
 const axiosInstance = axios.create({
   baseURL: baseApiEndpoints.baseEndpoint,
@@ -23,14 +24,60 @@ axiosInstance.interceptors.request.use(
       }
     }
 
+    if (isSSR()) {
+      // eslint-disable-next-line no-console
+      console.log('request', {
+        data: config.data,
+        headers: config.headers,
+        method: config.method,
+        url: config.url,
+        baseURL: config.baseURL,
+      })
+    }
+
     return config
   },
-  (error) => Promise.reject(error?.response?.data || error),
+  (error) => {
+    if (isSSR()) {
+      // eslint-disable-next-line no-console
+      console.error('request Error', {
+        data: error.data,
+        headers: error.headers,
+        method: error.method,
+        url: error.url,
+        baseURL: error.baseURL,
+      })
+    }
+
+    return Promise.reject(error?.response?.data || error)
+  },
 )
 
 axiosInstance.interceptors.response.use(
-  async (config) => config,
-  async (error) => Promise.reject(error?.response?.data || error),
+  async (config) => {
+    if (isSSR()) {
+      // eslint-disable-next-line no-console
+      console.log('response', {
+        data: config.data,
+        headers: config.headers,
+      })
+    }
+    return config
+  },
+  async (error) => {
+    if (isSSR()) {
+      // eslint-disable-next-line no-console
+      console.error('response Error', {
+        data: error.data,
+        headers: error.headers,
+        method: error.method,
+        url: error.url,
+        baseURL: error.baseURL,
+      })
+    }
+
+    return Promise.reject(error?.response?.data || error)
+  },
 )
 
 export const setCookieHeader = (cookie: string) => {
