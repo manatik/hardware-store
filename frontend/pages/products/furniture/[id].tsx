@@ -16,7 +16,7 @@ import { toast } from 'react-toastify'
 const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
   const dispatch = useAppDispatch()
   const [images] = useState<FurniturePhotosModal>(product?.photos[0])
-  const [currentImage, setCurrentImage] = useState<Photo>(product?.photos[0].photos[0])
+  const [currentImage, setCurrentImage] = useState<Photo>(product?.photos[0]?.photos[0])
   const [count, setCount] = useState<number>(1)
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
   }, [])
 
   const handleSetCurrentImage = (filename: string) => {
-    const result = images.photos.filter((item) => item.filename === filename)
+    const result = images.photos.filter((item) => item?.filename === filename)
     setCurrentImage(result[0])
   }
 
@@ -38,7 +38,7 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
 
   const setAvailable = (id: string) => {
     const result = available.filter((item) => item.id === id)
-    return result[0].name
+    return result[0]?.name || ''
   }
 
   const onSubmit = async () => {
@@ -65,9 +65,9 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                 {setAvailable(product?.available)}
               </div>
             )}
-            {product.name && (
+            {product?.name && (
               <div className={styles.products__item__title}>
-                {product.name}
+                {product?.name || ''}
               </div>
             )}
           </div>
@@ -84,18 +84,18 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
           )}
           {product?.photos && (
             <div className={styles.products__item__images}>
-              {images.photos.map((item) => (
+              {images?.photos?.map((item) => (
                 <div
-                  key={item.filename}
+                  key={item?.filename}
                   className={cn(styles.products__item__images__item, {
                     [styles.products__item__images__itemActive]:
-                    item.filename === currentImage.filename,
+                    item?.filename === currentImage?.filename,
                   })}
-                  onClick={() => handleSetCurrentImage(item.filename)}
+                  onClick={() => handleSetCurrentImage(item?.filename)}
                 >
                   <Image
-                    src={item.path}
-                    alt={item.filename}
+                    src={item?.path}
+                    alt={item?.filename}
                     width={187}
                     height={124}
                     placeholder="blur"
@@ -112,34 +112,34 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
               styles.products__item__mobile_description,
             )}
           >
-            {product.height && (
+            {product?.height && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product.height)} см</div>
               </div>
             )}
-            {product.width && (
+            {product?.width && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Ширина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product.width)} см</div>
               </div>
             )}
-            {product.depth && (
+            {product?.depth && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Глубина</div>
-                <div>{Intl.NumberFormat('ru-RU').format(product.depth)} см</div>
+                <div>{Intl.NumberFormat('ru-RU').format(product?.depth)} см</div>
               </div>
             )}
-            {product.features && <div className={styles.products__item__prices__title}>Цвет</div>}
-            {product.features
-              && product.features.map((item) => (
+            {product?.features && <div className={styles.products__item__prices__title}>Цвет</div>}
+            {product?.features
+              && product?.features.map((item) => (
                 <div
-                  key={item.id}
+                  key={item?.id}
                   className={styles.products__item__prices}
                 >
-                  <div className={styles.products__item__pricesValue}>{item.name}</div>
+                  <div className={styles.products__item__pricesValue}>{item?.name}</div>
                   <div className={styles.products__item__pricesName}>
-                    {Intl.NumberFormat('ru-RU').format(item.price)} руб.
+                    {Intl.NumberFormat('ru-RU').format(item?.price)} руб.
                   </div>
                 </div>
               ))
@@ -148,45 +148,45 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
         </div>
         <div className={styles.products__item__right}>
           <div className={styles.products__item__desktop}>
-            {product.available && (
+            {product?.available && (
               <div className={styles.products__item__available}>
-                {setAvailable(product.available)}
+                {setAvailable(product?.available)}
               </div>
             )}
-            {product.name && (
-              <div className={styles.products__item__title}>{product.name}</div>
+            {product?.name && (
+              <div className={styles.products__item__title}>{product?.name}</div>
             )}
-            {product.description && (
-              <div className={styles.products__item__description}>{product.description}</div>
+            {product?.description && (
+              <div className={styles.products__item__description}>{product?.description}</div>
             )}
-            {product.height && (
+            {product?.height && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>
-                <div>{Intl.NumberFormat('ru-RU').format(product.height)} см</div>
+                <div>{Intl.NumberFormat('ru-RU').format(product?.height)} см</div>
               </div>
             )}
-            {product.width && (
+            {product?.width && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Ширина</div>
-                <div>{Intl.NumberFormat('ru-RU').format(product.width)} см</div>
+                <div>{Intl.NumberFormat('ru-RU').format(product?.width)} см</div>
               </div>
             )}
-            {product.depth && (
+            {product?.depth && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Глубина</div>
-                <div>{Intl.NumberFormat('ru-RU').format(product.depth)} см</div>
+                <div>{Intl.NumberFormat('ru-RU').format(product?.depth)} см</div>
               </div>
             )}
-            {product.features && <div className={styles.products__item__prices__title}>Цвет</div>}
-            {product.features
-              && product.features.map((item) => (
+            {product?.features && <div className={styles.products__item__prices__title}>Цвет</div>}
+            {product?.features
+              && product?.features.map((item) => (
                 <div
-                  key={item.id}
+                  key={item?.id}
                   className={styles.products__item__prices}
                 >
-                  <div className={styles.products__item__pricesValue}>{item.name}</div>
+                  <div className={styles.products__item__pricesValue}>{item?.name}</div>
                   <div className={styles.products__item__pricesName}>
-                    {Intl.NumberFormat('ru-RU').format(item.price)} руб.
+                    {Intl.NumberFormat('ru-RU').format(item?.price)} руб.
                   </div>
                 </div>
               ))}
