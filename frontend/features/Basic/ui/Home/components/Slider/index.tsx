@@ -176,7 +176,7 @@ const Slider: FC = (): ReactElement => {
                   className={styles.slider__pagination__current}
                 >{pagination.current + 1}</span>
             /
-            <span className={styles.slider__pagination__total}>{pagination.total}</span>
+            <span className={styles.slider__pagination__total}>5</span>
           </div>}
 
           <div className={styles.slider__navigation}>
