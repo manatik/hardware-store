@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { ProductsState } from '@store/products/types'
 import {
-  FurnitureFeatureModal, FurnitureModal, PhotosModal, PlywoodModal,
+  FurnitureFeatureModal, FurnitureItemModal, FurnitureModal, PhotosModal, PlywoodItem, PlywoodModal,
 } from '@models/Products'
 import { plywoodService } from '@services/products/plywood.service'
 import { furnitureService } from '@services/products/furniture.service'
@@ -10,7 +10,9 @@ export const initialState: ProductsState = {
   isLoading: false,
   isError: false,
   plywood: null,
+  plywoodItem: null,
   furniture: null,
+  furnitureItem: null,
   furnitureFeature: null,
   furniturePhotos: null,
 }
@@ -59,10 +61,39 @@ export const fetchFurniturePhotosAsync = createAsyncThunk<PhotosModal>(
   },
 )
 
+export const fetchPlywoodItemAsync = createAsyncThunk<PlywoodItem, string>(
+  'products/fetchPlywoodItem',
+  async (id, { rejectWithValue }) => {
+    try {
+      return await plywoodService.plywood(id)
+    } catch (err: any) {
+      return rejectWithValue(err)
+    }
+  },
+)
+
+export const fetchFurnitureItemAsync = createAsyncThunk<FurnitureItemModal, string>(
+  'products/fetchFurnitureItem',
+  async (id, { rejectWithValue }) => {
+    try {
+      return await furnitureService.furniture(id)
+    } catch (err: any) {
+      return rejectWithValue(err)
+    }
+  },
+)
+
 export const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    removePlywoodItem: (state) => {
+      state.plywoodItem = null
+    },
+    removeFurnitureItem: (state) => {
+      state.furnitureItem = null
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPlywoodAsync.pending, (state) => {
@@ -112,7 +143,33 @@ export const productsSlice = createSlice({
         state.isLoading = false
         state.isError = true
       })
+
+      .addCase(fetchPlywoodItemAsync.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(fetchPlywoodItemAsync.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.plywoodItem = action.payload
+      })
+      .addCase(fetchPlywoodItemAsync.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+      })
+
+      .addCase(fetchFurnitureItemAsync.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(fetchFurnitureItemAsync.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.furnitureItem = action.payload
+      })
+      .addCase(fetchFurnitureItemAsync.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+      })
   },
 })
+
+export const { removePlywoodItem, removeFurnitureItem } = productsSlice.actions
 
 export default productsSlice.reducer

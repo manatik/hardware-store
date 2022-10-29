@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
-import { useAppDispatch } from '@store/hooks'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { addProduct, initBasket } from '@store/basket/basketSlice'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
@@ -12,16 +12,15 @@ import BasketCounter from '@features/Basic/ui/Basket/components/BasketCounter'
 import { FurnitureItemModal, FurniturePhotosModal, Photo } from '@models/Products'
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
 import { toast } from 'react-toastify'
+import { getFurnitureItem } from '@store/products/selector'
+import { removeFurnitureItem } from '@store/products/productsSlice'
 
-const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
+const CardItem: NextPage<{ product: FurnitureItemModal }> = () => {
+  const product: FurnitureItemModal = useAppSelector(getFurnitureItem)
   const dispatch = useAppDispatch()
   const [images] = useState<FurniturePhotosModal>(product?.photos[0])
   const [currentImage, setCurrentImage] = useState<Photo>(product?.photos[0]?.photos[0])
   const [count, setCount] = useState<number>(1)
-
-  useEffect(() => {
-    dispatch(initBasket())
-  }, [])
 
   const handleSetCurrentImage = (filename: string) => {
     const result = images.photos.filter((item) => item?.filename === filename)
@@ -49,6 +48,14 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
     setCount(1)
     toast.success('Товар добавлен в корзину')
   }
+
+  useEffect(() => {
+    dispatch(initBasket())
+
+    return () => {
+      dispatch(removeFurnitureItem())
+    }
+  }, [])
 
   return (
     <LayoutCard>

@@ -10,12 +10,10 @@ import { setCookieHeader } from '@services/http.service'
 import { fetchCalcParamsAsync } from '@store/calc/calcSlice'
 import {
   fetchFurnitureAsync,
-  fetchFurnitureFeatureAsync,
+  fetchFurnitureFeatureAsync, fetchFurnitureItemAsync,
   fetchFurniturePhotosAsync,
-  fetchPlywoodAsync,
+  fetchPlywoodAsync, fetchPlywoodItemAsync,
 } from '@store/products/productsSlice'
-import { plywoodService } from '@services/products/plywood.service'
-import { furnitureService } from '@services/products/furniture.service'
 import { orderService } from '@services/order/order.service'
 
 /**
@@ -111,8 +109,23 @@ export const useServerSideProps = async (
     case ProjectPage.ProductsPagePlywood: {
       try {
         const { id } = query
-        const { product } = await plywoodService.plywood(id as string)
-        return { props: { product } }
+        await dispatch(fetchPlywoodItemAsync(id as string))
+        break
+      } catch (e) {
+        return {
+          redirect: {
+            destination: '/products',
+            permanent: false,
+          },
+        }
+      }
+    }
+
+    case ProjectPage.ProductsPageFurniture: {
+      try {
+        const { id } = query
+        await dispatch(fetchFurnitureItemAsync(id as string))
+        break
       } catch (e) {
         return {
           redirect: {
@@ -129,23 +142,6 @@ export const useServerSideProps = async (
         return { props: { orders: data } }
       } catch (e) {
         return { props: { product: null } }
-      }
-    }
-
-    case ProjectPage.ProductsPageFurniture: {
-      try {
-        const { id } = query
-        // eslint-disable-next-line no-console
-        console.log('query', query)
-        const { product } = await furnitureService.furniture(id as string)
-        return { props: { product } }
-      } catch (e) {
-        return {
-          redirect: {
-            destination: '/products',
-            permanent: false,
-          },
-        }
       }
     }
 

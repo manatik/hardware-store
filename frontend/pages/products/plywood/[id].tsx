@@ -21,15 +21,14 @@ import { Formik } from 'formik'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
 import { PlywoodOrderSchema } from '@schema/plywood'
-import { useAppDispatch } from '@store/hooks'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { addProduct, initBasket } from '@store/basket/basketSlice'
 import { toast } from 'react-toastify'
+import { getPlywoodItem } from '@store/products/selector'
+import { removePlywoodItem } from '@store/products/productsSlice'
 
-interface CardItemPlywoodProps {
-  product: PlywoodItem
-}
-
-const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
+const CardItemPlywood: NextPage = () => {
+  const product: PlywoodItem = useAppSelector(getPlywoodItem)
   const dispatch = useAppDispatch()
   const [toggle, setToggle] = useState<boolean>(false)
   const [images, setImages] = useState<FurniturePhotosModal>(product?.photos[0])
@@ -68,6 +67,10 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
 
   useEffect(() => {
     dispatch(initBasket())
+
+    return () => {
+      dispatch(removePlywoodItem())
+    }
   }, [])
 
   return (

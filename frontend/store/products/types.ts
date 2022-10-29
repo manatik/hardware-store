@@ -1,4 +1,6 @@
-import { FurnitureFeatureItem, Photo, PlywoodItem } from '@models/Products'
+import {
+  FurnitureFeatureItem, FurnitureItemModal, Photo, PlywoodItem,
+} from '@models/Products'
 
 export interface ProductsState {
   isLoading: boolean;
@@ -7,4 +9,6 @@ export interface ProductsState {
   furniture: any | null;
   furnitureFeature: FurnitureFeatureItem[] | null;
   furniturePhotos: Photo[] | null;
+  plywoodItem: PlywoodItem | null;
+  furnitureItem: FurnitureItemModal | null;
 }
