@@ -18,14 +18,6 @@
 
   &__close {
     @include m-hover;
-    @include deviceWidth(tabletPortrait) {
-      width: 13px;
-      height: 13px;
-    }
-    @include deviceWidth(mobile) {
-      width: 13px;
-      height: 13px;
-    }
 
     &_block {
       display: flex;
