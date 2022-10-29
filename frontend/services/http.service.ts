@@ -60,6 +60,8 @@ axiosInstance.interceptors.response.use(
       console.log('response', {
         data: config.data,
         headers: config.headers,
+        req: config.request,
+        status: config.status,
       })
     }
     return config
