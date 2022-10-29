@@ -1,40 +1,40 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import AuthContainer from '@features/Basic/common/AuthContainer'
-import InputField from '@features/Admin/ui/InputField'
-import { InputType } from '@features/Admin/ui/InputField/types'
 import { Formik, FormikProps } from 'formik'
 import { AuthSchema } from '@schema/auth'
+import InputField from '@features/Admin/ui/InputField'
+import { InputType } from '@features/Admin/ui/InputField/types'
 import { storageService } from '@utils/storageService'
-import { AuthForm } from 'types/auth'
 
-import { useAppDispatch, useAppSelector } from '@store/hooks'
+import styles from '@pages/admin-control/login/index.module.scss'
+import { AuthForm } from '@types/auth'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
-import { fetchAuthAsync } from '@store/auth/authSlice'
-import { getAuthInfo, getAuthError, getAuthLoading } from '@store/auth/selector'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { fetchRegisterAsync } from '@store/register/registerSlice'
+import { getRegisterLoading, getRegisterError, getRegisterInfo } from '@store/register/selector'
 import cn from 'classnames'
 import { initBasket } from '@store/basket/basketSlice'
-import styles from './index.module.scss'
 
-const Login = () => {
+const Register = () => {
   const dispatch = useAppDispatch()
-  const auth = useAppSelector(getAuthInfo)
-  const isError = useAppSelector(getAuthError)
-  const isLoading = useAppSelector(getAuthLoading)
+  const register = useAppSelector(getRegisterInfo)
+  const isError = useAppSelector(getRegisterError)
+  const isLoading = useAppSelector(getRegisterLoading)
   const [error, setError] = useState<string>('')
   const router = useRouter()
   const formRef = useRef<FormikProps<AuthForm>>(null)
 
-  const onRegisterLinkClick = async () => {
+  const onLoginLinkClick = async () => {
     storageService.setItem('email', formRef?.current?.values?.email || '')
-    await router.push('/register')
+    await router.push('/login')
   }
 
   useEffect(() => {
-    if (auth?.success) router.push('/')
-    if (isError && auth?.error) setError(auth.message)
-  }, [auth, isError])
+    if (register?.success) router.push('/')
+    if (isError && register?.error) setError(register.message)
+  }, [register, isError])
 
   useEffect(() => {
     dispatch(initBasket())
@@ -46,9 +46,9 @@ const Login = () => {
   return (
     <AuthContainer>
       <div className={styles.login}>
-        <div className={styles.login__title}>Авторизация Plywood Market</div>
+        <div className={styles.login__title}>Регистрация Plywood Market</div>
         <div className={styles.login__description}>
-          Войдите в аккаунт, что бы воспользоваться всеми возможностями сервиса
+          Создайте аккаунт, что бы воспользоваться всеми возможностями сервиса
         </div>
         <Formik
           innerRef={formRef}
@@ -60,7 +60,7 @@ const Login = () => {
           validateOnChange={false}
           validateOnBlur={false}
           onSubmit={async (values) => {
-            await dispatch(fetchAuthAsync(values))
+            await dispatch(fetchRegisterAsync(values))
           }}
         >
           {({
@@ -104,28 +104,29 @@ const Login = () => {
                 className={cn(styles.login__submit, {
                   disable: isLoading,
                 })}
+                disabled={isLoading}
               >
-                Войти
+                Создать аккаунт
+              </button>
+              <button
+                className={cn(styles.login__submit, {
+                  disable: isLoading,
+                })}
+                onClick={onLoginLinkClick}
+                disabled={isLoading}
+              >
+                Уже есть аккаунт
               </button>
             </form>
           )}
         </Formik>
-        <div className={styles.login__or}>или</div>
-      <button
-        className={cn(styles.login__submit, {
-          disable: isLoading,
-        })}
-        onClick={onRegisterLinkClick}
-      >
-        Создать аккаунт
-      </button>
       </div>
     </AuthContainer>
   )
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => useServerSideProps(ProjectPage.Login, context, store),
+  (store) => async (context) => useServerSideProps(ProjectPage.Register, context, store),
 )
 
-export default Login
+export default Register
