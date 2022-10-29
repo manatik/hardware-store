@@ -20,13 +20,19 @@ async function main() {
 
   const role = await prisma.role.findFirst({ where: { name: 'admin' } });
 
-  await prisma.user.create({
-    data: {
-      email: 'plywood@admin.ru',
-      password: await bcrypt.hash('!Afythf543216', 10),
-      roles: { connect: { id: role.id } },
-    },
-  });
+  const email = 'plywood@admin.ru';
+
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    await prisma.user.create({
+      data: {
+        email,
+        password: await bcrypt.hash('!Afythf543216', 10),
+        roles: { connect: { id: role.id } },
+      },
+    });
+  }
 }
 
 main()
