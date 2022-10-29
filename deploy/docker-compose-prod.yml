@@ -3,7 +3,7 @@ version: "3.3"
 services:
   db:
     image: postgres:14.5
-    container_name: plywood_db
+    container_name: db
     restart: always
     environment:
       - POSTGRES_DB=test
@@ -17,7 +17,7 @@ services:
 
   backend:
     image: node:16.15.0
-    container_name: plywood_nestjs
+    container_name: nestjs
     networks:
       - web
     depends_on:
@@ -35,7 +35,7 @@ services:
 
   frontend:
     image: node:16.15.0
-    container_name: plywood_nextjs
+    container_name: nextjs
     networks:
       - web
     depends_on:
