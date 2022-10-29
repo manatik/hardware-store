@@ -65,17 +65,6 @@ axiosInstance.interceptors.response.use(
     return config
   },
   async (error) => {
-    if (isSSR()) {
-      // eslint-disable-next-line no-console
-      console.error('response Error', {
-        data: error.data,
-        headers: error.headers,
-        method: error.method,
-        url: error.url,
-        baseURL: error.baseURL,
-      })
-    }
-
     return Promise.reject(error?.response?.data || error)
   },
 )
