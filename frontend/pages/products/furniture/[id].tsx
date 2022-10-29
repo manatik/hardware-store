@@ -18,12 +18,13 @@ import { removeFurnitureItem } from '@store/products/productsSlice'
 const CardItem: NextPage<{ product: FurnitureItemModal }> = () => {
   const product: FurnitureItemModal = useAppSelector(getFurnitureItem)
   const dispatch = useAppDispatch()
-  const [images] = useState<FurniturePhotosModal>(product?.photos[0])
-  const [currentImage, setCurrentImage] = useState<Photo>(product?.photos[0]?.photos[0])
+  const [images, setImages] = useState<FurniturePhotosModal>()
+  const [currentImage, setCurrentImage] = useState<Photo>()
   const [count, setCount] = useState<number>(1)
 
   const handleSetCurrentImage = (filename: string) => {
-    const result = images.photos.filter((item) => item?.filename === filename)
+    const result = images && images.photos.filter((item) => item?.filename === filename)
+    if (!result) return
     setCurrentImage(result[0])
   }
 
@@ -48,6 +49,13 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = () => {
     setCount(1)
     toast.success('Товар добавлен в корзину')
   }
+
+  useEffect(() => {
+    if (product) {
+      setImages(product.photos[0])
+      setCurrentImage(product.photos[0].photos[0])
+    }
+  }, [product])
 
   useEffect(() => {
     dispatch(initBasket())
@@ -78,7 +86,7 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = () => {
               </div>
             )}
           </div>
-          {product?.photos && (
+          {product?.photos && currentImage?.path && (
             <div className={styles.products__item__currentImage}>
               <Image
                 src={currentImage.path}
