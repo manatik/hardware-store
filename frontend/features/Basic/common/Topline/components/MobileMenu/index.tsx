@@ -3,13 +3,10 @@ import Image from 'next/image'
 import Portal from '@features/Basic/common/Portal'
 import Modal from '@features/Basic/common/Modal'
 
-// import close from 'assets/close.svg'
+import close from 'assets/close.svg'
 import Link from 'next/link'
 import { ToplineLinks } from '@features/Basic/common/Topline'
-// import vkDark from 'assets/layout/mobile-menu/vk-dark-mobile.svg'
-// import tgDark from 'assets/layout/mobile-menu/tg-dark-mobile.svg'
-// import wuDark from 'assets/layout/mobile-menu/wu-dark-mobile.svg'
-// import ozonDark from 'assets/layout/ozon-dark.svg'
+import cn from 'classnames'
 import styles from './index.module.scss'
 
 interface MobileMenuProps {
@@ -29,7 +26,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
             className={styles.mobileMenu__close}
             onClick={onClose}
           >
-            {/* <Image src={close} /> */}
+             <Image src={close} />
           </div>
           <div className={styles.mobileMenu__content}>
             <div className={styles.mobileMenu__top}>
@@ -76,28 +73,22 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
                   href="https://vk.com/plywood_market"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.mobileMenu__social__link}
-                >
-                  {/* <Image src={vkDark} /> */}
-                </a>
+                  className={cn(styles.mobileMenu__social__link, styles.mobileMenu__social__linkVk)}
+                />
 
                 <a
                   href="https://t.me/plywood_market"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.mobileMenu__social__link}
-                >
-                  {/* <Image src={tgDark} /> */}
-                </a>
+                  className={cn(styles.mobileMenu__social__link, styles.mobileMenu__social__linkTg)}
+                />
 
                 <a
                   href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.mobileMenu__social__link}
-                >
-                  {/* <Image src={wuDark} /> */}
-                </a>
+                  className={cn(styles.mobileMenu__social__link, styles.mobileMenu__social__linkWu)}
+                />
               </div>
 
               <div className={styles.mobileMenu__market}>
@@ -105,10 +96,11 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
                   href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.mobileMenu__market__link}
-                >
-                  {/* <Image src={ozonDark} /> */}
-                </a>
+                  className={cn(
+                    styles.mobileMenu__social__link,
+                    styles.mobileMenu__social__linkOzon,
+                  )}
+                />
               </div>
             </div>
           </div>

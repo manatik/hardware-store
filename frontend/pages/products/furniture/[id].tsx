@@ -93,7 +93,6 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                 alt={currentImage.filename}
                 width={610}
                 height={400}
-                placeholder="blur"
               />
             </div>
           )}
@@ -113,7 +112,6 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                     alt={item?.filename}
                     width={187}
                     height={124}
-                    placeholder="blur"
                     layout="responsive"
                   />
                 </div>

@@ -28,7 +28,7 @@ const Login = () => {
 
   const onRegisterLinkClick = async () => {
     storageService.setItem('email', formRef?.current?.values?.email || '')
-    await router.push('/register')
+    await router.push('/admin-control/register')
   }
 
   useEffect(() => {
