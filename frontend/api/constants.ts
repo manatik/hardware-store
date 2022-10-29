@@ -1,11 +1,9 @@
 import getConfig from 'next/config'
-import { isSSR } from '@utils/isSSR'
-import { isDev } from '@utils/env'
 
 const { publicRuntimeConfig } = getConfig()
 
 export const baseApiEndpoints = {
-  baseEndpoint: (isSSR() && !isDev) ? 'http://localhost:3000' : publicRuntimeConfig?.REACT_APP_API_URL,
+  baseEndpoint: publicRuntimeConfig?.REACT_APP_API_URL,
 }
 
 export enum ApiEndpoints {
