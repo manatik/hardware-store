@@ -7,14 +7,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Opposite from '@features/Basic/ui/Opposite'
 
-import vkLight from 'assets/layout/vk.svg'
-import tgLight from 'assets/layout/tg.svg'
-import wuLight from 'assets/layout/wu.svg'
-import ozonLight from 'assets/layout/ozon-light-min.svg'
-import vkDark from 'assets/layout/vk-dark.svg'
-import tgDark from 'assets/layout/tg-dark.svg'
-import wuDark from 'assets/layout/wu-dark.svg'
-import ozonDark from 'assets/layout/ozon-dark-min.svg'
 import basket from 'assets/layout/fa-shopping-bag.svg'
 
 import MobileMenu from '@features/Basic/common/Topline/components/MobileMenu'
@@ -109,64 +101,44 @@ const Topline: FC<ToplineProps> = ({
         </div>
         <div className={styles.topline__right}>
           <div className={styles.topline__social}>
-            {dark
-              ? <>
-                <a
-                  href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.topline__social__link}
-                ><Image src={ozonDark} /></a>
-                <a
-                  href="https://vk.com/plywood_market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.topline__social__link}
-                ><Image src={vkDark} /></a>
+            <a
+              href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(styles.topline__social__link, {
+                [styles.topline__social__link__darkOzon]: dark,
+                [styles.topline__social__link__lightOzon]: !dark,
+              })}
+            />
+            <a
+              href="https://vk.com/plywood_market"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(styles.topline__social__link, {
+                [styles.topline__social__link__darkVk]: dark,
+                [styles.topline__social__link__lightVk]: !dark,
+              })}
+            />
 
-                <a
-                  href="https://t.me/plywood_market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.topline__social__link}
-                ><Image src={tgDark} /></a>
+            <a
+              href="https://t.me/plywood_market"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(styles.topline__social__link, {
+                [styles.topline__social__link__darkTg]: dark,
+                [styles.topline__social__link__lightTg]: !dark,
+              })}
+            />
 
-                <a
-                  href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.topline__social__link}
-                ><Image src={wuDark} /></a>
-              </>
-              : <>
-                <a
-                  href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.topline__social__link}
-                ><Image src={ozonLight} /></a>
-                <a
-                  href="https://vk.com/plywood_market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.topline__social__link}
-                ><Image src={vkLight} /></a>
-
-                <a
-                  href="https://t.me/plywood_market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.topline__social__link}
-                ><Image src={tgLight} /></a>
-
-                <a
-                  href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.topline__social__link}
-                ><Image src={wuLight} /></a>
-              </>
-            }
+            <a
+              href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(styles.topline__social__link, {
+                [styles.topline__social__link__darkWu]: dark,
+                [styles.topline__social__link__lightWu]: !dark,
+              })}
+            />
           </div>
           <div className={styles.topline__inter}>
             <button
@@ -176,7 +148,7 @@ const Topline: FC<ToplineProps> = ({
             </button>
             <Link href={`${ToplineLinks.Basket}?redirectUrl=${pathname || ''}`}>
               <a className={styles.topline__basket}>
-                <Image src={basket} />
+                 <Image src={basket} />
                 {basketEntities.length > 0 && (
                   <span className={styles.topline__basket__point}>{basketEntities.length}</span>
                 )}

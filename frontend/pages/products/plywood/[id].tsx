@@ -21,14 +21,14 @@ import { Formik } from 'formik'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
 import { PlywoodOrderSchema } from '@schema/plywood'
-import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { useAppDispatch } from '@store/hooks'
 import { addProduct, initBasket } from '@store/basket/basketSlice'
 import { toast } from 'react-toastify'
-import { getPlywoodItem } from '@store/products/selector'
+// import { getPlywoodItem } from '@store/products/selector'
 import { removePlywoodItem } from '@store/products/productsSlice'
 
-const CardItemPlywood: NextPage = () => {
-  const product: PlywoodItem = useAppSelector(getPlywoodItem)
+const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
+  // const product: PlywoodItem = useAppSelector(getPlywoodItem)
   const dispatch = useAppDispatch()
   const [toggle, setToggle] = useState<boolean>(false)
   const [images, setImages] = useState<FurniturePhotosModal>()

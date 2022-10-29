@@ -24,30 +24,30 @@ axiosInstance.interceptors.request.use(
       }
     }
 
-    if (isSSR()) {
-      // eslint-disable-next-line no-console
-      console.log('request', {
-        data: config.data,
-        headers: config.headers,
-        method: config.method,
-        url: config.url,
-        baseURL: config.baseURL,
-      })
-    }
+    // if (isSSR()) {
+    //   // eslint-disable-next-line no-console
+    //   console.log('request', {
+    //     data: config.data,
+    //     headers: config.headers,
+    //     method: config.method,
+    //     url: config.url,
+    //     baseURL: config.baseURL,
+    //   })
+    // }
 
     return config
   },
   (error) => {
-    if (isSSR()) {
-      // eslint-disable-next-line no-console
-      console.error('request Error', {
-        data: error.data,
-        headers: error.headers,
-        method: error.method,
-        url: error.url,
-        baseURL: error.baseURL,
-      })
-    }
+    // if (isSSR()) {
+    //   // eslint-disable-next-line no-console
+    //   console.error('request Error', {
+    //     data: error.data,
+    //     headers: error.headers,
+    //     method: error.method,
+    //     url: error.url,
+    //     baseURL: error.baseURL,
+    //   })
+    // }
 
     return Promise.reject(error?.response?.data || error)
   },
@@ -55,13 +55,13 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   async (config) => {
-    if (isSSR()) {
-      // eslint-disable-next-line no-console
-      console.log('response', {
-        data: config.data,
-        headers: config.headers,
-      })
-    }
+    // if (isSSR()) {
+    //   // eslint-disable-next-line no-console
+    //   console.log('response', {
+    //     data: config.data,
+    //     headers: config.headers,
+    //   })
+    // }
     return config
   },
   async (error) => {

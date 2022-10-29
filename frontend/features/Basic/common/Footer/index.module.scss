@@ -2,168 +2,220 @@
 @import "@public/styles/variables.scss";
 
 .footer {
-    flex: 0 0 auto;
-    padding: 30px 0;
-    background-color: $colorPrimary;
+  flex: 0 0 auto;
+  padding: 30px 0;
+  background-color: $colorPrimary;
 
-    &__inner {
-        @include w-layout;
+  &__inner {
+    @include w-layout;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include deviceWidth(tabletLandscape) {
+      display: block;
+    }
+    @include deviceWidth(tabletPortrait) {
+      display: block;
+    }
+    @include deviceWidth(mobile) {
+      display: block;
+    }
+  }
+
+  &__bottom {
+    font-family: 'MuseoSansCyrl500';
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    color: $colorOnPrimary;
+    padding-top: 30px;
+  }
+
+  &__links, &__contact,
+  &__social {
+    @include g-flex-container;
+  }
+
+  &__links {
+    margin-right: 50px;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 126px;
+      height: 43px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 126px 43px;
+      background-image: url('../../../../assets/layout/logo.svg');
     }
 
-    &__top {
+    @include deviceWidth(tabletLandscape) {
+      justify-content: space-between;
+      margin: 0 0 35px;
+    }
+    @include deviceWidth(tabletPortrait) {
+      justify-content: space-between;
+      margin: 0 0 35px;
+    }
+    @include deviceWidth(mobile) {
+      justify-content: space-between;
+      margin: 0 0 20px;
+    }
+
+    &_mobile {
+      display: none;
+
+      @include deviceWidth(mobile) {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-
-        @include deviceWidth(tabletLandscape) {
-            display: block;
-        }
-        @include deviceWidth(tabletPortrait) {
-            display: block;
-        }
-        @include deviceWidth(mobile) {
-            display: block;
-        }
+        margin-bottom: 20px;
+      }
     }
 
-    &__bottom {
-        font-family: 'MuseoSansCyrl500';
-        font-size: 16px;
-        line-height: 16px;
-        text-align: center;
-        color: $colorOnPrimary;
-        padding-top: 30px;
+    &__content {
+      @include deviceWidth(mobile) {
+        display: none;
+      }
     }
 
-    &__links, &__contact,
     &__social {
-        @include g-flex-container;
-    }
+      &_mobile {
+        display: none;
 
-    &__links {
-        margin-right: 50px;
-
-        &:before {
-            content: '';
-            display: block;
-            width: 126px;
-            height: 43px;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 126px 43px;
-            background-image: url('../../../../assets/layout/logo.svg');
-        }
-
-        @include deviceWidth(tabletLandscape) {
-            justify-content: space-between;
-            margin: 0 0 35px;
-        }
-        @include deviceWidth(tabletPortrait) {
-            justify-content: space-between;
-            margin: 0 0 35px;
-        }
         @include deviceWidth(mobile) {
-            justify-content: space-between;
-            margin: 0 0 20px;
+          display: block;
         }
-
-        &_mobile {
-            display: none;
-
-            @include deviceWidth(mobile) {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 20px;
-            }
-        }
-
-        &__content {
-            @include deviceWidth(mobile) {
-                display: none;
-            }
-        }
-
-        &__social {
-            &_mobile {
-                display: none;
-
-                @include deviceWidth(mobile) {
-                    display: block;
-                }
-            }
-        }
+      }
     }
+  }
+
+  &__link {
+    @include m-margin-link-bottom;
+    font-family: 'MuseoSansCyrl500';
+    font-size: 16px;
+    line-height: 16px;
+    color: $colorOnPrimary;
+  }
+
+  &__right {
+    display: flex;
+
+    @include deviceWidth(tabletLandscape) {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+    @include deviceWidth(tabletPortrait) {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+  }
+
+  &__contact {
+    margin-right: 30px;
 
     &__link {
-        @include m-margin-link-bottom;
-        font-family: 'MuseoSansCyrl500';
-        font-size: 16px;
-        line-height: 16px;
-        color: $colorOnPrimary;
-    }
+      font-family: 'MuseoSansCyrl500';
+      font-size: 16px;
+      line-height: 16px;
+      color: $colorOnPrimary;
 
-    &__right {
-        display: flex;
-
-        @include deviceWidth(tabletLandscape) {
-            flex-direction: row-reverse;
-            justify-content: space-between;
-        }
-        @include deviceWidth(tabletPortrait) {
-            flex-direction: row-reverse;
-            justify-content: space-between;
-        }
-    }
-
-    &__contact {
+      &:not(:last-child) {
         margin-right: 30px;
 
-        &__link {
-            font-family: 'MuseoSansCyrl500';
-            font-size: 16px;
-            line-height: 16px;
-            color: $colorOnPrimary;
-
-            &:not(:last-child) {
-                margin-right: 30px;
-
-                @include deviceWidth(mobile) {
-                    margin-right: 0;
-                }
-            }
-        }
-
         @include deviceWidth(mobile) {
-            justify-content: space-between;
-            flex-direction: row-reverse;
-            margin-right: 0;
-            width: 100%;
+          margin-right: 0;
         }
+      }
     }
 
-    &__social {
-        &__link {
-            cursor: pointer;
-
-            &:not(:last-child) {
-                margin-right: 17px;
-            }
-        }
-
-        @include deviceWidth(mobile) {
-            display: none;
-        }
+    @include deviceWidth(mobile) {
+      justify-content: space-between;
+      flex-direction: row-reverse;
+      margin-right: 0;
+      width: 100%;
     }
+  }
+
+  &__social {
+    &__link {
+      cursor: pointer;
+
+      &:not(:last-child) {
+        margin-right: 17px;
+      }
+
+      &Ozon {
+        &:before {
+          content: '';
+          display: block;
+          width: 56px;
+          height: 14px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 56px 14px;
+          background-image: url('../../../../assets/layout/ozon-light-min.svg');
+        }
+      }
+
+      &Vk {
+        &:before {
+          content: '';
+          display: block;
+          width: 24px;
+          height: 14px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 24px 14px;
+          background-image: url('../../../../assets/layout/vk.svg');
+        }
+      }
+
+      &Tg {
+        &:before {
+          content: '';
+          display: block;
+          width: 21px;
+          height: 18px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 21px 18px;
+          background-image: url('../../../../assets/layout/tg.svg');
+        }
+      }
+
+      &Wu {
+        &:before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 20px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 20px 20px;
+          background-image: url('../../../../assets/layout/wu.svg');
+        }
+      }
+    }
+
+    @include deviceWidth(mobile) {
+      display: none;
+    }
+  }
 }
 
 // only for hovers
-@media (hover: hover) and (pointer: fine){
-    .footer {
-        &__call, &__basket,
-        &__social__link {
-            &:hover {
-                opacity: $opacityHover;
-            }
-        }
+@media (hover: hover) and (pointer: fine) {
+  .footer {
+    &__call, &__basket,
+    &__social__link {
+      &:hover {
+        opacity: $opacityHover;
+      }
     }
+  }
 }

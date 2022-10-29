@@ -2,202 +2,310 @@
 @import "@public/styles/variables.scss";
 
 .topline {
-    position: relative;
+  position: relative;
+
+  &Dark {
+    background-color: $colorSecondary;
+  }
+
+  &__inner {
+    @include w-layout;
+    width: 100%;
+    height: 85px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &Absolute {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    z-index: 3;
+  }
+
+  &__left {
+    @include g-flex-container;
+    margin-right: 50px;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 126px;
+      height: 43px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 126px 43px;
+      background-image: url('../../../../assets/layout/logo.svg');
+    }
 
     &Dark {
-        background-color: $colorSecondary;
+      &:before {
+        content: '';
+        display: block;
+        width: 126px;
+        height: 43px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 126px 43px;
+        background-image: url('../../../../assets/layout/logo-dark.svg');
+      }
     }
 
-    &__inner {
-        @include w-layout;
-        width: 100%;
-        height: 85px;
-        display: flex;
-        justify-content: space-between;
+    &Active {
+      color: $colorPrimary !important;
     }
+  }
 
-    &Absolute {
-        position: absolute;
-        margin: auto;
-        left: 0;
-        right: 0;
-        z-index: 3;
+  &__links {
+    display: flex;
+    align-items: center;
+
+    @include deviceWidth(tabletLandscape) {
+      display: none;
     }
-
-    &__left {
-        @include g-flex-container;
-        margin-right: 50px;
-
-        &:before {
-            content: '';
-            display: block;
-            width: 126px;
-            height: 43px;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 126px 43px;
-            background-image: url('../../../../assets/layout/logo.svg');
-        }
-
-        &Dark {
-            &:before {
-                content: '';
-                display: block;
-                width: 126px;
-                height: 43px;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: 126px 43px;
-                background-image: url('../../../../assets/layout/logo-dark.svg');
-            }
-        }
-
-        &Active {
-            color: $colorPrimary !important;
-        }
+    @include deviceWidth(tabletPortrait) {
+      display: none;
     }
-
-    &__links {
-        display: flex;
-        align-items: center;
-
-        @include deviceWidth(tabletLandscape) {
-            display: none;
-        }
-        @include deviceWidth(tabletPortrait) {
-            display: none;
-        }
-        @include deviceWidth(mobile) {
-            display: none;
-        }
+    @include deviceWidth(mobile) {
+      display: none;
     }
+  }
 
-    &__right {
-        @include g-flex-container;
+  &__right {
+    @include g-flex-container;
+  }
+
+  &__inter {
+    display: flex;
+  }
+
+  &__social {
+    @include g-flex-container;
+    margin-right: 50px;
+
+    @include deviceWidth(tabletLandscape) {
+      display: none;
     }
-
-    &__inter {
-        display: flex;
+    @include deviceWidth(tabletPortrait) {
+      display: none;
     }
-
-    &__social {
-        @include g-flex-container;
-        margin-right: 50px;
-
-        @include deviceWidth(tabletLandscape) {
-            display: none;
-        }
-        @include deviceWidth(tabletPortrait) {
-            display: none;
-        }
-        @include deviceWidth(mobile) {
-            display: none;
-        }
-
-        &__link {
-            cursor: pointer;
-
-            &:not(:last-child) {
-                margin-right: 16px;
-            }
-        }
+    @include deviceWidth(mobile) {
+      display: none;
     }
 
     &__link {
-        @include m-margin-link-top;
-        font-family: 'MuseoSansCyrl500';
-        font-size: 16px;
-        line-height: 16px;
-        color: $colorOnPrimary;
+      cursor: pointer;
 
-        &Dark {
-            color: $colorBlack;
-        }
-    }
+      &:not(:last-child) {
+        margin-right: 16px;
+      }
 
-    &__call {
-        @include m-button-wrap;
-        font-family: 'MuseoSansCyrl500';
-        font-size: 16px;
-        line-height: 16px;
-        padding: 17px 32px;
-        margin-right: 12px;
-
-        @include deviceWidth(mobile) {
-            display: none;
-        }
-    }
-
-    &__basket {
-        @include m-button-wrap;
-        position: relative;
-        padding: 12px;
-
-        &__point {
-            font-family: MuseoSansCyrl700;
-            font-size: 12px;
-            line-height: 12px;
-            position: absolute;
-            top: -7px;
-            right: 3px;
-            background-color: $colorOnPrimary;
-            color: $colorPrimary;
-            padding: 3px 6px;
-            border-radius: 50%;
-
-            @include deviceWidth(mobile) {
-                top: -9px;
-                right: -1px
-            }
-        }
-
-        @include deviceWidth(mobile) {
-            padding: 9px;
-        }
-    }
-
-    &__mobile {
-        @include m-hover;
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 35px;
-
-        & span {
+      &__dark {
+        &Ozon {
+          &:before {
+            content: '';
             display: block;
-            border-bottom: 2px solid $colorOnPrimary;
-            margin: 3px 0 0 0;
-            width: 22px;
-            height: 5px;
+            width: 56px;
+            height: 14px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 56px 14px;
+            background-image: url('../../../../assets/layout/ozon-dark.svg');
+          }
         }
 
-        &Dark {
-            & span {
-                border-bottom: 2px solid $colorPrimary;
-            }
+        &Vk {
+          &:before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 14px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 24px 14px;
+            background-image: url('../../../../assets/layout/vk-dark.svg');
+          }
         }
 
-        @include deviceWidth(tabletLandscape) {
-            display: flex;
+        &Tg {
+          &:before {
+            content: '';
+            display: block;
+            width: 21px;
+            height: 18px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 21px 18px;
+            background-image: url('../../../../assets/layout/tg-dark.svg');
+          }
         }
-        @include deviceWidth(tabletPortrait) {
-            display: flex;
+
+        &Wu {
+          &:before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url('../../../../assets/layout/wu-dark.svg');
+          }
         }
-        @include deviceWidth(mobile) {
-            display: flex;
-            margin-left: 12px;
+      }
+
+      &__light {
+        &Ozon {
+          &:before {
+            content: '';
+            display: block;
+            width: 56px;
+            height: 14px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 56px 14px;
+            background-image: url('../../../../assets/layout/ozon-light-min.svg');
+          }
         }
+
+        &Vk {
+          &:before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 14px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 24px 14px;
+            background-image: url('../../../../assets/layout/vk.svg');
+          }
+        }
+
+        &Tg {
+          &:before {
+            content: '';
+            display: block;
+            width: 21px;
+            height: 18px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 21px 18px;
+            background-image: url('../../../../assets/layout/tg.svg');
+          }
+        }
+
+        &Wu {
+          &:before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-image: url('../../../../assets/layout/wu.svg');
+          }
+        }
+      }
     }
+  }
+
+  &__link {
+    @include m-margin-link-top;
+    font-family: 'MuseoSansCyrl500';
+    font-size: 16px;
+    line-height: 16px;
+    color: $colorOnPrimary;
+
+    &Dark {
+      color: $colorBlack;
+    }
+  }
+
+  &__call {
+    @include m-button-wrap;
+    font-family: 'MuseoSansCyrl500';
+    font-size: 16px;
+    line-height: 16px;
+    padding: 17px 32px;
+    margin-right: 12px;
+
+    @include deviceWidth(mobile) {
+      display: none;
+    }
+  }
+
+  &__basket {
+    @include m-button-wrap;
+    position: relative;
+    padding: 12px;
+
+    &__point {
+      font-family: MuseoSansCyrl700;
+      font-size: 12px;
+      line-height: 12px;
+      position: absolute;
+      top: -7px;
+      right: 3px;
+      background-color: $colorOnPrimary;
+      color: $colorPrimary;
+      padding: 3px 6px;
+      border-radius: 50%;
+
+      @include deviceWidth(mobile) {
+        top: -9px;
+        right: -1px
+      }
+    }
+
+    @include deviceWidth(mobile) {
+      padding: 9px;
+    }
+  }
+
+  &__mobile {
+    @include m-hover;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 35px;
+
+    & span {
+      display: block;
+      border-bottom: 2px solid $colorOnPrimary;
+      margin: 3px 0 0 0;
+      width: 22px;
+      height: 5px;
+    }
+
+    &Dark {
+      & span {
+        border-bottom: 2px solid $colorPrimary;
+      }
+    }
+
+    @include deviceWidth(tabletLandscape) {
+      display: flex;
+    }
+    @include deviceWidth(tabletPortrait) {
+      display: flex;
+    }
+    @include deviceWidth(mobile) {
+      display: flex;
+      margin-left: 12px;
+    }
+  }
 }
 
 // only for hovers
-@media (hover: hover) and (pointer: fine){
-    .topline {
-        &__call, &__basket,
-        &__social__link {
-            &:hover {
-                opacity: $opacityHover;
-            }
-        }
+@media (hover: hover) and (pointer: fine) {
+  .topline {
+    &__call, &__basket,
+    &__social__link {
+      &:hover {
+        opacity: $opacityHover;
+      }
     }
+  }
 }

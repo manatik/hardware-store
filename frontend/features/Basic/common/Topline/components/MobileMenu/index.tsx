@@ -3,13 +3,13 @@ import Image from 'next/image'
 import Portal from '@features/Basic/common/Portal'
 import Modal from '@features/Basic/common/Modal'
 
-import close from 'assets/close.svg'
+// import close from 'assets/close.svg'
 import Link from 'next/link'
 import { ToplineLinks } from '@features/Basic/common/Topline'
-import vkDark from 'assets/layout/mobile-menu/vk-dark-mobile.svg'
-import tgDark from 'assets/layout/mobile-menu/tg-dark-mobile.svg'
-import wuDark from 'assets/layout/mobile-menu/wu-dark-mobile.svg'
-import ozonDark from 'assets/layout/ozon-dark.svg'
+// import vkDark from 'assets/layout/mobile-menu/vk-dark-mobile.svg'
+// import tgDark from 'assets/layout/mobile-menu/tg-dark-mobile.svg'
+// import wuDark from 'assets/layout/mobile-menu/wu-dark-mobile.svg'
+// import ozonDark from 'assets/layout/ozon-dark.svg'
 import styles from './index.module.scss'
 
 interface MobileMenuProps {
@@ -29,7 +29,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
             className={styles.mobileMenu__close}
             onClick={onClose}
           >
-            <Image src={close} />
+            {/* <Image src={close} /> */}
           </div>
           <div className={styles.mobileMenu__content}>
             <div className={styles.mobileMenu__top}>
@@ -78,7 +78,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
                   rel="noopener noreferrer"
                   className={styles.mobileMenu__social__link}
                 >
-                  <Image src={vkDark} />
+                  {/* <Image src={vkDark} /> */}
                 </a>
 
                 <a
@@ -87,7 +87,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
                   rel="noopener noreferrer"
                   className={styles.mobileMenu__social__link}
                 >
-                  <Image src={tgDark} />
+                  {/* <Image src={tgDark} /> */}
                 </a>
 
                 <a
@@ -96,7 +96,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
                   rel="noopener noreferrer"
                   className={styles.mobileMenu__social__link}
                 >
-                  <Image src={wuDark} />
+                  {/* <Image src={wuDark} /> */}
                 </a>
               </div>
 
@@ -107,7 +107,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
                   rel="noopener noreferrer"
                   className={styles.mobileMenu__market__link}
                 >
-                  <Image src={ozonDark} />
+                  {/* <Image src={ozonDark} /> */}
                 </a>
               </div>
             </div>
