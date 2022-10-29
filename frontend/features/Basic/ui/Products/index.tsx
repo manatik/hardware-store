@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import cn from 'classnames'
 import Plywood from '@features/Basic/ui/Products/components/Plywood'
@@ -18,6 +18,7 @@ enum Blocks {
 
 const Products = () => {
   const [product, setProduct] = useState<Blocks>(Blocks.Plywood)
+  const sliderRef = useRef()
   const blockActive = getCookie('ProductBlock')
 
   const blocks: Record<Blocks, () => JSX.Element> = {
@@ -29,12 +30,32 @@ const Products = () => {
   const toggleProduct = (type: Blocks): void => {
     setProduct(type)
     setCookie('ProductBlock', type)
+
+    if (type === Blocks.Plywood) { // @ts-ignore
+      sliderRef?.current.swiper.slideTo(0)
+    }
+    if (type === Blocks.Furniture) { // @ts-ignore
+      sliderRef?.current.swiper.slideTo(1)
+    }
+    if (type === Blocks.House) { // @ts-ignore
+      sliderRef?.current.swiper.slideTo(2)
+    }
   }
 
   const CurrentComponent = blocks[product]
 
   useEffect(() => {
     if (blockActive) setProduct(blockActive as Blocks)
+
+    if (blockActive === Blocks.Plywood) { // @ts-ignore
+      sliderRef?.current.swiper.slideTo(0)
+    }
+    if (blockActive === Blocks.Furniture) { // @ts-ignore
+      sliderRef?.current.swiper.slideTo(1)
+    }
+    if (blockActive === Blocks.House) { // @ts-ignore
+      sliderRef?.current.swiper.slideTo(2)
+    }
   }, [blockActive])
 
   return (
@@ -66,7 +87,11 @@ const Products = () => {
         </div>
       </div>
 
-      <Slider sliders={plywood} />
+      <Slider
+        sliders={plywood}
+        sliderRef={sliderRef}
+        autoplay={false}
+      />
       <CurrentComponent />
     </div>
   )

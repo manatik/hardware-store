@@ -8,8 +8,15 @@ import { SliderMock } from '@features/Basic/ui/Products/types'
 import cn from 'classnames'
 import styles from './index.module.scss'
 
-const Slider: FC<{ sliders: SliderMock, sliderRef?: MutableRefObject<unknown> }> = ({
-  sliders, sliderRef,
+interface SliderProps {
+  sliders: SliderMock,
+  sliderRef?: MutableRefObject<unknown>,
+  autoplay?: boolean,
+}
+const Slider: FC<SliderProps> = ({
+  sliders,
+  sliderRef,
+  autoplay = true,
 }) => {
   return (
     <div
@@ -19,10 +26,10 @@ const Slider: FC<{ sliders: SliderMock, sliderRef?: MutableRefObject<unknown> }>
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
-        autoplay={{
+        autoplay={autoplay ? {
           delay: 3000,
           disableOnInteraction: false,
-        }}
+        } : false}
         // @ts-ignore
         ref={sliderRef}
         pagination={{
@@ -46,6 +53,7 @@ const Slider: FC<{ sliders: SliderMock, sliderRef?: MutableRefObject<unknown> }>
                 layout="responsive"
                 height={item.height}
                 width={item.width}
+                placeholder="blur"
               />
             </div>
           </SwiperSlide>

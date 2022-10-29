@@ -32,9 +32,7 @@ const Layout: FC<LayoutProps> = ({
   }
 
   useEffect(() => {
-    if (window.innerWidth > 960) {
-      window.addEventListener('scroll', handleScroll)
-    }
+    window.addEventListener('scroll', handleScroll)
 
     return () => {
       window.removeEventListener('scroll', handleScroll)

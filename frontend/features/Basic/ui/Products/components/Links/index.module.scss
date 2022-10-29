@@ -6,12 +6,11 @@
   overflow-x: auto;
   white-space: nowrap;
   height: 65px;
-  padding-top: 10px;
+  padding-top: 12px;
   overflow-y: unset;
 
   &__item {
-    font-family: MuseoSansCyrl500;
-    font-size: 16px;
+    @include m-typography(16px, 22px, 500);
     display: inline;
     line-height: 140%;
     padding: 9px 16px 10px;
@@ -29,5 +28,5 @@
       color: $colorOnPrimary;
       background-color: $colorPrimary;
     }
-    }
+  }
 }
