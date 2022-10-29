@@ -13,18 +13,18 @@ const nextConfig = {
   images: {
     domains: ['nestjs'],
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/:path*',
-  //       destination: 'http://nestjs:4200/api/:path*',
-  //     },
-  //     {
-  //       source: '/uploads/:path*',
-  //       destination: 'http://nestjs:4200/uploads/:path*',
-  //     },
-  //   ]
-  // },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://nestjs:4200/api/:path*',
+      },
+      {
+        source: '/uploads/:path*',
+        destination: 'http://nestjs:4200/uploads/:path*',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
