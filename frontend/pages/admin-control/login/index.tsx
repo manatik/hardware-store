@@ -6,7 +6,6 @@ import { InputType } from '@features/Admin/ui/InputField/types'
 import { Formik, FormikProps } from 'formik'
 import { AuthSchema } from '@schema/auth'
 import { storageService } from '@utils/storageService'
-import { AuthForm } from '@types/auth'
 
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { wrapper } from '@store/store'
@@ -15,6 +14,7 @@ import { fetchAuthAsync } from '@store/auth/authSlice'
 import { getAuthInfo, getAuthError, getAuthLoading } from '@store/auth/selector'
 import cn from 'classnames'
 import { initBasket } from '@store/basket/basketSlice'
+import { AuthModal } from '@models/Auth'
 import styles from './index.module.scss'
 
 const Login = () => {
@@ -24,7 +24,7 @@ const Login = () => {
   const isLoading = useAppSelector(getAuthLoading)
   const [error, setError] = useState<string>('')
   const router = useRouter()
-  const formRef = useRef<FormikProps<AuthForm>>(null)
+  const formRef = useRef<FormikProps<AuthModal>>(null)
 
   const onRegisterLinkClick = async () => {
     storageService.setItem('email', formRef?.current?.values?.email || '')

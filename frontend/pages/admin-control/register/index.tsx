@@ -8,7 +8,7 @@ import { InputType } from '@features/Admin/ui/InputField/types'
 import { storageService } from '@utils/storageService'
 
 import styles from '@pages/admin-control/login/index.module.scss'
-import { AuthForm } from '@types/auth'
+import { AuthModal } from '@models/Auth'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
@@ -24,7 +24,7 @@ const Register = () => {
   const isLoading = useAppSelector(getRegisterLoading)
   const [error, setError] = useState<string>('')
   const router = useRouter()
-  const formRef = useRef<FormikProps<AuthForm>>(null)
+  const formRef = useRef<FormikProps<AuthModal>>(null)
 
   const onLoginLinkClick = async () => {
     storageService.setItem('email', formRef?.current?.values?.email || '')
