@@ -38,8 +38,6 @@ services:
     container_name: nextjs
     networks:
       - web
-    depends_on:
-      - backend
     volumes:
       - ../frontend:/frontend
     working_dir: /frontend
