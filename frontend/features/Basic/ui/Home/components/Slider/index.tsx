@@ -30,10 +30,10 @@ const Slider: FC = (): ReactElement => {
         spaceBetween={0}
         slidesPerView={1}
         className={styles.slider}
-        // autoplay={{
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 6000,
+          disableOnInteraction: false,
+        }}
         pagination={{
           type: 'progressbar',
           modifierClass: `${styles.slider__progress} `,
@@ -44,7 +44,7 @@ const Slider: FC = (): ReactElement => {
           nextEl: nextRef.current,
           disabledClass: styles.slider__navigation__disable,
         }}
-        modules={[Pagination, Navigation]}
+        modules={[Pagination, Navigation, Autoplay]}
         onSlideChange={(swiperCore) => {
           const {
             // @ts-ignore
