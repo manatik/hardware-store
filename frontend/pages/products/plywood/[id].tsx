@@ -174,7 +174,7 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
           {product.description && (
             <div className={styles.products__item__description}>{product.description}</div>
           )}
-          {product.sorts && (
+          {product.sorts.length > 0 && (
             <div className={styles.products__item__sorts}>
               <div className={styles.products__item__sortsName}>Сорт</div>
               <div className={styles.products__item__sortsValue}>
@@ -184,7 +184,7 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
               </div>
             </div>
           )}
-          {product.coatingDensity && (
+          {product.coatingDensity.length > 0 && (
             <div className={styles.products__item__density}>
               <div className={styles.products__item__densityName}>Плотность</div>
               <div className={styles.products__item__densityValue}>
