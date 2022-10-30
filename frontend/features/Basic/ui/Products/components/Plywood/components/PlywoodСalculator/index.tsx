@@ -36,7 +36,7 @@ const PlywoodCalculator = () => {
     // @ts-ignore
     const result = Array.from(initData[target.name]).filter((item) => {
       // @ts-ignore
-      return item.id === Number(target.value)
+      return item.id === target.value
     })
     setData((prevState) => ({
       ...prevState,
