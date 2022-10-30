@@ -7,6 +7,8 @@ import close from 'assets/close.svg'
 import Link from 'next/link'
 import { ToplineLinks } from '@features/Basic/common/Topline'
 import cn from 'classnames'
+import { useAppSelector } from '@store/hooks'
+import { getUserInfo } from '@store/app/selector'
 import styles from './index.module.scss'
 
 interface MobileMenuProps {
@@ -14,6 +16,8 @@ interface MobileMenuProps {
   openCall: () => void;
 }
 const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
+  const user = useAppSelector(getUserInfo)
+
   useEffect(() => {
     return () => document.documentElement.classList.remove('g_lockscroll')
   }, [])
@@ -30,6 +34,13 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
           </div>
           <div className={styles.mobileMenu__content}>
             <div className={styles.mobileMenu__top}>
+              {user.isAdmin && <Link href={ToplineLinks.Admin}>
+                <a
+                  className={styles.mobileMenu__link}
+                >
+                  Админка
+                </a>
+              </Link>}
               <Link href={ToplineLinks.Home}>
                 <a
                   className={styles.mobileMenu__link}

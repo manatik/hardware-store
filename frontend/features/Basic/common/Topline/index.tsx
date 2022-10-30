@@ -11,6 +11,7 @@ import basket from 'assets/layout/fa-shopping-bag.svg'
 
 import MobileMenu from '@features/Basic/common/Topline/components/MobileMenu'
 import { useAppSelector } from '@store/hooks'
+import { getUserInfo } from '@store/app/selector'
 import { getBasketEntities } from '@store/basket/selector'
 import styles from './index.module.scss'
 
@@ -25,6 +26,7 @@ export enum ToplineLinks {
   Service = '/service',
   Contacts = '/contacts',
   Basket = '/basket',
+  Admin = '/admin-control/products',
 }
 
 const Topline: FC<ToplineProps> = ({
@@ -34,6 +36,7 @@ const Topline: FC<ToplineProps> = ({
   const [toggle, setToggle] = useState<boolean>(false)
   const [mobileMenu, setMobileMenu] = useState<boolean>(false)
   const basketEntities = useAppSelector(getBasketEntities)
+  const user = useAppSelector(getUserInfo)
   const { pathname } = useRouter()
 
   const toggleMobileMenu = (): void => {
@@ -60,11 +63,29 @@ const Topline: FC<ToplineProps> = ({
         })}
       >
         <div
-          className={cn(styles.topline__left, {
-            [styles.topline__leftDark]: dark,
-          })}
+          className={styles.topline__left}
         >
-          <div className={styles.topline__links}>
+          <Link href={ToplineLinks.Home}>
+            <a
+              className={cn(styles.topline__left__logo, {
+                [styles.topline__left__logoDark]: dark,
+              })}
+            />
+          </Link>
+          <div
+            className={cn(styles.topline__links, {
+              [styles.topline__linksAdmin]: user?.isAdmin,
+            })}
+          >
+            {user?.isAdmin && (
+              <Link href={ToplineLinks.Admin}>
+                <a
+                  className={cn(styles.topline__link, {
+                    [styles.topline__linkDark]: dark,
+                  })}
+                >Админка</a>
+              </Link>
+            )}
             <Link href={ToplineLinks.Home}>
               <a
                 className={cn(styles.topline__link, {

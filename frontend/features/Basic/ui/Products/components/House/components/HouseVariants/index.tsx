@@ -6,6 +6,10 @@ import {
   slider1, slider2, slider3, slider4, slider5,
 } from '@features/Basic/ui/Products/components/House/mockData'
 import { SliderMock } from '@features/Basic/ui/Products/types'
+import Portal from '@features/Basic/common/Portal'
+import Modal from '@features/Basic/common/Modal'
+import Image from 'next/image'
+import close from 'assets/close.svg'
 import styles from './index.module.scss'
 
 enum Sliders {
@@ -18,6 +22,7 @@ enum Sliders {
 
 const HouseVariants = () => {
   const [currentSlider, setCurrentSlider] = useState<Sliders>(Sliders.One)
+  const [toggleModal, setToggleModal] = useState(null)
   const sliderRef = useRef()
 
   const handleCurrentSlider = (id: Sliders) => {
@@ -33,6 +38,14 @@ const HouseVariants = () => {
     [Sliders.Three]: slider3,
     [Sliders.Four]: slider4,
     [Sliders.Five]: slider5,
+  }
+
+  const handleModalImage = (image: any) => {
+    if (toggleModal) {
+      setToggleModal(null)
+    } else {
+      setToggleModal(image)
+    }
   }
 
   const currentSlidersList: SliderMock = sliders[currentSlider]
@@ -56,8 +69,24 @@ const HouseVariants = () => {
         <Slider
           sliders={currentSlidersList}
           sliderRef={sliderRef}
+          onClickModal={handleModalImage}
         />
       </div>
+      {toggleModal && (
+        <Portal>
+          <Modal>
+            <div className={styles.variant__modal}>
+              <div
+                className={styles.variant__close}
+                onClick={handleModalImage}
+              >
+                <Image src={close} />
+              </div>
+              <Image src={toggleModal} />
+            </div>
+          </Modal>
+        </Portal>
+      )}
     </div>
   )
 }

@@ -24,4 +24,20 @@
       margin-top: 0;
     }
   }
+
+  &__modal {
+    @include m-transition;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    @include m-hover;
+  }
 }

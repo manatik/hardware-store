@@ -10,7 +10,7 @@ import { plywood } from '@features/Basic/ui/Products/mockData'
 import Slider from '@features/Basic/ui/Products/components/Slider'
 import styles from './index.module.scss'
 
-enum Blocks {
+export enum Blocks {
   Plywood = 'plywood',
   Furniture = 'furniture',
   House = 'house',
@@ -40,6 +40,15 @@ const Products = () => {
     if (type === Blocks.House) { // @ts-ignore
       sliderRef?.current.swiper.slideTo(2)
     }
+  }
+
+  const handleSlideComponent = (swiper: any) => {
+    if (!sliderRef.current) return
+    const activeSlide = swiper.activeIndex
+
+    if (activeSlide === 0) setProduct(Blocks.Plywood)
+    if (activeSlide === 1) setProduct(Blocks.Furniture)
+    if (activeSlide === 2) setProduct(Blocks.House)
   }
 
   const CurrentComponent = blocks[product]
@@ -91,6 +100,7 @@ const Products = () => {
         sliders={plywood}
         sliderRef={sliderRef}
         autoplay={false}
+        onChange={handleSlideComponent}
       />
       <CurrentComponent />
     </div>

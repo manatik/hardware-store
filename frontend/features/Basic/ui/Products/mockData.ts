@@ -105,7 +105,7 @@ export const houseLinks = [
   },
   {
     link: ProductLinks.Options,
-    title: 'Корпусная мебель',
+    title: 'Варианты комплектации',
   },
 ]
 
@@ -181,7 +181,7 @@ export const serviceSlide = [
   {
     image: card9,
     number: '09',
-    title: 'Разработка готовых решений фото',
+    title: 'Разработка готовых решений',
   },
 ]
 

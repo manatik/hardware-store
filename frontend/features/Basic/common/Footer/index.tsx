@@ -16,6 +16,9 @@ const Footer = () => {
       <div className={styles.footer__inner}>
         <div className={styles.footer__top}>
           <div className={styles.footer__links}>
+            <Link href="/">
+              <a className={styles.footer__link__logo} />
+            </Link>
             <div className={styles.footer__links__content}>
               <Link href="/">
                 <a className={styles.footer__link}>Главная</a>

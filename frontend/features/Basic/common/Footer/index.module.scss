@@ -43,17 +43,6 @@
   &__links {
     margin-right: 50px;
 
-    &:before {
-      content: '';
-      display: block;
-      width: 126px;
-      height: 43px;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 126px 43px;
-      background-image: url('../../../../assets/layout/logo.svg');
-    }
-
     @include deviceWidth(tabletLandscape) {
       justify-content: space-between;
       margin: 0 0 35px;
@@ -100,6 +89,19 @@
     font-size: 16px;
     line-height: 16px;
     color: $colorOnPrimary;
+
+    &__logo {
+      &:before {
+        content: '';
+        display: block;
+        width: 126px;
+        height: 43px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 126px 43px;
+        background-image: url('../../../../assets/layout/logo.svg');
+      }
+    }
   }
 
   &__right {

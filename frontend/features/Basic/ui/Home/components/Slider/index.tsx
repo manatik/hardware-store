@@ -30,10 +30,10 @@ const Slider: FC = (): ReactElement => {
         spaceBetween={0}
         slidesPerView={1}
         className={styles.slider}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 6000,
+        //   disableOnInteraction: false,
+        // }}
         pagination={{
           type: 'progressbar',
           modifierClass: `${styles.slider__progress} `,
@@ -44,7 +44,7 @@ const Slider: FC = (): ReactElement => {
           nextEl: nextRef.current,
           disabledClass: styles.slider__navigation__disable,
         }}
-        modules={[Pagination, Navigation, Autoplay]}
+        modules={[Pagination, Navigation]}
         onSlideChange={(swiperCore) => {
           const {
             // @ts-ignore
@@ -73,7 +73,7 @@ const Slider: FC = (): ReactElement => {
                 </div>
                 <div className={styles.slide__description}>
                   Гарантия своевременного
-                  и&nbsp;качественного выполнения услуг<br />по&nbsp;обработке фанеры,
+                  и&nbsp;качественного выполнения&nbsp;услуг<br />по&nbsp;обработке фанеры,
                   изготовлению мебели и&nbsp;домов,<br />разработке технических решений
                 </div>
               </div>
@@ -94,7 +94,7 @@ const Slider: FC = (): ReactElement => {
                   Эксперты по&nbsp;фанере
                 </div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения услуг<br />
+                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
                   по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
                   разработке технических решений
                 </div>
@@ -114,7 +114,7 @@ const Slider: FC = (): ReactElement => {
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>Жизнь, полная фанеры</div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения услуг<br />
+                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
                   по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
                   разработке технических решений
                 </div>
@@ -136,7 +136,7 @@ const Slider: FC = (): ReactElement => {
                   Отражение природы в вашем доме
                 </div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения услуг<br />
+                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
                   по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
                   разработке технических решений
                 </div>
@@ -151,12 +151,12 @@ const Slider: FC = (): ReactElement => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className={cn(styles.slide__wrap, styles.slide__wrap_)}>
+          <div className={cn(styles.slide__wrap, styles.slide__wrap_five)}>
             <div className={styles.slide}>
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>Ценим искусство природы</div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения услуг<br />
+                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
                   по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
                   разработке технических решений
                 </div>
@@ -171,13 +171,15 @@ const Slider: FC = (): ReactElement => {
         </SwiperSlide>
 
         <div className={styles.slider__nav}>
-          {pagination && <div className={styles.slider__pagination}>
+          {pagination && (
+            <div className={styles.slider__pagination}>
                 <span
                   className={styles.slider__pagination__current}
                 >{pagination.current + 1}</span>
-            /
-            <span className={styles.slider__pagination__total}>5</span>
-          </div>}
+              /
+              <span className={styles.slider__pagination__total}>5</span>
+            </div>
+          )}
 
           <div className={styles.slider__navigation}>
             <div
