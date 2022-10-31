@@ -35,14 +35,19 @@ export class FilesService {
   }
 
   async compressFile(buffer: Buffer, ext: string) {
+    const imageOpt = { quality: 70 };
+    const width = 1366;
+    const height = 768;
+    const opt: any = { fit: 'outside' };
+
     try {
       switch (ext) {
         case Extname.JPG:
-          return await sharp(buffer).jpeg({ quality: 70 }).resize(1366, 768, { fit: 'outside' }).toBuffer();
+          return await sharp(buffer).jpeg(imageOpt).resize(width, height, opt).toBuffer();
         case Extname.PNG:
-          return await sharp(buffer).png({ quality: 70 }).resize(1366, 768, { fit: 'outside' }).toBuffer();
+          return await sharp(buffer).png(imageOpt).resize(width, height, opt).toBuffer();
         case Extname.WEBP:
-          return await sharp(buffer).webp({ quality: 70 }).resize(1366, 768, { fit: 'outside' }).toBuffer();
+          return await sharp(buffer).webp(imageOpt).resize(width, height, opt).toBuffer();
         default:
           throw new Error('Неправильный формат фото, принимается только PNG и JPG');
       }
