@@ -34,7 +34,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
           </div>
           <div className={styles.mobileMenu__content}>
             <div className={styles.mobileMenu__top}>
-              {user.isAdmin && <Link href={ToplineLinks.Admin}>
+              {user?.isAdmin && <Link href={ToplineLinks.Admin}>
                 <a
                   className={styles.mobileMenu__link}
                 >
