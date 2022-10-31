@@ -49,7 +49,7 @@ export class FilesService {
         case Extname.WEBP:
           return await sharp(buffer).webp(imageOpt).resize(width, height, opt).toBuffer();
         default:
-          throw new Error('Неправильный формат фото, принимается только PNG и JPG');
+          throw new Error('Неправильный формат фото, принимается только PNG, JPG, WEBP');
       }
     } catch (e) {
       throw e;
