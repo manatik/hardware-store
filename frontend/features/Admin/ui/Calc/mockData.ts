@@ -1,53 +1,72 @@
 interface Option {
-  id: string,
+  id: number,
   name: string
+}
+
+export enum FeaturesEnum {
+  COATING_DENSITY,
+  FORMATS,
+  SORT,
+  WIDTH_PLYWOOD,
+  TYPE,
+  PHOTOS_PLYWOOD
+}
+
+export enum FurnitureEnum {
+  PRICE,
+  PHOTOS_FURNITURE
+}
+
+export enum ProductsEnum {
+  PLYWOOD,
+  FURNITURE
 }
 
 export const features: Option[] = [
   {
     name: 'Плотность покрытия',
-    id: '1',
+    id: FeaturesEnum.COATING_DENSITY,
   },
   {
     name: 'Формат листа',
-    id: '2',
+    id: FeaturesEnum.FORMATS,
   },
   {
     name: 'Сорт',
-    id: '3',
+    id: FeaturesEnum.SORT,
   },
   {
     name: 'Толщина листа',
-    id: '4',
+    id: FeaturesEnum.WIDTH_PLYWOOD,
   },
   {
     name: 'Вид фанеры',
-    id: '5',
+    id: FeaturesEnum.TYPE,
   },
   {
     name: 'Фото продукции',
-    id: '6',
+    id: FeaturesEnum.PHOTOS_PLYWOOD,
   },
 ]
 
 export const furniture: Option[] = [
   {
     name: 'Цена',
-    id: '1',
+    id: FurnitureEnum.PRICE,
   },
   {
     name: 'Фото товара',
-    id: '2',
+    id: FurnitureEnum.PHOTOS_FURNITURE,
   },
 ]
 
 export const products: Option[] = [
   {
     name: 'Фанера',
-    id: '1',
+    id: ProductsEnum.PLYWOOD,
   },
   {
     name: 'Мебель',
-    id: '2',
+    id: ProductsEnum.FURNITURE,
   },
 ]

@@ -13,7 +13,7 @@ interface SelectFieldProps {
 }
 
 interface Option {
-  id: string,
+  id: number,
   name: string
 }
 

@@ -4,7 +4,14 @@ import dynamic from 'next/dynamic'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
 import { getCookie, setCookie } from 'cookies-next'
-import { features, furniture, products } from '@features/Admin/ui/Calc/mockData'
+import {
+  features,
+  FeaturesEnum,
+  furniture,
+  FurnitureEnum,
+  products,
+  ProductsEnum,
+} from '@features/Admin/ui/Calc/mockData'
 import AdminLayout from '@features/Admin/common/Admin-Layout'
 import ContainerProduct from '@features/Admin/common/ContainerProduct'
 import SelectField from '@features/Admin/ui/SelectField'
@@ -83,12 +90,12 @@ const Calc: NextPage = () => {
                   defaultOption="Выберите характеристику..."
                 />
 
-                {Number(dataPlywood.value) === 1 && <CoatingDensity />}
-                {Number(dataPlywood.value) === 2 && <Formats />}
-                {Number(dataPlywood.value) === 3 && <Sort />}
-                {Number(dataPlywood.value) === 4 && <WidthPlywood />}
-                {Number(dataPlywood.value) === 5 && <Type />}
-                {Number(dataPlywood.value) === 6 && <PhotosPlywood />}
+                {dataPlywood.value === FeaturesEnum.COATING_DENSITY && <CoatingDensity />}
+                {dataPlywood.value === FeaturesEnum.FORMATS && <Formats />}
+                {dataPlywood.value === FeaturesEnum.SORT && <Sort />}
+                {dataPlywood.value === FeaturesEnum.WIDTH_PLYWOOD && <WidthPlywood />}
+                {dataPlywood.value === FeaturesEnum.TYPE && <Type />}
+                {dataPlywood.value === FeaturesEnum.PHOTOS_PLYWOOD && <PhotosPlywood />}
               </>
             )}
 
@@ -103,8 +110,8 @@ const Calc: NextPage = () => {
                   defaultOption="Выберите характеристику..."
                 />
 
-                {Number(dataFurniture.value) === 1 && <Price />}
-                {Number(dataFurniture.value) === 2 && <PhotosFurniture />}
+                {dataFurniture.value === FurnitureEnum.PRICE && <Price />}
+                {dataFurniture.value === FurnitureEnum.PHOTOS_FURNITURE && <PhotosFurniture />}
               </>
             )}
           </>
@@ -120,8 +127,8 @@ const Calc: NextPage = () => {
         defaultOption="Выберите тип товара"
       />
 
-      {Number(dataProduct.value) === 1 && <PlywoodItems />}
-      {Number(dataProduct.value) === 2 && <FurnitureItems />}
+      {dataProduct.value === ProductsEnum.PLYWOOD && <PlywoodItems />}
+      {dataProduct.value === ProductsEnum.FURNITURE && <FurnitureItems />}
     </AdminLayout>
   )
 }
