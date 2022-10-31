@@ -16,7 +16,6 @@ import { toast } from 'react-toastify'
 import { fetchFurnitureAsync } from '@store/products/productsSlice'
 import { furnitureService } from '@services/products/furniture.service'
 import { FurnitureItemModal } from '@models/Products'
-import { it } from 'node:test'
 
 interface FurnitureFormProductProps {
   item?: FurnitureItemModal
