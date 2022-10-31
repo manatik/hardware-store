@@ -18,6 +18,7 @@ export const GLOBAL_PREFIXES = {
 
   FURNITURE: 'products/furniture',
   FURNITURE_FEATURE: 'products/furniture-feature',
+  FURNITURE_PARAMETERS: 'products/furniture-parameters',
   FURNITURE_PHOTOS: 'products/furniture-photos',
 
   HOUSE: 'products/house',

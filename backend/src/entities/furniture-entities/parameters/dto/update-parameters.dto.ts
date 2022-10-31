@@ -1,19 +1,15 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class UpdateFeatureDto {
+export class UpdateParametersDto {
   @IsOptional()
   @IsString()
   name?: string;
 
   @IsOptional()
-  @IsNumber()
-  price?: number;
+  @IsString()
+  value?: string;
 
   @IsOptional()
   @IsString()
   description?: string;
-
-  @IsOptional()
-  @IsString()
-  value?: string;
 }

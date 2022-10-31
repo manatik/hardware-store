@@ -233,6 +233,7 @@ model Furniture {
   width       Float?
   depth       Float?
   features    FurnitureFeature[]
+  parameters  FurnitureParams[]
   createdAt   DateTime           @default(now()) @map("created_at")
   updatedAt   DateTime?          @map("updated_at")
   deleted     DateTime?
@@ -251,6 +252,18 @@ model FurnitureFeature {
   updatedAt   DateTime?   @map("updated_at")
 
   @@map("furniture_feature")
+}
+
+model FurnitureParams {
+  id          String      @id @default(uuid())
+  furniture   Furniture[]
+  name        String      @unique
+  description String?
+  value       String?
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime?   @map("updated_at")
+
+  @@map("furniture_params")
 }
 
 model FurniturePhotos {
