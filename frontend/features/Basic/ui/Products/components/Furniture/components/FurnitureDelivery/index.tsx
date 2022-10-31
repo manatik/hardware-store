@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Image from 'next/image'
 
 import delivery1 from 'assets/furniture/delivery-1.png'
 import delivery2 from 'assets/furniture/delivery-2.png'
 import delivery3 from 'assets/furniture/delivery-3.png'
+import scrollToAnchor from '@utils/scrollToAnchor'
 import styles from './index.module.scss'
 
 const FurnitureDelivery = () => {
+  useEffect(() => {
+    scrollToAnchor()
+  }, [])
   return (
     <div
       className={styles.delivery}

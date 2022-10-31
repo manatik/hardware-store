@@ -73,15 +73,16 @@ const Slider: FC = (): ReactElement => {
                 </div>
                 <div className={styles.slide__description}>
                   Гарантия своевременного
-                  и&nbsp;качественного выполнения&nbsp;услуг<br />по&nbsp;обработке фанеры,
-                  изготовлению мебели и&nbsp;домов,<br />разработке технических решений
+                  и&nbsp;качественного выполнения&nbsp;услуг по&nbsp;обработке фанеры,
+                  изготовлению мебели и&nbsp;домов, разработке технических решений
                 </div>
               </div>
             </div>
             <Image
               src={slide1}
-              placeholder="blur"
+              // placeholder="blur"
               layout="fill"
+              quality={100}
               alt=""
             />
           </div>
@@ -95,16 +96,17 @@ const Slider: FC = (): ReactElement => {
                   Эксперты по&nbsp;фанере
                 </div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
-                  по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
-                  разработке технических решений
+                  Гарантия своевременного
+                  и&nbsp;качественного выполнения&nbsp;услуг по&nbsp;обработке фанеры,
+                  изготовлению мебели и&nbsp;домов, разработке технических решений
                 </div>
               </div>
             </div>
             <Image
               src={slide2}
               layout="fill"
-              placeholder="blur"
+              quality={100}
+              // placeholder="blur"
               alt=""
             />
           </div>
@@ -116,16 +118,17 @@ const Slider: FC = (): ReactElement => {
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>Жизнь, полная фанеры</div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
-                  по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
-                  разработке технических решений
+                  Гарантия своевременного
+                  и&nbsp;качественного выполнения&nbsp;услуг по&nbsp;обработке фанеры,
+                  изготовлению мебели и&nbsp;домов, разработке технических решений
                 </div>
               </div>
             </div>
             <Image
               src={slide3}
               layout="fill"
-              placeholder="blur"
+              quality={100}
+              // placeholder="blur"
               alt=""
             />
           </div>
@@ -139,16 +142,17 @@ const Slider: FC = (): ReactElement => {
                   Отражение природы в вашем доме
                 </div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
-                  по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
-                  разработке технических решений
+                  Гарантия своевременного
+                  и&nbsp;качественного выполнения&nbsp;услуг по&nbsp;обработке фанеры,
+                  изготовлению мебели и&nbsp;домов, разработке технических решений
                 </div>
               </div>
             </div>
             <Image
               src={slide4}
               layout="fill"
-              placeholder="blur"
+              quality={100}
+              // placeholder="blur"
               alt=""
             />
           </div>
@@ -160,16 +164,17 @@ const Slider: FC = (): ReactElement => {
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>Ценим искусство природы</div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
-                  по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
-                  разработке технических решений
+                  Гарантия своевременного
+                  и&nbsp;качественного выполнения&nbsp;услуг по&nbsp;обработке фанеры,
+                  изготовлению мебели и&nbsp;домов, разработке технических решений
                 </div>
               </div>
             </div>
             <Image
               src={slide5}
               layout="fill"
-              placeholder="blur"
+              quality={100}
+              // placeholder="blur"
               alt=""
             />
           </div>

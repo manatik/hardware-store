@@ -18,6 +18,11 @@ export const getFurnitureFeature = createSelector(
   (products) => products.furnitureFeature,
 )
 
+export const getFurnitureParams = createSelector(
+  selectCategory,
+  (products) => products.furnitureParams,
+)
+
 export const getFurniturePhotos = createSelector(
   selectCategory,
   (products) => products.furniturePhotos,

@@ -37,7 +37,7 @@ export const slider1: SliderMock = [
     image: slide251,
     title: 'sdfdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -45,7 +45,7 @@ export const slider1: SliderMock = [
     image: slide252,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -53,7 +53,7 @@ export const slider1: SliderMock = [
     image: slide253,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -61,7 +61,7 @@ export const slider1: SliderMock = [
     image: slide254,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -69,7 +69,7 @@ export const slider1: SliderMock = [
     image: slide255,
     title: 'noCover',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
 ]
@@ -80,7 +80,7 @@ export const slider2: SliderMock = [
     image: slide401,
     title: 'sdfdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -88,7 +88,7 @@ export const slider2: SliderMock = [
     image: slide402,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -96,7 +96,7 @@ export const slider2: SliderMock = [
     image: slide403,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -104,7 +104,7 @@ export const slider2: SliderMock = [
     image: slide404,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -112,7 +112,7 @@ export const slider2: SliderMock = [
     image: slide405,
     title: 'noCover',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
 ]
@@ -123,7 +123,7 @@ export const slider3: SliderMock = [
     image: slide651,
     title: 'sdfdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -131,7 +131,7 @@ export const slider3: SliderMock = [
     image: slide652,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -139,7 +139,7 @@ export const slider3: SliderMock = [
     image: slide653,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -147,7 +147,7 @@ export const slider3: SliderMock = [
     image: slide654,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -155,7 +155,7 @@ export const slider3: SliderMock = [
     image: slide655,
     title: 'noCover',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -163,7 +163,7 @@ export const slider3: SliderMock = [
     image: slide656,
     title: 'noCover',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
 ]
@@ -174,7 +174,7 @@ export const slider4: SliderMock = [
     image: slide901,
     title: 'sdfdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -182,7 +182,7 @@ export const slider4: SliderMock = [
     image: slide902,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -190,7 +190,7 @@ export const slider4: SliderMock = [
     image: slide903,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -198,7 +198,7 @@ export const slider4: SliderMock = [
     image: slide904,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -206,7 +206,7 @@ export const slider4: SliderMock = [
     image: slide905,
     title: 'noCover',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
 ]
@@ -217,7 +217,7 @@ export const slider5: SliderMock = [
     image: slide1252,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -225,7 +225,7 @@ export const slider5: SliderMock = [
     image: slide1253,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -233,7 +233,7 @@ export const slider5: SliderMock = [
     image: slide1254,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -241,7 +241,7 @@ export const slider5: SliderMock = [
     image: slide1255,
     title: 'noCover',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
   {
@@ -249,7 +249,7 @@ export const slider5: SliderMock = [
     image: slide1251,
     title: 'noCover',
     description: 'sdfsdf',
-    height: 431,
+    height: 670,
     width: 1240,
   },
 ]

@@ -19,6 +19,7 @@ export const initialState: ProductsState = {
   furniture: null,
   furnitureItem: null,
   furnitureFeature: null,
+  furnitureParams: null,
   furniturePhotos: null,
 }
 
@@ -49,6 +50,17 @@ export const fetchFurnitureFeatureAsync = createAsyncThunk<FurnitureFeatureModal
   async (_, { rejectWithValue }) => {
     try {
       return await furnitureService.furnitureFeatureAll()
+    } catch (err: any) {
+      return rejectWithValue(err)
+    }
+  },
+)
+
+export const fetchFurnitureParamsAsync = createAsyncThunk<FurnitureFeatureModal>(
+  'products/fetchFurnitureParams',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await furnitureService.furnitureParamsAll()
     } catch (err: any) {
       return rejectWithValue(err)
     }
@@ -133,6 +145,18 @@ export const productsSlice = createSlice({
         state.furnitureFeature = action.payload.data
       })
       .addCase(fetchFurnitureFeatureAsync.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+      })
+
+      .addCase(fetchFurnitureParamsAsync.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(fetchFurnitureParamsAsync.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.furnitureParams = action.payload.data
+      })
+      .addCase(fetchFurnitureParamsAsync.rejected, (state) => {
         state.isLoading = false
         state.isError = true
       })

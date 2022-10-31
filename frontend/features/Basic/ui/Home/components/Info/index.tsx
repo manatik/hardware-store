@@ -9,12 +9,12 @@ import styles from './index.module.scss'
 
 const Info = () => {
   const router = useRouter()
-  const handleLink = async (link: string) => {
+  const handleLink = async (link: string, hash?: string) => {
     if (link === 'service') {
       await router.push('/service')
     } else {
       await setCookie('ProductBlock', link)
-      await router.push('/products')
+      await router.push(`/products${hash ? `#${hash}` : ''}`)
     }
   }
   return (
@@ -23,27 +23,57 @@ const Info = () => {
         <div className={styles.info__products}>
           <div className={styles.info__title}>Продукты и сервис</div>
           <div className={styles.info__cards}>
-            <div
-              className={cn(styles.info__card, styles.info__cardHome)}
-              onClick={() => handleLink('house')}
-            >
+            <div className={cn(styles.info__card, styles.info__cardHome)}>
               <div className={styles.info__card__title}>Домостроение</div>
-              <div className={styles.info__card__subTitle}>О продукте</div>
-              <div className={styles.info__card__subTitle}>Каталог</div>
-              <div className={styles.info__card__subTitle}>Производство</div>
+              <div
+                className={cn(
+                  styles.info__card__subTitle,
+                  styles.info__card__subTitleLink,
+                )}
+                onClick={() => handleLink('house', 'house')}
+              >О продукте</div>
+              <div
+                className={cn(
+                  styles.info__card__subTitle,
+                  styles.info__card__subTitleLink,
+                )}
+                onClick={() => handleLink('house', 'plan')}
+              >Варианты планировок</div>
+              <div
+                className={cn(
+                  styles.info__card__subTitle,
+                  styles.info__card__subTitleLink,
+                )}
+                onClick={() => handleLink('house', 'options')}
+              >Варианты комплектации</div>
             </div>
-            <div
-              className={cn(styles.info__card, styles.info__cardFurniture)}
-              onClick={() => handleLink('furniture')}
-            >
+            <div className={cn(styles.info__card, styles.info__cardFurniture)}>
               <div className={styles.info__card__title}>Мебель</div>
-              <div className={styles.info__card__subTitle}>Корпусная мебель</div>
-              <div className={styles.info__card__subTitle}>Дизайнерская мебель</div>
-              <div className={styles.info__card__subTitle}>Логистика</div>
+              <div
+                className={cn(
+                  styles.info__card__subTitle,
+                  styles.info__card__subTitleLink,
+                )}
+                onClick={() => handleLink('furniture', 'cabinet')}
+              >Корпусная мебель</div>
+              <div
+                className={cn(
+                  styles.info__card__subTitle,
+                  styles.info__card__subTitleLink,
+                )}
+                onClick={() => handleLink('furniture', 'designer')}
+              >Дизайнерская мебель</div>
+              <div
+                className={cn(
+                  styles.info__card__subTitle,
+                  styles.info__card__subTitleLink,
+                )}
+                onClick={() => handleLink('furniture', 'delivery')}
+              >Логистика</div>
             </div>
             <div
-              className={cn(styles.info__card, styles.info__cardPlyWood)}
-              onClick={() => handleLink('plywood')}
+              className={cn(styles.info__card, styles.info__cardLink, styles.info__cardPlyWood)}
+              onClick={() => handleLink('plywood', 'range')}
             >
               <div className={styles.info__card__title}>Фанера</div>
               <div className={styles.info__card__subTitle}>ФСФ</div>
@@ -54,7 +84,7 @@ const Info = () => {
               <div className={styles.info__card__subTitle}>Под покраску</div>
             </div>
             <div
-              className={cn(styles.info__card, styles.info__cardService)}
+              className={cn(styles.info__card, styles.info__cardLink, styles.info__cardService)}
               onClick={() => handleLink('service')}
             >
               <div className={styles.info__card__title}>Сервис</div>
@@ -96,8 +126,8 @@ const Info = () => {
               <Image
                 src={furniture}
                 placeholder="blur"
-                width={638}
-                height={525}
+                // width={638}
+                // height={525}
                 alt=""
               />
             </div>

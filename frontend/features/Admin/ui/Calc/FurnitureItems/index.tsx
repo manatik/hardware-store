@@ -1,16 +1,21 @@
 import React from 'react'
 import styles from '@pages/admin-control/calc/index.module.scss'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
-import { getFurnitureFeature, getFurniturePhotos } from '@store/products/selector'
+import { getFurnitureFeature, getFurnitureParams, getFurniturePhotos } from '@store/products/selector'
 import CardGrid from '@features/Admin/ui/CardGrid'
 import { FurnitureFeatureItem, FurniturePhotosModal } from '@models/Products'
 import { toast } from 'react-toastify'
-import { fetchFurnitureFeatureAsync, fetchFurniturePhotosAsync } from '@store/products/productsSlice'
+import {
+  fetchFurnitureFeatureAsync,
+  fetchFurnitureParamsAsync,
+  fetchFurniturePhotosAsync,
+} from '@store/products/productsSlice'
 import { furnitureService } from '@services/products/furniture.service'
 
 const FurnitureItems = () => {
   const dispatch = useAppDispatch()
   const feature = useAppSelector(getFurnitureFeature)
+  const params = useAppSelector(getFurnitureParams)
   const photos = useAppSelector(getFurniturePhotos)
 
   const handleRemovePhotos = async (id: string) => {
@@ -37,11 +42,35 @@ const FurnitureItems = () => {
     }
   }
 
+  const handleRemoveParams = async (id: string) => {
+    try {
+      const data = await furnitureService.furnitureParamsRemove(id)
+      if (data.success) {
+        await dispatch(fetchFurnitureParamsAsync())
+        toast.success('Успешно удалено')
+      }
+    } catch (e) {
+      toast.error('Ошибка сервера')
+    }
+  }
+
   const handleUpdateFeature = async (id: string, values: any) => {
     try {
       const data = await furnitureService.furnitureFeatureUpdate({ ...values, id })
       if (data.success) {
         await dispatch(fetchFurnitureFeatureAsync())
+        toast.success('Успешно обновлено')
+      }
+    } catch (e) {
+      toast.error('Ошибка сервера')
+    }
+  }
+
+  const handleUpdateParams = async (id: string, values: any) => {
+    try {
+      const data = await furnitureService.furnitureParamsUpdate({ ...values, id })
+      if (data.success) {
+        await dispatch(fetchFurnitureParamsAsync())
         toast.success('Успешно обновлено')
       }
     } catch (e) {
@@ -60,9 +89,29 @@ const FurnitureItems = () => {
                 id={item.id as string}
                 title={item.name}
                 price={item.price}
+                description={item.description}
                 endpoint={0}
                 onUpdate={handleUpdateFeature}
                 onRemove={handleRemoveFeature}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+      {params && (
+        <div className={styles.feature__container}>
+          <div className={styles.feature__title}>Параметры</div>
+          <div className={styles.feature__card__container}>
+            {params.map((item: FurnitureFeatureItem) => (
+              <CardGrid
+                key={item.id}
+                id={item.id as string}
+                title={item.name}
+                price={item.price}
+                description={item.description}
+                endpoint={0}
+                onUpdate={handleUpdateParams}
+                onRemove={handleRemoveParams}
               />
             ))}
           </div>

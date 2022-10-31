@@ -42,6 +42,15 @@ const Products = () => {
     }
   }
 
+  const handleChangeSlide = (item: any, index: number) => {
+    if (!sliderRef.current) return
+    if (index === 2) { // @ts-ignore
+      sliderRef?.current.swiper.slideTo(0)
+    } else { // @ts-ignore
+      sliderRef?.current.swiper.slideTo(index + 1)
+    }
+  }
+
   const handleSlideComponent = (swiper: any) => {
     if (!sliderRef.current) return
     const activeSlide = swiper.activeIndex
@@ -101,6 +110,7 @@ const Products = () => {
         sliderRef={sliderRef}
         autoplay={false}
         onChange={handleSlideComponent}
+        onClickModal={handleChangeSlide}
       />
       <CurrentComponent />
     </div>

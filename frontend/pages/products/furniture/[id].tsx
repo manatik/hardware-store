@@ -127,12 +127,12 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                 <div>{Intl.NumberFormat('ru-RU').format(product.height)} см</div>
               </div>
             )}
-            {product?.width && (
+             {product?.width && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Ширина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product.width)} см</div>
               </div>
-            )}
+             )}
             {product?.depth && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Глубина</div>
@@ -141,17 +141,19 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
             )}
             {product?.features && <div className={styles.products__item__prices__title}>Цвет</div>}
             {product?.features
-              && product?.features.map((item) => (
-                <div
-                  key={item?.id}
-                  className={styles.products__item__prices}
-                >
-                  <div className={styles.products__item__pricesValue}>{item?.name}</div>
-                  <div className={styles.products__item__pricesName}>
-                    {Intl.NumberFormat('ru-RU').format(item?.price)} руб.
+              && product?.features.map((item) => {
+                return (
+                  <div
+                    key={item?.id}
+                    className={styles.products__item__prices}
+                  >
+                    <div className={styles.products__item__pricesValue}>{item?.description}</div>
+                    <div className={styles.products__item__pricesName}>
+                      {Intl.NumberFormat('ru-RU').format(item?.price)} руб.
+                    </div>
                   </div>
-                </div>
-              ))
+                )
+              })
             }
           </div>
         </div>
@@ -193,7 +195,7 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                   key={item?.id}
                   className={styles.products__item__prices}
                 >
-                  <div className={styles.products__item__pricesValue}>{item?.name}</div>
+                  <div className={styles.products__item__pricesValue}>{item?.description}</div>
                   <div className={styles.products__item__pricesName}>
                     {Intl.NumberFormat('ru-RU').format(item?.price)} руб.
                   </div>
@@ -207,14 +209,14 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
               addProduct={handleAddProduct}
             />
 
-            <div
-              className={cn(styles.products__item__basket__button, {
-                [styles.products__item__disable]: !count,
-              })}
-              onClick={onSubmit}
-            >
+             <div
+               className={cn(styles.products__item__basket__button, {
+                 [styles.products__item__disable]: !count,
+               })}
+               onClick={onSubmit}
+             >
               Добавить в корзину
-            </div>
+             </div>
           </div>
         </div>
       </div>

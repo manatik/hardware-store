@@ -221,7 +221,7 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
       </div>
       {toggle && (
         <Portal>
-          <Modal>
+          <Modal onClose={toggleModal}>
             <div className={stylesModal.opposite}>
               <div
                 className={stylesModal.opposite__close}

@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Public } from 'authorization/decorators';
+import { Public, Roles } from 'authorization/decorators';
 import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
 import { ParametersService } from './parameters.service';
 import { CreateParametersDto } from './dto/create-parameters.dto';
 import { UpdateParametersDto } from './dto/update-parameters.dto';
+import { Role } from 'authorization/enum/role.enum';
 
+@Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.FURNITURE_PARAMETERS)
 export class ParametersController {
   constructor(private readonly parametersService: ParametersService) {}

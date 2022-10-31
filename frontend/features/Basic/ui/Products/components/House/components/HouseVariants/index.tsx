@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { houseVariantsLinks, ProductLinks } from '@features/Basic/ui/Products/mockData'
 import Links from '@features/Basic/ui/Products/components/Links'
 import Slider from '@features/Basic/ui/Products/components/Slider'
@@ -6,10 +6,8 @@ import {
   slider1, slider2, slider3, slider4, slider5,
 } from '@features/Basic/ui/Products/components/House/mockData'
 import { SliderMock } from '@features/Basic/ui/Products/types'
-import Portal from '@features/Basic/common/Portal'
-import Modal from '@features/Basic/common/Modal'
-import Image from 'next/image'
-import close from 'assets/close.svg'
+import scrollToAnchor from '@utils/scrollToAnchor'
+import { PhotoSwipe } from 'react-photoswipe'
 import styles from './index.module.scss'
 
 enum Sliders {
@@ -22,7 +20,8 @@ enum Sliders {
 
 const HouseVariants = () => {
   const [currentSlider, setCurrentSlider] = useState<Sliders>(Sliders.One)
-  const [toggleModal, setToggleModal] = useState(null)
+  const [zoom, setZoom] = useState<SliderMock>([])
+  const [toggleModal, setToggleModal] = useState<boolean>(false)
   const sliderRef = useRef()
 
   const handleCurrentSlider = (id: Sliders) => {
@@ -40,20 +39,26 @@ const HouseVariants = () => {
     [Sliders.Five]: slider5,
   }
 
-  const handleModalImage = (image: any) => {
-    if (toggleModal) {
-      setToggleModal(null)
-    } else {
-      setToggleModal(image)
-    }
+  const currentSlidersList: SliderMock = sliders[currentSlider]
+
+  const handleModalImage = (itemCurrent: any) => {
+    const arr = [...currentSlidersList]
+    const lol = arr.findIndex((item) => itemCurrent.id === item.id)
+    arr.splice(lol, 1)
+    arr.unshift(itemCurrent)
+
+    setZoom(arr)
+    setToggleModal(!toggleModal)
   }
 
-  const currentSlidersList: SliderMock = sliders[currentSlider]
+  useEffect(() => {
+    scrollToAnchor()
+  }, [])
 
   return (
     <div
       className={styles.variant}
-      id="options"
+      id="plan"
     >
       <div className={styles.variant__title}>
         Варианты планировок
@@ -70,28 +75,27 @@ const HouseVariants = () => {
           sliders={currentSlidersList}
           sliderRef={sliderRef}
           onClickModal={handleModalImage}
+          autoplay={false}
+          nav={true}
         />
       </div>
+
       {toggleModal && (
-        <Portal>
-          <Modal>
-            <div className={styles.variant__modal}>
-              <div
-                className={styles.variant__close}
-                onClick={handleModalImage}
-              >
-                <Image
-                  src={close}
-                  alt="close"
-                />
-              </div>
-              <Image
-                src={toggleModal}
-                alt=""
-              />
-            </div>
-          </Modal>
-        </Portal>
+        <PhotoSwipe
+          isOpen={true}
+          items={zoom.map((item) => {
+            return {
+              src: item.image.src,
+              thumbnail: item.image.src,
+              w: item.width,
+              h: item.height,
+            }
+          })}
+          options={{
+            bgOpacity: 0.7,
+          }}
+          onClose={() => setToggleModal(!toggleModal)}
+        />
       )}
     </div>
   )

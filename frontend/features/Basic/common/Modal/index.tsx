@@ -1,10 +1,21 @@
 import React, { FC, ReactElement } from 'react'
-import { IChildren } from '@models/Props/props'
+import { Children } from '@models/Props/props'
 
 import styles from './index.module.scss'
 
-const Modal: FC<IChildren> = ({ children }): ReactElement => {
-  return <div className={styles.modal}>{children}</div>
+const Modal: FC<{children: Children, onClose: () => void}> = ({
+  children, onClose,
+}): ReactElement => {
+  return (
+    <div
+      onClick={onClose}
+      className={styles.modal}
+    >
+      <div onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>
+  )
 }
 
 export default Modal

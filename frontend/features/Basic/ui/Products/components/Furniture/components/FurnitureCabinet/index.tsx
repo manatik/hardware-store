@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import FurnitureOfferCard from '@features/Basic/ui/Products/components/Furniture/components/FurnitureOfferCard'
+import scrollToAnchor from '@utils/scrollToAnchor'
 
 import img1 from 'assets/furniture/cabinet-1.webp'
 import img2 from 'assets/furniture/cabinet-2.webp'
@@ -9,6 +10,9 @@ import img4 from 'assets/furniture/cabinet-4.webp'
 import styles from './index.module.scss'
 
 const FurnitureCabinet = () => {
+  useEffect(() => {
+    scrollToAnchor()
+  }, [])
   return (
     <div
       className={styles.cabinet}

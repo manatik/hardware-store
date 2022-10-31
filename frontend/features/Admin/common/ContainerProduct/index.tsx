@@ -35,7 +35,7 @@ const ContainerProduct: FC<PropsContainerProduct> = ({
         {/* <Card /> */}
       </div>}
       {toggle && <Portal>
-        <Modal>
+        <Modal onClose={onToggle}>
           <>
             <div className={styles.form}>
               <button

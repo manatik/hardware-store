@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import house1 from 'assets/house/house-1.webp'
 import house2 from 'assets/house/house-2.webp'
 import Image from 'next/image'
+import scrollToAnchor from '@utils/scrollToAnchor'
 import styles from './index.module.scss'
 
 const HouseInfo = () => {
+  useEffect(() => {
+    scrollToAnchor()
+  }, [])
   return (
     <div
       className={styles.info}

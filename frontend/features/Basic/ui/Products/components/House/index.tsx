@@ -12,14 +12,14 @@ const House = () => {
     <>
       <Links
         links={houseLinks}
-        defaultLink={ProductLinks.House}
+        defaultLink={ProductLinks.Plan}
       />
 
+      <HouseVariants />
       <HouseInfo />
       <HouseOfferCard />
       <HouseCabinet />
       <HouseEquipment />
-      <HouseVariants />
     </>
   )
 }

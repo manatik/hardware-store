@@ -89,6 +89,9 @@
       justify-content: flex-end;
       position: relative;
 
+      @include deviceWidth(tabletPortrait) {
+        flex-direction: column;
+      }
       @include deviceWidth(mobile) {
         flex-direction: column;
       }
@@ -100,21 +103,39 @@
 
     &__image {
       position: absolute;
+      max-width: 660px;
+      max-height: 525px;
       left: 0;
 
       @include deviceWidth(tabletLandscape) {
         width: calc(60% - 70px);
       }
       @include deviceWidth(tabletPortrait) {
-        width: calc(63% - 70px);
+        position: unset;
+        margin-bottom: 20px;
+        max-width: 100%;
+        max-height: 100%;
       }
       @include deviceWidth(mobile) {
         position: unset;
         margin-bottom: 20px;
+        max-width: 100%;
+        max-height: 100%;
       }
 
       img {
         border-radius: 15px;
+      }
+
+      @include deviceWidth(tabletPortrait) {
+        img {
+          border-radius: 10px;
+        }
+      }
+      @include deviceWidth(mobile) {
+        img {
+          border-radius: 10px;
+        }
       }
     }
 
@@ -130,6 +151,7 @@
       @include deviceWidth(tabletPortrait) {
         @include m-typography(36px, 36px, 700);
         padding: 30px 20px 30px 60px;
+        width: 100%;
       }
       @include deviceWidth(mobile) {
         @include m-typography(24px, 24px, 700);
@@ -200,7 +222,10 @@
     position: relative;
     padding: 25px 30px;
     border-radius: 24px;
-    @include m-hover;
+
+    &Link {
+      @include m-hover;
+    }
 
     @include deviceWidth(tabletLandscape) {
       padding: 15px;
@@ -246,6 +271,11 @@
         @include m-typography(11px, 15px, 500);
       }
 
+      &Link {
+        @include m-hover;
+        text-decoration: underline;
+      }
+
       &:not(:last-child) {
         margin-bottom: 7px;
       }
@@ -268,72 +298,47 @@
     &Home {
       width: auto;
       height: auto;
-      background-size: 100% 270px;
+      background-size: cover;
+      background-position-x: center;
+      background-position-y: center;
       background-repeat: no-repeat;
       background-image: url("../../../../../../assets/slider/slide-1.webp");
-
-      @include deviceWidth(tabletLandscape) {
-        background-size: 100% 195px;
-      }
-      @include deviceWidth(tabletPortrait) {
-        background-size: 100% 195px;
-      }
-      @include deviceWidth(mobile) {
-        background-size: 100% 195px;
-      }
     }
 
     &Furniture {
       width: auto;
       height: auto;
-      background-size: 100% 270px;
+      background-size: cover;
+      background-position-x: center;
+      background-position-y: center;
       background-repeat: no-repeat;
       background-image: url("../../../../../../assets/slider/slide-5.webp");
-
-      @include deviceWidth(tabletLandscape) {
-        background-size: 100% 195px;
-      }
-      @include deviceWidth(tabletPortrait) {
-        background-size: 100% 195px;
-      }
-      @include deviceWidth(mobile) {
-        background-size: 100% 195px;
-      }
     }
 
     &PlyWood {
       width: auto;
       height: auto;
-      background-size: 100% 270px;
+      background-size: cover;
+      background-position-x: center;
+      background-position-y: center;
       background-repeat: no-repeat;
       background-image: url("../../../../../../assets/slider/slide-3.webp");
-
-      @include deviceWidth(tabletLandscape) {
-        background-size: 100% 195px;
-      }
-      @include deviceWidth(tabletPortrait) {
-        background-size: 100% 195px;
-      }
-      @include deviceWidth(mobile) {
-        background-size: 100% 195px;
-      }
     }
 
     &Service {
       width: auto;
       height: auto;
-      background-size: 100% 270px;
+      background-size: cover;
+      background-position-x: center;
+      background-position-y: center;
       background-repeat: no-repeat;
       background-image: url("../../../../../../assets/slider/slide-6.webp");
 
       @include deviceWidth(tabletLandscape) {
-        background-size: 100% 195px;
+        background-position-y: bottom;
       }
       @include deviceWidth(tabletPortrait) {
-        background-size: 100% 195px;
-      }
-      @include deviceWidth(mobile) {
-        background-size: 100% 195px;
+        background-position-y: bottom;
       }
     }
   }

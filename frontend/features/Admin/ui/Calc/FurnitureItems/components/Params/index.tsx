@@ -1,5 +1,4 @@
 import React from 'react'
-import { calcAllSchema } from '@schema/calc'
 import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
@@ -9,12 +8,13 @@ import { toast } from 'react-toastify'
 import { furnitureService } from '@services/products/furniture.service'
 import { fetchFurnitureAsync } from '@store/products/productsSlice'
 import { useAppDispatch } from '@store/hooks'
+import { calcParams } from '@schema/calc/calcAll'
 
-const Price = () => {
+const Params = () => {
   const dispatch = useAppDispatch()
-  const addPrice = async (values: { name: string, price: number }) => {
+  const addPrice = async (values: { name: string, value: string }) => {
     try {
-      const data = await furnitureService.furnitureFeatureAdd(values)
+      const data = await furnitureService.furnitureParamsAdd(values)
       if (data.success) {
         await dispatch(fetchFurnitureAsync())
         toast.success('Прайс успешно добавлен')
@@ -30,19 +30,18 @@ const Price = () => {
       initialValues={{
         name: '',
         description: '',
-        // value: '',
-        price: 0,
+        value: '',
       }}
       validateOnChange={false}
       validateOnBlur={false}
-      validationSchema={calcAllSchema}
+      validationSchema={calcParams}
       onSubmit={async (values, formikHelpers) => {
         const data = await addPrice(values)
         if (data === 'success') {
           formikHelpers.setValues({
             name: '',
             description: '',
-            price: 0,
+            value: '',
           })
         }
       }}
@@ -85,12 +84,12 @@ const Price = () => {
           />
 
           <InputField
-            type={InputType.Number}
-            name="price"
-            value={values.price}
-            error={errors.price}
-            placeholder="22 500р"
-            label="Стоимость"
+            type={InputType.Text}
+            name="value"
+            value={values.value}
+            error={errors.value}
+            placeholder="22см"
+            label="Значение"
             size="md"
             onChange={handleChange}
           />
@@ -109,4 +108,4 @@ const Price = () => {
   )
 }
 
-export default Price
+export default Params

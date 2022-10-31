@@ -14,7 +14,8 @@ export enum FeaturesEnum {
 
 export enum FurnitureEnum {
   PRICE,
-  PHOTOS_FURNITURE
+  PHOTOS_FURNITURE,
+  PARAMS_FURNITURE,
 }
 
 export enum ProductsEnum {
@@ -57,6 +58,10 @@ export const furniture: Option[] = [
   {
     name: 'Фото товара',
     id: FurnitureEnum.PHOTOS_FURNITURE,
+  },
+  {
+    name: 'Доп. значение',
+    id: FurnitureEnum.PARAMS_FURNITURE,
   },
 ]
 

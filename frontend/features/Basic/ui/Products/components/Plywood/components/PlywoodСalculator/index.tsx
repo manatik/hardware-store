@@ -157,7 +157,7 @@ const PlywoodCalculator = () => {
               onChange={handleChange}
               value={data.widthPlywoods?.id || ''}
               options={widthPlywoods}
-              defaultOption="Выберите Тольщину листа..."
+              defaultOption="Выберите Толщину листа..."
             />
           </div>
         </div>

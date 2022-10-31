@@ -25,6 +25,7 @@ import PhotosPlywood from '@features/Admin/ui/Calc/PlywoodItems/components/Photo
 
 import Price from '@features/Admin/ui/Calc/FurnitureItems/components/Price'
 import PhotosFurniture from '@features/Admin/ui/Calc/FurnitureItems/components/Photos'
+import Params from '@features/Admin/ui/Calc/FurnitureItems/components/Params'
 
 const PlywoodItems: any = dynamic(
   () => import('@features/Admin/ui/Calc/PlywoodItems'),
@@ -38,40 +39,41 @@ const FurnitureItems: any = dynamic(
 const Calc: NextPage = () => {
   const [dataPlywood, setDataPlywood] = useState({
     name: '',
-    value: 1,
+    value: 0,
   })
   const [dataFurniture, setDataFurniture] = useState({
     name: '',
-    value: 1,
+    value: 0,
   })
 
   const [dataProduct, setDataProduct] = useState({
     name: '',
-    value: 1,
+    value: 0,
   })
 
   const handleChangeProducts = (target: any) => {
-    setDataProduct(target)
+    setDataProduct({ name: target.name, value: Number(target.value) })
   }
 
   const handleChangeFurniture = (target: any) => {
-    setDataFurniture(target)
+    setDataFurniture({ name: target.name, value: Number(target.value) })
   }
 
   const handleChange = (target: any) => {
-    setDataPlywood(target)
+    setDataPlywood({ name: target.name, value: Number(target.value) })
   }
 
   useEffect(() => {
     setDataProduct({
       name: '',
-      value: Number(getCookie('AdminCalcSelect')) || 1,
+      value: Number(getCookie('AdminCalcSelect')) || 0,
     })
   }, [])
 
   useEffect(() => {
     setCookie('AdminCalcSelect', dataProduct.value)
   }, [dataProduct])
+
   return (
     <AdminLayout>
       <ContainerProduct
@@ -79,8 +81,8 @@ const Calc: NextPage = () => {
         buttonName="Добавить характеристику"
         form={
           <>
-            {Number(dataProduct.value) === 1 && (
-              <>
+            {Number(dataProduct.value) === ProductsEnum.PLYWOOD && (
+              <div style={{ width: '100%', minWidth: '375px' }}>
                 <SelectField
                   name="Характеристики"
                   onChange={handleChange}
@@ -96,11 +98,11 @@ const Calc: NextPage = () => {
                 {dataPlywood.value === FeaturesEnum.WIDTH_PLYWOOD && <WidthPlywood />}
                 {dataPlywood.value === FeaturesEnum.TYPE && <Type />}
                 {dataPlywood.value === FeaturesEnum.PHOTOS_PLYWOOD && <PhotosPlywood />}
-              </>
+              </div>
             )}
 
-            {Number(dataProduct.value) === 2 && (
-              <>
+            {Number(dataProduct.value) === ProductsEnum.FURNITURE && (
+              <div style={{ width: '100%', minWidth: '375px' }}>
                 <SelectField
                   name="Характеристики"
                   onChange={handleChangeFurniture}
@@ -112,7 +114,8 @@ const Calc: NextPage = () => {
 
                 {dataFurniture.value === FurnitureEnum.PRICE && <Price />}
                 {dataFurniture.value === FurnitureEnum.PHOTOS_FURNITURE && <PhotosFurniture />}
-              </>
+                {dataFurniture.value === FurnitureEnum.PARAMS_FURNITURE && <Params />}
+              </div>
             )}
           </>
         }

@@ -20,6 +20,7 @@ export enum ApiEndpoints {
   ProductPlywood = '/api/products/plywood',
   ProductFurniture = '/api/products/furniture',
   ProductFeature = '/api/products/furniture-feature',
+  ProductParams = '/api/products/furniture-parameters',
   ProductFeaturePhoto = '/api/products/furniture-photos',
   CalcPlywoodPhotos = '/api/products/plywood-photos',
   CalcCoatingDensity = '/api/products/plywood-coating-density',

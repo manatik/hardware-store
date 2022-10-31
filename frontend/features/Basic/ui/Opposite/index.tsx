@@ -33,12 +33,13 @@ const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
   }
 
   useEffect(() => {
+    document.documentElement.classList.add('g_lockscroll')
     return () => document.documentElement.classList.remove('g_lockscroll')
   }, [])
 
   return (
     <Portal>
-      <Modal>
+      <Modal onClose={onClose}>
         <div className={styles.opposite}>
           <div
             className={styles.opposite__close}

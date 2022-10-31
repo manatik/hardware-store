@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Opposite from '@features/Basic/ui/Opposite'
+import scrollToAnchor from '@utils/scrollToAnchor'
 import styles from './index.module.scss'
 
 const HouseEquipment = () => {
@@ -10,6 +11,10 @@ const HouseEquipment = () => {
     setToggle(!toggle)
     document.documentElement.classList.toggle('g_lockscroll')
   }
+
+  useEffect(() => {
+    scrollToAnchor()
+  }, [])
 
   return (
     <div

@@ -7,4 +7,19 @@ export const calcAllSchema = Yup.object().shape({
   price: Yup.string()
     .trim()
     .required('Введите цену'),
+  description: Yup.string()
+    .trim()
+    .required('Введите название которое будет отображаться на сайте'),
+})
+
+export const calcParams = Yup.object().shape({
+  name: Yup.string()
+    .trim()
+    .required('Введите название'),
+  value: Yup.string()
+    .trim()
+    .required('Введите значение'),
+  description: Yup.string()
+    .trim()
+    .required('Введите название которое будет отображаться на сайте'),
 })

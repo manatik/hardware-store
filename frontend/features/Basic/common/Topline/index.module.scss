@@ -251,6 +251,13 @@
     position: relative;
     padding: 12px;
 
+    @include deviceWidth(tabletPortrait) {
+      padding: 10px 12px;
+    }
+    @include deviceWidth(mobile) {
+      padding: 10px 12px;
+    }
+
     &__point {
       font-family: MuseoSansCyrl700;
       font-size: 12px;

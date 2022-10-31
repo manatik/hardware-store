@@ -6,6 +6,7 @@ import {
 
 const furnitureEndpoint = `${baseApiEndpoints.baseEndpoint}${ApiEndpoints.ProductFurniture}`
 const furnitureFeatureEndpoint = `${baseApiEndpoints.baseEndpoint}${ApiEndpoints.ProductFeature}`
+const furnitureParamsEndpoint = `${baseApiEndpoints.baseEndpoint}${ApiEndpoints.ProductParams}`
 const furniturePhotosEndpoint = `${baseApiEndpoints.baseEndpoint}${ApiEndpoints.ProductFeaturePhoto}`
 
 export const furnitureService = {
@@ -48,6 +49,27 @@ export const furnitureService = {
   },
   furnitureFeatureRemove: async (id: string) => {
     const { data } = await httpService.delete(`${furnitureFeatureEndpoint}/${id}`)
+    return data
+  },
+
+  furnitureParamsAdd: async (featureData: any) => {
+    const { data } = await httpService.post(furnitureParamsEndpoint, featureData)
+    return data
+  },
+  furnitureParamsAll: async () => {
+    const { data } = await httpService.get<FurnitureFeatureModal>(furnitureParamsEndpoint)
+    return data
+  },
+  furnitureParams: async (id: string) => {
+    const { data } = await httpService.get(`${furnitureParamsEndpoint}/${id}`)
+    return data
+  },
+  furnitureParamsUpdate: async (featureData: any) => {
+    const { data } = await httpService.patch(`${furnitureParamsEndpoint}/${featureData.id}`, featureData)
+    return data
+  },
+  furnitureParamsRemove: async (id: string) => {
+    const { data } = await httpService.delete(`${furnitureParamsEndpoint}/${id}`)
     return data
   },
 

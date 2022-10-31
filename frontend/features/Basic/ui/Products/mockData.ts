@@ -20,7 +20,7 @@ export const plywood = [
     image: plywoodSUUUKKAAA,
     title: 'plywood',
     description: 'sdfsdf',
-    height: 431,
+    height: 550,
     width: 1240,
   },
   {
@@ -28,7 +28,7 @@ export const plywood = [
     image: plywood2,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 550,
     width: 1240,
   },
   {
@@ -36,7 +36,7 @@ export const plywood = [
     image: plywood3,
     title: 'sdfsdf',
     description: 'sdfsdf',
-    height: 431,
+    height: 550,
     width: 1240,
   },
 ]
@@ -52,6 +52,7 @@ export enum ProductLinks {
   DesignerFurniture = '#designer',
   Delivery = '#delivery',
   House = '#house',
+  Plan = '#plan',
   Options = '#options',
   OneHouseDefault = '#one',
 }
@@ -99,6 +100,10 @@ export const furnitureLinks = [
 ]
 
 export const houseLinks = [
+  {
+    link: ProductLinks.Plan,
+    title: 'Варианты планировок',
+  },
   {
     link: ProductLinks.House,
     title: 'О Продукте',

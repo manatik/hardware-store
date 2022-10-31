@@ -8,6 +8,7 @@ export interface ProductsState {
   plywood: PlywoodItem[] | null;
   furniture: any | null;
   furnitureFeature: FurnitureFeatureItem[] | null;
+  furnitureParams: FurnitureFeatureItem[] | null;
   furniturePhotos: Photo[] | null;
   plywoodItem: PlywoodItem | null;
   furnitureItem: FurnitureItemModal | null;

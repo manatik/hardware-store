@@ -24,7 +24,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
 
   return (
     <Portal>
-      <Modal>
+      <Modal onClose={onClose}>
         <div className={styles.mobileMenu}>
           <div
             className={styles.mobileMenu__close}
