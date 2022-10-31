@@ -29,6 +29,8 @@ const Photos = () => {
     try {
       const data = await furnitureService.furniturePhotosAdd(fd)
       toast.success(data.message || 'Фотографии успешно добавлены')
+      setImages([])
+      setColor('#fff')
       return 'success'
     } catch (e: any) {
       toast.error(e.error || 'Ошибка запроса')
