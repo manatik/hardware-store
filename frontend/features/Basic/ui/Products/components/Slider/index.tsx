@@ -10,7 +10,6 @@ import Image from 'next/image'
 import { SliderMock } from '@features/Basic/ui/Products/types'
 
 import cn from 'classnames'
-import deviceTypeByWidth, { DeviceType } from '@utils/getDeviceType'
 import styles from './index.module.scss'
 
 interface SliderProps {
@@ -30,16 +29,16 @@ const Slider: FC<SliderProps> = ({
   onClickModal,
   nav = false,
 }) => {
-  const [device, setDevice] = useState<DeviceType>()
+  const [isMobile, setIsMobile] = useState<boolean>()
 
   useEffect(() => {
     window.addEventListener('resize', () => {
-      setDevice(deviceTypeByWidth())
+      setIsMobile(window.innerWidth < 659)
     })
 
     return () => {
       window.removeEventListener('resize', () => {
-        setDevice(deviceTypeByWidth())
+        setIsMobile(window.innerWidth < 659)
       })
     }
   }, [])
@@ -58,7 +57,7 @@ const Slider: FC<SliderProps> = ({
         } : false}
         // @ts-ignore
         ref={sliderRef}
-        navigation={device !== DeviceType.smartphone ? nav : false}
+        navigation={!isMobile ? nav : false}
         pagination={{
           type: 'bullets',
           modifierClass: `${styles.slider__pagination} `,
