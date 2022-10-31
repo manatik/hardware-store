@@ -88,6 +88,7 @@
 
       & img {
         border-radius: 25px;
+        object-fit: cover;
 
         @include deviceWidth(tabletPortrait) {
           border-radius: 13px;
@@ -117,6 +118,7 @@
 
         & img {
           border-radius: 12px;
+          object-fit: cover;
         }
 
         &:not(:last-child) {
@@ -252,15 +254,21 @@
 
       @include deviceWidth(tabletPortrait) {
         @include m-typography(14px, 16px, 500);
-        margin-right: 15px;
       }
       @include deviceWidth(mobile) {
         @include m-typography(14px, 16px, 500);
-        margin-right: 15px;
       }
 
       &Name {
         color: $colorPrimary;
+        margin-right: 60px;
+
+        @include deviceWidth(tabletPortrait) {
+          margin-right: 20px;
+        }
+        @include deviceWidth(mobile) {
+          margin-right: 20px;
+        }
       }
     }
 
@@ -272,15 +280,21 @@
 
       @include deviceWidth(tabletPortrait) {
         @include m-typography(14px, 16px, 500);
-        margin-right: 15px;
       }
       @include deviceWidth(mobile) {
         @include m-typography(14px, 16px, 500);
-        margin-right: 15px;
       }
 
       &Name {
         color: $colorPrimary;
+        margin-right: 60px;
+
+        @include deviceWidth(tabletPortrait) {
+          margin-right: 20px;
+        }
+        @include deviceWidth(mobile) {
+          margin-right: 20px;
+        }
       }
     }
 
@@ -293,11 +307,9 @@
 
       @include deviceWidth(tabletPortrait) {
         @include m-typography(14px, 16px, 500);
-        margin-right: 15px;
       }
       @include deviceWidth(mobile) {
         @include m-typography(14px, 16px, 500);
-        margin-right: 15px;
       }
 
       &__title {
@@ -325,15 +337,15 @@
       justify-content: space-between;
       margin-bottom: 12px;
 
-      @include deviceWidth(tabletPortrait) {
-        margin-right: 10px;
-      }
-      @include deviceWidth(mobile) {
-        margin-right: 10px;
-      }
-
       &Name {
         color: $colorPrimary;
+
+        @include deviceWidth(tabletPortrait) {
+          margin-right: 20px;
+        }
+        @include deviceWidth(mobile) {
+          margin-right: 20px;
+        }
       }
     }
 

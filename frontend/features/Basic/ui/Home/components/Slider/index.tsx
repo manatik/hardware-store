@@ -31,7 +31,7 @@ const Slider: FC = (): ReactElement => {
         slidesPerView={1}
         className={styles.slider}
         autoplay={{
-          delay: 3000,
+          delay: 6000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -73,7 +73,7 @@ const Slider: FC = (): ReactElement => {
                 </div>
                 <div className={styles.slide__description}>
                   Гарантия своевременного
-                  и&nbsp;качественного выполнения услуг<br />по&nbsp;обработке фанеры,
+                  и&nbsp;качественного выполнения&nbsp;услуг<br />по&nbsp;обработке фанеры,
                   изготовлению мебели и&nbsp;домов,<br />разработке технических решений
                 </div>
               </div>
@@ -82,6 +82,7 @@ const Slider: FC = (): ReactElement => {
               src={slide1}
               placeholder="blur"
               layout="fill"
+              alt=""
             />
           </div>
         </SwiperSlide>
@@ -94,7 +95,7 @@ const Slider: FC = (): ReactElement => {
                   Эксперты по&nbsp;фанере
                 </div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения услуг<br />
+                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
                   по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
                   разработке технических решений
                 </div>
@@ -104,6 +105,7 @@ const Slider: FC = (): ReactElement => {
               src={slide2}
               layout="fill"
               placeholder="blur"
+              alt=""
             />
           </div>
         </SwiperSlide>
@@ -114,7 +116,7 @@ const Slider: FC = (): ReactElement => {
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>Жизнь, полная фанеры</div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения услуг<br />
+                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
                   по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
                   разработке технических решений
                 </div>
@@ -124,6 +126,7 @@ const Slider: FC = (): ReactElement => {
               src={slide3}
               layout="fill"
               placeholder="blur"
+              alt=""
             />
           </div>
         </SwiperSlide>
@@ -136,7 +139,7 @@ const Slider: FC = (): ReactElement => {
                   Отражение природы в вашем доме
                 </div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения услуг<br />
+                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
                   по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
                   разработке технических решений
                 </div>
@@ -146,17 +149,18 @@ const Slider: FC = (): ReactElement => {
               src={slide4}
               layout="fill"
               placeholder="blur"
+              alt=""
             />
           </div>
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className={cn(styles.slide__wrap, styles.slide__wrap_)}>
+          <div className={cn(styles.slide__wrap, styles.slide__wrap_five)}>
             <div className={styles.slide}>
               <div className={styles.slide__position}>
                 <div className={styles.slide__title}>Ценим искусство природы</div>
                 <div className={styles.slide__description}>
-                  Гарантия своевременного и&nbsp;качественного выполнения услуг<br />
+                  Гарантия своевременного и&nbsp;качественного выполнения&nbsp;услуг<br />
                   по&nbsp;обработке фанеры, изготовлению мебели и&nbsp;домов,<br />
                   разработке технических решений
                 </div>
@@ -166,18 +170,21 @@ const Slider: FC = (): ReactElement => {
               src={slide5}
               layout="fill"
               placeholder="blur"
+              alt=""
             />
           </div>
         </SwiperSlide>
 
         <div className={styles.slider__nav}>
-          {pagination && <div className={styles.slider__pagination}>
+          {pagination && (
+            <div className={styles.slider__pagination}>
                 <span
                   className={styles.slider__pagination__current}
                 >{pagination.current + 1}</span>
-            /
-            <span className={styles.slider__pagination__total}>5</span>
-          </div>}
+              /
+              <span className={styles.slider__pagination__total}>5</span>
+            </div>
+          )}
 
           <div className={styles.slider__navigation}>
             <div

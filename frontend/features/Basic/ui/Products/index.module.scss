@@ -12,6 +12,7 @@
         font-size: 16px;
         line-height: 22px;
         cursor: pointer;
+        @include m-transition;
 
         &:not(:last-child) {
             margin-right: 27px;
@@ -20,6 +21,7 @@
         &Active {
             color: $colorPrimary;
             border-bottom: 1px solid $colorPrimary;
+            @include m-transition;
         }
     }
 }

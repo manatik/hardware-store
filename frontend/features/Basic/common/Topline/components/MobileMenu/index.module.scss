@@ -2,107 +2,159 @@
 @import "@public/styles/variables";
 
 .mobileMenu {
-    position: relative;
+  position: relative;
+  max-width: 410px;
+  padding: 72px 110px;
+  border-radius: 16px;
+  background-color: $colorSecondary;
+
+  @include deviceWidth(mobile) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    padding: 72px;
+    max-width: 100%;
+  }
+
+  &__close {
+    //@include m-hover;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    cursor: pointer;
+  }
+
+  &__content {
     max-width: 410px;
-    padding: 72px 110px;
-    border-radius: 16px;
-    background-color: $colorSecondary;
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+  }
+
+  &__link {
+    @include m-typography(32px, 32px, 500);
+    text-align: center;
+    color: $colorBlack;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__call {
+    @include m-typography(16px, 16px, 500);
+    @include m-hover;
+    display: none;
+    text-align: center;
+    background-color: $colorPrimary;
+    color: $colorOnPrimary;
+    border-radius: 10px;
+    padding: 17px 32px;
+    margin-bottom: 60px;
 
     @include deviceWidth(mobile) {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        border-radius: 0;
-        padding: 72px;
-        max-width: 100%;
+      display: block;
     }
+  }
 
-    &__close {
-        //@include m-hover;
-        position: absolute;
-        top: 24px;
-        right: 24px;
-        cursor: pointer;
+  &__bottom {
+    display: flex;
+    flex-direction: column-reverse;
+
+    @include deviceWidth(mobile) {
+      flex-direction: column;
     }
+  }
 
-    &__content {
-        max-width: 410px;
-    }
+  &__social {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    &__top {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 60px;
+    @include deviceWidth(mobile) {
+      margin-bottom: 27px;
     }
 
     &__link {
-        @include m-typography(32px, 32px, 500);
-        text-align: center;
-        color: $colorBlack;
+      &:not(:last-child) {
+        margin-right: 25px;
+      }
 
-        &:not(:last-child) {
-            margin-bottom: 40px;
+      &Ozon {
+        &:before {
+          content: '';
+          display: block;
+          width: 89px;
+          height: 19px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 89px 19px;
+          background-image: url('../../../../../../assets/layout/ozon-dark.svg');
         }
+      }
+
+      &Vk {
+        &:before {
+          content: '';
+          display: block;
+          width: 36px;
+          height: 21px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 36px 21px;
+          background-image: url('../../../../../../assets/layout/vk-dark.svg');
+        }
+      }
+
+      &Tg {
+        &:before {
+          content: '';
+          display: block;
+          width: 30px;
+          height: 25px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 30px 25px;
+          background-image: url('../../../../../../assets/layout/tg-dark.svg');
+        }
+      }
+
+      &Wu {
+        &:before {
+          content: '';
+          display: block;
+          width: 29px;
+          height: 29px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 29px 29px;
+          background-image: url('../../../../../../assets/layout/wu-dark.svg');
+        }
+      }
+    }
+  }
+
+  &__market {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    @include deviceWidth(mobile) {
+      margin-bottom: 0;
     }
 
-    &__call {
-        @include m-typography(16px, 16px, 500);
-        @include m-hover;
-        display: none;
-        text-align: center;
-        background-color: $colorPrimary;
-        color: $colorOnPrimary;
-        border-radius: 10px;
-        padding: 17px 32px;
-        margin-bottom: 60px;
-
-        @include deviceWidth(mobile) {
-            display: block;
-        }
+    &__link {
+      &:not(:last-child) {
+        margin-right: 22px;
+      }
     }
-
-    &__bottom {
-        display: flex;
-        flex-direction: column-reverse;
-
-        @include deviceWidth(mobile) {
-            flex-direction: column;
-        }
-    }
-
-    &__social {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        @include deviceWidth(mobile) {
-            margin-bottom: 27px;
-        }
-
-        &__link {
-            &:not(:last-child) {
-                margin-right: 25px;
-            }
-        }
-    }
-
-    &__market {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 30px;
-
-        @include deviceWidth(mobile) {
-            margin-bottom: 0;
-        }
-
-        &__link {
-            &:not(:last-child) {
-                margin-right: 22px;
-            }
-        }
-    }
+  }
 }

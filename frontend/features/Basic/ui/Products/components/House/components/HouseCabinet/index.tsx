@@ -29,24 +29,28 @@ const HouseCabinet = () => {
             <Image
               src={img1}
               placeholder="blur"
+              alt=""
             />
           </div>
           <div className={styles.cabinet__right__item}>
             <Image
               src={img2}
               placeholder="blur"
+              alt=""
             />
           </div>
           <div className={styles.cabinet__right__item}>
             <Image
               src={img3}
               placeholder="blur"
+              alt=""
             />
           </div>
           <div className={styles.cabinet__right__item}>
             <Image
               src={img4}
               placeholder="blur"
+              alt=""
             />
           </div>
         </div>

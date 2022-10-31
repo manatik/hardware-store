@@ -20,6 +20,7 @@ const HouseOfferCard = () => {
           src={img}
           placeholder="blur"
           layout="fill"
+          alt=""
         />
       </div>
     </div>

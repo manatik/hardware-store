@@ -21,6 +21,7 @@ const Service = () => {
                 width={400}
                 height={272}
                 layout="responsive"
+                alt=""
               />
             </div>
             <div className={styles.service__card__description}>

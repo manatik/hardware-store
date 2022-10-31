@@ -35,6 +35,7 @@ const HouseInfo = () => {
               width={505}
               height={337}
               placeholder="blur"
+              alt=""
             />
           </div>
         </div>
@@ -45,6 +46,7 @@ const HouseInfo = () => {
               width={505}
               height={337}
               placeholder="blur"
+              alt=""
             />
           </div>
           <div className={styles.info__bottom__right}>

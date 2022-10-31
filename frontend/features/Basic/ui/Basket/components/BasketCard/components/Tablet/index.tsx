@@ -37,6 +37,7 @@ const Tablet: FC<BlockProps> = ({
           <Image
             src={remove}
             onClick={() => removeItem(id)}
+            alt="remove"
           />
         </div>
       </div>

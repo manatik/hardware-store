@@ -42,24 +42,26 @@
     }
   }
 
-    &__right {
-      @include m-typography(20px, 28px);
-      width: 50%;
+  &__right {
+    @include m-typography(20px, 28px);
+    width: 50%;
 
-      @include deviceWidth(mobile) {
-        @include m-typography(14px, 20px);
-        width: 100%;
+    @include deviceWidth(mobile) {
+      @include m-typography(14px, 20px);
+      width: 100%;
+    }
+  }
+
+  &__images {
+    display: flex;
+    margin-top: 15px;
+
+    &__item {
+      @include m-hover;
+
+      &:not(:last-child) {
+        margin-right: 12px;
       }
     }
-
-    &__images {
-        display: flex;
-        margin-top: 15px;
-
-        &__item {
-            &:not(:last-child) {
-                margin-right: 12px;
-            }
-        }
-    }
+  }
 }

@@ -7,6 +7,7 @@ import tg from 'assets/layout/tg.svg'
 import wu from 'assets/layout/wu.svg'
 import ozon from 'assets/layout/ozon-light-min.svg'
 
+import cn from 'classnames'
 import styles from './index.module.scss'
 
 const Footer = () => {
@@ -15,6 +16,9 @@ const Footer = () => {
       <div className={styles.footer__inner}>
         <div className={styles.footer__top}>
           <div className={styles.footer__links}>
+            <Link href="/">
+              <a className={styles.footer__link__logo} />
+            </Link>
             <div className={styles.footer__links__content}>
               <Link href="/">
                 <a className={styles.footer__link}>Главная</a>
@@ -34,26 +38,26 @@ const Footer = () => {
                 href="https://www.ozon.ru/seller/plywood-market-622604/products/?miniapp=seller_622604"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.footer__social__link}
-              ><Image src={ozon} /></a>
+                className={cn(styles.footer__social__link, styles.footer__social__linkOzon)}
+              />
               <a
                 href="https://vk.com/plywood_market"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.footer__social__link}
-              ><Image src={vk} /></a>
+                className={cn(styles.footer__social__link, styles.footer__social__linkVk)}
+              />
               <a
                 href="https://t.me/plywood_market"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.footer__social__link}
-              ><Image src={tg} /></a>
+                className={cn(styles.footer__social__link, styles.footer__social__linkTg)}
+              />
               <a
                 href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.footer__social__link}
-              ><Image src={wu} /></a>
+                className={cn(styles.footer__social__link, styles.footer__social__linkWu)}
+              />
             </div>
           </div>
           <div className={styles.footer__links_mobile}>
@@ -83,25 +87,45 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footer__social__link}
-              ><Image src={ozon} /></a>
+              >
+                <Image
+                  src={ozon}
+                  alt="ozon"
+                />
+              </a>
               <a
                 href="https://vk.com/plywood_market"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footer__social__link}
-              ><Image src={vk} /></a>
+              >
+                <Image
+                  src={vk}
+                  alt="vk"
+                />
+              </a>
               <a
                 href="https://t.me/plywood_market"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footer__social__link}
-              ><Image src={tg} /></a>
+              >
+                <Image
+                  src={tg}
+                  alt='tg'
+                />
+              </a>
               <a
                 href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footer__social__link}
-              ><Image src={wu} /></a>
+              >
+                <Image
+                  src={wu}
+                  alt="wu"
+                />
+              </a>
             </div>
           </div>
         </div>

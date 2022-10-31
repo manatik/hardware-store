@@ -1,31 +1,50 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { setCookie } from 'cookies-next'
 import cn from 'classnames'
-
 import plywood from 'assets/slider/slide-3.webp'
 import furniture from 'assets/slider/slide-7.webp'
 import styles from './index.module.scss'
 
 const Info = () => {
+  const router = useRouter()
+  const handleLink = async (link: string) => {
+    if (link === 'service') {
+      await router.push('/service')
+    } else {
+      await setCookie('ProductBlock', link)
+      await router.push('/products')
+    }
+  }
   return (
     <div className={styles.info}>
       <div className={styles.info__inner}>
         <div className={styles.info__products}>
           <div className={styles.info__title}>Продукты и сервис</div>
           <div className={styles.info__cards}>
-            <div className={cn(styles.info__card, styles.info__cardHome)}>
+            <div
+              className={cn(styles.info__card, styles.info__cardHome)}
+              onClick={() => handleLink('house')}
+            >
               <div className={styles.info__card__title}>Домостроение</div>
               <div className={styles.info__card__subTitle}>О продукте</div>
               <div className={styles.info__card__subTitle}>Каталог</div>
               <div className={styles.info__card__subTitle}>Производство</div>
             </div>
-            <div className={cn(styles.info__card, styles.info__cardFurniture)}>
+            <div
+              className={cn(styles.info__card, styles.info__cardFurniture)}
+              onClick={() => handleLink('furniture')}
+            >
               <div className={styles.info__card__title}>Мебель</div>
               <div className={styles.info__card__subTitle}>Корпусная мебель</div>
               <div className={styles.info__card__subTitle}>Дизайнерская мебель</div>
               <div className={styles.info__card__subTitle}>Логистика</div>
             </div>
-            <div className={cn(styles.info__card, styles.info__cardPlyWood)}>
+            <div
+              className={cn(styles.info__card, styles.info__cardPlyWood)}
+              onClick={() => handleLink('plywood')}
+            >
               <div className={styles.info__card__title}>Фанера</div>
               <div className={styles.info__card__subTitle}>ФСФ</div>
               <div className={styles.info__card__subTitle}>ФК</div>
@@ -34,7 +53,10 @@ const Info = () => {
               <div className={styles.info__card__subTitle}>С покрытием</div>
               <div className={styles.info__card__subTitle}>Под покраску</div>
             </div>
-            <div className={cn(styles.info__card, styles.info__cardService)}>
+            <div
+              className={cn(styles.info__card, styles.info__cardService)}
+              onClick={() => handleLink('service')}
+            >
               <div className={styles.info__card__title}>Сервис</div>
               <div className={styles.info__card__subTitle}>Фрезерование</div>
               <div className={styles.info__card__subTitle}>Сверление</div>
@@ -61,6 +83,7 @@ const Info = () => {
                 placeholder="blur"
                 width={612}
                 height={312}
+                alt=""
               />
             </div>
           </div>
@@ -75,6 +98,7 @@ const Info = () => {
                 placeholder="blur"
                 width={638}
                 height={525}
+                alt=""
               />
             </div>
             <div className={styles.info__edge__description}>

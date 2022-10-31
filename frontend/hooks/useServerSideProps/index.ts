@@ -14,9 +14,9 @@ import {
   fetchFurniturePhotosAsync,
   fetchPlywoodAsync,
 } from '@store/products/productsSlice'
+import { orderService } from '@services/order/order.service'
 import { plywoodService } from '@services/products/plywood.service'
 import { furnitureService } from '@services/products/furniture.service'
-import { orderService } from '@services/order/order.service'
 
 /**
  * Список шаблонов страниц
@@ -112,14 +112,13 @@ export const useServerSideProps = async (
       try {
         const { id } = query
         const { product } = await plywoodService.plywood(id as string)
+        // eslint-disable-next-line no-console
+        console.log(product)
         return { props: { product } }
       } catch (e) {
-        return {
-          redirect: {
-            destination: '/products',
-            permanent: false,
-          },
-        }
+        // eslint-disable-next-line no-console
+        console.log(e)
+        return { props: { product: null } }
       }
     }
 
@@ -136,14 +135,13 @@ export const useServerSideProps = async (
       try {
         const { id } = query
         const { product } = await furnitureService.furniture(id as string)
+        // eslint-disable-next-line no-console
+        console.log(product)
         return { props: { product } }
       } catch (e) {
-        return {
-          redirect: {
-            destination: '/products',
-            permanent: false,
-          },
-        }
+        // eslint-disable-next-line no-console
+        console.log(e)
+        return { props: { product: null } }
       }
     }
 

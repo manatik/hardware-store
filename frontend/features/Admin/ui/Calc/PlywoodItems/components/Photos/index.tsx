@@ -33,8 +33,12 @@ const Photos = () => {
       const { message } = await photosService.add(fd)
       toast.success(message || 'Фотографии успешно добавлены')
       dispatch(fetchPlywoodAsync())
+      setImages([])
+      setColor('#fff')
+      return 'success'
     } catch (e: any) {
       toast.error(e.error || 'Ошибка запроса')
+      return 'error'
     }
   }
 
@@ -50,8 +54,9 @@ const Photos = () => {
       validateOnChange={false}
       validateOnBlur={false}
       validationSchema={photosSchema}
-      onSubmit={async (values) => {
-        await handleSaveImages(values.name)
+      onSubmit={async (values, formikHelpers) => {
+        const data = await handleSaveImages(values.name)
+        if (data === 'success') formikHelpers.setValues({ name: '' })
       }}
     >
       {({

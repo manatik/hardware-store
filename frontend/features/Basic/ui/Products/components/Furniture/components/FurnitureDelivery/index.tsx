@@ -24,15 +24,39 @@ const FurnitureDelivery = () => {
         <div className={styles.delivery__right}>
           Самостоятельно можно рассчитать стоимость доставки следующими транспортными компаниями
           <div className={styles.delivery__images}>
-            <div className={styles.delivery__images__item}>
-              <Image src={delivery1} />
-            </div>
-            <div className={styles.delivery__images__item}>
-              <Image src={delivery2} />
-            </div>
-            <div className={styles.delivery__images__item}>
-              <Image src={delivery3} />
-            </div>
+            <a
+              href="https://www.cdek-calc.ru/"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.delivery__images__item}
+            >
+              <Image
+                src={delivery1}
+                alt=""
+              />
+            </a>
+            <a
+              href="https://www.pochta.ru/parcels?addressFrom=6b1bab7d-ee45-4168-a2a6-4ce2880d90d3"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.delivery__images__item}
+            >
+              <Image
+                src={delivery2}
+                alt=""
+              />
+            </a>
+            <a
+              href="https://pecom.ru/services-are/shipping-request/"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.delivery__images__item}
+            >
+              <Image
+                src={delivery3}
+                alt=""
+              />
+            </a>
           </div>
         </div>
       </div>

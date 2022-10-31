@@ -12,11 +12,15 @@ interface SliderProps {
   sliders: SliderMock,
   sliderRef?: MutableRefObject<unknown>,
   autoplay?: boolean,
+  onChange?: (swiper: any) => void,
+  onClickModal?: (image: any) => void,
 }
 const Slider: FC<SliderProps> = ({
   sliders,
   sliderRef,
   autoplay = true,
+  onChange,
+  onClickModal,
 }) => {
   return (
     <div
@@ -38,6 +42,7 @@ const Slider: FC<SliderProps> = ({
           bulletClass: styles.slider__pagination__bullet,
           bulletActiveClass: styles.slider__pagination__bulletActive,
         }}
+        onSlideChange={(swiper) => (onChange ? onChange(swiper) : () => null)}
         modules={[Autoplay, Pagination]}
       >
         {sliders && sliders.map((item, index) => (
@@ -47,6 +52,7 @@ const Slider: FC<SliderProps> = ({
                 [styles.slider__slide__first]: index === 0 && item.title === 'plywood',
                 [styles.slider__slide__noCover]: item.title === 'noCover',
               })}
+              onClick={() => (onClickModal ? onClickModal(item.image) : () => null)}
             >
               <Image
                 src={item.image}
@@ -54,6 +60,7 @@ const Slider: FC<SliderProps> = ({
                 height={item.height}
                 width={item.width}
                 placeholder="blur"
+                alt={`slide${index + 1}`}
               />
             </div>
           </SwiperSlide>

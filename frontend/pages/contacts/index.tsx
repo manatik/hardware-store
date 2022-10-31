@@ -86,6 +86,7 @@ const Contacts: NextPage = () => {
                 quality={100}
                 placeholder="blur"
                 layout="responsive"
+                alt=""
               />
             </div>
           </div>

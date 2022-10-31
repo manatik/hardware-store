@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use(
     const requireAuth = config.headers.common.cookie
     const authToken = localStorageService.getAccessToken()
     if (requireAuth || authToken) {
-      const token = requireAuth?.split('a_t=')[1].split(';')[0] || authToken
+      const token = requireAuth?.split('a_t=')[1]?.split(';')[0] || authToken
       // eslint-disable-next-line no-param-reassign
       config.headers = {
         ...config.headers,
@@ -60,6 +60,8 @@ axiosInstance.interceptors.response.use(
       console.log('response', {
         data: config.data,
         headers: config.headers,
+        req: config.request,
+        status: config.status,
       })
     }
     return config

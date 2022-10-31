@@ -27,6 +27,7 @@ const FurnitureDesigner = () => {
             src={img}
             width={505}
             height={318}
+            alt=""
           />
         </div>
         <div className={styles.designer__right}>

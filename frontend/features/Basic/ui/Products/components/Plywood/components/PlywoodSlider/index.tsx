@@ -35,6 +35,7 @@ const PlywoodSlider: FC<any> = ({ cards }) => {
                   width={614}
                   height={400}
                   placeholder="blur"
+                  alt=""
                 />
               </div>
               {item.title && (

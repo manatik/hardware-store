@@ -25,8 +25,10 @@ const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
     try {
       const { success } = await orderService.orderEmail(values)
       if (success) toast.success('Заявка отправлена, скоро мы вам перезвоним!')
+      return 'success'
     } catch (e: any) {
-      console.log(e)
+      toast.error(e.message || 'Ошибка сервера')
+      return 'error'
     }
   }
 
@@ -42,7 +44,10 @@ const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
             className={styles.opposite__close}
             onClick={onClose}
           >
-            <Image src={close} />
+            <Image
+              src={close}
+              alt="close"
+            />
           </div>
           <div className={styles.opposite__title}>{title}</div>
           <div className={styles.opposite__info}>
@@ -60,7 +65,9 @@ const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
             validateOnChange={false}
             validateOnBlur={false}
             onSubmit={async (values) => {
-              await handleSubmit(values)
+              const data = await handleSubmit(values)
+
+              if (data === 'success') onClose()
             }}
           >
             {({

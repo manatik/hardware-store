@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import { useAppDispatch } from '@store/hooks'
-import { addProduct, initBasket } from '@store/basket/basketSlice'
+import { addProduct } from '@store/basket/basketSlice'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
 import LayoutCard from '@features/Basic/common/LayoutCard'
@@ -12,19 +12,17 @@ import BasketCounter from '@features/Basic/ui/Basket/components/BasketCounter'
 import { FurnitureItemModal, FurniturePhotosModal, Photo } from '@models/Products'
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
 import { toast } from 'react-toastify'
+import { removeFurnitureItem } from '@store/products/productsSlice'
 
 const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
   const dispatch = useAppDispatch()
-  const [images] = useState<FurniturePhotosModal>(product?.photos[0])
-  const [currentImage, setCurrentImage] = useState<Photo>(product?.photos[0]?.photos[0])
+  const [images, setImages] = useState<FurniturePhotosModal>()
+  const [currentImage, setCurrentImage] = useState<Photo>()
   const [count, setCount] = useState<number>(1)
 
-  useEffect(() => {
-    dispatch(initBasket())
-  }, [])
-
   const handleSetCurrentImage = (filename: string) => {
-    const result = images.photos.filter((item) => item?.filename === filename)
+    const result = images && images.photos.filter((item) => item?.filename === filename)
+    if (!result) return
     setCurrentImage(result[0])
   }
 
@@ -50,6 +48,19 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
     toast.success('Товар добавлен в корзину')
   }
 
+  useEffect(() => {
+    if (product) {
+      setImages(product.photos[0])
+      setCurrentImage(product.photos[0].photos[0])
+    }
+  }, [product])
+
+  useEffect(() => {
+    return () => {
+      dispatch(removeFurnitureItem())
+    }
+  }, [])
+
   return (
     <LayoutCard>
       <div className={styles.products__item}>
@@ -71,14 +82,13 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
               </div>
             )}
           </div>
-          {product?.photos && (
+          {product?.photos && currentImage?.path && (
             <div className={styles.products__item__currentImage}>
               <Image
                 src={currentImage.path}
                 alt={currentImage.filename}
                 width={610}
                 height={400}
-                placeholder="blur"
               />
             </div>
           )}
@@ -98,7 +108,6 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                     alt={item?.filename}
                     width={187}
                     height={124}
-                    placeholder="blur"
                     layout="responsive"
                   />
                 </div>

@@ -22,18 +22,15 @@ import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
 import { PlywoodOrderSchema } from '@schema/plywood'
 import { useAppDispatch } from '@store/hooks'
-import { addProduct, initBasket } from '@store/basket/basketSlice'
+import { addProduct } from '@store/basket/basketSlice'
 import { toast } from 'react-toastify'
+import { removePlywoodItem } from '@store/products/productsSlice'
 
-interface CardItemPlywoodProps {
-  product: PlywoodItem
-}
-
-const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
+const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
   const dispatch = useAppDispatch()
   const [toggle, setToggle] = useState<boolean>(false)
-  const [images, setImages] = useState<FurniturePhotosModal>(product?.photos[0])
-  const [currentImage, setCurrentImage] = useState<Photo>(product?.photos[0].photos[0])
+  const [images, setImages] = useState<FurniturePhotosModal>()
+  const [currentImage, setCurrentImage] = useState<Photo>()
   const [count, setCount] = useState<number>(1)
 
   const toggleModal = (): void => {
@@ -49,7 +46,8 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
   }
 
   const handleSetCurrentImage = (filename: string) => {
-    const result = images.photos.filter((item) => item.filename === filename)
+    const result = images && images.photos.filter((item) => item.filename === filename)
+    if (!result) return
     setCurrentImage(result[0])
   }
 
@@ -67,7 +65,16 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
   }
 
   useEffect(() => {
-    dispatch(initBasket())
+    if (product) {
+      setImages(product.photos[0])
+      setCurrentImage(product.photos[0].photos[0])
+    }
+  }, [product])
+
+  useEffect(() => {
+    return () => {
+      dispatch(removePlywoodItem())
+    }
   }, [])
 
   return (
@@ -85,7 +92,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
                 {product.name}
               </div>
             )}
-            {product.photos && (
+            {product.photos && images && (
               <div className={styles.products__item__colors}>
                 <div className={styles.products__item__colorsName}>Цвет</div>
                 <div className={styles.products__item__colorsValue}>
@@ -103,20 +110,19 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
               </div>
             )}
           </div>
-          {product?.photos && (
+          {product?.photos && currentImage?.path && (
             <div className={styles.products__item__currentImage}>
               <Image
                 src={currentImage.path}
                 alt={currentImage.filename}
                 width={610}
                 height={400}
-                placeholder="blur"
               />
             </div>
           )}
-          {product?.photos && (
+          {product?.photos && currentImage?.path && (
             <div className={styles.products__item__images}>
-              {images.photos.map((item) => (
+              {images && images.photos.map((item) => (
                 <div
                   key={item.filename}
                   className={cn(styles.products__item__images__item, {
@@ -130,7 +136,6 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
                     alt={item.filename}
                     width={187}
                     height={124}
-                    placeholder="blur"
                     layout="responsive"
                   />
                 </div>
@@ -148,7 +153,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
             {product.name && (
               <div className={styles.products__item__title}>{product.name}</div>
             )}
-            {product.photos && (
+            {product.photos && images && (
               <div className={styles.products__item__colors}>
                 <div className={styles.products__item__colorsName}>Цвет</div>
                 <div className={styles.products__item__colorsValue}>
@@ -169,7 +174,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
           {product.description && (
             <div className={styles.products__item__description}>{product.description}</div>
           )}
-          {product.sorts && (
+          {product.sorts.length > 0 && (
             <div className={styles.products__item__sorts}>
               <div className={styles.products__item__sortsName}>Сорт</div>
               <div className={styles.products__item__sortsValue}>
@@ -179,7 +184,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
               </div>
             </div>
           )}
-          {product.coatingDensity && (
+          {product.coatingDensity.length > 0 && (
             <div className={styles.products__item__density}>
               <div className={styles.products__item__densityName}>Плотность</div>
               <div className={styles.products__item__densityValue}>
@@ -222,7 +227,10 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
                 className={stylesModal.opposite__close}
                 onClick={toggleModal}
               >
-                <Image src={close} />
+                <Image
+                  src={close}
+                  alt="close"
+                />
               </div>
               <div className={stylesModal.opposite__info}>
                 Для оформления заказа нужно указать параметры фанеры
@@ -242,7 +250,7 @@ const CardItemPlywood: NextPage<CardItemPlywoodProps> = ({ product }) => {
                     ...product,
                     ...values,
                     count,
-                    color: images.color,
+                    color: images?.color || '#fff',
                   }))
                   toggleModal()
                   setCount(1)

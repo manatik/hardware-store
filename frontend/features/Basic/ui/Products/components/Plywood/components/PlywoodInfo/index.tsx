@@ -30,6 +30,7 @@ const PlywoodInfo = () => {
           src={info}
           quality={100}
           placeholder="blur"
+          alt=""
         />
       </div>
     </div>

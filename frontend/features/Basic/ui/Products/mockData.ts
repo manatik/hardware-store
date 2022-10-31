@@ -1,4 +1,4 @@
-import plywood1 from 'assets/slider/slide-3.webp'
+import plywoodSUUUKKAAA from 'assets/products/plywoood-ska.webp'
 import plywood2 from 'assets/slider/slide-8.webp'
 import plywood3 from 'assets/slider/slide-9.webp'
 import card from 'assets/service/card-1.webp'
@@ -17,7 +17,7 @@ import image3 from 'assets/products/plywood/production3.webp'
 export const plywood = [
   {
     id: 1,
-    image: plywood1,
+    image: plywoodSUUUKKAAA,
     title: 'plywood',
     description: 'sdfsdf',
     height: 431,
@@ -105,7 +105,7 @@ export const houseLinks = [
   },
   {
     link: ProductLinks.Options,
-    title: 'Корпусная мебель',
+    title: 'Варианты комплектации',
   },
 ]
 
@@ -181,7 +181,7 @@ export const serviceSlide = [
   {
     image: card9,
     number: '09',
-    title: 'Разработка готовых решений фото',
+    title: 'Разработка готовых решений',
   },
 ]
 
