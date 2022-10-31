@@ -5,14 +5,21 @@ import * as path from 'path';
 import * as sharp from 'sharp';
 import * as uuid from 'uuid';
 
+export enum Extname {
+  PNG = '.png',
+  JPG = '.jpg',
+  WEBP = '.webp',
+}
+
 @Injectable()
 export class FilesService {
   private readonly SOURCE_DIR = path.join(process.cwd(), 'assets');
 
   async writeFileWithCompress({ filename, buffer, size = 0 }: { filename: string; buffer: Buffer; size?: number }) {
     try {
-      const compressedBuffer = await this.compressFile(buffer);
-      const name = uuid.v4() + '.webp';
+      const ext = path.extname(filename);
+      const compressedBuffer = await this.compressFile(buffer, ext);
+      const name = uuid.v4() + ext;
 
       await this.writeFile({ filename: name, buffer: compressedBuffer });
 
@@ -27,14 +34,18 @@ export class FilesService {
     }
   }
 
-  async compressFile(buffer: Buffer) {
+  async compressFile(buffer: Buffer, ext: string) {
     try {
-      return await sharp(buffer)
-        .toFormat('webp')
-        .webp({ quality: 70 })
-        .resize(1366, 768, { fit: 'outside' })
-        .normalise()
-        .toBuffer();
+      switch (ext) {
+        case Extname.JPG:
+          return await sharp(buffer).jpeg({ quality: 70 }).resize(1366, 768, { fit: 'outside' }).toBuffer();
+        case Extname.PNG:
+          return await sharp(buffer).png({ quality: 70 }).resize(1366, 768, { fit: 'outside' }).toBuffer();
+        case Extname.WEBP:
+          return await sharp(buffer).webp({ quality: 70 }).resize(1366, 768, { fit: 'outside' }).toBuffer();
+        default:
+          throw new Error('Неправильный формат фото, принимается только PNG и JPG');
+      }
     } catch (e) {
       throw e;
     }
