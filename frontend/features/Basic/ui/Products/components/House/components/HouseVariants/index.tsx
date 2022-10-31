@@ -80,9 +80,15 @@ const HouseVariants = () => {
                 className={styles.variant__close}
                 onClick={handleModalImage}
               >
-                <Image src={close} />
+                <Image
+                  src={close}
+                  alt="close"
+                />
               </div>
-              <Image src={toggleModal} />
+              <Image
+                src={toggleModal}
+                alt=""
+              />
             </div>
           </Modal>
         </Portal>

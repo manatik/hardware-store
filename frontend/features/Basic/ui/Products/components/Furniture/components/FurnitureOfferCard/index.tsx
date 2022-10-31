@@ -17,6 +17,7 @@ const FurnitureOfferCard = () => {
           src={img}
           placeholder="blur"
           layout="fill"
+          alt=""
         />
       </div>
     </div>

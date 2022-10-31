@@ -44,7 +44,10 @@ const Opposite: FC<OppositeProps> = ({ onClose, title }) => {
             className={styles.opposite__close}
             onClick={onClose}
           >
-            <Image src={close} />
+            <Image
+              src={close}
+              alt="close"
+            />
           </div>
           <div className={styles.opposite__title}>{title}</div>
           <div className={styles.opposite__info}>

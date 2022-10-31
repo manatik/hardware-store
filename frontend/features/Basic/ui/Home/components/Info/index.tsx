@@ -83,6 +83,7 @@ const Info = () => {
                 placeholder="blur"
                 width={612}
                 height={312}
+                alt=""
               />
             </div>
           </div>
@@ -97,6 +98,7 @@ const Info = () => {
                 placeholder="blur"
                 width={638}
                 height={525}
+                alt=""
               />
             </div>
             <div className={styles.info__edge__description}>

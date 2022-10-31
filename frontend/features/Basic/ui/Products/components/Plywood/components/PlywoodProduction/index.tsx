@@ -28,16 +28,19 @@ const PlywoodProduction = () => {
           src={image1}
           width={502}
           height={329}
+          alt=""
         />
         <Image
           src={image2}
           width={502}
           height={329}
+          alt=""
         />
         <Image
           src={image3}
           width={715}
           height={329}
+          alt=""
         />
       </div>
 

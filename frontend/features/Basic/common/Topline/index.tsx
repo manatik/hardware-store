@@ -169,7 +169,10 @@ const Topline: FC<ToplineProps> = ({
             </button>
             <Link href={`${ToplineLinks.Basket}?redirectUrl=${pathname || ''}`}>
               <a className={styles.topline__basket}>
-                 <Image src={basket} />
+                 <Image
+                   src={basket}
+                   alt="basket"
+                 />
                 {basketEntities.length > 0 && (
                   <span className={styles.topline__basket__point}>{basketEntities.length}</span>
                 )}

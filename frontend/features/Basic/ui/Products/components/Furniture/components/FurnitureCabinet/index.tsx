@@ -36,6 +36,7 @@ const FurnitureCabinet = () => {
                width={244}
                height={157}
                placeholder="blur"
+               alt=""
              />
           </div>
           <div className={styles.cabinet__right__item}>
@@ -44,6 +45,7 @@ const FurnitureCabinet = () => {
                width={244}
                height={157}
                placeholder="blur"
+               alt=""
              />
           </div>
           <div className={styles.cabinet__right__item}>
@@ -52,6 +54,7 @@ const FurnitureCabinet = () => {
                width={244}
                height={157}
                placeholder="blur"
+               alt=""
              />
           </div>
           <div className={styles.cabinet__right__item}>
@@ -60,6 +63,7 @@ const FurnitureCabinet = () => {
                width={244}
                height={157}
                placeholder="blur"
+               alt=""
              />
           </div>
         </div>

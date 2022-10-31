@@ -30,7 +30,10 @@ const FurnitureDelivery = () => {
               rel="noreferrer"
               className={styles.delivery__images__item}
             >
-              <Image src={delivery1} />
+              <Image
+                src={delivery1}
+                alt=""
+              />
             </a>
             <a
               href="https://www.pochta.ru/parcels?addressFrom=6b1bab7d-ee45-4168-a2a6-4ce2880d90d3"
@@ -38,7 +41,10 @@ const FurnitureDelivery = () => {
               rel="noreferrer"
               className={styles.delivery__images__item}
             >
-              <Image src={delivery2} />
+              <Image
+                src={delivery2}
+                alt=""
+              />
             </a>
             <a
               href="https://pecom.ru/services-are/shipping-request/"
@@ -46,7 +52,10 @@ const FurnitureDelivery = () => {
               rel="noreferrer"
               className={styles.delivery__images__item}
             >
-              <Image src={delivery3} />
+              <Image
+                src={delivery3}
+                alt=""
+              />
             </a>
           </div>
         </div>

@@ -10,6 +10,10 @@ const nextConfig = {
     REACT_APP_ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
   },
+  i18n: {
+    locales: ['ru'],
+    defaultLocale: 'ru',
+  },
   images: {
     domains: ['nestjs'],
   },

@@ -23,7 +23,10 @@ const LayoutCard: FC<LayoutCardProps> = ({ children }) => {
             onClick={onClose}
             className={styles.layoutCard__close}
           >
-            <Image src={close} />
+            <Image
+              src={close}
+              alt="close"
+            />
           </button>
         </div>
 

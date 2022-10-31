@@ -60,6 +60,7 @@ const Slider: FC<SliderProps> = ({
                 height={item.height}
                 width={item.width}
                 placeholder="blur"
+                alt={`slide${index + 1}`}
               />
             </div>
           </SwiperSlide>

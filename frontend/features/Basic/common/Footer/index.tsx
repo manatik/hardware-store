@@ -87,25 +87,45 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footer__social__link}
-              ><Image src={ozon} /></a>
+              >
+                <Image
+                  src={ozon}
+                  alt="ozon"
+                />
+              </a>
               <a
                 href="https://vk.com/plywood_market"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footer__social__link}
-              ><Image src={vk} /></a>
+              >
+                <Image
+                  src={vk}
+                  alt="vk"
+                />
+              </a>
               <a
                 href="https://t.me/plywood_market"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footer__social__link}
-              ><Image src={tg} /></a>
+              >
+                <Image
+                  src={tg}
+                  alt='tg'
+                />
+              </a>
               <a
                 href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.footer__social__link}
-              ><Image src={wu} /></a>
+              >
+                <Image
+                  src={wu}
+                  alt="wu"
+                />
+              </a>
             </div>
           </div>
         </div>

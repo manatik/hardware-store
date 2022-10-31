@@ -82,6 +82,7 @@ const Slider: FC = (): ReactElement => {
               src={slide1}
               placeholder="blur"
               layout="fill"
+              alt=""
             />
           </div>
         </SwiperSlide>
@@ -104,6 +105,7 @@ const Slider: FC = (): ReactElement => {
               src={slide2}
               layout="fill"
               placeholder="blur"
+              alt=""
             />
           </div>
         </SwiperSlide>
@@ -124,6 +126,7 @@ const Slider: FC = (): ReactElement => {
               src={slide3}
               layout="fill"
               placeholder="blur"
+              alt=""
             />
           </div>
         </SwiperSlide>
@@ -146,6 +149,7 @@ const Slider: FC = (): ReactElement => {
               src={slide4}
               layout="fill"
               placeholder="blur"
+              alt=""
             />
           </div>
         </SwiperSlide>
@@ -166,6 +170,7 @@ const Slider: FC = (): ReactElement => {
               src={slide5}
               layout="fill"
               placeholder="blur"
+              alt=""
             />
           </div>
         </SwiperSlide>

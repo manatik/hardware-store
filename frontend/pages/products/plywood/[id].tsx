@@ -227,7 +227,10 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
                 className={stylesModal.opposite__close}
                 onClick={toggleModal}
               >
-                <Image src={close} />
+                <Image
+                  src={close}
+                  alt="close"
+                />
               </div>
               <div className={stylesModal.opposite__info}>
                 Для оформления заказа нужно указать параметры фанеры

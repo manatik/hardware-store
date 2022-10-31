@@ -30,7 +30,10 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
             className={styles.mobileMenu__close}
             onClick={onClose}
           >
-             <Image src={close} />
+             <Image
+               src={close}
+               alt="close"
+             />
           </div>
           <div className={styles.mobileMenu__content}>
             <div className={styles.mobileMenu__top}>
