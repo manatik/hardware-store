@@ -145,9 +145,9 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
         </div>
         <div className={styles.products__item__right}>
           <div className={styles.products__item__desktop}>
-            {product.available && (
+            {product?.available && (
               <div className={styles.products__item__available}>
-                {setAvailable(product.available)}
+                {setAvailable(product?.available)}
               </div>
             )}
             {product?.name && (
@@ -160,8 +160,8 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
                   {product?.photos.map((item) => (
                     <div
                       key={item.id}
-                      style={{ backgroundColor: item.color }}
-                      onClick={() => handleChangeImages(item.id)}
+                      style={{ backgroundColor: item?.color }}
+                      onClick={() => handleChangeImages(item?.id)}
                       className={cn(styles.products__item__color, {
                         [styles.products__item__colorActive]: images.id === item.id,
                       })}
@@ -172,7 +172,7 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
             )}
           </div>
           {product?.description && (
-            <div className={styles.products__item__description}>{product.description}</div>
+            <div className={styles.products__item__description}>{product?.description}</div>
           )}
           {product?.sorts?.length > 0 && (
             <div className={styles.products__item__sorts}>
