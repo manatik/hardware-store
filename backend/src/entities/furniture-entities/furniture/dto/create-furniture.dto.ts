@@ -4,11 +4,15 @@ import { Available } from '../../../../types/enum/Available.enum';
 export class CreateFurnitureDto {
   @IsOptional()
   @IsString({ each: true })
-  features: string[];
+  features?: string[];
 
   @IsOptional()
   @IsString({ each: true })
-  photos: string[];
+  photos?: string[];
+
+  @IsOptional()
+  @IsString({ each: true })
+  parameters?: string[];
 
   @IsNotEmpty()
   @IsString()

@@ -16,6 +16,7 @@ export class FurnitureService {
       const products = await this.prismaService.furniture.findMany({
         where: deleted ? undefined : { deleted: null },
         select: {
+          parameters: true,
           category: true,
           features: true,
           description: true,
@@ -33,6 +34,9 @@ export class FurnitureService {
           width: true,
           deleted: deleted,
         },
+        orderBy: {
+          article: 'asc',
+        },
       });
 
       return this.errorService.success('Продукты успешно получены', {
@@ -47,7 +51,7 @@ export class FurnitureService {
     try {
       const product = await this.prismaService.furniture.findFirst({
         where: { id, deleted: null },
-        include: { category: true, features: true, photos: true },
+        include: { category: true, features: true, photos: true, parameters: true },
       });
 
       return this.errorService.success('Продукт успешно получен', { product });
@@ -69,6 +73,7 @@ export class FurnitureService {
           ...dto,
           features: { connect: idsArrayToArrayOfObjects(dto.features) },
           photos: { connect: idsArrayToArrayOfObjects(dto.photos) },
+          parameters: { connect: idsArrayToArrayOfObjects(dto.parameters) },
         },
       });
 
@@ -88,6 +93,9 @@ export class FurnitureService {
           ...dto,
           features: dto.features?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.features) } : { set: [] },
           photos: dto.photos?.length ? { set: [], connect: idsArrayToArrayOfObjects(dto.photos) } : { set: [] },
+          parameters: dto.parameters?.length
+            ? { set: [], connect: idsArrayToArrayOfObjects(dto.parameters) }
+            : { set: [] },
         },
       });
 
