@@ -11,6 +11,10 @@ export class UpdateFurnitureDto {
   photos?: string[];
 
   @IsOptional()
+  @IsString({ each: true })
+  parameters?: string[];
+
+  @IsOptional()
   @IsString()
   name?: string;
 

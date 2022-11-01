@@ -36,6 +36,9 @@ export class PlywoodService {
           updatedAt: true,
           deleted: deleted,
         },
+        orderBy: {
+          article: 'asc',
+        },
       });
 
       return this.errorService.success('Продукты успешно получены', {

@@ -35,7 +35,7 @@ export class FilesService {
   }
 
   async compressFile(buffer: Buffer, ext: string) {
-    const imageOpt = { quality: 85 };
+    const imageOpt = { quality: 70 };
     const width = 1366;
     const height = 768;
     const opt: any = { fit: 'outside' };
@@ -45,7 +45,7 @@ export class FilesService {
         case Extname.JPG:
           return await sharp(buffer).jpeg(imageOpt).resize(width, height, opt).toBuffer();
         case Extname.PNG:
-          return await sharp(buffer).png(imageOpt).resize(width, height, opt).toBuffer();
+          return await sharp(buffer).png().resize(width, height, opt).toBuffer();
         case Extname.WEBP:
           return await sharp(buffer).webp(imageOpt).resize(width, height, opt).toBuffer();
         default:
