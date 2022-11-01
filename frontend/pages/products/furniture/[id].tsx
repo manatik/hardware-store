@@ -49,9 +49,9 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
   }
 
   useEffect(() => {
-    if (product) {
-      setImages(product.photos[0])
-      setCurrentImage(product.photos[0].photos[0])
+    if (product?.photos[0]) {
+      setImages(product?.photos[0])
+      setCurrentImage(product?.photos[0]?.photos[0])
     }
   }, [product])
 

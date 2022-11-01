@@ -27,9 +27,9 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
 
   return (
     <div className={styles.productCards}>
-      {products.length > 0 && products.map((item: PlywoodItem | FurnitureItemModal) => {
-        const allPrice = item.features?.map((item) => item.price)
-        const lowPrice = allPrice && allPrice.length ? Math.min(...allPrice) : null
+      {products?.length > 0 && products.map((item: PlywoodItem | FurnitureItemModal) => {
+        const allPrice = item?.features?.map((item) => item?.price)
+        const lowPrice = allPrice && allPrice?.length ? Math.min(...allPrice) : null
 
         const PriceElement = () => {
           return lowPrice ? (

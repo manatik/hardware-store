@@ -42,7 +42,7 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
   const handleChangeImages = (id: string) => {
     const result = product?.photos.filter((item) => item.id === id)
     setImages(result[0])
-    setCurrentImage(result[0].photos[0])
+    setCurrentImage(result[0]?.photos[0])
   }
 
   const handleSetCurrentImage = (filename: string) => {
@@ -65,9 +65,9 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
   }
 
   useEffect(() => {
-    if (product) {
-      setImages(product.photos[0])
-      setCurrentImage(product.photos[0].photos[0])
+    if (product?.photos[0]) {
+      setImages(product?.photos[0])
+      setCurrentImage(product?.photos[0]?.photos[0])
     }
   }, [product])
 
@@ -87,16 +87,16 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
                 {setAvailable(product?.available)}
               </div>
             )}
-            {product.name && (
+            {product?.name && (
               <div className={styles.products__item__title}>
-                {product.name}
+                {product?.name}
               </div>
             )}
-            {product.photos && images && (
+            {product?.photos && images && (
               <div className={styles.products__item__colors}>
                 <div className={styles.products__item__colorsName}>Цвет</div>
                 <div className={styles.products__item__colorsValue}>
-                  {product.photos.map((item) => (
+                  {product?.photos.map((item) => (
                     <div
                       key={item.id}
                       style={{ backgroundColor: item.color }}
@@ -150,14 +150,14 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
                 {setAvailable(product.available)}
               </div>
             )}
-            {product.name && (
+            {product?.name && (
               <div className={styles.products__item__title}>{product.name}</div>
             )}
-            {product.photos && images && (
+            {product?.photos && images && (
               <div className={styles.products__item__colors}>
                 <div className={styles.products__item__colorsName}>Цвет</div>
                 <div className={styles.products__item__colorsValue}>
-                  {product.photos.map((item) => (
+                  {product?.photos.map((item) => (
                     <div
                       key={item.id}
                       style={{ backgroundColor: item.color }}
@@ -171,24 +171,24 @@ const CardItemPlywood: NextPage<{ product: PlywoodItem }> = ({ product }) => {
               </div>
             )}
           </div>
-          {product.description && (
+          {product?.description && (
             <div className={styles.products__item__description}>{product.description}</div>
           )}
-          {product.sorts.length > 0 && (
+          {product?.sorts?.length > 0 && (
             <div className={styles.products__item__sorts}>
               <div className={styles.products__item__sortsName}>Сорт</div>
               <div className={styles.products__item__sortsValue}>
-                {product.sorts.map((item) => (
+                {product?.sorts?.map((item) => (
                   item.name
                 )).join(', ')}
               </div>
             </div>
           )}
-          {product.coatingDensity.length > 0 && (
+          {product?.coatingDensity?.length > 0 && (
             <div className={styles.products__item__density}>
               <div className={styles.products__item__densityName}>Плотность</div>
               <div className={styles.products__item__densityValue}>
-                {product.coatingDensity.map((item) => (
+                {product?.coatingDensity?.map((item) => (
                   item.name
                 )).join(', ')}
               </div>
