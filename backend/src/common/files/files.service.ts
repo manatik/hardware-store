@@ -35,7 +35,7 @@ export class FilesService {
   }
 
   async compressFile(buffer: Buffer, ext: string) {
-    const imageOpt = { quality: 70 };
+    const imageOpt = { quality: 85 };
     const width = 1366;
     const height = 768;
     const opt: any = { fit: 'outside' };
