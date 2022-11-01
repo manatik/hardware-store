@@ -89,6 +89,7 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                 alt={currentImage.filename}
                 width={610}
                 height={400}
+                quality={100}
               />
             </div>
           )}
@@ -108,6 +109,7 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                     alt={item?.filename}
                     width={187}
                     height={124}
+                    quality={100}
                     layout="responsive"
                   />
                 </div>
@@ -139,7 +141,15 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                 <div>{Intl.NumberFormat('ru-RU').format(product?.depth)} см</div>
               </div>
             )}
-            {product?.features && <div className={styles.products__item__prices__title}>Цвет</div>}
+            {product?.parameters && (
+              <div className={styles.products__item__param}>
+                <div className={styles.products__item__paramName}>
+                  {product.parameters.description}
+                </div>
+                <div>{product.parameters.value}</div>
+              </div>
+            )}
+            {product?.features && <div className={styles.products__item__prices__title}>Цена</div>}
             {product?.features
               && product?.features.map((item) => {
                 return (
@@ -188,7 +198,15 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
                 <div>{Intl.NumberFormat('ru-RU').format(product?.depth)} см</div>
               </div>
             )}
-            {product?.features && <div className={styles.products__item__prices__title}>Цвет</div>}
+            {product?.parameters && (
+              <div className={styles.products__item__param}>
+                <div className={styles.products__item__paramName}>
+                  {product.parameters.description}
+                </div>
+                <div>{product.parameters.value}</div>
+              </div>
+            )}
+            {product?.features && <div className={styles.products__item__prices__title}>Цена</div>}
             {product?.features
               && product?.features.map((item) => (
                 <div
