@@ -22,7 +22,7 @@ export const plywoodService = {
     return data
   },
   plywoodRemove: async (id: string) => {
-    const { data } = await httpService.delete(`${plywoodEndpoint}/${id}`)
+    const { data } = await httpService.delete(`${plywoodEndpoint}/${id}?hard=true`)
     return data
   },
 }

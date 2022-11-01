@@ -27,7 +27,7 @@ export const furnitureService = {
     return data
   },
   furnitureRemove: async (id: string) => {
-    const { data } = await httpService.delete(`${furnitureEndpoint}/${id}`)
+    const { data } = await httpService.delete(`${furnitureEndpoint}/${id}?hard=true`)
     return data
   },
 
