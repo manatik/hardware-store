@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 import slide1 from 'assets/slider/slide-1.webp'
 import slide2 from 'assets/slider/slide-2.webp'
-import slide3 from 'assets/slider/slide-3.webp'
+import slide3 from 'assets/slider/slide-11.webp'
 import slide4 from 'assets/slider/slide-4.webp'
 import slide5 from 'assets/slider/slide-5.webp'
 
@@ -30,10 +30,10 @@ const Slider: FC = (): ReactElement => {
         spaceBetween={0}
         slidesPerView={1}
         className={styles.slider}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 6000,
+        //   disableOnInteraction: false,
+        // }}
         pagination={{
           type: 'progressbar',
           modifierClass: `${styles.slider__progress} `,
@@ -44,7 +44,7 @@ const Slider: FC = (): ReactElement => {
           nextEl: nextRef.current,
           disabledClass: styles.slider__navigation__disable,
         }}
-        modules={[Pagination, Navigation, Autoplay]}
+        modules={[Pagination, Navigation]}
         onSlideChange={(swiperCore) => {
           const {
             // @ts-ignore

@@ -149,7 +149,7 @@
     @include deviceWidth(mobile) {
       &_one {
         & img {
-          object-position: 73% 50%;
+          object-position: 63% 50%;
         }
       }
     }
@@ -163,14 +163,14 @@
     @include deviceWidth(mobile) {
       &_three {
         & img {
-          object-position: 15% 100%;
+          object-position: 28% 100%;
         }
       }
     }
     @include deviceWidth(mobile) {
       &_five {
         & img {
-          object-position: 35% 100%;
+          object-position: 29% 100%;
         }
       }
     }

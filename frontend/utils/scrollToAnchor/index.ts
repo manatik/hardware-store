@@ -16,8 +16,6 @@ const scrollToAnchor = (offset?: number) => {
         history.replaceState({}, '', url)
       }, 1000)
     }
-  } else {
-    window.scrollTo(0, 0)
   }
 }
 

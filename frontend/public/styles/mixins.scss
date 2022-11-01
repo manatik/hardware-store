@@ -223,7 +223,7 @@
     background: $colorOnPrimary;
     max-width: 850px;
     max-height: 850px;
-    width: 100%;
+    width: 375px;
     overflow: auto;
 
     @include deviceWidth(mobile) {

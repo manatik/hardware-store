@@ -81,7 +81,6 @@ const Slider: FC<SliderProps> = ({
                 layout="responsive"
                 height={item.height}
                 width={item.width}
-                placeholder="blur"
                 alt={`slide${index + 1}`}
               />
             </div>
