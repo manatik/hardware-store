@@ -27,7 +27,7 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
 
   return (
     <div className={styles.productCards}>
-      {products && products.map((item: PlywoodItem | FurnitureItemModal) => {
+      {products.length > 0 && products.map((item: PlywoodItem | FurnitureItemModal) => {
         const allPrice = item.features?.map((item) => item.price)
         const lowPrice = allPrice && allPrice.length ? Math.min(...allPrice) : null
 
@@ -52,32 +52,32 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
             <a
               className={styles.productCards__item}
             >
-              {item.photos && (
+              {item?.photos && (
                 <div className={styles.productCards__item__image}>
                   <Image
-                    src={item.photos[0].photos[0].path}
-                    alt={item.photos[0].photos[0].filename}
+                    src={item.photos[0]?.photos[0]?.path}
+                    alt={item.photos[0]?.photos[0]?.filename}
                     width={400}
                     height={250}
                   />
                 </div>
               )}
 
-              {item.name && <div className={styles.productCards__item__title}>{item.name}</div>}
+              {item?.name && <div className={styles.productCards__item__title}>{item.name}</div>}
 
-              {item.photos && link === Links.Plywood && (
+              {item?.photos && link === Links.Plywood && (
                 <div className={styles.productCards__item__colors}>
-                  {item.photos.map((item) => (
+                  {item?.photos?.map((item) => (
                     <div
                       key={item.id}
-                      style={{ backgroundColor: item.color }}
+                      style={{ backgroundColor: item?.color }}
                       className={styles.productCards__item__color}
                     />
                   ))}
                 </div>
               )}
 
-              {(item.price || item.available) && (
+              {(item?.price || item?.available) && (
                 <div className={styles.productCards__item__bottom}>
                   {item?.price as number > 0 ? (
                     <div className={styles.productCards__item__price}>
@@ -86,13 +86,13 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
                   ) : (
                     PriceElement()
                   )}
-                  {item.available && (
+                  {item?.available && (
                     <div
                       className={cn(styles.productCards__item__availability, {
-                        [styles.productCards__item__availabilityNo]: item.available === 'NOT_AVAILABLE',
+                        [styles.productCards__item__availabilityNo]: item?.available === 'NOT_AVAILABLE',
                       })}
                     >
-                      {setAvailable(item.available)}
+                      {setAvailable(item?.available)}
                     </div>
                   )}
                 </div>
