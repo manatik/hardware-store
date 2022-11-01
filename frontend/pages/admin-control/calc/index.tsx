@@ -82,7 +82,7 @@ const Calc: NextPage = () => {
         form={
           <>
             {Number(dataProduct.value) === ProductsEnum.PLYWOOD && (
-              <div style={{ width: '100%', minWidth: '375px' }}>
+              <div style={{ width: '100%' }}>
                 <SelectField
                   name="Характеристики"
                   onChange={handleChange}
@@ -102,7 +102,7 @@ const Calc: NextPage = () => {
             )}
 
             {Number(dataProduct.value) === ProductsEnum.FURNITURE && (
-              <div style={{ width: '100%', minWidth: '375px' }}>
+              <div style={{ width: '100%' }}>
                 <SelectField
                   name="Характеристики"
                   onChange={handleChangeFurniture}
