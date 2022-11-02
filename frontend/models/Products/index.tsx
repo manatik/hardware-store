@@ -68,11 +68,14 @@ export interface FurnitureItemModal {
   width: number;
   height: number;
   depth: number;
-  parameters: {
-    name: string;
-    description: string;
-    value: string;
-  }
+  parameters?: FurnitureParamItem[];
+}
+
+export interface FurnitureParamItem {
+  id: string;
+  name: string;
+  description: string;
+  value: string;
 }
 
 export interface FurnitureItemData {

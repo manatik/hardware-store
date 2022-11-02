@@ -17,6 +17,7 @@ const CardGrid: FC<PropsCardGrid> = ({
   title,
   price = 0,
   description,
+  paramValue,
   id = '',
   endpoint = 0,
   onUpdate,
@@ -86,6 +87,7 @@ const CardGrid: FC<PropsCardGrid> = ({
                       id,
                       name: title,
                       price,
+                      paramValue,
                       description: description || '',
                     }}
                     validateOnChange={false}
@@ -134,9 +136,21 @@ const CardGrid: FC<PropsCardGrid> = ({
                               <InputField
                                 type={InputType.Text}
                                 name="description"
-                                value={values.description}
+                                value={values.description || ''}
                                 error={errors.description}
                                 label="Название На сайте"
+                                size="md"
+                                onChange={handleChange}
+                              />
+                            )}
+
+                            {paramValue?.length && paramValue?.length > 0 && (
+                              <InputField
+                                type={InputType.Text}
+                                name="paramValue"
+                                value={values.paramValue || ''}
+                                error={errors.paramValue}
+                                label="Значение параметра"
                                 size="md"
                                 onChange={handleChange}
                               />

@@ -11,7 +11,7 @@ import { getCategories } from '@store/category/selector'
 import { available } from '@features/Admin/ui/Products/Plywood/mockData'
 import SelectField from '@features/Admin/ui/SelectField'
 import MultiSelectField from '@features/Admin/ui/MuliSelectField'
-import { getFurnitureFeature, getFurniturePhotos } from '@store/products/selector'
+import { getFurnitureFeature, getFurnitureParams, getFurniturePhotos } from '@store/products/selector'
 import { toast } from 'react-toastify'
 import { fetchFurnitureAsync } from '@store/products/productsSlice'
 import { furnitureService } from '@services/products/furniture.service'
@@ -25,9 +25,11 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
   const categories = useAppSelector(getCategories)
   const photos = useAppSelector(getFurniturePhotos)
   const feature = useAppSelector(getFurnitureFeature)
+  const params = useAppSelector(getFurnitureParams)
   const [availableData, setAvailableData] = useState<any>(available[0].id)
   const [photoData, setPhotoData] = useState<any>()
   const [pricesData, setPricesData] = useState<any>()
+  const [paramsData, setParamsData] = useState<any>()
 
   const addProduct = async (values: any) => {
     try {
@@ -36,6 +38,7 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
         features: pricesData,
         photos: photoData,
         available: availableData,
+        parameters: paramsData,
       })
       toast.success('Товар успешно создан')
       dispatch(fetchFurnitureAsync())
@@ -49,12 +52,21 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
 
   const updateProduct = async (values: any) => {
     try {
+      console.log({
+        ...values,
+        id: item?.id,
+        features: pricesData,
+        photos: photoData,
+        available: availableData,
+        parameters: paramsData,
+      })
       await furnitureService.furnitureUpdate({
         ...values,
         id: item?.id,
         features: pricesData,
         photos: photoData,
         available: availableData,
+        parameters: paramsData,
       })
       toast.success('Товар успешно обновлен')
       dispatch(fetchFurnitureAsync())
@@ -77,6 +89,12 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
     const result = target.map((item: any) => item.value)
 
     setPricesData(result)
+  }
+
+  const handleChangeParamsData = (target: any) => {
+    const result = target.map((item: any) => item.value)
+
+    setParamsData(result)
   }
 
   const handleChangePhotoData = (target: any) => {
@@ -187,6 +205,17 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
               label="Прайсы"
               size="md"
               onChange={handleChangePricesData}
+            />
+          )}
+
+          {params && (
+            <MultiSelectField
+              name="params"
+              options={params}
+              defaultValue={updateDefaultValueSelect(item?.parameters)}
+              label="Доп характеристика"
+              size="md"
+              onChange={handleChangeParamsData}
             />
           )}
 

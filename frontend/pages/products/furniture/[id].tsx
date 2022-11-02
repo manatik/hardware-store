@@ -140,12 +140,17 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
               </div>
             )}
             {product?.parameters && (
-              <div className={styles.products__item__param}>
-                <div className={styles.products__item__paramName}>
-                  {product.parameters.description}
+              product.parameters.map((item) => (
+                <div
+                  key={item.id}
+                  className={styles.products__item__param}
+                >
+                  <div className={styles.products__item__paramName}>
+                    {item.description}
+                  </div>
+                  <div>{item.value}</div>
                 </div>
-                <div>{product.parameters.value}</div>
-              </div>
+              ))
             )}
             {product?.features && <div className={styles.products__item__prices__title}>Цена</div>}
             {product?.features
@@ -175,9 +180,11 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
             {product?.name && (
               <div className={styles.products__item__title}>{product?.name}</div>
             )}
-            {product?.description && (
-              <div className={styles.products__item__description}>{product?.description}</div>
-            )}
+            {/* {product?.description && ( */}
+            {/*  <div className={styles.products__item__description}> */}
+            {/*    {product?.description} */}
+            {/*  </div> */}
+            {/* )} */}
             {product?.height && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>
@@ -197,12 +204,17 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
               </div>
             )}
             {product?.parameters && (
-              <div className={styles.products__item__param}>
-                <div className={styles.products__item__paramName}>
-                  {product.parameters.description}
+              product.parameters.map((item) => (
+                <div
+                  key={item.id}
+                  className={styles.products__item__param}
+                >
+                  <div className={styles.products__item__paramName}>
+                    {item.description}
+                  </div>
+                  <div>{item.value}</div>
                 </div>
-                <div>{product.parameters.value}</div>
-              </div>
+              ))
             )}
             {product?.features && <div className={styles.products__item__prices__title}>Цена</div>}
             {product?.features
