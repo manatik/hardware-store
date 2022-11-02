@@ -18,8 +18,8 @@ const Service = () => {
               <Image
                 src={item.image}
                 placeholder="blur"
-                width={400}
-                height={272}
+                width={659}
+                height={472}
                 layout="responsive"
                 alt=""
               />

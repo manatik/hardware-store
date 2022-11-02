@@ -57,8 +57,8 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
                   <Image
                     src={item.photos[0]?.photos[0]?.path}
                     alt={item.photos[0]?.photos[0]?.filename}
-                    width={400}
-                    height={250}
+                    width={659}
+                    height={450}
                   />
                 </div>
               )}
