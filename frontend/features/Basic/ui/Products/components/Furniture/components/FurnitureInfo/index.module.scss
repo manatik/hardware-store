@@ -81,9 +81,11 @@
 
       @include deviceWidth(tabletPortrait) {
         @include m-typography(18px, 25px, 700);
+        margin-bottom: 12px;
       }
       @include deviceWidth(mobile) {
         @include m-typography(18px, 25px, 700);
+        margin-bottom: 12px;
       }
     }
 
