@@ -116,6 +116,9 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
       setPhotoData(item.photos?.map((item: any) => {
         return item.id
       }))
+      setParamsData(item.parameters?.map((item: any) => {
+        return item.id
+      }))
       setAvailableData(item.available)
     }
   }, [item])
