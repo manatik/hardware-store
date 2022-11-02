@@ -20,7 +20,7 @@ const FurnitureDelivery = () => {
       <div className={styles.delivery__title}>Доставка</div>
       <div className={styles.delivery__container}>
         <div className={styles.delivery__left}>
-          Доставка осуществляется <b>во&nbsp;все&nbsp;регионы Росси</b>{' '}
+          Доставка осуществляется <b>во&nbsp;все&nbsp;регионы России</b>{' '}
           любой транспортной компанией. Напишите нам, и&nbsp;мы&nbsp;рассчитаем
           точную стоимость доставки в&nbsp;ваш&nbsp;город. Часть мебели разборная,
           поставляется в&nbsp;разобранном виде с&nbsp;фурнитурой и&nbsp;инструкцией по&nbsp;сборке.

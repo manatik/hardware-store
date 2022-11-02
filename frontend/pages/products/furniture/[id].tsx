@@ -121,19 +121,19 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
               styles.products__item__mobile_description,
             )}
           >
-            {product?.height && (
+            {product?.height > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product.height)} см</div>
               </div>
             )}
-             {product?.width && (
+             {product?.width > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Ширина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product.width)} см</div>
               </div>
              )}
-            {product?.depth && (
+            {product?.depth > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Глубина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product?.depth)} см</div>
@@ -185,19 +185,19 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
             {/*    {product?.description} */}
             {/*  </div> */}
             {/* )} */}
-            {product?.height && (
+            {product?.height > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product?.height)} см</div>
               </div>
             )}
-            {product?.width && (
+            {product?.width > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Ширина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product?.width)} см</div>
               </div>
             )}
-            {product?.depth && (
+            {product?.depth > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Глубина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product?.depth)} см</div>
