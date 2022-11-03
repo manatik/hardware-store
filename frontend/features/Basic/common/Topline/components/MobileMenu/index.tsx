@@ -98,7 +98,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ onClose, openCall }) => {
                 />
 
                 <a
-                  href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                  href="https://api.whatsapp.com/send?phone=79091349009&text="
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(styles.mobileMenu__social__link, styles.mobileMenu__social__linkWu)}

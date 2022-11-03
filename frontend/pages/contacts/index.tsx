@@ -38,7 +38,7 @@ const Contacts: NextPage = () => {
                   +79091349009
                 </a>
                 <a
-                  href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+                  href="https://api.whatsapp.com/send?phone=79091349009&text="
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(styles.contacts__link, styles.contacts__linkWU)}
