@@ -30,6 +30,7 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
       {products?.length > 0 && products.map((item: PlywoodItem | FurnitureItemModal) => {
         const allPrice = item?.features?.map((item) => item?.price)
         const lowPrice = allPrice && allPrice?.length ? Math.min(...allPrice) : null
+        const urlHash = link === Links.Plywood ? 'range' : 'designer'
 
         const PriceElement = () => {
           return lowPrice ? (
@@ -47,7 +48,7 @@ const ProductCards: FC<ProductCardsProps> = ({ products, link }) => {
         return (
           <Link
             key={item.id}
-            href={`/products/${link}/${item.id}?redirectUrl=${pathname}`}
+            href={`/products/${link}/${item.id}?redirectUrl=${pathname}&hash=${urlHash}`}
           >
             <a
               className={styles.productCards__item}

@@ -52,14 +52,6 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
 
   const updateProduct = async (values: any) => {
     try {
-      console.log({
-        ...values,
-        id: item?.id,
-        features: pricesData,
-        photos: photoData,
-        available: availableData,
-        parameters: paramsData,
-      })
       await furnitureService.furnitureUpdate({
         ...values,
         id: item?.id,

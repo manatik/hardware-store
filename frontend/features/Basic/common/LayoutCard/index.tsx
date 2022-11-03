@@ -12,8 +12,9 @@ interface LayoutCardProps {
 const LayoutCard: FC<LayoutCardProps> = ({ children }) => {
   const { query, push } = useRouter()
   const redirectUrl = query.redirectUrl as string || '/'
+  const hash = query.hash ? `#${query.hash}` : ''
 
-  const onClose = (): Promise<boolean> => push(redirectUrl)
+  const onClose = (): Promise<boolean> => push(`${redirectUrl}${hash}`)
 
   return (
     <div className={styles.layoutCard}>
