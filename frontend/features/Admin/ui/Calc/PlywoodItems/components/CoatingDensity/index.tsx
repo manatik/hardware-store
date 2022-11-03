@@ -4,11 +4,11 @@ import { InputType } from '@features/Admin/ui/InputField/types'
 import InputField from '@features/Admin/ui/InputField'
 import cn from 'classnames'
 import styles from '@features/Admin/ui/Card/index.module.scss'
-import { calcAllSchema } from '@schema/calc'
 import { CalcData } from '@models/Calc'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '@store/hooks'
 import { fetchCalcAddParamsAsync } from '@store/calc/calcSlice'
+import { namePriceSchema } from '@schema/calc/calcAll'
 
 const CoatingDensity = () => {
   const formRef = useRef<HTMLFormElement | null>(null)
@@ -31,7 +31,7 @@ const CoatingDensity = () => {
       }}
       validateOnChange={false}
       validateOnBlur={false}
-      validationSchema={calcAllSchema}
+      validationSchema={namePriceSchema}
       onSubmit={async (values, formikHelpers) => {
         await addCoatingDensity(values as CalcData)
         formikHelpers.setValues({

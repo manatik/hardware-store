@@ -8,7 +8,11 @@ import { CardProps } from '@features/Admin/ui/Card/types'
 import { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Photo } from '@models/Products'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import styles from './index.module.scss'
+
+const MySwal = withReactContent(Swal)
 
 const Card: FC<CardProps> = ({
   id,
@@ -27,6 +31,23 @@ const Card: FC<CardProps> = ({
 
   const toggle = () => {
     slideToggle(hiddenElemForm.current)
+  }
+
+  const handleRemove = async (id: string) => {
+    const { isConfirmed } = await MySwal.fire({
+      title: 'Вы уверены?',
+      text: 'Вы действительно хотите удалить?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e23535',
+      cancelButtonColor: '#24822C',
+      confirmButtonText: 'Да, удалить!',
+      cancelButtonText: 'Отмена',
+    })
+
+    if (isConfirmed) {
+      remove?.(id)
+    }
   }
 
   useEffect(() => {
@@ -96,7 +117,7 @@ const Card: FC<CardProps> = ({
                 styles.card__button,
                 styles.card__buttonRemove,
               )}
-              onClick={() => remove(id as string)}
+              onClick={() => handleRemove(id as string)}
             >
               Удалить
             </div>

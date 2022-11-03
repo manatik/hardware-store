@@ -11,7 +11,11 @@ import { Formik } from 'formik'
 import { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Image from 'next/image'
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
 import styles from './index.module.scss'
+
+const MySwal = withReactContent(Swal)
 
 const CardGrid: FC<PropsCardGrid> = ({
   title,
@@ -27,6 +31,23 @@ const CardGrid: FC<PropsCardGrid> = ({
   const [toggle, setToggle] = useState<boolean>(false)
   const onToggle = () => {
     setToggle(!toggle)
+  }
+
+  const handleRemove = async (id: string, endpoint: number) => {
+    const { isConfirmed } = await MySwal.fire({
+      title: 'Вы уверены?',
+      text: 'Вы действительно хотите удалить?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e23535',
+      cancelButtonColor: '#24822C',
+      confirmButtonText: 'Да, удалить!',
+      cancelButtonText: 'Отмена',
+    })
+
+    if (isConfirmed) {
+      onRemove?.(id, endpoint)
+    }
   }
 
   return (
@@ -74,7 +95,7 @@ const CardGrid: FC<PropsCardGrid> = ({
             {onRemove && (
               <div
                 className={cn(styles.cardGrid__button, styles.cardGrid__buttonRemove)}
-                onClick={() => onRemove(id, endpoint)}
+                onClick={() => handleRemove(id, endpoint)}
               >
                 Удалить
               </div>

@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import { calcAllSchema } from '@schema/calc'
 import InputField from '@features/Admin/ui/InputField'
 import { InputType } from '@features/Admin/ui/InputField/types'
 import cn from 'classnames'
@@ -9,6 +8,7 @@ import { CalcData } from '@models/Calc'
 import { toast } from 'react-toastify'
 import { fetchCalcAddParamsAsync } from '@store/calc/calcSlice'
 import { useAppDispatch } from '@store/hooks'
+import { namePriceSchema } from '@schema/calc/calcAll'
 
 const Sort = () => {
   const formRef = useRef<HTMLFormElement | null>(null)
@@ -31,7 +31,7 @@ const Sort = () => {
       }}
       validateOnChange={false}
       validateOnBlur={false}
-      validationSchema={calcAllSchema}
+      validationSchema={namePriceSchema}
       onSubmit={async (values, formikHelpers) => {
         await addSort(values as CalcData)
         formikHelpers.setValues({
