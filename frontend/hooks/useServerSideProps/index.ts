@@ -100,6 +100,7 @@ export const useServerSideProps = async (
       await dispatch(fetchFurnitureAsync())
       await dispatch(fetchFurnitureFeatureAsync())
       await dispatch(fetchFurniturePhotosAsync())
+      await dispatch(fetchFurnitureParamsAsync())
       break
     }
 
@@ -113,8 +114,6 @@ export const useServerSideProps = async (
       try {
         const { id } = query
         const { product } = await plywoodService.plywood(id as string)
-        // eslint-disable-next-line no-console
-        console.log(product)
         return { props: { product } }
       } catch (e) {
         return { props: { product: null } }
@@ -134,8 +133,6 @@ export const useServerSideProps = async (
       try {
         const { id } = query
         const { product } = await furnitureService.furniture(id as string)
-        // eslint-disable-next-line no-console
-        console.log(product)
         return { props: { product } }
       } catch (e) {
         return { props: { product: null } }

@@ -9,6 +9,7 @@ export interface UpdateData {
 export interface PropsCardGrid {
   title: string;
   description?: string;
+  paramValue?: string;
   price: number;
   id: string;
   endpoint: number;

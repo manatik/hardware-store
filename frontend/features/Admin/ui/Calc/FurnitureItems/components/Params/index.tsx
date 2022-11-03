@@ -88,7 +88,7 @@ const Params = () => {
             name="value"
             value={values.value}
             error={errors.value}
-            placeholder="22см"
+            placeholder="22 см"
             label="Значение"
             size="md"
             onChange={handleChange}

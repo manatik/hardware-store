@@ -14,6 +14,13 @@
     &__image {
       margin-bottom: 20px;
 
+      @include deviceWidth(tabletPortrait) {
+        margin-bottom: 8px;
+      }
+      @include deviceWidth(mobile) {
+        margin-bottom: 8px;
+      }
+
       & img {
         border-radius: 24px;
 

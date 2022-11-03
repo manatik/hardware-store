@@ -152,7 +152,7 @@ const Topline: FC<ToplineProps> = ({
             />
 
             <a
-              href="https://api.whatsapp.com/send?phone=79091349009&text=Plywood%20Market"
+              href="https://api.whatsapp.com/send?phone=79091349009&text="
               target="_blank"
               rel="noopener noreferrer"
               className={cn(styles.topline__social__link, {

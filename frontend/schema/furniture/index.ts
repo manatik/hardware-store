@@ -7,13 +7,10 @@ export const FurnitureSchema = Yup.object().shape({
   article: Yup.string()
     .trim()
     .required('Введите артикул'),
-  width: Yup.string()
-    .trim()
-    .required('Введите ширину'),
-  height: Yup.string()
-    .trim()
-    .required('Введите высоту'),
-  depth: Yup.string()
-    .trim()
-    .required('Введите глубину'),
+  width: Yup.number()
+    .required('Введите ширину, если она не нужна тогда 0'),
+  height: Yup.number()
+    .required('Введите высоту, если она не нужна тогда 0'),
+  depth: Yup.number()
+    .required('Введите глубину, если она не нужна тогда 0'),
 })

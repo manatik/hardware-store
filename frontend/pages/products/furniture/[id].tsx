@@ -121,25 +121,38 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
               styles.products__item__mobile_description,
             )}
           >
-            {product?.height && (
+            {product?.height > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product.height)} см</div>
               </div>
             )}
-             {product?.width && (
+             {product?.width > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Ширина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product.width)} см</div>
               </div>
              )}
-            {product?.depth && (
+            {product?.depth > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Глубина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product?.depth)} см</div>
               </div>
             )}
-            {product?.features && <div className={styles.products__item__prices__title}>Цвет</div>}
+            {product?.parameters && (
+              product.parameters.map((item) => (
+                <div
+                  key={item.id}
+                  className={styles.products__item__param}
+                >
+                  <div className={styles.products__item__paramName}>
+                    {item.description}
+                  </div>
+                  <div>{item.value}</div>
+                </div>
+              ))
+            )}
+            {product?.features && <div className={styles.products__item__prices__title}>Цена</div>}
             {product?.features
               && product?.features.map((item) => {
                 return (
@@ -167,28 +180,43 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
             {product?.name && (
               <div className={styles.products__item__title}>{product?.name}</div>
             )}
-            {product?.description && (
-              <div className={styles.products__item__description}>{product?.description}</div>
-            )}
-            {product?.height && (
+            {/* {product?.description && ( */}
+            {/*  <div className={styles.products__item__description}> */}
+            {/*    {product?.description} */}
+            {/*  </div> */}
+            {/* )} */}
+            {product?.height > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product?.height)} см</div>
               </div>
             )}
-            {product?.width && (
+            {product?.width > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Ширина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product?.width)} см</div>
               </div>
             )}
-            {product?.depth && (
+            {product?.depth > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Глубина</div>
                 <div>{Intl.NumberFormat('ru-RU').format(product?.depth)} см</div>
               </div>
             )}
-            {product?.features && <div className={styles.products__item__prices__title}>Цвет</div>}
+            {product?.parameters && (
+              product.parameters.map((item) => (
+                <div
+                  key={item.id}
+                  className={styles.products__item__param}
+                >
+                  <div className={styles.products__item__paramName}>
+                    {item.description}
+                  </div>
+                  <div>{item.value}</div>
+                </div>
+              ))
+            )}
+            {product?.features && <div className={styles.products__item__prices__title}>Цена</div>}
             {product?.features
               && product?.features.map((item) => (
                 <div

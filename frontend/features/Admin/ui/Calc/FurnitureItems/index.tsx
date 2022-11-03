@@ -3,7 +3,7 @@ import styles from '@pages/admin-control/calc/index.module.scss'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getFurnitureFeature, getFurnitureParams, getFurniturePhotos } from '@store/products/selector'
 import CardGrid from '@features/Admin/ui/CardGrid'
-import { FurnitureFeatureItem, FurniturePhotosModal } from '@models/Products'
+import { FurnitureFeatureItem, FurnitureParamItem, FurniturePhotosModal } from '@models/Products'
 import { toast } from 'react-toastify'
 import {
   fetchFurnitureFeatureAsync,
@@ -80,7 +80,12 @@ const FurnitureItems = () => {
 
   const handleUpdateParams = async (id: string, values: any) => {
     try {
-      const data = await furnitureService.furnitureParamsUpdate({ ...values, id })
+      const data = await furnitureService.furnitureParamsUpdate({
+        value: values.paramValue,
+        description: values.description,
+        name: values.name,
+        id,
+      })
       if (data.success) {
         await dispatch(fetchFurnitureParamsAsync())
         toast.success('Успешно обновлено')
@@ -141,12 +146,13 @@ const FurnitureItems = () => {
       {isActiveTab(Tabs.PARAMS) && params && (
         <div className={styles.feature__container}>
           <div className={styles.feature__card__container}>
-            {params.map((item: FurnitureFeatureItem) => (
+            {params.map((item: FurnitureParamItem) => (
               <CardGrid
                 key={item.id}
                 id={item.id as string}
                 title={item.name}
-                price={item.price}
+                price={0}
+                paramValue={item.value}
                 description={item.description}
                 endpoint={0}
                 onUpdate={handleUpdateParams}
