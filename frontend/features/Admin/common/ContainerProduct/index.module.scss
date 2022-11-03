@@ -26,6 +26,7 @@
     border-radius: 8px;
     background-color: $colorPrimary;
     cursor: pointer;
+    color: #fff;
 
     @include deviceWidth(tabletPortrait) {
       @include m-typography(18px, 18px)

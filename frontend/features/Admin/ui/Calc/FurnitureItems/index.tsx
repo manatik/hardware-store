@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '@pages/admin-control/calc/index.module.scss'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import { getFurnitureFeature, getFurnitureParams, getFurniturePhotos } from '@store/products/selector'
@@ -11,12 +11,24 @@ import {
   fetchFurniturePhotosAsync,
 } from '@store/products/productsSlice'
 import { furnitureService } from '@services/products/furniture.service'
+import cn from 'classnames'
+
+enum Tabs {
+  PRICE,
+  PARAMS,
+  PHOTOS
+}
 
 const FurnitureItems = () => {
+  const [currentTab, setCurrentTab] = useState<Tabs>(Tabs.PRICE)
   const dispatch = useAppDispatch()
   const feature = useAppSelector(getFurnitureFeature)
   const params = useAppSelector(getFurnitureParams)
   const photos = useAppSelector(getFurniturePhotos)
+
+  const handleTab = (tab: Tabs) => setCurrentTab(tab)
+
+  const isActiveTab = (tab: Tabs) => tab === currentTab
 
   const handleRemovePhotos = async (id: string) => {
     try {
@@ -79,9 +91,37 @@ const FurnitureItems = () => {
   }
   return (
     <div className={styles.feature}>
-      {feature && (
+      <div className={styles.feature__tabs}>
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.PRICE),
+          })}
+          onClick={() => handleTab(Tabs.PRICE)}
+        >
+          Прайсы
+        </span>
+
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.PARAMS),
+          })}
+          onClick={() => handleTab(Tabs.PARAMS)}
+        >
+          Параметры
+        </span>
+
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.PHOTOS),
+          })}
+          onClick={() => handleTab(Tabs.PHOTOS)}
+        >
+          Фотографии
+        </span>
+      </div>
+
+      {isActiveTab(Tabs.PRICE) && feature && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Прайсы</div>
           <div className={styles.feature__card__container}>
             {feature.map((item: FurnitureFeatureItem) => (
               <CardGrid
@@ -98,9 +138,8 @@ const FurnitureItems = () => {
           </div>
         </div>
       )}
-      {params && (
+      {isActiveTab(Tabs.PARAMS) && params && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Параметры</div>
           <div className={styles.feature__card__container}>
             {params.map((item: FurnitureFeatureItem) => (
               <CardGrid
@@ -117,9 +156,8 @@ const FurnitureItems = () => {
           </div>
         </div>
       )}
-      {photos && (
+      {isActiveTab(Tabs.PHOTOS) && photos && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Фотографии</div>
           <div className={styles.feature__card__container}>
             {photos.map((item: FurniturePhotosModal) => (
               <CardGrid

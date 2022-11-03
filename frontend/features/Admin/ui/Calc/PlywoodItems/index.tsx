@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@store/hooks'
 import {
   getCoatingDensity, getFormats, getPhotos, getSorts, getTypes, getWidthPlywood,
@@ -8,9 +8,20 @@ import { toast } from 'react-toastify'
 import { CalcData } from '@models/Calc'
 import styles from '@pages/admin-control/calc/index.module.scss'
 import CardGrid from '@features/Admin/ui/CardGrid'
-import { FurniturePhotosModal, PhotosModal } from '@models/Products'
+import { FurniturePhotosModal } from '@models/Products'
+import cn from 'classnames'
+
+enum Tabs {
+  COAT_DEN,
+  FORMAT,
+  SORT,
+  WIDTH,
+  TYPE,
+  PHOTOS
+}
 
 const PlywoodItems = () => {
+  const [currentTab, setCurrentTab] = useState<Tabs>(Tabs.COAT_DEN)
   const formats = useAppSelector(getFormats)
   const sorts = useAppSelector(getSorts)
   const types = useAppSelector(getTypes)
@@ -18,6 +29,10 @@ const PlywoodItems = () => {
   const coatingDensity = useAppSelector(getCoatingDensity)
   const images = useAppSelector(getPhotos)
   const dispatch = useAppDispatch()
+
+  const handleTab = (tab: Tabs) => setCurrentTab(tab)
+
+  const isActiveTab = (tab: Tabs) => tab === currentTab
 
   const handleRemoveItem = async (id: string, endpoint: number) => {
     try {
@@ -39,9 +54,64 @@ const PlywoodItems = () => {
 
   return (
     <div className={styles.feature}>
-      {coatingDensity && (
+      <div className={styles.feature__tabs}>
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.COAT_DEN),
+          })}
+          onClick={() => handleTab(Tabs.COAT_DEN)}
+        >
+          Плотность покрытия
+        </span>
+
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.FORMAT),
+          })}
+          onClick={() => handleTab(Tabs.FORMAT)}
+        >
+          Формат листа
+        </span>
+
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.SORT),
+          })}
+          onClick={() => handleTab(Tabs.SORT)}
+        >
+          Сорт
+        </span>
+
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.WIDTH),
+          })}
+          onClick={() => handleTab(Tabs.WIDTH)}
+        >
+          Толщина листа
+        </span>
+
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.TYPE),
+          })}
+          onClick={() => handleTab(Tabs.TYPE)}
+        >
+          Вид фанеры
+        </span>
+
+        <span
+          className={cn(styles.feature__tabs__tab, {
+            [styles.feature__tabs__tab_active]: isActiveTab(Tabs.PHOTOS),
+          })}
+          onClick={() => handleTab(Tabs.PHOTOS)}
+        >
+          Фотографии
+        </span>
+      </div>
+
+      {isActiveTab(Tabs.COAT_DEN) && coatingDensity && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Плотность покрытия</div>
           <div className={styles.feature__card__container}>
             {coatingDensity.map((item: CalcData) => (
               <CardGrid
@@ -57,9 +127,8 @@ const PlywoodItems = () => {
           </div>
         </div>
       )}
-      {formats && (
+      {isActiveTab(Tabs.FORMAT) && formats && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Формат листа</div>
           <div className={styles.feature__card__container}>
             {formats.map((item: CalcData) => (
               <CardGrid
@@ -75,9 +144,8 @@ const PlywoodItems = () => {
           </div>
         </div>
       )}
-      {sorts && (
+      {isActiveTab(Tabs.SORT) && sorts && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Сорт</div>
           <div className={styles.feature__card__container}>
             {sorts.map((item: CalcData) => (
               <CardGrid
@@ -93,9 +161,8 @@ const PlywoodItems = () => {
           </div>
         </div>
       )}
-      {widthPlywoods && (
+      {isActiveTab(Tabs.WIDTH) && widthPlywoods && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Толщина листа</div>
           <div className={styles.feature__card__container}>
             {widthPlywoods.map((item: CalcData) => (
               <CardGrid
@@ -111,9 +178,8 @@ const PlywoodItems = () => {
           </div>
         </div>
       )}
-      {types && (
+      {isActiveTab(Tabs.TYPE) && types && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Вид фанеры</div>
           <div className={styles.feature__card__container}>
             {types.map((item: CalcData) => (
               <CardGrid
@@ -129,9 +195,8 @@ const PlywoodItems = () => {
           </div>
         </div>
       )}
-      {images && (
+      {isActiveTab(Tabs.PHOTOS) && images && (
         <div className={styles.feature__container}>
-          <div className={styles.feature__title}>Фото</div>
           <div className={styles.feature__card__container}>
             {images.map((item: FurniturePhotosModal) => (
               <CardGrid

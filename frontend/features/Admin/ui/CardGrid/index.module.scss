@@ -48,7 +48,10 @@
 
   &__bottom {
     &__buttons {
-
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
     &__inputs {
@@ -57,6 +60,7 @@
   }
 
   &__button {
+    width: 50%;
     @include m-button;
 
     &Edit {
@@ -65,10 +69,6 @@
 
     &Remove {
       background-color: #e23535;
-    }
-
-    &:not(:last-child) {
-      margin-bottom: 8px;
     }
   }
 }
