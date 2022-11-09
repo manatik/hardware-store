@@ -121,6 +121,11 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
               styles.products__item__mobile_description,
             )}
           >
+            {product?.description && (
+              <div className={styles.products__item__description}>
+                {product?.description}
+              </div>
+            )}
             {product?.height > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>
@@ -180,11 +185,11 @@ const CardItem: NextPage<{ product: FurnitureItemModal }> = ({ product }) => {
             {product?.name && (
               <div className={styles.products__item__title}>{product?.name}</div>
             )}
-            {/* {product?.description && ( */}
-            {/*  <div className={styles.products__item__description}> */}
-            {/*    {product?.description} */}
-            {/*  </div> */}
-            {/* )} */}
+            {product?.description && (
+              <div className={styles.products__item__description}>
+                {product?.description}
+              </div>
+            )}
             {product?.height > 0 && (
               <div className={styles.products__item__param}>
                 <div className={styles.products__item__paramName}>Высота</div>

@@ -10,7 +10,8 @@ import { setCookieHeader } from '@services/http.service'
 import { fetchCalcParamsAsync } from '@store/calc/calcSlice'
 import {
   fetchFurnitureAsync,
-  fetchFurnitureFeatureAsync, fetchFurnitureParamsAsync,
+  fetchFurnitureFeatureAsync,
+  fetchFurnitureParamsAsync,
   fetchFurniturePhotosAsync,
   fetchPlywoodAsync,
 } from '@store/products/productsSlice'

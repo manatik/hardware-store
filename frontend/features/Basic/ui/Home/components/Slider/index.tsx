@@ -30,10 +30,10 @@ const Slider: FC = (): ReactElement => {
         spaceBetween={0}
         slidesPerView={1}
         className={styles.slider}
-        // autoplay={{
-        //   delay: 6000,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 6000,
+          disableOnInteraction: false,
+        }}
         pagination={{
           type: 'progressbar',
           modifierClass: `${styles.slider__progress} `,
