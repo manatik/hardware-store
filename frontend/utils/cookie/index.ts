@@ -1,4 +1,4 @@
-.cacheimport jsCookie from 'js-cookie'
+import jsCookie from 'js-cookie'
 
 export const getCookie = (key: string) => {
   let result = []
