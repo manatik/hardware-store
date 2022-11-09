@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
-import { Roles } from 'authorization/decorators';
-import { Role } from 'authorization/enum/role.enum';
-import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { Roles } from '@authorization/decorators';
+import { Role } from '@authorization/enum/role.enum';
+import { ENDPOINTS, GLOBAL_PREFIXES } from '@consts/endpoints.consts';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.ROLE)

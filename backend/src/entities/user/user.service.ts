@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'database/prisma/prisma.service';
-import { ErrorService } from 'common/error/error.service';
-import { Role } from 'authorization/enum/role.enum';
-import { RoleService } from 'entities/role/role.service';
+import { PrismaService } from '@prisma-service/prisma.service';
+import { ErrorService } from '@error/error.service';
+import { Role } from '@authorization/enum/role.enum';
+import { RoleService } from '@role/role.service';
 import { UserInfoQuery } from './dto/user-info.query';
 import { UserAllQuery } from './dto/user-all.query';
 

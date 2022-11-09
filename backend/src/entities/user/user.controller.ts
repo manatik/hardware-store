@@ -1,11 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Roles } from 'authorization/decorators';
-import { Role } from 'authorization/enum/role.enum';
-import { Request } from 'express';
+import { CurrentUser, Roles } from '@authorization/decorators';
+import { Role } from '@authorization/enum/role.enum';
 import { UserInfoQuery } from './dto/user-info.query';
 import { UserAllQuery } from './dto/user-all.query';
-import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { ENDPOINTS, GLOBAL_PREFIXES } from '@consts/endpoints.consts';
 import { UserRoleDto } from './dto/user-role.dto';
 
 @Roles(Role.Admin)
@@ -20,8 +19,8 @@ export class UserController {
 
   @Roles(Role.User)
   @Get(ENDPOINTS.USER.INFO)
-  async byId(@Req() req: Request & { user: any }, @Query() query: UserInfoQuery) {
-    return await this.userService.getById(req.user.id, query);
+  async byId(@CurrentUser() user, @Query() query: UserInfoQuery) {
+    return await this.userService.getById(user.id, query);
   }
 
   @Post(ENDPOINTS.USER.CREATE)
@@ -30,20 +29,19 @@ export class UserController {
   }
 
   @Patch(ENDPOINTS.USER.ADD_ROLE)
-  async addRoleToUser(@Req() req: Request & { user: any }, @Body() dto: UserRoleDto) {
-    console.log(req.user, dto);
-    return await this.userService.addRole(req.user.id, dto.roleId);
+  async addRoleToUser(@CurrentUser() user, @Body() dto: UserRoleDto) {
+    return await this.userService.addRole(user.id, dto.roleId);
   }
 
   @Patch(ENDPOINTS.USER.REMOVE_ROLE)
-  async removeRoleToUser(@Req() req: Request & { user: any }, @Body() dto: UserRoleDto) {
-    return await this.userService.removeRole(req.user.id, dto.roleId);
+  async removeRoleToUser(@CurrentUser() user, @Body() dto: UserRoleDto) {
+    return await this.userService.removeRole(user.id, dto.roleId);
   }
 
   @Roles(Role.User)
   @Patch(ENDPOINTS.USER.UPDATE)
-  async update(@Req() req: Request & { user: any }, @Body() dto) {
-    return await this.userService.update(req.user.id, dto);
+  async update(@CurrentUser() user, @Body() dto) {
+    return await this.userService.update(user.id, dto);
   }
 
   @Delete(ENDPOINTS.USER.DELETE)

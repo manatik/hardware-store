@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ISuccessResponseType } from 'types/ISuccessResponse.type';
+import { ISuccessResponseType } from '@common-types/ISuccessResponse.type';
 
 @Injectable()
 export class ErrorService {

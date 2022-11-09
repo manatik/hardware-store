@@ -113,6 +113,7 @@ model Plywood {
   features       PlywoodFeature[]
   widths         PlywoodWidth[]
   available      Available               @default(AVAILABLE)
+  position       Int                     @default(1)
   price          Int
   description    String
   createdAt      DateTime                @default(now()) @map("created_at")
@@ -232,6 +233,7 @@ model Furniture {
   height      Float?
   width       Float?
   depth       Float?
+  position    Int                @default(1)
   features    FurnitureFeature[]
   parameters  FurnitureParams[]
   createdAt   DateTime           @default(now()) @map("created_at")

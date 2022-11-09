@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'database/prisma/prisma.service';
-import { ErrorService } from 'common/error/error.service';
-import { CreateFurnitureDto } from 'entities/furniture-entities/furniture/dto/create-furniture.dto';
+import { PrismaService } from '@prisma-service/prisma.service';
+import { ErrorService } from '@error/error.service';
+import { CreateFurnitureDto } from '@furniture/furniture/dto/create-furniture.dto';
 import { UpdateFurnitureDto } from './dto/update-furniture.dto';
-import { idsArrayToArrayOfObjects } from '../../../common/utils/utils';
+import { idsArrayToArrayOfObjects } from '@utils/utils';
 import { FurnitureAllQuery } from './dto/furniture-all.query';
 import { DeleteFurnitureQuery } from './dto/delete-furniture.query';
 
@@ -32,10 +32,11 @@ export class FurnitureService {
           height: true,
           id: true,
           width: true,
+          position: true,
           deleted: deleted,
         },
         orderBy: {
-          article: 'asc',
+          position: 'asc',
         },
       });
 

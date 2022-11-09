@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ErrorService } from 'common/error/error.service';
+import { ErrorService } from '@error/error.service';
 
 @Module({
   providers: [ErrorService],

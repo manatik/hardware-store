@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'database/prisma/prisma.service';
-import { ErrorService } from 'common/error/error.service';
+import { PrismaService } from '@prisma-service/prisma.service';
+import { ErrorService } from '@error/error.service';
 import { CreateParametersDto } from './dto/create-parameters.dto';
 import { UpdateParametersDto } from './dto/update-parameters.dto';
 

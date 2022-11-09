@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { CategoryController } from './category.controller';
 import { CategoryService } from './category.service';
-import { PrismaModule } from 'database/prisma/prisma.module';
-import { ErrorModule } from 'common/error/error.module';
+import { PrismaModule } from '@prisma-service/prisma.module';
+import { ErrorModule } from '@error/error.module';
 
 @Module({
   imports: [PrismaModule, ErrorModule],

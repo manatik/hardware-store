@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'database/prisma/prisma.service';
-import { ErrorService } from 'common/error/error.service';
+import { PrismaService } from '@prisma-service/prisma.service';
+import { ErrorService } from '@error/error.service';
 import { AddPhotoDto } from './dto/add-photo.dto';
-import { IPhoto } from 'types/IPhoto.type';
-import { FilesService } from 'common/files/files.service';
+import { IPhoto } from '@common-types/IPhoto.type';
+import { FilesService } from '@files/files.service';
 import { Prisma } from '@prisma/client';
 
 @Injectable()

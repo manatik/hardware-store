@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { EmailController } from './email.controller';
 import { EmailService } from './email.service';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { getMailConfig } from 'common/config/mail.config';
+import { getMailConfig } from '@config/mail.config';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ErrorModule } from 'common/error/error.module';
+import { ErrorModule } from '@error/error.module';
 
 @Module({
   imports: [

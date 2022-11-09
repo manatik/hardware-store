@@ -5,7 +5,7 @@ import { RegisterDto } from './dto/register.dto';
 import { Public } from './decorators';
 import { ErrorService } from 'common/error/error.service';
 import { Response } from 'express';
-import { ENDPOINTS, GLOBAL_PREFIXES } from '../common/consts/endpoints.consts';
+import { ENDPOINTS, GLOBAL_PREFIXES } from '@consts/endpoints.consts';
 
 enum TOKENS {
   REFRESH = 'r_t',

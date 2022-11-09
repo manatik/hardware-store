@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
-import { ErrorModule } from '../../common/error/error.module';
-import { PrismaModule } from '../../database/prisma/prisma.module';
+import { ErrorModule } from '@error/error.module';
+import { PrismaModule } from '@prisma-service/prisma.module';
 
 @Module({
   imports: [ErrorModule, PrismaModule],

@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Patch } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { Public, Roles } from 'authorization/decorators';
-import { Role } from 'authorization/enum/role.enum';
+import { Public, Roles } from '@authorization/decorators';
+import { Role } from '@authorization/enum/role.enum';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
+import { ENDPOINTS, GLOBAL_PREFIXES } from '@consts/endpoints.consts';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.CATEGORY)

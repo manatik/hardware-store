@@ -1,5 +1,5 @@
 import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
-import { Available } from '../../../../types/enum/Available.enum';
+import { Available } from '@common-types/enum/Available.enum';
 
 export class UpdateFurnitureDto {
   @IsOptional()

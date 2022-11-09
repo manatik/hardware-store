@@ -1,6 +1,6 @@
 import { IsBoolean, IsOptional } from 'class-validator';
 import { Transform } from 'class-transformer';
-import { isTrue } from 'common/utils/utils';
+import { isTrue } from '@utils/utils';
 
 export class UserInfoQuery {
   @IsOptional()

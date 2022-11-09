@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
-import { Public, Roles } from 'authorization/decorators';
-import { ENDPOINTS, GLOBAL_PREFIXES } from 'common/consts/endpoints.consts';
-import { Role } from 'authorization/enum/role.enum';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { Public, Roles } from '@authorization/decorators';
+import { ENDPOINTS, GLOBAL_PREFIXES } from '@consts/endpoints.consts';
+import { Role } from '@authorization/enum/role.enum';
 import { PhotosService } from './photos.service';
 import { AddPhotoDto } from './dto/add-photo.dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Roles(Role.Admin)
 @Controller(GLOBAL_PREFIXES.FURNITURE_PHOTOS)
