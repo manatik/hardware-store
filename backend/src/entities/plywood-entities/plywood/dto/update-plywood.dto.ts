@@ -57,4 +57,8 @@ export class UpdatePlywoodDto {
   @IsOptional()
   @IsNumber()
   price?: number;
+
+  @IsOptional()
+  @IsNumber()
+  position?: number;
 }

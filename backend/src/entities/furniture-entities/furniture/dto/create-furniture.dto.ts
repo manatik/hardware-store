@@ -49,4 +49,8 @@ export class CreateFurnitureDto {
   @IsNotEmpty()
   @IsNumber()
   depth: number;
+
+  @IsOptional()
+  @IsNumber()
+  position?: number;
 }

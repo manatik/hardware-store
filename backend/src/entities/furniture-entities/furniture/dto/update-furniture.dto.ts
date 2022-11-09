@@ -49,4 +49,8 @@ export class UpdateFurnitureDto {
   @IsOptional()
   @IsNumber()
   depth?: number;
+
+  @IsOptional()
+  @IsNumber()
+  position?: number;
 }

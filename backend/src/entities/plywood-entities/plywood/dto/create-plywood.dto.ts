@@ -57,4 +57,8 @@ export class CreatePlywoodDto {
   @IsNotEmpty()
   @IsNumber()
   price: number;
+
+  @IsOptional()
+  @IsNumber()
+  position?: number;
 }
