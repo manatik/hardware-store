@@ -44,6 +44,7 @@ const PlywoodItems = () => {
   }
 
   const handleUpdateItem = async (id: string, data: CalcData, endpoint: number) => {
+    console.log(id, data, endpoint)
     try {
       dispatch(fetchCalcUpdateParamsAsync({ id, endpoint, values: data }))
       toast.success('Успешно обновлено')
@@ -120,6 +121,7 @@ const PlywoodItems = () => {
                 title={item.name}
                 price={item.price}
                 endpoint={1}
+                type="plywood"
                 onUpdate={handleUpdateItem}
                 onRemove={handleRemoveItem}
               />
@@ -137,6 +139,7 @@ const PlywoodItems = () => {
                 title={item.name}
                 price={item.price}
                 endpoint={2}
+                type="plywood"
                 onUpdate={handleUpdateItem}
                 onRemove={handleRemoveItem}
               />
@@ -154,6 +157,7 @@ const PlywoodItems = () => {
                 title={item.name}
                 price={item.price}
                 endpoint={3}
+                type="plywood"
                 onUpdate={handleUpdateItem}
                 onRemove={handleRemoveItem}
               />
@@ -171,6 +175,7 @@ const PlywoodItems = () => {
                 title={item.name}
                 price={item.price}
                 endpoint={4}
+                type="plywood"
                 onUpdate={handleUpdateItem}
                 onRemove={handleRemoveItem}
               />
@@ -188,6 +193,7 @@ const PlywoodItems = () => {
                 title={item.name}
                 price={item.price}
                 endpoint={5}
+                type="plywood"
                 onUpdate={handleUpdateItem}
                 onRemove={handleRemoveItem}
               />
@@ -206,6 +212,7 @@ const PlywoodItems = () => {
                 images={item.photos}
                 endpoint={6}
                 price={0}
+                type="plywood"
                 onRemove={handleRemoveItem}
               />
             ))}

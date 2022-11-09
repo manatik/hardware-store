@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import Image from 'next/image'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
+import { namePriceSchema } from '@schema/calc/calcAll'
 import styles from './index.module.scss'
 
 const MySwal = withReactContent(Swal)
@@ -27,8 +28,11 @@ const CardGrid: FC<PropsCardGrid> = ({
   onUpdate,
   onRemove,
   images,
+  type,
 }) => {
   const [toggle, setToggle] = useState<boolean>(false)
+  const schemaFurniture = endpoint === 2 ? CoatingDensitySchema : calcAllSchema
+  const schema = type === 'furniture' ? schemaFurniture : namePriceSchema
   const onToggle = () => {
     setToggle(!toggle)
   }
@@ -107,13 +111,13 @@ const CardGrid: FC<PropsCardGrid> = ({
                     initialValues={{
                       id,
                       name: title,
-                      price,
+                      price: price || 0,
                       paramValue,
                       description: description || '',
                     }}
                     validateOnChange={false}
                     validateOnBlur={false}
-                    validationSchema={endpoint === 2 ? CoatingDensitySchema : calcAllSchema}
+                    validationSchema={schema}
                     onSubmit={async (values) => {
                       if (onUpdate) {
                         await onUpdate(id, values, endpoint)
@@ -177,11 +181,11 @@ const CardGrid: FC<PropsCardGrid> = ({
                               />
                             )}
 
-                            {price > 0 && (
+                            {price >= 0 && (
                               <InputField
                                 type={InputType.Number}
                                 name="price"
-                                value={values.price || ''}
+                                value={values.price}
                                 label="Цена"
                                 size="md"
                                 onChange={handleChange}

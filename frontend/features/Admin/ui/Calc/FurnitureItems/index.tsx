@@ -136,6 +136,7 @@ const FurnitureItems = () => {
                 price={item.price}
                 description={item.description}
                 endpoint={0}
+                type="furniture"
                 onUpdate={handleUpdateFeature}
                 onRemove={handleRemoveFeature}
               />
@@ -155,6 +156,7 @@ const FurnitureItems = () => {
                 paramValue={item.value}
                 description={item.description}
                 endpoint={0}
+                type="furniture"
                 onUpdate={handleUpdateParams}
                 onRemove={handleRemoveParams}
               />
@@ -173,6 +175,7 @@ const FurnitureItems = () => {
                 title={item.name}
                 price={0}
                 endpoint={0}
+                type="furniture"
                 onRemove={handleRemovePhotos}
               />
             ))}

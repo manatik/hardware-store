@@ -33,6 +33,7 @@ export interface PlywoodItem {
   sorts: CalcItem[];
   surfaceTypes: CalcItem[];
   photos: FurniturePhotosModal[];
+  position: number,
   color?: string;
   widthPlywood?: string;
   format?: string;
@@ -58,6 +59,7 @@ export interface FurnitureItemModal {
   id: string;
   category: Category;
   categoryId: number;
+  position: number,
   features?: FurnitureFeatureItem[];
   photos: FurniturePhotosModal[];
   name: string;

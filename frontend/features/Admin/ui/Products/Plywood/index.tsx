@@ -123,6 +123,7 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
       initialValues={{
         name: item?.name || '',
         article: item?.article || '',
+        position: item?.position || '',
         categoryId: categories[0].id,
         description: item?.description || '',
         price: item?.price || '',
@@ -140,6 +141,7 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
             name: '',
             article: '',
             categoryId: categories[0].id,
+            position: '',
             description: '',
             price: '',
           })
@@ -169,6 +171,17 @@ const PlywoodFormProduct: FC<PlywoodFormProductProps> = ({ item }) => {
             error={errors.name as string}
             placeholder="Фанера с Юпитера"
             label="Название"
+            size="md"
+            onChange={handleChange}
+          />
+
+          <InputField
+            type={InputType.Number}
+            name="position"
+            value={values.position}
+            error={errors.position as string}
+            placeholder="1"
+            label="Порядковый номер (для отображения на сайте)"
             size="md"
             onChange={handleChange}
           />

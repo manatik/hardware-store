@@ -120,6 +120,7 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
         name: item?.name || '',
         article: item?.article || '',
         categoryId: categories[2].id,
+        position: item?.position || '',
         width: item?.width || 0,
         height: item?.height || 0,
         depth: item?.depth || 0,
@@ -138,9 +139,10 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
             name: '',
             article: '',
             categoryId: categories[2].id,
-            width: NaN,
-            height: NaN,
-            depth: NaN,
+            position: '',
+            width: 0,
+            height: 0,
+            depth: 0,
             description: '',
           })
         }
@@ -168,6 +170,17 @@ const FurnitureFormProduct: FC<FurnitureFormProductProps> = ({ item }) => {
             error={errors.name}
             placeholder="Стул"
             label="Название"
+            size="md"
+            onChange={handleChange}
+          />
+
+          <InputField
+            type={InputType.Number}
+            name="position"
+            value={values.position}
+            error={errors.position as string}
+            placeholder="1"
+            label="Порядковый номер (для отображения на сайте)"
             size="md"
             onChange={handleChange}
           />
