@@ -150,7 +150,7 @@ const PlywoodCalculator = () => {
 
           <div className={styles.calculator__select__item}>
             <div className={styles.calculator__select__title}>
-              Тольщина листа <b>*</b>
+              Толщина листа <b>*</b>
             </div>
             <SelectField
               name="widthPlywoods"
