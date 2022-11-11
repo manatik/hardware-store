@@ -182,6 +182,13 @@
     z-index: 6;
     max-width: 840px;
     top: 290px;
+
+    @include m-height-630 {
+      top: 200px;
+    }
+    @include m-height-550 {
+      top: 150px;
+    }
   }
 
   &__title {
