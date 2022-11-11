@@ -32,6 +32,12 @@
   }
 }
 
+@mixin m-height-480 {
+  @media (max-height: 480px) {
+    @content;
+  }
+}
+
 @mixin container {
   &_container {
     max-width: 1200px;

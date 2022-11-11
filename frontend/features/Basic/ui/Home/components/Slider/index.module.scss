@@ -189,6 +189,9 @@
     @include m-height-550 {
       top: 150px;
     }
+    @include m-height-480 {
+      top: 85px;
+    }
   }
 
   &__title {
