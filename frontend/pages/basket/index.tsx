@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { ToplineLinks } from '@features/Basic/common/Topline'
 import { wrapper } from '@store/store'
 import { ProjectPage, useServerSideProps } from '@hooks'
+import { yandexCounter } from '@utils/metrics/yandexCounter'
 import styles from './index.module.scss'
 
 const Basket = () => {
@@ -19,6 +20,8 @@ const Basket = () => {
 
   useEffect(() => {
     dispatch(initBasket())
+
+    yandexCounter.initReach('BasketPage')
   }, [])
 
   return (

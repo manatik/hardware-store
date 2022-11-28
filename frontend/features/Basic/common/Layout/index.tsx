@@ -4,10 +4,12 @@ import Topline from '@features/Basic/common/Topline'
 import Footer from '@features/Basic/common/Footer'
 
 import cn from 'classnames'
+import { yandexCounter } from '@utils/metrics/yandexCounter'
 import styles from './index.module.scss'
 
 interface LayoutProps {
   children: Children;
+  pageName: string;
   absolute?: boolean;
   dark?: boolean;
 }
@@ -16,6 +18,7 @@ const Layout: FC<LayoutProps> = ({
   children,
   absolute = true,
   dark = false,
+  pageName,
 }) => {
   const [scroll, setScroll] = React.useState(0)
 
@@ -33,6 +36,8 @@ const Layout: FC<LayoutProps> = ({
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
+
+    yandexCounter.initReach(pageName)
 
     return () => {
       window.removeEventListener('scroll', handleScroll)

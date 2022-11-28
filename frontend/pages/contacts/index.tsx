@@ -23,6 +23,7 @@ const Contacts: NextPage = () => {
     <Layout
       dark={true}
       absolute={false}
+      pageName="ContactsPage"
     >
       <div className={styles.contacts}>
         <div className={styles.contacts__inner}>

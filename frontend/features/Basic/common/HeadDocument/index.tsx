@@ -1,4 +1,5 @@
 import React from 'react'
+import { YandexMetrica } from '@features/Basic/common/HeadDocument/components/YandexMetrica'
 
 const HeadDocument = () => {
   return (
@@ -26,6 +27,7 @@ const HeadDocument = () => {
         rel="backend"
         href="https://github.com/manatik"
       />
+      <YandexMetrica />
     </>
   )
 }

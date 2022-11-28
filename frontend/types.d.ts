@@ -12,4 +12,6 @@ declare module '*.jpg'
 declare module '*.jpeg'
 declare module '*.svg'
 
-interface Window {}
+interface Window {
+  ym: any
+}

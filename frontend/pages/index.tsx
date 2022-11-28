@@ -16,7 +16,10 @@ const Home: NextPage = (): ReactElement => {
   }, [])
   return (
     <>
-      <Layout dark={false}>
+      <Layout
+        dark={false}
+        pageName="HomePage"
+      >
         <HomeSlider />
         <HomeInfo />
       </Layout>

@@ -19,6 +19,7 @@ const Products: NextPage = () => {
     <Layout
       dark={true}
       absolute={false}
+      pageName="ProductionPage"
     >
       <div className={styles.products}>
         <div className={styles.products__inner}>

@@ -8,11 +8,13 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import 'swiper/scss/pagination'
+import Metrics from '@features/Basic/common/Metrics'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Component {...pageProps} />
+      <Metrics />
       <ToastContainer
         position="top-right"
         autoClose={3000}

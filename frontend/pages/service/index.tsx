@@ -20,6 +20,7 @@ const Service: NextPage = () => {
     <Layout
       dark={true}
       absolute={false}
+      pageName="ServicePage"
     >
       <div className={styles.service__wrap}>
         <div className={styles.service__title}>Сервис</div>
