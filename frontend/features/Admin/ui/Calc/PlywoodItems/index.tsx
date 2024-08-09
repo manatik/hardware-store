@@ -44,7 +44,6 @@ const PlywoodItems = () => {
   }
 
   const handleUpdateItem = async (id: string, data: CalcData, endpoint: number) => {
-    console.log(id, data, endpoint)
     try {
       dispatch(fetchCalcUpdateParamsAsync({ id, endpoint, values: data }))
       toast.success('Успешно обновлено')

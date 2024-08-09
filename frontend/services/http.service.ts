@@ -33,12 +33,12 @@ axiosInstance.interceptors.response.use(
   async (config) => {
     if (isSSR()) {
       // eslint-disable-next-line no-console
-      console.log('response', {
-        data: config.data,
-        headers: config.headers,
-        req: config.request,
-        status: config.status,
-      })
+      // console.log('response', {
+      //   data: config.data,
+      //   headers: config.headers,
+      //   req: config.request,
+      //   status: config.status,
+      // })
     }
     return config
   },
