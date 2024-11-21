@@ -5,8 +5,6 @@ const { publicRuntimeConfig } = getConfig()
 const { REACT_APP_YANDEX_METRIKA_ID } = publicRuntimeConfig
 const yandexMetrikaId = Math.trunc(REACT_APP_YANDEX_METRIKA_ID)
 
-// Справочник методов
-// https://yandex.com/support/metrica/objects/method-reference.html
 export const yandexCounter = {
   hit(url: string, params?: object): void {
     if (!window.ym) return
@@ -25,11 +23,5 @@ export const yandexCounter = {
     if (!name) return
 
     window.ym(yandexMetrikaId, 'params', name, params || 1)
-  },
-  setUserUuid(userId: string): void {
-    if (!window.ym) return
-    if (!userId) return
-
-    window.ym(yandexMetrikaId, 'setUserID', userId)
   },
 }
