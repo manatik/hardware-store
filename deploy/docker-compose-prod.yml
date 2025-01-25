@@ -9,6 +9,8 @@ services:
       - POSTGRES_DB=test
       - POSTGRES_USER=test
       - POSTGRES_PASSWORD=testik
+    ports:
+      - "25432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - pgsql-sock:/var/run/postgresql
